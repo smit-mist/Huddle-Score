@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/welcome_screen.dart';
 
 import 'constants.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch:kThemeColor,
       ),
+      routes: routeGenerator,
       home: WelcomeScreen(),
     );
   }

@@ -66,7 +66,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: themeFont(color: kThemeColor, w: FontWeight.normal),
                   ),
                   bgColor: Colors.white,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, 'sign_in');
+                  },
                 ),
                 SizedBox(
                   height: 30,
