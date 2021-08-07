@@ -24,22 +24,15 @@ class _SignInScreenState extends State<SignInScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Image.network(
-                    'https://picsum.photos/70/100',
+                  Image.asset(
+                    'assets/images/huddle_logo.jpeg',
+                    height: h * 0.2,
                   ),
                   SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Huddle & Score',
-                    style: themeFont(color: Colors.black, w: FontWeight.bold)
-                        .copyWith(fontStyle: FontStyle.italic, fontSize: 20),
+                    height: 20,
                   ),
                   Container(
-                    width: w*0.82,
+                    width: w * (356 / kScreenW),
                     child: TextField(
                       onTap: () {
                         setState(() {
@@ -52,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         });
                       },
                       style: themeFont(
-                        color: kThemeColor,
+                        color: Colors.black,
                         w: FontWeight.normal,
                       ),
                       decoration: normalTextDecoration(isEmail, 'Email id'),
@@ -62,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 10,
                   ),
                   Container(
-                    width: w*0.82,
+                    width: w * (356 / kScreenW),
                     child: TextField(
                       onTap: () {
                         setState(() {
@@ -75,12 +68,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         });
                       },
                       style: themeFont(
-                        color: kThemeColor,
+                        color: Colors.black,
                         w: FontWeight.normal,
                       ),
                       obscureText: obscureText,
                       decoration: InputDecoration(
                         hintText: 'Password',
+                        hintStyle: themeFont(
+                            color: Color(0xff626262),
+                            w: FontWeight.normal,
+                            s: 14),
                         suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -96,7 +93,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 : Colors.grey.withOpacity(0.4),
                           ),
                         ),
-                        contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                         filled: true,
                         fillColor: Colors.grey.withOpacity(0.3),
                         border: OutlineInputBorder(
@@ -132,16 +130,24 @@ class _SignInScreenState extends State<SignInScreen> {
                   Row(
                     children: [
                       Spacer(),
-                      Text(
-                        'Forgot Password?',
-                        style: themeFont(
-                          color: kThemeColor,
-                          w: FontWeight.normal,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: GestureDetector(
+                          onTap:(){
+                            Navigator.pushNamed(context, 'password_assist');
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: themeFont(
+                                color: kThemeColor, w: FontWeight.normal, s: 11),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 50,
+                  ),
                   ActionButton(
                     bgColor: kThemeColor,
                     child: Text(
@@ -151,7 +157,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         w: FontWeight.normal,
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('New to Huddle & Score?', style: themeFont(s: 13)),
+                      SizedBox(width: 5,),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushReplacementNamed(context, 'sign_up');
+
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: themeFont(
+                            s: 13,
+                            color: kThemeColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

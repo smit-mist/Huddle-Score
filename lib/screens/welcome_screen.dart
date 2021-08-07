@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
@@ -31,6 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: themeFont(
                         color: kThemeColor,
                         w: FontWeight.normal,
+                        s: 12,
                       ),
                     ),
                   ],
@@ -38,25 +40,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                Image.network(
-                  'https://picsum.photos/70/100',
+                Image.asset(
+                  'assets/images/huddle_logo.jpeg',
+                  height: h * 0.3,
                 ),
                 SizedBox(
                   height: 5,
-                ),
-                Text(
-                  'Huddle & Score',
-                  style: themeFont(color: Colors.black, w: FontWeight.bold)
-                      .copyWith(fontStyle: FontStyle.italic, fontSize: 20),
                 ),
                 Spacer(),
                 ActionButton(
                   child: Text(
                     'Sign Up',
-                    style: themeFont(color: Colors.white, w: FontWeight.normal),
+                    style: themeFont(
+                        color: Colors.white, w: FontWeight.normal, s: 16),
                   ),
                   bgColor: kThemeColor,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, 'sign_up');
+
+                  },
                 ),
                 SizedBox(
                   height: 10,
@@ -64,7 +66,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ActionButton(
                   child: Text(
                     'Login',
-                    style: themeFont(color: kThemeColor, w: FontWeight.normal),
+                    style: themeFont(
+                        color: kThemeColor, w: FontWeight.normal, s: 16),
                   ),
                   bgColor: Colors.white,
                   onTap: () {
@@ -76,11 +79,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 Text(
                   'from',
-                  style: themeFont(color: Colors.black, w: FontWeight.w400),
+                  style: GoogleFonts.syne(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13),
                 ),
                 Text(
                   'GROWNITED',
-                  style: themeFont(color: Colors.black, w: FontWeight.w400),
+                  style: GoogleFonts.syne(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13),
                 ),
               ],
             ),

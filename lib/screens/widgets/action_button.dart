@@ -19,7 +19,7 @@ class _ActionButtonState extends State<ActionButton> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        width: w * 0.82,
+        width: (354/kScreenW)*w,
         height: 50,
         child: Center(
           child: widget.child,
