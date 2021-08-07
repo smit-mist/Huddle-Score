@@ -318,15 +318,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   ActionButton(
-                    bgColor: kThemeColor,
-                    child: Text(
-                      'Sign Up',
-                      style: themeFont(
-                        color: Colors.white,
-                        w: FontWeight.normal,
+                      bgColor: kThemeColor,
+                      child: Text(
+                        'Sign Up',
+                        style: themeFont(
+                          color: Colors.white,
+                          w: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                  ),
+                      onTap: () {
+                        Navigator.pushNamed(context, 'home');
+                      }),
                   SizedBox(
                     height: 20,
                   ),

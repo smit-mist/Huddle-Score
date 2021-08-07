@@ -157,6 +157,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         w: FontWeight.normal,
                       ),
                     ),
+                    onTap: (){
+                      Navigator.pushNamed(context, 'home');
+                    },
                   ),
                   SizedBox(height: 20,),
                   Row(
