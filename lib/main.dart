@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
@@ -29,6 +30,11 @@ class MyApp extends StatelessWidget {
           )..add(
               AppStartedEvent(),
             ),
+        ),
+        BlocProvider<ForgotPasswordBloc>(
+          create: (context)=>ForgotPasswordBloc(
+            authRepository: _authRepository,
+          ),
         ),
         BlocProvider<SignupBloc>(
           create: (context) => SignupBloc(

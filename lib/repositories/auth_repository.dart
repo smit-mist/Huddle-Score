@@ -23,6 +23,14 @@ class AuthRepository {
     }
   }
 
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<User> signIn(String email, String password) async {
     try {
       var result = await _auth.signInWithEmailAndPassword(
