@@ -10,12 +10,13 @@ class AuthRepository {
     return _auth.currentUser;
   }
 
-  Future<User> signUp(String email, String password) async {
+  Future<User> signUp(String email, String password, String name) async {
     try {
       var result = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      result.user.updateDisplayName(name);
       return result.user;
     } catch (e) {
       throw Exception(e.toString());

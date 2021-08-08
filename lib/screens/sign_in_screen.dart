@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/login/login_bloc.dart';
+import 'package:huddle_and_score/screens/home_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../constants.dart';
 
-class SignInScreen extends StatefulWidget {
-  @override
-  _SignInScreenState createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  String email = "", password = "";
-  bool isEmail = false, isPass = false, obscureText = true;
+class SignInScreen extends StatelessWidget {
+  LoginBloc _loginBloc;
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -24,6 +24,34 @@ class _SignInScreenState extends State<SignInScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  BlocListener<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginSuccess) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => HomeScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    child: BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        if (state is LoginLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is LoginFailure) {
+                          return _onFailure();
+                        } else if (state is LoginSuccess) {
+                          emailCtrl.text = '';
+                          passwordCtrl.text = '';
+                          return Container();
+                        }
+                        return Container();
+                      },
+                    ),
+                  ),
                   Image.asset(
                     'assets/images/huddle_logo.jpeg',
                     height: h * 0.2,
@@ -34,21 +62,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   Container(
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isEmail = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          email = a;
-                        });
-                      },
+                      controller: emailCtrl,
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      decoration: normalTextDecoration(isEmail, 'Email id'),
+                      decoration: normalTextDecoration(true, 'Email id'),
                     ),
                   ),
                   SizedBox(
@@ -57,21 +76,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   Container(
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isPass = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          password = a;
-                        });
-                      },
+                      controller: passwordCtrl,
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      obscureText: obscureText,
+                      obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Password',
                         hintStyle: themeFont(
@@ -79,16 +89,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             w: FontWeight.normal,
                             s: 14),
                         suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
                           child: Icon(
-                            (obscureText == false
+                            (false == false
                                 ? Icons.visibility
                                 : Icons.visibility_off),
-                            color: (isPass == true)
+                            color: (true == true)
                                 ? kThemeColor
                                 : Colors.grey.withOpacity(0.4),
                           ),
@@ -99,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         fillColor: Colors.grey.withOpacity(0.3),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isPass == false
+                          borderSide: (true == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -111,7 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isPass == false
+                          borderSide: (true == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -133,13 +138,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(
-                          onTap:(){
+                          onTap: () {
                             Navigator.pushNamed(context, 'password_assist');
                           },
                           child: Text(
                             'Forgot Password?',
                             style: themeFont(
-                                color: kThemeColor, w: FontWeight.normal, s: 11),
+                                color: kThemeColor,
+                                w: FontWeight.normal,
+                                s: 11),
                           ),
                         ),
                       ),
@@ -157,20 +164,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         w: FontWeight.normal,
                       ),
                     ),
-                    onTap: (){
-                      Navigator.pushNamed(context, 'home');
+                    onTap: () {
+                      _loginBloc.add(
+                        LoginButtonPressed(
+                          email: emailCtrl.text,
+                          password: passwordCtrl.text,
+                        ),
+                      );
                     },
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('New to Huddle & Score?', style: themeFont(s: 13)),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.pushReplacementNamed(context, 'sign_up');
-
+                        onTap: () {
+                          Navigator.pushNamed(context, 'sign_up');
                         },
                         child: Text(
                           'Sign up',
@@ -191,3 +206,5 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
+
+Widget _onFailure() {}

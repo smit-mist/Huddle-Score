@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
+import 'package:huddle_and_score/screens/home_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants.dart';
 
-class SignUpScreen extends StatefulWidget {
-  @override
-  _SignUpScreenState createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  String email = "", password = "", name = "", confirmPass = "";
-  bool isEmail = false, isPass = false, obscureText = true;
-  bool isName = false, isConfirmPass = false, confirmObs = true;
+class SignUpScreen extends StatelessWidget {
+  SignupBloc _signupBloc;
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController nameCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -26,6 +26,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  BlocListener<SignupBloc, SignupState>(
+                    listener: (context, state) {
+                      if (state is SignUpSuccess) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => HomeScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    child: BlocBuilder<SignupBloc, SignupState>(
+                      builder: (context, state) {
+                        if (state is SignUpLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is SignUpFailure) {
+                          return _onFailure();
+                        } else if (state is SignUpSuccess) {
+                          emailCtrl.text = '';
+                          nameCtrl.text = '';
+                          passwordCtrl.text = '';
+                          return Container();
+                        }
+                        return Container();
+                      },
+                    ),
+                  ),
                   Image.asset(
                     'assets/images/huddle_logo.jpeg',
                     height: h * 0.1,
@@ -48,21 +77,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // name
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isName = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          name = a;
-                        });
-                      },
+                      controller: nameCtrl,
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      decoration: normalTextDecoration(isName, 'Full Name'),
+                      decoration: normalTextDecoration(true, 'Full Name'),
                     ),
                   ),
                   SizedBox(
@@ -72,21 +92,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // email
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isEmail = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          email = a;
-                        });
-                      },
+                      controller: emailCtrl,
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      decoration: normalTextDecoration(isEmail, 'Email id'),
+                      decoration: normalTextDecoration(true, 'Email id'),
                     ),
                   ),
                   SizedBox(
@@ -96,21 +107,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // password
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isPass = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          password = a;
-                        });
-                      },
+                      controller: passwordCtrl,
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      obscureText: obscureText,
+                      obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Password',
                         hintStyle: themeFont(
@@ -118,16 +120,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             w: FontWeight.normal,
                             s: 14),
                         suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
                           child: Icon(
-                            (obscureText == false
+                            (false == false
                                 ? Icons.visibility
                                 : Icons.visibility_off),
-                            color: (isPass == true)
+                            color: (true == true)
                                 ? kThemeColor
                                 : Colors.grey.withOpacity(0.4),
                           ),
@@ -138,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fillColor: Colors.grey.withOpacity(0.3),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isPass == false
+                          borderSide: (true == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -150,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isPass == false
+                          borderSide: (true == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -170,21 +167,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // confirm pass
                     width: w * (356 / kScreenW),
                     child: TextField(
-                      onTap: () {
-                        setState(() {
-                          isConfirmPass = true;
-                        });
-                      },
-                      onChanged: (String a) {
-                        setState(() {
-                          confirmPass = a;
-                        });
-                      },
                       style: themeFont(
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      obscureText: confirmObs,
+                      obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Confirm Password',
                         hintStyle: themeFont(
@@ -192,16 +179,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             w: FontWeight.normal,
                             s: 14),
                         suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              confirmObs = !confirmObs;
-                            });
-                          },
                           child: Icon(
-                            (confirmObs == false
+                            (false == false
                                 ? Icons.visibility
                                 : Icons.visibility_off),
-                            color: (isConfirmPass == true)
+                            color: (true == true)
                                 ? kThemeColor
                                 : Colors.grey.withOpacity(0.4),
                           ),
@@ -212,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fillColor: Colors.grey.withOpacity(0.3),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isConfirmPass == false
+                          borderSide: (false == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -224,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: (isConfirmPass == false
+                          borderSide: (false == false
                               ? BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
@@ -327,7 +309,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, 'home');
+                        _signupBloc.add(
+                          SignUpButtonPressed(
+                            email: emailCtrl.text,
+                            password: passwordCtrl.text,
+                            name: nameCtrl.text,
+                          ),
+                        );
                       }),
                   SizedBox(
                     height: 20,
@@ -362,3 +350,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
+
+Widget _onFailure() {}
