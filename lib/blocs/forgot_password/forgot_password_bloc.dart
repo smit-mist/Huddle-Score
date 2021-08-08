@@ -27,5 +27,6 @@ class ForgotPasswordBloc
         yield ForgotPasswordFailureState();
       }
     }
+    yield ForgotPasswordInitial();
   }
 }

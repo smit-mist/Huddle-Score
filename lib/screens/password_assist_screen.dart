@@ -12,8 +12,12 @@ class _PasswordAssistScreenState extends State<PasswordAssistScreen> {
   bool isEmail = false;
   String email = "";
   int state = 0;
+  // 0 - error
+  // 1 - default
+  // 2 - success
   @override
   Widget build(BuildContext context) {
+    print(state);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -93,7 +97,7 @@ class _PasswordAssistScreenState extends State<PasswordAssistScreen> {
                         ),
                         (state ==2?Spacer():SizedBox(width: 1,)),
                         Text(
-                            (state == 2?'Didn\'t receive an email? ':''),
+                          (state == 2?'Didn\'t receive an email? ':''),
                           style: themeFont(s: 13),
                         ),
                         Text(
