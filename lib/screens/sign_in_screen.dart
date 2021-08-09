@@ -59,75 +59,93 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      controller: emailCtrl,
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      decoration: normalTextDecoration(true, 'Email id'),
-                    ),
+                  BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      return Container(
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          onTap: () {
+                            _loginBloc.add(EmailFieldPressed());
+                          },
+                          controller: emailCtrl,
+                          style: themeFont(
+                            color: Colors.black,
+                            w: FontWeight.normal,
+                          ),
+                          decoration: normalTextDecoration(
+                              state.emailTapped, 'Email id'),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      controller: passwordCtrl,
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: themeFont(
-                            color: Color(0xff626262),
+                  BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      return Container(
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          onTap: () {
+                            _loginBloc.add(PasswordFieldPressed());
+                          },
+                          controller: passwordCtrl,
+                          style: themeFont(
+                            color: Colors.black,
                             w: FontWeight.normal,
-                            s: 14),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            (false == false
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            color: (true == true)
-                                ? kThemeColor
-                                : Colors.grey.withOpacity(0.4),
+                          ),
+                          obscureText: state.obscureText,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            hintStyle: themeFont(
+                                color: Color(0xff626262),
+                                w: FontWeight.normal,
+                                s: 14),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                _loginBloc.add(ObscureTextPressed());
+                              },
+                              child: Icon(
+                                (state.obscureText == false
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                color: (state.passwordTapped == true)
+                                    ? kThemeColor
+                                    : Colors.grey.withOpacity(0.4),
+                              ),
+                            ),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                            filled: true,
+                            fillColor: Colors.grey.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.passwordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.passwordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
                           ),
                         ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                        filled: true,
-                        fillColor: Colors.grey.withOpacity(0.3),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (true == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (true == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 5,
