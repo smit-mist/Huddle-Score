@@ -34,7 +34,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ForgotPasswordBloc>(
           create: (context) => ForgotPasswordBloc(
             authRepository: _authRepository,
+
           ),
+
         ),
         BlocProvider<SignupBloc>(
           create: (context) => SignupBloc(
