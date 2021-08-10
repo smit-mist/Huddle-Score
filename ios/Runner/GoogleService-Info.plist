@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>160049309902-813hdofi8cjs280cann63dqigvngutt5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.160049309902-813hdofi8cjs280cann63dqigvngutt5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDwzSC41wC2HM2ltqlZR_vc569RTFje1aA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>160049309902</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.huddleAndScore</string>
+	<key>PROJECT_ID</key>
+	<string>football-demo-3a80e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>football-demo-3a80e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:160049309902:ios:7089afc306a4e0ceb5889f</string>
+	<key>DATABASE_URL</key>
+	<string>https://football-demo-3a80e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
