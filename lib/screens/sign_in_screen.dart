@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
-import 'package:huddle_and_score/screens/home_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../constants.dart';
@@ -27,11 +26,9 @@ class SignInScreen extends StatelessWidget {
                   BlocListener<LoginBloc, LoginState>(
                     listener: (context, state) {
                       if (state is LoginSuccess) {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => HomeScreen(),
-                          ),
+                          'home',
                         );
                       }
                     },

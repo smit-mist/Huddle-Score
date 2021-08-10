@@ -19,14 +19,16 @@ class ForgotPasswordBloc
     ForgotPasswordEvent event,
   ) async* {
     if (event is ForgotPasswordInitiated) {
+      print('loading');
       yield ForgotPasswordLoadingState();
       try {
-        await _repository.forgotPassword(event.email);
+        await _repository.sendPasswordResetEmail(event.email);
+        print('success');
         yield ForgotPasswordSuccessState();
       } catch (e) {
+        print('failure');
         yield ForgotPasswordFailureState();
       }
     }
-    yield ForgotPasswordInitial();
   }
 }

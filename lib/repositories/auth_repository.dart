@@ -23,7 +23,7 @@ class AuthRepository {
     }
   }
 
-  Future<void> forgotPassword(String email) async {
+  Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {

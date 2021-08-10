@@ -11,7 +11,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    print('=================');
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -57,7 +56,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   bgColor: kThemeColor,
                   onTap: () {
                     Navigator.pushNamed(context, 'sign_up');
-
                   },
                 ),
                 SizedBox(

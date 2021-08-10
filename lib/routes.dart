@@ -7,8 +7,8 @@ import 'package:huddle_and_score/screens/welcome_screen.dart';
 
 Map<String, Widget Function(BuildContext)> routeGenerator = {
   'welcome': (context) => WelcomeScreen(),
-  'sign_in':(context) =>SignInScreen(),
-  'sign_up':(context)=>SignUpScreen(),
-  'password_assist':(context)=>PasswordAssistScreen(),
-  'home':(context)=>HomeNavBar(),
+  'sign_in': (context) => SignInScreen(),
+  'sign_up': (context) => SignUpScreen(),
+  'password_assist': (context) => PasswordAssistInitialScreen(),
+  'home': (context) => HomeNavBar(),
 };

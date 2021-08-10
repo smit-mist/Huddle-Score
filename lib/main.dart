@@ -19,7 +19,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  AuthRepository _authRepository = AuthRepository();
+  final AuthRepository _authRepository = AuthRepository();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             ),
         ),
         BlocProvider<ForgotPasswordBloc>(
-          create: (context)=>ForgotPasswordBloc(
+          create: (context) => ForgotPasswordBloc(
             authRepository: _authRepository,
           ),
         ),
