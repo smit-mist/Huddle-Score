@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/home_screen.dart';
-import 'package:huddle_and_score/screens/widgets/profile_screen.dart';
+import 'package:huddle_and_score/screens/profile_screen.dart';
 
 class HomeNavBar extends StatefulWidget {
   @override
@@ -12,15 +12,18 @@ class _HomeNavBarState extends State<HomeNavBar> {
   int state = 0;
   List<Widget> pages = [
     HomeScreen(),
-    ProfileScreen(),
+    ProfileScreen(
+      loggedIn: true,
+    ),
     HomeScreen(),
-    ProfileScreen()
+    ProfileScreen(
+      loggedIn: false,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         body: pages[state],

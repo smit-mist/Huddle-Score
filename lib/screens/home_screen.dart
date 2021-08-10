@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
       width: w,
       height: h * 0.8,
-      color: Colors.blue,
+      color: Colors.red,
     );
   }
 }

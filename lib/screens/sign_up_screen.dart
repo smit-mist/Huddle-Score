@@ -29,12 +29,7 @@ class SignUpScreen extends StatelessWidget {
                   BlocListener<SignupBloc, SignupState>(
                     listener: (context, state) {
                       if (state is SignUpSuccess) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => HomeScreen(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, 'home');
                       }
                     },
                     child: BlocBuilder<SignupBloc, SignupState>(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
+  bool loggedIn;
+  ProfileScreen({this.loggedIn});
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -12,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double h = MediaQuery.of(context).size.height;
     return Container(
       width: w,
-      height: h * 0.8,
+      height: double.infinity,
       color: Colors.blue,
     );
   }
