@@ -75,16 +75,24 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          width: w * (356 / kScreenW),
-                          child: TextField(
-                            controller: _controller,
-                            style: themeFont(
-                              color: Colors.black,
-                              w: FontWeight.normal,
-                            ),
-                            decoration: normalTextDecoration(false, 'Email id'),
-                          ),
+                        BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                          builder: (context, state) {
+                            return Container(
+                              width: w * (356 / kScreenW),
+                              child: TextField(
+                                controller: _controller,
+                                onTap: () {
+                                  _bloc.add(onEmailChanged());
+                                },
+                                style: themeFont(
+                                  color: Colors.black,
+                                  w: FontWeight.normal,
+                                ),
+                                decoration: normalTextDecoration(
+                                    state.emailTap, 'Email id'),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           height: 10,
@@ -134,7 +142,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  //  print(state);
+    //  print(state);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 

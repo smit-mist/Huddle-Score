@@ -12,13 +12,8 @@ class LoginButtonPressed extends LoginEvent {
   LoginButtonPressed({this.email, this.password});
 }
 
-class EmailFieldPressed extends LoginEvent{
-  EmailFieldPressed();
-}
-class PasswordFieldPressed extends LoginEvent{
-  PasswordFieldPressed();
-}
-class ObscureTextPressed extends LoginEvent{
-  ObscureTextPressed();
-}
+class EmailFieldPressed extends LoginEvent {}
 
+class PasswordFieldPressed extends LoginEvent {}
+
+class ObscureTextPressed extends LoginEvent {}

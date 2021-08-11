@@ -12,7 +12,7 @@ class ForgotPasswordBloc
   final AuthRepository _repository;
   ForgotPasswordBloc({AuthRepository authRepository})
       : _repository = authRepository,
-        super(ForgotPasswordInitial());
+        super(ForgotPasswordInitial(false));
 
   @override
   Stream<ForgotPasswordState> mapEventToState(
@@ -20,15 +20,18 @@ class ForgotPasswordBloc
   ) async* {
     if (event is ForgotPasswordInitiated) {
       print('loading');
-      yield ForgotPasswordLoadingState();
+      yield ForgotPasswordLoadingState(true);
       try {
         await _repository.sendPasswordResetEmail(event.email);
         print('success');
-        yield ForgotPasswordSuccessState();
+        yield ForgotPasswordSuccessState(true);
       } catch (e) {
         print('failure');
-        yield ForgotPasswordFailureState();
+        yield ForgotPasswordFailureState(false);
       }
+    } else if (event is onEmailChanged) {
+      state.emailTap = true;
+      yield state;
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
-import 'package:huddle_and_score/screens/home_screen.dart';
-import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
+import 'package:huddle_and_score/screens/widgets/action_button.dart';
+
 import '../constants.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -68,151 +68,187 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    // name
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      controller: nameCtrl,
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      decoration: normalTextDecoration(true, 'Full Name'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    // email
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      controller: emailCtrl,
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      decoration: normalTextDecoration(true, 'Email id'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    // password
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      controller: passwordCtrl,
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: themeFont(
-                            color: Color(0xff626262),
+                  BlocBuilder<SignupBloc, SignupState>(
+                    builder: (context, state) {
+                      return Container(
+                        // name
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          controller: nameCtrl,
+                          onTap: () {
+                            _signupBloc.add(NameOnTap());
+                          },
+                          style: themeFont(
+                            color: Colors.black,
                             w: FontWeight.normal,
-                            s: 14),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            (false == false
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            color: (true == true)
-                                ? kThemeColor
-                                : Colors.grey.withOpacity(0.4),
+                          ),
+                          decoration: normalTextDecoration(
+                              state.nameTapped, 'Full Name'),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  BlocBuilder<SignupBloc, SignupState>(
+                    builder: (context, state) {
+                      return Container(
+                        // email
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          controller: emailCtrl,
+                          onTap: () {
+                            _signupBloc.add(EmailOnTap());
+                          },
+                          style: themeFont(
+                            color: Colors.black,
+                            w: FontWeight.normal,
+                          ),
+                          decoration: normalTextDecoration(
+                              state.emailTapped, 'Email id'),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  BlocBuilder<SignupBloc, SignupState>(
+                    builder: (context, state) {
+                      return Container(
+                        // password
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          controller: passwordCtrl,
+                          onTap: () {
+                            _signupBloc.add(PasswordOnTap());
+                          },
+                          style: themeFont(
+                            color: Colors.black,
+                            w: FontWeight.normal,
+                          ),
+                          obscureText: state.obscureText,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            hintStyle: themeFont(
+                                color: Color(0xff626262),
+                                w: FontWeight.normal,
+                                s: 14),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                state.obscureText = !state.obscureText;
+                              },
+                              child: Icon(
+                                (state.obscureText == false
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                color: (state.passwordTapped == true)
+                                    ? kThemeColor
+                                    : Colors.grey.withOpacity(0.4),
+                              ),
+                            ),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                            filled: true,
+                            fillColor: Colors.grey.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.passwordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.passwordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
                           ),
                         ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                        filled: true,
-                        fillColor: Colors.grey.withOpacity(0.3),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (true == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (true == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    // confirm pass
-                    width: w * (356 / kScreenW),
-                    child: TextField(
-                      style: themeFont(
-                        color: Colors.black,
-                        w: FontWeight.normal,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Confirm Password',
-                        hintStyle: themeFont(
-                            color: Color(0xff626262),
+                  BlocBuilder<SignupBloc, SignupState>(
+                    builder: (context, state) {
+                      return Container(
+                        // confirm pass
+                        width: w * (356 / kScreenW),
+                        child: TextField(
+                          onTap: () {
+                            _signupBloc.add(ConfirmPasswordOnTap());
+                          },
+                          style: themeFont(
+                            color: Colors.black,
                             w: FontWeight.normal,
-                            s: 14),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            (false == false
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            color: (true == true)
-                                ? kThemeColor
-                                : Colors.grey.withOpacity(0.4),
+                          ),
+                          obscureText: state.obscureText,
+                          decoration: InputDecoration(
+                            hintText: 'Confirm Password',
+                            hintStyle: themeFont(
+                                color: Color(0xff626262),
+                                w: FontWeight.normal,
+                                s: 14),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                state.obscureText = !state.obscureText;
+                              },
+                              child: Icon(
+                                (state.obscureText == false
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                color: (state.confirmPasswordTapped == true)
+                                    ? kThemeColor
+                                    : Colors.grey.withOpacity(0.4),
+                              ),
+                            ),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                            filled: true,
+                            fillColor: Colors.grey.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.confirmPasswordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: (state.confirmPasswordTapped == false
+                                  ? BorderSide(
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    )
+                                  : BorderSide(
+                                      width: 2,
+                                      color: kThemeColor,
+                                    )),
+                            ),
                           ),
                         ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                        filled: true,
-                        fillColor: Colors.grey.withOpacity(0.3),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (false == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: (false == false
-                              ? BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )
-                              : BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                )),
-                        ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 5,
@@ -220,7 +256,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     width: w * (356 / kScreenW),
                     child: Text(
-                      'Password should be atleast 6 characters long and must include atleast 1 number. Ex. @,\$,%,!.',
+                      'Password should be at least 6 characters long and must include at least 1 number. Ex. @,\$,%,!.',
                       style: themeFont(
                         color: Colors.black,
                         s: 10,

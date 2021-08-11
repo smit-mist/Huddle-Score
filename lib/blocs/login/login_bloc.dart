@@ -24,27 +24,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         User user = await _repository.signIn(event.email, event.password);
         yield LoginSuccess(
-            user: user,
-            emailTapped: true,
-            passwordTapped: true,
-            obscureText: false);
+          user: user,
+          emailTapped: true,
+          passwordTapped: true,
+          obscureText: false,
+        );
       } catch (e) {
         yield LoginFailure(
-            message: e.toString(),
-            emailTapped: true,
-            passwordTapped: true,
-            obscureText: false);
+          message: e.toString(),
+          emailTapped: true,
+          passwordTapped: true,
+          obscureText: false,
+        );
       }
-    }
-    else if(event is EmailFieldPressed){
+    } else if (event is EmailFieldPressed) {
       state.emailTapped = true;
       yield state;
-    }
-    else if(event is PasswordFieldPressed){
+    } else if (event is PasswordFieldPressed) {
       state.passwordTapped = true;
       yield state;
-    }
-    else if(event is ObscureTextPressed){
+    } else if (event is ObscureTextPressed) {
       state.obscureText = !state.obscureText;
       yield state;
     }

@@ -11,3 +11,5 @@ class ForgotPasswordInitiated extends ForgotPasswordEvent {
   String email;
   ForgotPasswordInitiated({this.email});
 }
+
+class onEmailChanged extends ForgotPasswordEvent {}

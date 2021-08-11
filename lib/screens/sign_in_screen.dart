@@ -71,7 +71,9 @@ class SignInScreen extends StatelessWidget {
                             w: FontWeight.normal,
                           ),
                           decoration: normalTextDecoration(
-                              state.emailTapped, 'Email id'),
+                            state.emailTapped,
+                            'Email id',
+                          ),
                         ),
                       );
                     },
@@ -81,11 +83,14 @@ class SignInScreen extends StatelessWidget {
                   ),
                   BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
+                      print(state);
                       return Container(
                         width: w * (356 / kScreenW),
                         child: TextField(
                           onTap: () {
+                            print('=');
                             _loginBloc.add(PasswordFieldPressed());
+                            print('=>');
                           },
                           controller: passwordCtrl,
                           style: themeFont(
