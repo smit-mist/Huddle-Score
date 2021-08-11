@@ -5,7 +5,7 @@ class TournamentRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Tournament>> fetchTournaments() async{
-    var doc = _fire
+    //var doc = _fire
   }
 
 }

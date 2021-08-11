@@ -10,7 +10,8 @@ class ViewAllTournamentScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          height: h,
+          height:h,
+
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
@@ -19,14 +20,7 @@ class ViewAllTournamentScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                    ),
-                  ),
+                  Icon(Icons.arrow_back_ios),
                   SizedBox(
                     width: 10,
                   ),
@@ -39,22 +33,21 @@ class ViewAllTournamentScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20,),
               Expanded(
                 child: Container(
                   width: w,
-                  //   height:100,
+             //   height:100,
                   child: GridView.builder(
                     itemCount: 10,
-                    itemBuilder: (_, ind) {
+                    itemBuilder: (_,ind){
                       return TournamentTile();
                     },
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio:
-                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
+                        // width: w * (145 / kScreenW),
+                        // height: h * (212 / kScreenH)
+                      childAspectRatio: (w*(160/kScreenW))/(h*(205/kScreenH)),
                       crossAxisSpacing: 0.5,
                     ),
                   ),
