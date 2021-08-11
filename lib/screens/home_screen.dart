@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/view_all_fifa_screen.dart';
+import 'package:huddle_and_score/screens/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
@@ -112,11 +114,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  'View all',
-                  style: themeFont(s: 13, color: kThemeColor)
-                      .copyWith(decoration: TextDecoration.underline),
-                )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ViewAllTournamentScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'View all',
+                    style: themeFont(s: 13, color: kThemeColor)
+                        .copyWith(decoration: TextDecoration.underline),
+                  ),
+                ),
               ],
             ),
             SizedBox(
@@ -124,12 +136,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
-
               height: h * (215 / kScreenH),
               child: ListView.separated(
                   separatorBuilder: (_, index) {
                     return SizedBox(
-                      width: 17,
+                      width: 20,
                     );
                   },
                   scrollDirection: Axis.horizontal,
@@ -150,11 +161,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  'View all',
-                  style: themeFont(s: 13, color: kThemeColor)
-                      .copyWith(decoration: TextDecoration.underline),
-                )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ViewAllFifaScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'View all',
+                    style: themeFont(s: 13, color: kThemeColor)
+                        .copyWith(decoration: TextDecoration.underline),
+                  ),
+                ),
               ],
             ),
             SizedBox(
@@ -162,12 +183,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
-
               height: h * (215 / kScreenH),
               child: ListView.separated(
                   separatorBuilder: (_, index) {
                     return SizedBox(
-                      width: 17,
+                      width: 20 + (w*(10/kScreenW)),
                     );
                   },
                   scrollDirection: Axis.horizontal,
@@ -176,7 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return FifaTile();
                   }),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
