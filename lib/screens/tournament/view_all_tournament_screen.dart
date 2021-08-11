@@ -53,8 +53,6 @@ class ViewAllTournamentScreen extends StatelessWidget {
                     },
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      // width: w * (145 / kScreenW),
-                      // height: h * (212 / kScreenH)
                       childAspectRatio:
                           (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
                       crossAxisSpacing: 0.5,

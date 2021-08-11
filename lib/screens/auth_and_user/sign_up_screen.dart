@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignupBloc _signupBloc;

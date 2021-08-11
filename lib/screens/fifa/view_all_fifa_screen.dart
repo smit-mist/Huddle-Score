@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class ViewAllFifaScreen extends StatelessWidget {
   @override

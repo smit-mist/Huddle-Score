@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class PasswordAssistInitialScreen extends StatelessWidget {
   ForgotPasswordBloc _bloc;

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class SignInScreen extends StatelessWidget {
   LoginBloc _loginBloc;

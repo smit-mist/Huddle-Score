@@ -8,7 +8,7 @@ import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
-import 'package:huddle_and_score/screens/welcome_screen.dart';
+import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 
 import 'blocs/auth/auth_bloc.dart';
 import 'constants.dart';
