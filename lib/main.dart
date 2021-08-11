@@ -2,12 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
-import 'package:huddle_and_score/screens/home_screen.dart';
 import 'package:huddle_and_score/screens/welcome_screen.dart';
 
 import 'blocs/auth/auth_bloc.dart';
@@ -32,12 +32,13 @@ class MyApp extends StatelessWidget {
               AppStartedEvent(),
             ),
         ),
+        BlocProvider<HomeNavBarBloc>(
+          create: (context) => HomeNavBarBloc(),
+        ),
         BlocProvider<ForgotPasswordBloc>(
           create: (context) => ForgotPasswordBloc(
             authRepository: _authRepository,
-
           ),
-
         ),
         BlocProvider<SignupBloc>(
           create: (context) => SignupBloc(
