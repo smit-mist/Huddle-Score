@@ -42,15 +42,19 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       }
     } else if (event is NameOnTap) {
       state.nameTapped = true;
+      yield state;
     } else if (event is EmailOnTap) {
       state.emailTapped = true;
+      yield state;
     } else if (event is PasswordOnTap) {
       state.passwordTapped = true;
+      yield state;
     } else if (event is ConfirmPasswordOnTap) {
       state.confirmPasswordTapped = true;
+      yield state;
     } else if (event is ObscureTextOnTap) {
       state.obscureText = true;
+      yield state;
     }
-    yield state;
   }
 }
