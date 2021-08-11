@@ -30,7 +30,6 @@ class SignInScreen extends StatelessWidget {
                           context,
                           'home',
                         );
-                        Navigator.pushNamed(context, 'home');
                       }
                     },
                     child: BlocBuilder<LoginBloc, LoginState>(
