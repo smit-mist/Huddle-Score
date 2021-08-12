@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:huddle_and_score/models/tournaments/utils.dart';
 
 class Tournament {
+  Utils utils;
   Details details;
   String email;
   Info info;
   Main main;
   List<PrizePool> prizePool;
   Tournament({
+    this.utils,
     this.details,
     this.email,
     this.info,
     this.main,
     this.prizePool,
   });
-
-  factory Tournament.mapFromFirestore(DocumentSnapshot doc){
-    
-  }
 }
+
 
 class PrizePool {
   Map<int, List<String>> prizes;
