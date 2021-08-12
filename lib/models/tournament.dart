@@ -1,27 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:huddle_and_score/models/tournaments/utils.dart';
+import 'package:huddle_and_score/models/record.dart';
 
 class Tournament {
-  Utils utils;
+  Map<String, Record> utils; //String is tour id
   Details details;
   String email;
   Info info;
+  String tourId;
   Main main;
-  List<PrizePool> prizePool;
+  Map<int, List<String>> prizePool;
   Tournament({
     this.utils,
     this.details,
+    this.tourId,
     this.email,
     this.info,
     this.main,
     this.prizePool,
   });
-}
 
-
-class PrizePool {
-  Map<int, List<String>> prizes;
-  PrizePool({this.prizes});
+  
 }
 
 class Main {
@@ -41,14 +38,9 @@ class Main {
 }
 
 class Venue {
-  String address;
-  int latitude;
-  int longitude;
-  Venue({
-    this.address,
-    this.latitude,
-    this.longitude,
-  });
+  List<String> address;
+  Map<String, double> coordinates;
+  Venue({this.address, this.coordinates});
 }
 
 class Room {
@@ -58,7 +50,7 @@ class Room {
 }
 
 class Info {
-  Map<String, DateTime> dates;
+  Map<String, String> dates;
   int durationPerMatch;
   int playersPerTeam;
   int registrationFee;

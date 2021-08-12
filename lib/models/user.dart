@@ -1,12 +1,12 @@
-import 'package:huddle_and_score/models/users/record.dart';
-import 'package:huddle_and_score/models/users/records.dart';
+
+import 'package:huddle_and_score/models/record.dart';
 
 class User {
   String uid;
   Map<String, int> buyIns;
   List<String> favTurf;
   Map<String, int> ratings;
-  List<Records> records;
+  Map<String,Record> records; //String is the id of tour/fifa
   Booking lastBooking;
   User({
     this.buyIns,
