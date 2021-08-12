@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/fifa/view_all_fifa_screen.dart';
+import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
@@ -187,14 +188,24 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(9),
-              child: Container(
-                width: w * (355 / kScreenW),
-                height: h * (146 / kScreenH),
-                child: Image.network(
-                  'https://picsum.photos/300/200',
-                  fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PartnerWithUsIntro(),
+                  ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(9),
+                child: Container(
+                  width: w * (355 / kScreenW),
+                  height: h * (146 / kScreenH),
+                  child: Image.network(
+                    'https://picsum.photos/300/200',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
