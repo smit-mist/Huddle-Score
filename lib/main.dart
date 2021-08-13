@@ -12,6 +12,8 @@ import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 
 import 'blocs/auth/auth_bloc.dart';
+import 'blocs/home/home_bloc.dart';
+import 'blocs/home/home_event.dart';
 import 'constants.dart';
 
 void main() async {
@@ -22,12 +24,17 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final AuthRepository _authRepository = AuthRepository();
+  final HomeRepository _homeRepository = HomeRepository();
   @override
   Widget build(BuildContext context) {
-    //HomeRepository().fetchFifas();
-    //HomeRepository().fetchTours();
     return MultiBlocProvider(
       providers: [
+        BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc(homeRepository: _homeRepository)
+            ..add(
+              AppStart(),
+            ),
+        ),
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
             authRepository: _authRepository,

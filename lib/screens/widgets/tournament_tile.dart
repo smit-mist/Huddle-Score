@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 
 import '../../constants.dart';
 
 class TournamentTile extends StatefulWidget {
+  HomeTour here;
+  TournamentTile({this.here});
   @override
   _TournamentTileState createState() => _TournamentTileState();
 }
-
 class _TournamentTileState extends State<TournamentTile> {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _TournamentTileState extends State<TournamentTile> {
             ),
             child: Container(
               width: w * (145 / kScreenW),
-              height: h * (212 / kScreenH),
+             // height: h * (212 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
@@ -55,7 +57,7 @@ class _TournamentTileState extends State<TournamentTile> {
                         ),
                       ),
                       child: Image.network(
-                        'https://picsum.photos/200/300',
+                        widget.here.photo,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -64,24 +66,24 @@ class _TournamentTileState extends State<TournamentTile> {
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 10),
-                    height: h * (99 / kScreenH),
+                    height: h * (120 / kScreenH),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'FIFA championship 2021',
+                          widget.here.name,
                           style: themeFont(s: 12),
                         ),
                         SizedBox(
                           height: 1,
                         ),
                         Text(
-                          'Venus, Ahmedabad',
+                          widget.here.venue.join(''),
                           style: themeFont(s: 12),
                         ),
                         Text(
-                          '11 -12 March, 2021',
+                          widget.here.finalsDate[0],
                           style: themeFont(s: 12),
                         ),
                       ],
