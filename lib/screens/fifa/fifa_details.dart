@@ -18,17 +18,16 @@ List<String> second = [
   'Vouchers'
 ];
 
-class TournamentDetails extends StatefulWidget {
+class FifaDetails extends StatefulWidget {
+
   @override
-  _TournamentDetailsState createState() => _TournamentDetailsState();
+  _FifaDetailsState createState() => _FifaDetailsState();
 }
 
-class _TournamentDetailsState extends State<TournamentDetails> {
-  bool isExpanded = true;
-
+class _FifaDetailsState extends State<FifaDetails> {
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
-    print(isExpanded);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -208,10 +207,10 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                         Text(
                                           'Maps',
                                           style: themeFont(
-                                                  s: 12, color: kThemeColor)
+                                              s: 12, color: kThemeColor)
                                               .copyWith(
                                             decoration:
-                                                TextDecoration.underline,
+                                            TextDecoration.underline,
                                           ),
                                         )
                                       ],
@@ -297,7 +296,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                     itemBuilder: (_, ind) {
                                       return Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             first[ind],
@@ -323,120 +322,120 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                           ),
                           (isExpanded == false
                               ? Expanded(
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    width: double.infinity,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'And many more... ',
-                                          style: themeFont(
-                                            color: Colors.black.withOpacity(
-                                              0.7,
-                                            ),
-                                            s: 10,
-                                          ),
+                            child: Container(
+                              padding:
+                              EdgeInsets.symmetric(horizontal: 20),
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'And many more... ',
+                                    style: themeFont(
+                                      color: Colors.black.withOpacity(
+                                        0.7,
+                                      ),
+                                      s: 10,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isExpanded = true;
+                                      });
+                                    },
+                                    child: Text(
+                                      'View all prizes',
+                                      style: themeFont(
+                                          color: kThemeColor, s: 10)
+                                          .copyWith(
+                                          decoration: TextDecoration
+                                              .underline),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_drop_down_sharp,
+                                    color: kThemeColor,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                              : Expanded(
+                            child: Container(
+                              width: double.infinity,
+                              child: Container(
+                                child: Column(
+                                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        width: double.infinity,
+                                        // height: h * 0.2,
+                                        child: ListView.separated(
+                                          separatorBuilder: (_, ind) {
+                                            return SizedBox(
+                                              height: 10,
+                                            );
+                                          },
+                                          itemCount: first.length - 2,
+                                          itemBuilder: (_, ind) {
+                                            return Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  first[ind + 2],
+                                                  style: themeFont(
+                                                    color: Colors.black
+                                                        .withOpacity(0.7),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  second[ind + 2],
+                                                  style: themeFont(),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         ),
-                                        Spacer(),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.end,
+                                      children: [
                                         TextButton(
                                           onPressed: () {
                                             setState(() {
-                                              isExpanded = true;
+                                              isExpanded = false;
                                             });
                                           },
                                           child: Text(
-                                            'View all prizes',
+                                            'View less prizes',
                                             style: themeFont(
-                                                    color: kThemeColor, s: 10)
+                                                color: kThemeColor,
+                                                s: 10)
                                                 .copyWith(
-                                                    decoration: TextDecoration
-                                                        .underline),
+                                                decoration:
+                                                TextDecoration
+                                                    .underline),
                                           ),
                                         ),
                                         Icon(
-                                          Icons.arrow_drop_down_sharp,
+                                          Icons.arrow_drop_up_sharp,
                                           color: kThemeColor,
                                         )
                                       ],
                                     ),
-                                  ),
-                                )
-                              : Expanded(
-                                  child: Container(
-                                    width: double.infinity,
-                                    child: Container(
-                                      child: Column(
-                                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 20),
-                                              width: double.infinity,
-                                              // height: h * 0.2,
-                                              child: ListView.separated(
-                                                separatorBuilder: (_, ind) {
-                                                  return SizedBox(
-                                                    height: 10,
-                                                  );
-                                                },
-                                                itemCount: first.length - 2,
-                                                itemBuilder: (_, ind) {
-                                                  return Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        first[ind + 2],
-                                                        style: themeFont(
-                                                          color: Colors.black
-                                                              .withOpacity(0.7),
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        second[ind + 2],
-                                                        style: themeFont(),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    isExpanded = false;
-                                                  });
-                                                },
-                                                child: Text(
-                                                  'View less prizes',
-                                                  style: themeFont(
-                                                          color: kThemeColor,
-                                                          s: 10)
-                                                      .copyWith(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline),
-                                                ),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_drop_up_sharp,
-                                                color: kThemeColor,
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
                         ],
                       ),
                     ),
@@ -449,7 +448,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                   padding: const EdgeInsets.all(3.0),
                   child: Container(
                     width: double.infinity,
-                    height: h * (300 / kScreenH),
+                    height: h * (170 / kScreenH),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -469,53 +468,23 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         ),
                         DataShower(
                           type: 'Registration Fee',
-                          data: '₹4500/ team',
+                          data: '₹ 250 per head',
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
-                          type: 'Players per team',
-                          data: '5',
+                          type: 'Time',
+                          data: '4 p.m. onwards',
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
-                          type: 'Substitutes',
-                          data: '3',
+                          type: 'Mode',
+                          data: '1v1',
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        DataShower(
-                          type: 'Type',
-                          data: 'Knockout',
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        DataShower(
-                          type: 'Duration per match',
-                          data: '60 minutes',
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        DataShower(
-                          type: 'Date of Semi-Finals',
-                          data: '22 March 2021',
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        DataShower(
-                          type: 'Date of Finals',
-                          data: '22 March 2021',
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                       SizedBox(height: 20,),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -538,3 +507,4 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     );
   }
 }
+
