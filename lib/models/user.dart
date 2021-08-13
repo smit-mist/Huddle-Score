@@ -1,14 +1,14 @@
 
 import 'package:huddle_and_score/models/record.dart';
 
-class User {
+class UserModel {
   String uid;
   Map<String, int> buyIns;
   List<String> favTurf;
   Map<String, int> ratings;
   Map<String,Record> records; //String is the id of tour/fifa
   Booking lastBooking;
-  User({
+  UserModel({
     this.buyIns,
     this.favTurf,
     this.lastBooking,

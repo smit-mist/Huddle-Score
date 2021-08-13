@@ -14,4 +14,9 @@ class SearchScreenState extends HomeNavBarState {}
 
 class CartScreenState extends HomeNavBarState {}
 
-class ProfileScreenState extends HomeNavBarState {}
+class UserProfileScreenState extends HomeNavBarState {
+  final String email, name;
+  UserProfileScreenState({this.email, this.name}) : super();
+}
+
+class AnonymousProfileScreenState extends HomeNavBarState {}

@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  String name;
-  String email;
-  UserProfileScreen({this.name, this.email});
+  final String name;
+  final String email;
+  UserProfileScreen({this.email,this.name});
 
   @override
   Widget build(BuildContext context) {

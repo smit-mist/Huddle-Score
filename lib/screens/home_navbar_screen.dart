@@ -23,12 +23,17 @@ class HomeNavBar extends StatelessWidget {
       child: Scaffold(
         body: BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
           builder: (context, state) {
-            if (state is ProfileScreenState) {
-              return AnonymousProfileScreen();
+            if (state is UserProfileScreenState) {
+              return UserProfileScreen(
+                email: state.email,
+                name: state.name,
+              );
             } else if (state is SearchScreenState) {
-              return UserProfileScreen();
+              return AnonymousProfileScreen();
             } else if (state is CartScreenState) {
               return HomeScreen();
+            } else if (state is AnonymousProfileScreenState) {
+              return AnonymousProfileScreen();
             }
             return HomeScreen();
           },

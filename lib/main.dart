@@ -36,7 +36,9 @@ class MyApp extends StatelessWidget {
             ),
         ),
         BlocProvider<HomeNavBarBloc>(
-          create: (context) => HomeNavBarBloc(),
+          create: (context) => HomeNavBarBloc(
+            authRepository: _authRepository,
+          ),
         ),
         BlocProvider<ForgotPasswordBloc>(
           create: (context) => ForgotPasswordBloc(

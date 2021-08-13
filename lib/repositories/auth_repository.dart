@@ -10,6 +10,14 @@ class AuthRepository {
     return _auth.currentUser;
   }
 
+  Future<void> updateUserName({String name}) async {
+    await _auth.currentUser.updateDisplayName(name);
+  }
+
+  Future<void> updateUserEmail({String email}) async {
+    await _auth.currentUser.updateEmail(email);
+  }
+
   Future<User> signUp(String email, String password, String name) async {
     try {
       var result = await _auth.createUserWithEmailAndPassword(
