@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeRepository().fetchFifas();
-   // HomeRepository().fetchTours();
+    HomeRepository().fetchTours();
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
