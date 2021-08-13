@@ -53,7 +53,11 @@ class ThankYou extends StatelessWidget {
                   color: kThemeColor,
                 ),
               ),
-              Icon(Icons.check_circle,color: kThemeColor,size: 100,),
+              Icon(
+                Icons.check_circle,
+                color: kThemeColor,
+                size: 100,
+              ),
               Text(
                 'Thank You for your interest!',
                 style: themeFont(
@@ -66,7 +70,9 @@ class ThankYou extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: themeFont(s: 18),
               ),
-              SizedBox(height: h*0.2,),
+              SizedBox(
+                height: h * 0.2,
+              ),
             ],
           ),
         ),

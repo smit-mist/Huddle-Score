@@ -11,7 +11,7 @@ class FillYourDetails extends StatefulWidget {
 class _FillYourDetailsState extends State<FillYourDetails> {
   bool fullName = false, contact = false, emailId = false, nameTour = false;
   String city = "Ahmd";
-  TextEditingController _name, _contact, _emailId, _nameTour;
+//  TextEditingController _name, _contact, _emailId, _nameTour;
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -85,7 +85,7 @@ class _FillYourDetailsState extends State<FillYourDetails> {
                 style: themeFont(),
               ),
               TextField(
-                controller: _name,
+           //     controller: _name,
                 onTap: () {
                   fullName = true;
                 },
@@ -99,12 +99,13 @@ class _FillYourDetailsState extends State<FillYourDetails> {
                 style: themeFont(),
               ),
               TextField(
-                controller: _contact,
+        //        controller: _contact,
                 onTap: () {
                   contact = true;
                 },
                 decoration: normalTextDecoration(contact, ' ').copyWith(
                   prefixIcon: Container(
+                    width: w*0.15,
                     padding: EdgeInsets.only(left: 15),
                     child: Row(
                       children: [
@@ -134,7 +135,7 @@ class _FillYourDetailsState extends State<FillYourDetails> {
                 style: themeFont(),
               ),
               TextField(
-                controller: _emailId,
+        //        controller: _emailId,
                 onTap: () {
                   emailId = true;
                 },
@@ -324,7 +325,7 @@ class _FillYourDetailsState extends State<FillYourDetails> {
                 style: themeFont(),
               ),
               TextField(
-                controller: _nameTour,
+          //      controller: _nameTour,
                 onTap: () {
                   nameTour = true;
                 },

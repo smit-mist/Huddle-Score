@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
+import 'fifa_registration_form.dart';
+
 List<String> first = [
   'Winners',
   'Runners Up',
@@ -19,7 +21,6 @@ List<String> second = [
 ];
 
 class FifaDetails extends StatefulWidget {
-
   @override
   _FifaDetailsState createState() => _FifaDetailsState();
 }
@@ -49,7 +50,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                 size: 18,
               ),
               TextButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -58,18 +59,28 @@ class _FifaDetailsState extends State<FifaDetails> {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 40,
-                width: w*0.3,
-                child: Center(
-                  child: Text(
-                    'Register',
-                    style: themeFont(color: Colors.white),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => FifaRegistrationForm(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 40,
+                  width: w * 0.3,
+                  child: Center(
+                    child: Text(
+                      'Register',
+                      style: themeFont(color: Colors.white),
+                    ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: kThemeColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: kThemeColor,
+                  ),
                 ),
               )
             ],
@@ -207,10 +218,10 @@ class _FifaDetailsState extends State<FifaDetails> {
                                         Text(
                                           'Maps',
                                           style: themeFont(
-                                              s: 12, color: kThemeColor)
+                                                  s: 12, color: kThemeColor)
                                               .copyWith(
                                             decoration:
-                                            TextDecoration.underline,
+                                                TextDecoration.underline,
                                           ),
                                         )
                                       ],
@@ -296,7 +307,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                     itemBuilder: (_, ind) {
                                       return Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             first[ind],
@@ -322,120 +333,120 @@ class _FifaDetailsState extends State<FifaDetails> {
                           ),
                           (isExpanded == false
                               ? Expanded(
-                            child: Container(
-                              padding:
-                              EdgeInsets.symmetric(horizontal: 20),
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'And many more... ',
-                                    style: themeFont(
-                                      color: Colors.black.withOpacity(
-                                        0.7,
-                                      ),
-                                      s: 10,
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        isExpanded = true;
-                                      });
-                                    },
-                                    child: Text(
-                                      'View all prizes',
-                                      style: themeFont(
-                                          color: kThemeColor, s: 10)
-                                          .copyWith(
-                                          decoration: TextDecoration
-                                              .underline),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_drop_down_sharp,
-                                    color: kThemeColor,
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                              : Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              child: Container(
-                                child: Column(
-                                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        width: double.infinity,
-                                        // height: h * 0.2,
-                                        child: ListView.separated(
-                                          separatorBuilder: (_, ind) {
-                                            return SizedBox(
-                                              height: 10,
-                                            );
-                                          },
-                                          itemCount: first.length - 2,
-                                          itemBuilder: (_, ind) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment
-                                                  .start,
-                                              children: [
-                                                Text(
-                                                  first[ind + 2],
-                                                  style: themeFont(
-                                                    color: Colors.black
-                                                        .withOpacity(0.7),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  second[ind + 2],
-                                                  style: themeFont(),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.end,
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    width: double.infinity,
+                                    child: Row(
                                       children: [
+                                        Text(
+                                          'And many more... ',
+                                          style: themeFont(
+                                            color: Colors.black.withOpacity(
+                                              0.7,
+                                            ),
+                                            s: 10,
+                                          ),
+                                        ),
+                                        Spacer(),
                                         TextButton(
                                           onPressed: () {
                                             setState(() {
-                                              isExpanded = false;
+                                              isExpanded = true;
                                             });
                                           },
                                           child: Text(
-                                            'View less prizes',
+                                            'View all prizes',
                                             style: themeFont(
-                                                color: kThemeColor,
-                                                s: 10)
+                                                    color: kThemeColor, s: 10)
                                                 .copyWith(
-                                                decoration:
-                                                TextDecoration
-                                                    .underline),
+                                                    decoration: TextDecoration
+                                                        .underline),
                                           ),
                                         ),
                                         Icon(
-                                          Icons.arrow_drop_up_sharp,
+                                          Icons.arrow_drop_down_sharp,
                                           color: kThemeColor,
                                         )
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )),
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Container(
+                                    width: double.infinity,
+                                    child: Container(
+                                      child: Column(
+                                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 20),
+                                              width: double.infinity,
+                                              // height: h * 0.2,
+                                              child: ListView.separated(
+                                                separatorBuilder: (_, ind) {
+                                                  return SizedBox(
+                                                    height: 10,
+                                                  );
+                                                },
+                                                itemCount: first.length - 2,
+                                                itemBuilder: (_, ind) {
+                                                  return Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        first[ind + 2],
+                                                        style: themeFont(
+                                                          color: Colors.black
+                                                              .withOpacity(0.7),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        second[ind + 2],
+                                                        style: themeFont(),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    isExpanded = false;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  'View less prizes',
+                                                  style: themeFont(
+                                                          color: kThemeColor,
+                                                          s: 10)
+                                                      .copyWith(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline),
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_drop_up_sharp,
+                                                color: kThemeColor,
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )),
                         ],
                       ),
                     ),
@@ -484,7 +495,9 @@ class _FifaDetailsState extends State<FifaDetails> {
                           type: 'Mode',
                           data: '1v1',
                         ),
-                       SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -507,4 +520,3 @@ class _FifaDetailsState extends State<FifaDetails> {
     );
   }
 }
-

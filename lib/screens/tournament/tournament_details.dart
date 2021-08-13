@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
 List<String> first = [
@@ -50,7 +51,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 size: 18,
               ),
               TextButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -59,18 +60,28 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 40,
-                width: w*0.3,
-                child: Center(
-                  child: Text(
-                    'Register',
-                    style: themeFont(color: Colors.white),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TournamentRegisterForm(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 40,
+                  width: w * 0.3,
+                  child: Center(
+                    child: Text(
+                      'Register',
+                      style: themeFont(color: Colors.white),
+                    ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: kThemeColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: kThemeColor,
+                  ),
                 ),
               )
             ],
