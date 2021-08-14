@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_details.dart';
 
 import '../../constants.dart';
 
-class FifaTile extends StatefulWidget {
-  @override
-  _FifaTileState createState() => _FifaTileState();
-}
-
-class _FifaTileState extends State<FifaTile> {
+class FifaTile extends StatelessWidget {
+  HomeFifa fifa;
+  FifaTile({this.fifa});
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -55,7 +54,7 @@ class _FifaTileState extends State<FifaTile> {
                         ),
                       ),
                       child: Image.network(
-                        'https://picsum.photos/200/300',
+                        fifa.photo,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -70,18 +69,18 @@ class _FifaTileState extends State<FifaTile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'FIFA championship 2021',
+                          fifa.name,
                           style: themeFont(s: 12),
                         ),
                         SizedBox(
                           height: 1,
                         ),
                         Text(
-                          'Venus, Ahmedabad',
+                          fifa.venue.join(' '),
                           style: themeFont(s: 12),
                         ),
                         Text(
-                          '11 -12 March, 2021',
+                          fifa.date,
                           style: themeFont(s: 12),
                         ),
                       ],

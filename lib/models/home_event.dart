@@ -42,18 +42,18 @@ class HomeRoom {
 }
 
 class HomeFifa {
-  String tourId;
-  String eventType;
+  String fifaId;
   String name;
   String photo;
   HomeRoom room;
   List<String> venue;
+  String date;
   HomeFifa({
-    this.eventType,
     this.name,
     this.photo,
     this.room,
-    this.tourId,
+    this.date,
+    this.fifaId,
     this.venue,
   });
 
@@ -63,8 +63,8 @@ class HomeFifa {
     String eventType,
   ) =>
       HomeFifa(
-        eventType: eventType,
-        tourId: key,
+        fifaId: key,
+        date: doc['date'],
         photo: doc['photo'],
         venue: doc['venue'].cast<String>(),
         name: doc['name'],

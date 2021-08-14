@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/home/home_bloc.dart';
+import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../../constants.dart';
 
 class ViewAllFifaScreen extends StatelessWidget {
+  HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
+    _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -48,22 +53,35 @@ class ViewAllFifaScreen extends StatelessWidget {
                 child: Container(
                   width: w,
                   //   height:100,
-                  child: GridView.builder(
-                    itemCount: 10,
-                    itemBuilder: (_, ind) {
-                      return SizedBox(
-                        child: FifaTile(),
-                        width: w * (145 / kScreenW),
-                        height: h * (212 / kScreenH),
+                  child: BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      if (state is Loading) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (state is Failure) {
+                        return Center(
+                          child: Text('Failed'),
+                        );
+                      } else if (state is InitialState) {
+                        return Container();
+                      }
+                      return GridView.builder(
+                        itemCount: state.allFifa.length,
+                        itemBuilder: (_, ind) {
+                          return SizedBox(
+                            child: FifaTile(fifa:state.allFifa[ind]),
+                            width: w * (145 / kScreenW),
+                            height: h * (212 / kScreenH),
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          // width: w * (145 / kScreenW),
+                          // height: h * (212 / kScreenH)
+                          childAspectRatio:
+                              (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
+                        ),
                       );
                     },
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      // width: w * (145 / kScreenW),
-                      // height: h * (212 / kScreenH)
-                      childAspectRatio:
-                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-                    ),
                   ),
                 ),
               )

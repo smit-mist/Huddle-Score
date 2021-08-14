@@ -9,12 +9,12 @@ import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   String _chosenValue = "Rajkot";
   HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
-
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -111,7 +111,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-
             Row(
               children: [
                 Text(
@@ -144,15 +143,15 @@ class HomeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
               height: h * (250 / kScreenH),
-              child: BlocBuilder<HomeBloc,HomeState>(
-                builder: (_,state){
-                  if(state is Loading){
+              child: BlocBuilder<HomeBloc, HomeState>(
+                builder: (_, state) {
+                  if (state is Loading) {
                     return Center(child: CircularProgressIndicator());
-                  }
-                  else if(state is Failure){
-                    return Center(child: Text('Failed'),);
-                  }
-                  else if(state is InitialState){
+                  } else if (state is Failure) {
+                    return Center(
+                      child: Text('Failed'),
+                    );
+                  } else if (state is InitialState) {
                     return Container();
                   }
                   return ListView.separated(
@@ -164,7 +163,8 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
                       itemBuilder: (_, int index) {
-                        return TournamentTile(here:state.allTournaments[index]);
+                        return TournamentTile(
+                            here: state.allTournaments[index]);
                       });
                 },
               ),
@@ -204,24 +204,37 @@ class HomeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
               height: h * (215 / kScreenH),
-              child: ListView.separated(
-                  separatorBuilder: (_, index) {
-                    return SizedBox(
-                      width: 20 + (w * (15 / kScreenW)),
+              child: BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state is Loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is Failure) {
+                    return Center(
+                      child: Text('Failed'),
                     );
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 6,
-                  itemBuilder: (_, int index) {
-                    if (index == 0)
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          left: 5,
-                        ),
-                        child: FifaTile(),
-                      );
-                    return FifaTile();
-                  }),
+                  } else if (state is InitialState) {
+                    return Container();
+                  }
+                  return ListView.separated(
+                      separatorBuilder: (_, index) {
+                        return SizedBox(
+                          width: 20 + (w * (15 / kScreenW)),
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 6,
+                      itemBuilder: (_, int index) {
+                        if (index == 0)
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              left: 5,
+                            ),
+                            child: FifaTile(fifa:state.allFifa[index]),
+                          );
+                        return FifaTile(fifa: state.allFifa[index],);
+                      });
+                },
+              ),
             ),
             SizedBox(
               height: 10,
