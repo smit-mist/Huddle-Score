@@ -1,17 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/partner_details.dart';
+import 'package:http/http.dart' as http;
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 
 class PartnerRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Future<void> sendPartnerData(ParnterDetails details) async {
+  Future<void> submitPartnerDetails(ParnterDetails details) async {
     try {
-      var response = await _firestore.doc('config').set({
-        details.email: details.convertToMap(),
-      });
-      print("Succes");
+      print('before');
+      final String baseUrl =
+          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
+      final User user = await AuthRepository().getCurrentUser();
+      print(user.uid);
+      final String jwt = await user.getIdToken();
+      var response = await http.post(
+        Uri.parse(baseUrl),
+        headers: <String, String>{
+          'Authorization': 'Bearer $jwt',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'name': details.name,
+          'tourName': details.tourName,
+          'tourType': details.tourType,
+          'contact': details.contactNumber,
+          'email': details.email,
+          'city': details.city,
+          'type': details.type,
+          'state': details.state,
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode == 200) print('Success=====>>>>');
     } catch (e) {
-      print("Error $e");
-      return ;
+      print(e.toString());
     }
   }
 }

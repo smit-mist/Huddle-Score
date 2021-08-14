@@ -222,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       },
                       scrollDirection: Axis.horizontal,
-                      itemCount: 6,
+                      itemCount: state.allFifa.length,
                       itemBuilder: (_, int index) {
                         if (index == 0)
                           return Padding(

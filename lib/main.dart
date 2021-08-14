@@ -21,15 +21,18 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //  await PartnerRepository().sendPartnerData(ParnterDetails(
-  //   email: 'smit@gmail.com',
-  //   city: 'rjt',
-  //   contactNumber: 23423,
-  //   tournamentName: 'test',
-  //   name: 'test',
-  //   type: 'test',
-  //   state: 'test',
-  // ));
+  print('earlier');
+  await PartnerRepository().submitPartnerDetails(ParnterDetails(
+    email: 'smit@gmail.com',
+    city: 'rjt',
+    contactNumber: 23423,
+    tourName: 'test',
+    tourType: 'online',
+    name: 'test',
+    type: 'tour',
+    state: 'test',
+  ));
+  print('after');
   runApp(MyApp());
 }
 
@@ -39,7 +42,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
