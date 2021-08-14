@@ -48,7 +48,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => HowItWorks(),
+                      builder: (_) => HowItWorks(isFirst: isFirst,),
                     ),
                   );
                 },

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:huddle_and_score/screens/partner_with_us/fill_your_details.dart';
+import 'package:huddle_and_score/screens/partner_with_us/fill_your_details_tournament.dart';
 
 import '../../constants.dart';
+import 'fill_your_details_turf.dart';
 
 class HowItWorks extends StatelessWidget {
+  bool isFirst;
+  HowItWorks({this.isFirst});
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -41,9 +44,13 @@ class HowItWorks extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => FillYourDetails(),
-                    ),
+                    (isFirst)
+                        ? MaterialPageRoute(
+                            builder: (_) => FillYourDetailsTurf(),
+                          )
+                        : MaterialPageRoute(
+                            builder: (_) => FillYourDetailsTournament(),
+                          ),
                   );
                 },
                 child: Container(
