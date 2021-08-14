@@ -1,4 +1,38 @@
+UI CHANGES
 //TODO: SMIT Add checkbox for agreement in SignUp Screen
 // TODO: SMIT Change filled color for text field.
+//TODO: FORM Validation
 
-// TODO: Fifa Fetching
+
+
+
+For tomorrow
+
+BackEnd..
+// TODO: Null operator for all models to map..
+// TODO: All 4 Forms??2.
+// TODO: UI Update Bloc SetState Prize Pool.
+// TODO: Tournament ID + User ID method isRegister.
+
+
+// TODO: Prize Pool Conversion.
+// TODO: Logout, Edit Profile, email verification
+// TODO: User History
+// TODO: CityWise in Home
+// TODO: FeedBack Form
+
+
+
+
+UI
+
+// TODO: All static Pages
+// TODO: Account, Delta Password, Logout - 2 Screens.
+// TODO: Banner Widget
+// TODO: Receipt Page
+
+// TODO: My Booking Page
+// TODO: Page 12 Dialog Box City
+// TODO: Page 14 Dialog for FeedBack
+
+

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ButtonClickBloc>(
+          create: (_) => ButtonClickBloc(),
+        ),
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(homeRepository: _homeRepository)
             ..add(

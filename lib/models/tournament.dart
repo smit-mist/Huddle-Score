@@ -27,7 +27,7 @@ class Tournament {
         tourId: id,
         email: data['email'],
         orderId: data['orderID'],
-        prizePool: data['prizePool'].cast<String, List<String>>(),
+        prizePool: (data['prizePool']).cast<String,List<String>>(),
         main: Main.fromMap(data['main']),
         info: Info.fromMap(data['info']),
         details: Details.fromMap(data['details']),
@@ -94,7 +94,7 @@ class Info {
         dates: map['dates'].cast<String, String>(),
         durationPerMatch: map['durationPerMatch'],
         playersPerTeam: map['playersPerTeam'],
-        registrationFee: map['registrationFee'],
+        registrationFee: map['regestrationFee'],
         substituteAllowed: map['substituteAllowed'],
         type: map['type'],
       );
@@ -113,7 +113,8 @@ class Details {
   });
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'],
-        pdf: map['pdf'].cast<String>(),
+      pdf: (map['pdf'] ==null?null:map['pdf'].cast<String>()),
+      //  pdf: map['pdf'].cast<String>(),
         poster: map['poster'],
         title: map['title'],
       );
