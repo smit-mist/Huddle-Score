@@ -1,20 +1,18 @@
-UI CHANGES
+@ the end.
 //TODO: SMIT Add checkbox for agreement in SignUp Screen
 // TODO: SMIT Change filled color for text field.
 //TODO: FORM Validation
 
-
-
-
-For tomorrow
+====================================
 
 BackEnd..
+Priority
 // TODO: Null operator for all models to map..
 // TODO: All 4 Forms??2.
 // TODO: UI Update Bloc SetState Prize Pool.
 // TODO: Tournament ID + User ID method isRegister.
 
-
+After
 // TODO: Prize Pool Conversion.
 // TODO: Logout, Edit Profile, email verification
 // TODO: User History
@@ -24,13 +22,10 @@ BackEnd..
 
 
 
-UI
-
-// TODO: All static Pages
+UI Screens Priority Wise.
 // TODO: Account, Delta Password, Logout - 2 Screens.
+// TODO: All static Pages
 // TODO: Banner Widget
-// TODO: Receipt Page
-
 // TODO: My Booking Page
 // TODO: Page 12 Dialog Box City
 // TODO: Page 14 Dialog for FeedBack

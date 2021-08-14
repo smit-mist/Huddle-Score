@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_details.dart';
+import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
 
 import '../../constants.dart';
 
@@ -19,8 +20,9 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
     double h = MediaQuery.of(context).size.height;
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-      child:   Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      child: Dialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: 200.0,
@@ -48,7 +50,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                             MaterialPageRoute(
                               builder: (_) => FifaDetails(),
                             ),
-                                (route) => false);
+                            (route) => false);
                       },
                       child: Container(
                         height: 40,
@@ -129,18 +131,29 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 40,
-                width: w * 0.3,
-                child: Center(
-                  child: Text(
-                    'Submit',
-                    style: themeFont(color: Colors.white),
+              GestureDetector(
+                onTap: () {
+                  print("pressed");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => FifaReview(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 40,
+                  width: w * 0.3,
+                  child: Center(
+                    child: Text(
+                      'Submit',
+                      style: themeFont(color: Colors.white),
+                    ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: kThemeColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: kThemeColor,
+                  ),
                 ),
               )
             ],
@@ -225,8 +238,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                     contact = true;
                   },
                   decoration:
-                      normalTextDecoration('Your Contact Number')
-                          .copyWith(
+                      normalTextDecoration('Your Contact Number').copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
                       padding: EdgeInsets.only(left: 15),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
 
 import '../../constants.dart';
 
-class FifaReview extends StatelessWidget {
+class FifaReceiptScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -36,28 +35,27 @@ class FifaReview extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => FifaReceiptScreen(),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Proceed to pay',
-                      style: themeFont(color: Colors.white),
-                    ),
+              Container(
+                height: 40,
+                width: w * 0.45,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.download_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Download Receipt',
+                        style: themeFont(color: Colors.white, ),
+                      ),
+                    ],
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
                 ),
               ),
             ],
@@ -74,19 +72,83 @@ class FifaReview extends StatelessWidget {
                 height: h * (0.04),
               ),
               Text(
-                'Review',
+                'Receipt',
                 style: themeFont(
                   color: kThemeColor,
                   s: 23,
                 ),
               ),
               SizedBox(
-                height: h * (0.04),
+                height: h * 0.04,
               ),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (190 / kScreenH),
+                height: h * (150 / kScreenH),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      spreadRadius: 2,
+                    )
+                  ],
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 1,
+                        ),
+                        Text(
+                          'Fifa Championship',
+                          style: themeFont(w: FontWeight.bold),
+                        ),
+                        Text(
+                          '8 September 2021',
+                          style: themeFont(w: FontWeight.bold),
+                        ),
+                        Text(
+                          'LD College, Ahmedabad',
+                          style: themeFont(w: FontWeight.bold),
+                        ),
+                        Text(
+                          '4 p.m. onwards',
+                          style: themeFont(w: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: h * (102 / kScreenH),
+                      width: h * (102 / kScreenH),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.network(
+                          'https://picsum.photos/300/300',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: h * (220 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -103,15 +165,16 @@ class FifaReview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Summary',
-                      style: themeFont(w: FontWeight.bold),
+                      'Your participation has been confirmed.',
+                      style: themeFont(color: kThemeColor),
                     ),
                     SizedBox(
                       height: 1,
                     ),
-                    DataShower(type: 'Name', data: 'Person Name'),
+                    DataShower(type: 'Participant Name', data: 'Person Name'),
                     DataShower(type: 'Phone No.', data: '9934923912'),
                     DataShower(type: 'Email Id', data: 'abc@gmail.com'),
+                    DataShower(type: 'Mode of Payment', data: 'Net Banking'),
                     SizedBox(
                       height: 1,
                     ),
