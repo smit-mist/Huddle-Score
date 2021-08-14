@@ -1,4 +1,6 @@
+import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/repositories/fifa_repository.dart';
 
 class Fifa {
   Map<String, Record> utils; //String is tour id
@@ -31,6 +33,10 @@ class Fifa {
         poster: data['poster'],
         details: Details.fromMap(data['details']),
       );
+
+  Future<Fifa> fromHomeFifa({HomeFifa fifa}) async {
+    return await FifaRepository().getFifaById(fifa.fifaId);
+  }
 }
 
 class Main {
@@ -73,10 +79,10 @@ class Info {
   String time;
   Info({this.mode, this.registrationFee, this.time});
   factory Info.fromMap(Map<String, dynamic> map) => Info(
-    mode: map['mode'],
-    registrationFee: map['registrationFee'],
-    time: map['time'],
-  );
+        mode: map['mode'],
+        registrationFee: map['registrationFee'],
+        time: map['time'],
+      );
 }
 
 class Details {

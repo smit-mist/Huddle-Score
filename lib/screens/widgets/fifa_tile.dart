@@ -13,11 +13,14 @@ class FifaTile extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        Fifa here = await Fifa().fromHomeFifa(fifa: fifa);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => FifaDetails(),
+            builder: (_) => FifaDetails(
+              fifa: here,
+            ),
           ),
         );
       },

@@ -4,16 +4,19 @@ import 'package:huddle_and_score/models/fifa.dart';
 class FifaRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<Fifa> getFifaById(String iD) async {
-    var response = _firestore.doc('fifas/$iD');
+    try {
+      var response = _firestore.doc('fifas/$iD');
 
+      Fifa fifa = await response.get().then(
+            (value) => Fifa.fromMap(
+              value.data(),
+              value.id,
+            ),
+          );
 
-    Fifa fifa = await response.get().then(
-          (value) => Fifa.fromMap(
-            value.data(),
-            value.id,
-          ),
-        );
-
-    return fifa;
+      return fifa;
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

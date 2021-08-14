@@ -1,4 +1,6 @@
+import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 
 class Tournament {
   Map<String, Record> utils; //String is tour id
@@ -25,11 +27,15 @@ class Tournament {
         tourId: id,
         email: data['email'],
         orderId: data['orderID'],
-        prizePool: data['prizePool'].cast<String,List<String>>(),
+        prizePool: data['prizePool'].cast<String, List<String>>(),
         main: Main.fromMap(data['main']),
         info: Info.fromMap(data['info']),
         details: Details.fromMap(data['details']),
       );
+
+  Future<Tournament> fromHomeTour(HomeTour tour) async {
+    return await TournamentRepository().getTournamentById(tour.tourId);
+  }
 }
 
 class Main {
@@ -42,7 +48,7 @@ class Main {
   factory Main.fromMap(Map<String, dynamic> map) => Main(
         ageRec: map['ageRec'],
         deadline: map['deadline'],
-        timeLine: (map['timeline'] as List).map((e) => e as String).toList(),
+        timeLine: map['timeline'].cast<String>(),
         venue: Venue.fromMap(map['venue']),
         room: Room.fromMap(map['rooms']),
       );
@@ -53,8 +59,8 @@ class Venue {
   Map<String, double> coordinates;
   Venue({this.address, this.coordinates});
   factory Venue.fromMap(Map<String, dynamic> map) => Venue(
-        address: (map['address'] as List).map((e) => e as String).toList(),
-        coordinates: map['coordinates'].cast<String,double>(),
+        address: map['address'].cast<String>(),
+        coordinates: map['coordinates'].cast<String, double>(),
       );
 }
 
@@ -63,7 +69,8 @@ class Room {
   int total;
   Room({this.registered, this.total});
   factory Room.fromMap(Map<String, dynamic> map) => Room(
-        registered: (map['registered'] as List).map((e) => e as String).toList(),
+        registered:
+            map['registered'].cast<String>(),
         total: map['total'],
       );
 }
@@ -84,7 +91,7 @@ class Info {
     this.type,
   });
   factory Info.fromMap(Map<String, dynamic> map) => Info(
-        dates: map['dates'].cast<String,String>(),
+        dates: map['dates'].cast<String, String>(),
         durationPerMatch: map['durationPerMatch'],
         playersPerTeam: map['playersPerTeam'],
         registrationFee: map['registrationFee'],
@@ -106,7 +113,7 @@ class Details {
   });
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'],
-        pdf: (map['pdf'] as List).map((e) => e as String).toList(),
+        pdf: map['pdf'].cast<String>(),
         poster: map['poster'],
         title: map['title'],
       );

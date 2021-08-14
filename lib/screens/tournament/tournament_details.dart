@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
@@ -19,12 +20,9 @@ List<String> second = [
   'Vouchers'
 ];
 
-class TournamentDetails extends StatefulWidget {
-  @override
-  _TournamentDetailsState createState() => _TournamentDetailsState();
-}
-
-class _TournamentDetailsState extends State<TournamentDetails> {
+class TournamentDetails extends StatelessWidget {
+  Tournament tournament;
+  TournamentDetails({this.tournament});
   bool isExpanded = true;
 
   @override
@@ -100,7 +98,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 Row(
                   children: [
                     Text(
-                      'Vamos\' 21',
+                      tournament.details.title,
                       style: themeFont(
                         color: kThemeColor,
                         s: 23,
@@ -117,7 +115,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                   height: h * (390 / kScreenH),
                   width: double.infinity,
                   child: Image.network(
-                    'https://picsum.photos/200/400',
+                    tournament.details.poster,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -127,7 +125,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+                    tournament.details.description,
                     style: themeFont(s: 12),
                   ),
                 ),
@@ -352,9 +350,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                         Spacer(),
                                         TextButton(
                                           onPressed: () {
-                                            setState(() {
-                                              isExpanded = true;
-                                            });
+                                            
                                           },
                                           child: Text(
                                             'View all prizes',
@@ -422,9 +418,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {
-                                                  setState(() {
-                                                    isExpanded = false;
-                                                  });
+                                                  
                                                 },
                                                 child: Text(
                                                   'View less prizes',

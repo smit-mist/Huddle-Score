@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/home_event.dart';
+import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 
 import '../../constants.dart';
 
-class TournamentTile extends StatefulWidget {
+class TournamentTile extends StatelessWidget {
   HomeTour here;
   TournamentTile({this.here});
-  @override
-  _TournamentTileState createState() => _TournamentTileState();
-}
-class _TournamentTileState extends State<TournamentTile> {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        Tournament tournament = await Tournament().fromHomeTour(here);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => TournamentDetails(),
+            builder: (_) => TournamentDetails(tournament: tournament,),
           ),
         );
       },
@@ -33,7 +31,7 @@ class _TournamentTileState extends State<TournamentTile> {
             ),
             child: Container(
               width: w * (155 / kScreenW),
-             // height: h * (212 / kScreenH),
+              // height: h * (212 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
@@ -57,7 +55,7 @@ class _TournamentTileState extends State<TournamentTile> {
                         ),
                       ),
                       child: Image.network(
-                        widget.here.photo,
+                        here.photo,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -72,18 +70,18 @@ class _TournamentTileState extends State<TournamentTile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          widget.here.name,
-                          style: themeFont(s: 12,w: FontWeight.w500),
+                          here.name,
+                          style: themeFont(s: 12, w: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 1,
                         ),
                         Text(
-                          widget.here.venue.join(''),
+                          here.venue.join(''),
                           style: themeFont(s: 12),
                         ),
                         Text(
-                          widget.here.finalsDate[0],
+                          here.finalsDate[0],
                           style: themeFont(s: 12),
                         ),
                       ],
@@ -94,7 +92,7 @@ class _TournamentTileState extends State<TournamentTile> {
             ),
           ),
           Positioned(
-            top: h*(100/kScreenH),
+            top: h * (100 / kScreenH),
             child: Container(
               height: 20,
               width: w * (155 / kScreenW),

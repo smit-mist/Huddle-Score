@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
 import 'fifa_registration_form.dart';
@@ -20,12 +21,9 @@ List<String> second = [
   'Vouchers'
 ];
 
-class FifaDetails extends StatefulWidget {
-  @override
-  _FifaDetailsState createState() => _FifaDetailsState();
-}
-
-class _FifaDetailsState extends State<FifaDetails> {
+class FifaDetails extends StatelessWidget {
+  Fifa fifa;
+  FifaDetails({this.fifa});
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
@@ -99,7 +97,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                 Row(
                   children: [
                     Text(
-                      'Vamos\' 21',
+                      fifa.details.title,
                       style: themeFont(
                         color: kThemeColor,
                         s: 23,
@@ -116,7 +114,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                   height: h * (390 / kScreenH),
                   width: double.infinity,
                   child: Image.network(
-                    'https://picsum.photos/200/400',
+                    fifa.poster,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -126,7 +124,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+                    fifa.details.description,
                     style: themeFont(s: 12),
                   ),
                 ),
@@ -350,11 +348,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                         ),
                                         Spacer(),
                                         TextButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              isExpanded = true;
-                                            });
-                                          },
+                                          onPressed: () {},
                                           child: Text(
                                             'View all prizes',
                                             style: themeFont(
@@ -420,11 +414,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    isExpanded = false;
-                                                  });
-                                                },
+                                                onPressed: () {},
                                                 child: Text(
                                                   'View less prizes',
                                                   style: themeFont(
