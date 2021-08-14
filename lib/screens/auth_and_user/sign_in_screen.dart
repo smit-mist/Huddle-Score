@@ -70,7 +70,7 @@ class SignInScreen extends StatelessWidget {
                             w: FontWeight.normal,
                           ),
                           decoration: normalTextDecoration(
-                            state.emailTapped,
+
                             'Email id',
                           ),
                         ),

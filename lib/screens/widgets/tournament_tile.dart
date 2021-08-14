@@ -25,14 +25,14 @@ class _TournamentTileState extends State<TournamentTile> {
         );
       },
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         children: [
           Padding(
             padding: const EdgeInsets.only(
               bottom: 2.0,
             ),
             child: Container(
-              width: w * (145 / kScreenW),
+              width: w * (155 / kScreenW),
              // height: h * (212 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -62,7 +62,7 @@ class _TournamentTileState extends State<TournamentTile> {
                       ),
                     ),
                     height: h * (112 / kScreenH),
-                    width: w * (147 / kScreenW),
+                    width: w * (155 / kScreenW),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 10),
@@ -73,7 +73,7 @@ class _TournamentTileState extends State<TournamentTile> {
                       children: [
                         Text(
                           widget.here.name,
-                          style: themeFont(s: 12),
+                          style: themeFont(s: 12,w: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 1,
@@ -93,11 +93,11 @@ class _TournamentTileState extends State<TournamentTile> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.center,
+          Positioned(
+            top: h*(100/kScreenH),
             child: Container(
               height: 20,
-              width: w * (160 / kScreenW),
+              width: w * (155 / kScreenW),
               color: Colors.red,
               child: Center(
                 child: Text(

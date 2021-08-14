@@ -83,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
                             w: FontWeight.normal,
                           ),
                           decoration: normalTextDecoration(
-                              state.nameTapped, 'Full Name'),
+                              'Full Name'),
                         ),
                       );
                     },
@@ -106,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                             w: FontWeight.normal,
                           ),
                           decoration: normalTextDecoration(
-                              state.emailTapped, 'Email id'),
+                             'Email id'),
                         ),
                       );
                     },

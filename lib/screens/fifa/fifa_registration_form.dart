@@ -207,7 +207,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       name = true;
                     });
                   },
-                  decoration: normalTextDecoration(name, 'Your Full Name'),
+                  decoration: normalTextDecoration('Your Full Name'),
                 ),
                 SizedBox(
                   height: 15,
@@ -225,7 +225,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                     contact = true;
                   },
                   decoration:
-                      normalTextDecoration(contact, 'Your Contact Number')
+                      normalTextDecoration('Your Contact Number')
                           .copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
@@ -269,7 +269,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       email = true;
                     });
                   },
-                  decoration: normalTextDecoration(email, 'Your Email ID'),
+                  decoration: normalTextDecoration('Your Email ID'),
                 ),
                 SizedBox(
                   height: 15,

@@ -27,7 +27,7 @@ TextStyle themeFont({Color color, FontWeight w, double s}) {
   // return TextStyle(color: color, fontWeight: w, fontSize: 14);
 }
 
-InputDecoration normalTextDecoration(bool _isActive, String name) {
+InputDecoration normalTextDecoration(String name) {
   return InputDecoration(
     hintText: name,
     hintStyle: themeFont(color: Color(0xff626262), w: FontWeight.normal, s: 14),
@@ -38,27 +38,32 @@ InputDecoration normalTextDecoration(bool _isActive, String name) {
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: (_isActive == false
-          ? BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            )
-          : BorderSide(
-              width: 2,
-              color: kThemeColor,
-            )),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(
+        width: 2,
+        color: kThemeColor,
+      ),
+    ),
+  );
+}
+InputDecoration filledTextDecoration(String name){
+  return InputDecoration(
+    hintText: name,
+    hintStyle: themeFont(color: Color(0xff626262), w: FontWeight.normal, s: 14),
+    contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+    filled: true,
+    fillColor: Colors.grey.withOpacity(
+      0.14,
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: (_isActive == false
-          ? BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            )
-          : BorderSide(
-              width: 2,
-              color: kThemeColor,
-            )),
+      borderSide: BorderSide(
+        width: 2,
+        color: kThemeColor,
+      ),
     ),
   );
 }

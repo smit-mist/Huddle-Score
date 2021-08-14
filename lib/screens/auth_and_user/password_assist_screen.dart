@@ -89,7 +89,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                                   w: FontWeight.normal,
                                 ),
                                 decoration: normalTextDecoration(
-                                    state.emailTap, 'Email id'),
+                                    'Email id'),
                               ),
                             );
                           },
@@ -198,7 +198,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      decoration: normalTextDecoration(true, 'Email id'),
+                      decoration: normalTextDecoration('Email id'),
                     ),
                   ),
                   SizedBox(
@@ -292,7 +292,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                         color: Colors.black,
                         w: FontWeight.normal,
                       ),
-                      decoration: normalTextDecoration(true, 'Email id'),
+                      decoration: normalTextDecoration('Email id'),
                     ),
                   ),
                   SizedBox(

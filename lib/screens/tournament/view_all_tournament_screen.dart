@@ -58,15 +58,17 @@ class ViewAllTournamentScreen extends StatelessWidget {
                       return GridView.builder(
                         itemCount: state.allTournaments.length,
                         itemBuilder: (_, ind) {
-                          return TournamentTile(here: state.allTournaments[ind],);
+                          return TournamentTile(
+                            here: state.allTournaments[ind],
+                          );
                         },
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                         // width: w * (145 / kScreenW),
+                          // width: w * (145 / kScreenW),
 //height: h * (212 / kScreenH)
                           childAspectRatio:
                               (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-                          crossAxisSpacing: 0.5,
+                          mainAxisSpacing: 10
                         ),
                       );
                     },

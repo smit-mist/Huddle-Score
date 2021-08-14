@@ -213,7 +213,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       teamName = true;
                     });
                   },
-                  decoration: normalTextDecoration(teamName, 'Team Name'),
+                  decoration: normalTextDecoration( 'Team Name'),
                 ),
                 SizedBox(
                   height: h * 0.025,
@@ -238,7 +238,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       name1 = true;
                     });
                   },
-                  decoration: normalTextDecoration(name1, 'Captain\'s Name'),
+                  decoration: normalTextDecoration('Captain\'s Name'),
                 ),
                 SizedBox(
                   height: 15,
@@ -249,7 +249,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                     contact1 = true;
                   },
                   decoration: normalTextDecoration(
-                          contact1, 'Captain\'s Contact Number')
+                          'Captain\'s Contact Number')
                       .copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
@@ -286,7 +286,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       email1 = true;
                     });
                   },
-                  decoration: normalTextDecoration(email1, 'Captain\'s Email'),
+                  decoration: normalTextDecoration('Captain\'s Email'),
                 ),
                 SizedBox(
                   height: 15,
@@ -297,7 +297,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       age1 = true;
                     });
                   },
-                  decoration: normalTextDecoration(age1, 'Captain\'s Age'),
+                  decoration: normalTextDecoration('Captain\'s Age'),
                 ),
                 SizedBox(
                   height: h * (0.025),
@@ -316,7 +316,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                     });
                   },
                   decoration:
-                      normalTextDecoration(name2, 'Vice Captain\'s Name'),
+                      normalTextDecoration('Vice Captain\'s Name'),
                 ),
                 SizedBox(
                   height: 15,
@@ -327,7 +327,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                     contact2 = true;
                   },
                   decoration: normalTextDecoration(
-                          contact2, 'Vice Captain\'s Contact Number')
+                          'Vice Captain\'s Contact Number')
                       .copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
@@ -365,7 +365,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                     });
                   },
                   decoration:
-                      normalTextDecoration(email2, 'Vice Captain\'s Email'),
+                      normalTextDecoration('Vice Captain\'s Email'),
                 ),
                 SizedBox(
                   height: 15,
@@ -376,7 +376,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       age2 = true;
                     });
                   },
-                  decoration: normalTextDecoration(age2, 'Vice Captain\'s Age'),
+                  decoration: normalTextDecoration('Vice Captain\'s Age'),
                 ),
                 SizedBox(
                   height: 15,
