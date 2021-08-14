@@ -5,8 +5,10 @@ import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
+import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/home_repository.dart';
+import 'package:huddle_and_score/repositories/partner_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
@@ -19,14 +21,25 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  //  await PartnerRepository().sendPartnerData(ParnterDetails(
+  //   email: 'smit@gmail.com',
+  //   city: 'rjt',
+  //   contactNumber: 23423,
+  //   tournamentName: 'test',
+  //   name: 'test',
+  //   type: 'test',
+  //   state: 'test',
+  // ));
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final AuthRepository _authRepository = AuthRepository();
   final HomeRepository _homeRepository = HomeRepository();
+
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(

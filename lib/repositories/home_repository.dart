@@ -5,6 +5,7 @@ import 'package:huddle_and_score/models/home_event.dart';
 
 class HomeRepository {
   Future<List<HomeTour>> fetchTours() async {
+    print("Tournament Fetching started");
     final String baseUrl =
         "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
     List<HomeTour> tours = [];
@@ -20,12 +21,15 @@ class HomeRepository {
       });
       return tours;
     } else {
-      print('Error!!!!');
+      print('Error!!!! In fetching tournaments');
       return null;
     }
+
   }
 
   Future<List<HomeFifa>> fetchFifas() async {
+    print("fifa Fetching started");
+
     final String baseUrl =
         "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
     List<HomeFifa> fifas = [];
@@ -41,7 +45,7 @@ class HomeRepository {
       });
       return fifas;
     } else {
-      print('Error!!!!');
+      print('Error!!!! in fifa fetching');
       return null;
     }
   }

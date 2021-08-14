@@ -154,27 +154,14 @@ class SignUpScreen extends StatelessWidget {
                             fillColor: Colors.grey.withOpacity(0.3),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.passwordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide.none,
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.passwordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: kThemeColor,
+                              ),
                             ),
                           ),
                         ),
@@ -223,27 +210,14 @@ class SignUpScreen extends StatelessWidget {
                             fillColor: Colors.grey.withOpacity(0.3),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.confirmPasswordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide.none,
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.confirmPasswordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: kThemeColor,
+                              ),
                             ),
                           ),
                         ),

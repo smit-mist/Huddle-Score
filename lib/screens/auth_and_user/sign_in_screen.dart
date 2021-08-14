@@ -70,7 +70,6 @@ class SignInScreen extends StatelessWidget {
                             w: FontWeight.normal,
                           ),
                           decoration: normalTextDecoration(
-
                             'Email id',
                           ),
                         ),
@@ -122,27 +121,14 @@ class SignInScreen extends StatelessWidget {
                             fillColor: Colors.grey.withOpacity(0.3),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.passwordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide.none,
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: (state.passwordTapped == false
-                                  ? BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    )
-                                  : BorderSide(
-                                      width: 2,
-                                      color: kThemeColor,
-                                    )),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: kThemeColor,
+                              ),
                             ),
                           ),
                         ),

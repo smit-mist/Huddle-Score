@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:huddle_and_score/screens/auth_and_user/sign_in_screen.dart';
 
 import '../../constants.dart';
-
 
 class AnonymousProfileScreen extends StatelessWidget {
   @override
@@ -17,49 +17,59 @@ class AnonymousProfileScreen extends StatelessWidget {
           SizedBox(
             height: h * (63 / kScreenH),
           ),
-          Container(
-            height: h * (65 / kScreenH),
-            width: w * (348 / kScreenW),
-            decoration: BoxDecoration(
-              color: kThemeColor,
-              borderRadius: BorderRadius.circular(9),
-            ),
-            child: Stack(
-              children: [
-                Align(
-                  child: Text(
-                    'Sign In',
-                    style: themeFont(
-                      s: 18,
-                      color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SignInScreen(),
+                ),
+              );
+            },
+            child: Container(
+              height: h * (65 / kScreenH),
+              width: w * (348 / kScreenW),
+              decoration: BoxDecoration(
+                color: kThemeColor,
+                borderRadius: BorderRadius.circular(9),
+              ),
+              child: Stack(
+                children: [
+                  Align(
+                    child: Text(
+                      'Sign In',
+                      style: themeFont(
+                        s: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Container(
+                          child: Icon(
+                            Icons.account_circle_rounded,
+                            color: kThemeColor,
+                            size: 40,
+                          ),
+                          height: w * (55 / kScreenW),
+                          width: w * (55 / kScreenW),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  alignment: Alignment.center,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Container(
-                        child: Icon(
-                          Icons.account_circle_rounded,
-                          color: kThemeColor,
-                          size: 40,
-                        ),
-                        height: w * (55 / kScreenW),
-                        width: w * (55 / kScreenW),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -138,5 +148,3 @@ class AnonymousProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

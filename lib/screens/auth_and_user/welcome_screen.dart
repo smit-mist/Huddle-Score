@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
+import '../home_navbar_screen.dart';
+
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -11,7 +13,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-   // print('=================');
+    // print('=================');
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -27,12 +29,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Row(
                   children: [
                     Spacer(),
-                    Text(
-                      'Skip',
-                      style: themeFont(
-                        color: kThemeColor,
-                        w: FontWeight.normal,
-                        s: 12,
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => HomeNavBar(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Skip',
+                        style: themeFont(
+                          color: kThemeColor,
+                          w: FontWeight.normal,
+                          s: 12,
+                        ),
                       ),
                     ),
                   ],
@@ -57,7 +69,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   bgColor: kThemeColor,
                   onTap: () {
                     Navigator.pushNamed(context, 'sign_up');
-
                   },
                 ),
                 SizedBox(

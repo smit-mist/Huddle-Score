@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
+
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
