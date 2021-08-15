@@ -8,6 +8,8 @@ import 'auth_and_user/user_profile_screen.dart';
 import 'home_screen.dart';
 
 class HomeNavBar extends StatelessWidget {
+  Widget showMe;
+  HomeNavBar({this.showMe});
   HomeNavBarBloc _homeNavBarBloc;
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class HomeNavBar extends StatelessWidget {
             } else if (state is AnonymousProfileScreenState) {
               return AnonymousProfileScreen();
             }
+            if(showMe != null)return showMe;
             return HomeScreen();
           },
         ),

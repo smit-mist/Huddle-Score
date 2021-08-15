@@ -13,6 +13,7 @@ Priority
 // TODO: Tournament ID + User ID method isRegister.
 
 After
+
 // TODO: Logout, Edit Profile, email verification
 // TODO: User History
 // TODO: CityWise in Home
@@ -22,6 +23,7 @@ After
 
 
 UI Screens Priority Wise.
+//TODO: Loading Screen
 // TODO: All static Pages
 // TODO: My Booking Page
 // TODO: Page 12 Dialog Box City

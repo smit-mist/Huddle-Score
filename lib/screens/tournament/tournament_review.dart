@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/models/tournament.dart';
+import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 
 class TournamentReview extends StatelessWidget {
+  Tournament currentTour;
+  RegDetails userRecord;
+  TournamentReview({@required this.currentTour, @required this.userRecord});
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -37,8 +44,16 @@ class TournamentReview extends StatelessWidget {
               ),
               Spacer(),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LoadingScreen(),
+                    ),
+                  );
+                  await TournamentRepository()
+                      .registerInTournament(currentTour, userRecord);
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => TournamentReceiptScreen(),
@@ -110,14 +125,24 @@ class TournamentReview extends StatelessWidget {
                       SizedBox(
                         height: 1,
                       ),
-                      DataShower(type: 'Team Name', data: 'Supreme FC'),
-                      DataShower(type: 'Captain', data: 'Sunil'),
-                      DataShower(type: 'Phone No.', data: '9934923912'),
-                      DataShower(type: 'Email Id', data: 'abc@gmail.com'),
-                      DataShower(type: 'Age', data: '20'),
-                      DataShower(type: 'Vice Captain', data: 'Bob'),
-                      DataShower(type: 'Email Id', data: 'xyz@gmail.com'),
-                      DataShower(type: 'Age', data: '21'),
+                      DataShower(type: 'Team Name', data: userRecord.teamName),
+                      DataShower(
+                          type: 'Captain', data: userRecord.captain.fullName),
+                      DataShower(
+                          type: 'Phone No.',
+                          data: userRecord.captain.contact.toString()),
+                      DataShower(
+                          type: 'Email Id', data: userRecord.captain.email),
+                      DataShower(
+                          type: 'Age', data: userRecord.captain.age.toString()),
+                      DataShower(
+                          type: 'Vice Captain',
+                          data: userRecord.viceCaptain.fullName),
+                      DataShower(
+                          type: 'Email Id', data: userRecord.viceCaptain.email),
+                      DataShower(
+                          type: 'Age',
+                          data: userRecord.viceCaptain.age.toString()),
                       SizedBox(
                         height: 1,
                       ),
@@ -161,7 +186,7 @@ class TournamentReview extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            '₹ 750',
+                            '₹ ${currentTour.info.registrationFee}',
                             style: themeFont(w: FontWeight.w600),
                           )
                         ],
@@ -190,7 +215,7 @@ class TournamentReview extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            '₹ 750',
+                            '₹ ${currentTour.info.registrationFee}',
                             style: themeFont(w: FontWeight.w600),
                           )
                         ],

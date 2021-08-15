@@ -10,6 +10,11 @@ class AuthRepository {
     return _auth.currentUser;
   }
 
+  Future<String> getJwtToken() async {
+    final String jwt = await _auth.currentUser.getIdToken();
+    return jwt;
+  }
+
   Future<void> updateUserName({String name}) async {
     await _auth.currentUser.updateDisplayName(name);
   }

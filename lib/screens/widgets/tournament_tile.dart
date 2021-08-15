@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 
@@ -14,11 +15,19 @@ class TournamentTile extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () async {
-        Tournament tournament = await Tournament().fromHomeTour(here);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => TournamentDetails(tournament: tournament,),
+            builder: (_) => LoadingScreen(),
+          ),
+        );
+        Tournament tournament = await Tournament().fromHomeTour(here);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TournamentDetails(
+              tournament: tournament,
+            ),
           ),
         );
       },

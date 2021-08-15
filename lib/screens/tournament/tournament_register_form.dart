@@ -1,26 +1,26 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
 
-class TournamentRegisterForm extends StatefulWidget {
-  @override
-  _TournamentRegisterFormState createState() => _TournamentRegisterFormState();
-}
+class TournamentRegisterForm extends StatelessWidget {
+  Tournament currentTour;
+  TournamentRegisterForm({this.currentTour});
+  TextEditingController teamName = TextEditingController(),
+      capName = TextEditingController(),
+      capNum = TextEditingController(),
+      capEmail = TextEditingController(),
+      capAge = TextEditingController(),
+      vCapName = TextEditingController(),
+      vCapNum = TextEditingController(),
+      vCapAge = TextEditingController(),
+      vCapEmail = TextEditingController();
 
-class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
-  bool teamName = false,
-      name1 = false,
-      contact1 = false,
-      email1 = false,
-      age1 = false,
-      name2 = false,
-      contact2 = false,
-      email2 = false,
-      age2 = false;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -55,7 +55,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => TournamentDetails(),
+                              builder: (_) => TournamentDetails(
+                                tournament: currentTour,
+                              ),
                             ),
                             (route) => false);
                       },
@@ -141,10 +143,33 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
               Spacer(),
               GestureDetector(
                 onTap: () {
+                  RegDetails temp = RegDetails(
+                    teamName: 'Stunners',
+                    captain: Captain(
+                      fullName: 'Smit Mistry',
+                      email: 'smit33@gmail.com',
+                      contact: int.parse('9876543210'),
+                      age: int.parse(
+                        '20',
+                      ),
+                    ),
+                    viceCaptain: Captain(
+                      fullName: 'Yash Jain',
+                      email: 'yash201@gmail.com',
+                      contact: int.parse('9876543211'),
+                      age: int.parse(
+                        '19',
+                      ),
+                    ),
+                  );
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => TournamentReview(),
+                      builder: (_) => TournamentReview(
+                        currentTour: currentTour,
+                        userRecord: temp,
+                      ),
                     ),
                   );
                 },
@@ -208,12 +233,8 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   height: h * 0.025,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      teamName = true;
-                    });
-                  },
-                  decoration: normalTextDecoration( 'Team Name'),
+                  controller: teamName,
+                  decoration: normalTextDecoration('Team Name'),
                 ),
                 SizedBox(
                   height: h * 0.025,
@@ -233,23 +254,15 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   height: h * 0.02,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      name1 = true;
-                    });
-                  },
+                  controller: capName,
                   decoration: normalTextDecoration('Captain\'s Name'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  //        controller: _contact,
-                  onTap: () {
-                    contact1 = true;
-                  },
-                  decoration: normalTextDecoration(
-                          'Captain\'s Contact Number')
+                  controller: capNum,
+                  decoration: normalTextDecoration('Captain\'s Contact Number')
                       .copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
@@ -281,22 +294,14 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   height: 15,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      email1 = true;
-                    });
-                  },
+                  controller: capEmail,
                   decoration: normalTextDecoration('Captain\'s Email'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      age1 = true;
-                    });
-                  },
+                  controller: capAge,
                   decoration: normalTextDecoration('Captain\'s Age'),
                 ),
                 SizedBox(
@@ -310,25 +315,17 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   height: 15,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      name2 = true;
-                    });
-                  },
-                  decoration:
-                      normalTextDecoration('Vice Captain\'s Name'),
+                  controller: vCapName,
+                  decoration: normalTextDecoration('Vice Captain\'s Name'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  //        controller: _contact,
-                  onTap: () {
-                    contact2 = true;
-                  },
-                  decoration: normalTextDecoration(
-                          'Vice Captain\'s Contact Number')
-                      .copyWith(
+                  controller: vCapNum,
+                  decoration:
+                      normalTextDecoration('Vice Captain\'s Contact Number')
+                          .copyWith(
                     prefixIcon: Container(
                       width: w * 0.15,
                       padding: EdgeInsets.only(left: 15),
@@ -359,23 +356,14 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   height: 15,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      email2 = true;
-                    });
-                  },
-                  decoration:
-                      normalTextDecoration('Vice Captain\'s Email'),
+                  controller: vCapEmail,
+                  decoration: normalTextDecoration('Vice Captain\'s Email'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      age2 = true;
-                    });
-                  },
+                  controller: vCapAge,
                   decoration: normalTextDecoration('Vice Captain\'s Age'),
                 ),
                 SizedBox(

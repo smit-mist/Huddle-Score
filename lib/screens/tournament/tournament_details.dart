@@ -66,7 +66,7 @@ class TournamentDetails extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => TournamentRegisterForm(),
+                      builder: (_) => TournamentRegisterForm(currentTour: tournament,),
                     ),
                   );
                 },
@@ -272,13 +272,13 @@ class TournamentDetails extends StatelessWidget {
                 //===================
                 BlocBuilder<ButtonClickBloc, ButtonClickState>(
                   builder: (context, state) {
-                    if (state is ExpandedState) {
+                    if (!(state is ExpandedState)) {
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 200),
                           width: double.infinity,
-                          height: 0.42 * h,
+                          height: 0.3 * h,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(9),
@@ -289,7 +289,7 @@ class TournamentDetails extends StatelessWidget {
                           ),
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 1),
-                            height: 0.42 * h,
+                            height: 0.3 * h,
                             width: double.infinity,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +396,7 @@ class TournamentDetails extends StatelessWidget {
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 200),
                         width: double.infinity,
-                        height: 0.3 * h,
+                        height: 0.42 * h,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(9),
@@ -406,7 +406,7 @@ class TournamentDetails extends StatelessWidget {
                         ),
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 1),
-                          height: 0.3 * h,
+                          height: 0.42 * h,
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

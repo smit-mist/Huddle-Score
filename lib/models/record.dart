@@ -28,13 +28,13 @@ class RegDetails {
 
 class Captain {
   int contact;
+  int age;
   String email;
   String fullName;
-  String teamName;
   Captain({
     this.contact,
+    this.age,
     this.email,
     this.fullName,
-    this.teamName,
   });
 }
