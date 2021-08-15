@@ -164,7 +164,7 @@ class TournamentDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(3.0),
                   child: Container(
                     width: double.infinity,
-                    height: h * (260 / kScreenH),
+                    height: h * (270 / kScreenH),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

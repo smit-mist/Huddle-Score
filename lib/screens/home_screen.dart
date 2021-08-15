@@ -4,6 +4,7 @@ import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
+import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
@@ -24,6 +25,7 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 30),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 50,
@@ -229,15 +231,183 @@ class HomeScreen extends StatelessWidget {
                             padding: EdgeInsets.only(
                               left: 5,
                             ),
-                            child: FifaTile(fifa:state.allFifa[index]),
+                            child: FifaTile(fifa: state.allFifa[index]),
                           );
-                        return FifaTile(fifa: state.allFifa[index],);
+                        return FifaTile(
+                          fifa: state.allFifa[index],
+                        );
                       });
                 },
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 40,
+            ),
+            Text(
+              'Turfs Around You',
+              style: themeFont(s: 18),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: h * (442 / kScreenH),
+              width: w * (354 / kScreenW),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                  )
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          12,
+                        ),
+                        topRight: Radius.circular(
+                          12,
+                        ),
+                      ),
+                      child: Image.network(
+                        'https://picsum.photos/id/237/200/300',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    height: h * (170 / kScreenH),
+                    width: double.infinity,
+                  ),
+                  Text(
+                    'Coming Soon',
+                    style: themeFont(color: kThemeColor, s: 23),
+                  ),
+                  Text(
+                    'Be the first one to know when the turfs go live',
+                    style: themeFont(),
+                  ),
+                  Container(
+                    height: 50,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      decoration:
+                          normalTextDecoration('Enter your email address')
+                              .copyWith(fillColor: Colors.white),
+                    ),
+                  ),
+                  Container(
+                    height: 45,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: ActionButton(
+                      bgColor: kThemeColor,
+                      child: Text(
+                        'Subscribe',
+                        style: themeFont(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: h * (157 / kScreenH),
+              width: w * (354 / kScreenW),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                  )
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Partner with us!',
+                      style: themeFont(s: 18),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Text(
+                              '• ',
+                              style: themeFont(color: kThemeColor, s: 17),
+                            ),
+                            Text(
+                              'List Your Tournament',
+                              style: themeFont(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Text(
+                              '• ',
+                              style: themeFont(color: kThemeColor, s: 17),
+                            ),
+                            Text(
+                              'List Your Turf',
+                              style: themeFont(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 45,
+                    width: double.infinity,
+                    //    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: ActionButton(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => PartnerWithUsIntro(),
+                          ),
+                        );
+                      },
+                      bgColor: kThemeColor,
+                      child: Text(
+                        'Contact Today!',
+                        style: themeFont(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
           ],
         ),

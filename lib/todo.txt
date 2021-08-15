@@ -23,9 +23,9 @@ After
 
 
 UI Screens Priority Wise.
-// TODO: Account, Delta Password, Logout - 2 Screens.
+// TODO: Account, Chang Password, Logout - 2 Screens.
 // TODO: All static Pages
-// TODO: Banner Widget
+// TODO: Banner Widget (Home Page)
 // TODO: My Booking Page
 // TODO: Page 12 Dialog Box City
 // TODO: Page 14 Dialog for FeedBack
