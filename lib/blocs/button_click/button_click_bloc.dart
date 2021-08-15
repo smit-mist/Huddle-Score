@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 part 'button_click_event.dart';
 part 'button_click_state.dart';
