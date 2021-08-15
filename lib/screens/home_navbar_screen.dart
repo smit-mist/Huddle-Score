@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
-import 'package:huddle_and_score/screens/fifa/view_all_fifa_screen.dart';
-import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
-import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
-import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
-import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import 'auth_and_user/anonymous_profile_screen.dart';
 import 'auth_and_user/user_profile_screen.dart';
