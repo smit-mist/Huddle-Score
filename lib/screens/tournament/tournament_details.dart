@@ -323,11 +323,12 @@ class TournamentDetails extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                first[ind],
+                                                tournament.prizePool[ind.toString()][0],
                                                 style: themeFont(),
                                               ),
                                               Text(
-                                                second[ind],
+                                                tournament.prizePool[
+                                                    ind.toString()][1],
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
                                                   w: FontWeight.bold,

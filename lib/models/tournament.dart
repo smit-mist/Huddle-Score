@@ -10,7 +10,7 @@ class Tournament {
   String tourId;
   String orderId;
   Main main;
-  Map<String, List<String>> prizePool;
+  Map<String, List<dynamic>> prizePool;
   Tournament({
     this.utils,
     this.details,
@@ -27,7 +27,7 @@ class Tournament {
         tourId: id,
         email: data['email'],
         orderId: data['orderID'],
-        prizePool: (data['prizePool']).cast<String,List<String>>(),
+        prizePool: (data['prizePool']).cast<String,List<dynamic>>(),
         main: Main.fromMap(data['main']),
         info: Info.fromMap(data['info']),
         details: Details.fromMap(data['details']),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 
 class TournamentRepository {
@@ -13,6 +14,10 @@ class TournamentRepository {
               value.id,
             ),
           );
+      // tournament.prizePool.forEach((key, value) {
+      //   for (var x in value) print("$x ");
+      //   print('\n');
+      // });
       print('complete');
       return tournament;
     } catch (e) {
