@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
   @override
@@ -90,10 +91,20 @@ class EditProfileScreen extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              Text(
-                'Change Password',
-                style:
-                    themeFont().copyWith(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ChangePasswordScreen(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Change Password',
+                  style: themeFont()
+                      .copyWith(decoration: TextDecoration.underline),
+                ),
               ),
               SizedBox(
                 height: 5,
