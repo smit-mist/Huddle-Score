@@ -23,7 +23,6 @@ After
 
 
 UI Screens Priority Wise.
-// TODO: Account, Chang Password, Logout - 2 Screens.
 // TODO: All static Pages
 // TODO: My Booking Page
 // TODO: Page 12 Dialog Box City
