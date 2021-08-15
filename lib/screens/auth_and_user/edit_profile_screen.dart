@@ -15,7 +15,9 @@ class EditProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Row(
                 children: [
                   Icon(
@@ -28,14 +30,16 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 30,),
-
+              SizedBox(
+                height: 30,
+              ),
               Text(
                 'Full Name',
                 style: themeFont(),
               ),
-              SizedBox(height: 10,),
-
+              SizedBox(
+                height: 10,
+              ),
               TextField(
                 decoration: normalTextDecoration('Test User').copyWith(
                   suffixIcon: Icon(
@@ -43,20 +47,28 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
-
+              SizedBox(
+                height: 10,
+              ),
               Text(
                 'Email ID',
                 style: themeFont(),
               ),
-              SizedBox(height: 10,),
-
-              TextField(
-                style: themeFont(color: Colors.redAccent,),
-                decoration: normalTextDecoration('test@gmail.com').copyWith(hintStyle: themeFont(color: Colors.redAccent,)),
+              SizedBox(
+                height: 10,
               ),
-              SizedBox(height: 5,),
-
+              TextField(
+                style: themeFont(
+                  color: Colors.redAccent,
+                ),
+                decoration: normalTextDecoration('test@gmail.com').copyWith(
+                    hintStyle: themeFont(
+                  color: Colors.redAccent,
+                )),
+              ),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Spacer(),
@@ -65,15 +77,12 @@ class EditProfileScreen extends StatelessWidget {
                       style: themeFont(),
                       children: <TextSpan>[
                         TextSpan(
-                          text:
-                          'Email not verified! ',
-                          style: themeFont(color: Colors.redAccent,s: 12)
-                        ),
+                            text: 'Email not verified! ',
+                            style: themeFont(color: Colors.redAccent, s: 12)),
                         TextSpan(
                           text: 'Verify Email',
-                          style: themeFont(
-                            color: kThemeColor,s: 12
-                          ).copyWith(decoration: TextDecoration.underline),
+                          style: themeFont(color: kThemeColor, s: 12)
+                              .copyWith(decoration: TextDecoration.underline),
                         ),
                       ],
                     ),
@@ -83,15 +92,20 @@ class EditProfileScreen extends StatelessWidget {
               Spacer(),
               Text(
                 'Change Password',
-                style: themeFont().copyWith(decoration: TextDecoration.underline),
+                style:
+                    themeFont().copyWith(decoration: TextDecoration.underline),
               ),
-              SizedBox(height: 5,),
-
+              SizedBox(
+                height: 5,
+              ),
               Text(
                 'Log Out',
-                style: themeFont().copyWith(decoration: TextDecoration.underline),
+                style:
+                    themeFont().copyWith(decoration: TextDecoration.underline),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
