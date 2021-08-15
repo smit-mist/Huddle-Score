@@ -13,7 +13,6 @@ Priority
 // TODO: Tournament ID + User ID method isRegister.
 
 After
-// TODO: Prize Pool Conversion.
 // TODO: Logout, Edit Profile, email verification
 // TODO: User History
 // TODO: CityWise in Home

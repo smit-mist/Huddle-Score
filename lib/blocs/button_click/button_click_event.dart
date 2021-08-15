@@ -6,6 +6,4 @@ abstract class ButtonClickEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TournamentDetailExpanded extends ButtonClickEvent{
-
-}
+class TournamentDetailExpanded extends ButtonClickEvent {}

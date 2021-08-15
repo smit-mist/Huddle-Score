@@ -15,16 +15,12 @@ class ButtonClickBloc extends Bloc<ButtonClickEvent, ButtonClickState> {
   Stream<ButtonClickState> mapEventToState(
     ButtonClickEvent event,
   ) async* {
-    // TODO: implement mapEventToState
-    if(event is TournamentDetailExpanded){
-        state.tournamentDetailExpanded = !state.tournamentDetailExpanded;
-        print("Inside");
-        print(state.tournamentDetailExpanded);
-
-        yield state;
+    if (event is TournamentDetailExpanded) {
+      state.tournamentDetailExpanded = !state.tournamentDetailExpanded;
+      if (state.tournamentDetailExpanded) {
+        yield ExpandedState();
+      } else
+        yield UnExpandedState();
     }
-    print("outside");
-    print(state.tournamentDetailExpanded);
-    yield state;
   }
 }
