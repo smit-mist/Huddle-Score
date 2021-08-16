@@ -21,7 +21,7 @@ class FifaDetails extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     print('User is registered:- $isReg');
-
+    int seatsLeft = fifa.main.rooms.total- fifa.main.rooms.taken.length;
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -175,7 +175,7 @@ class FifaDetails extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        (seatsLeft ==0)?Container(
                           width: double.infinity,
                           height: h * (50 / kScreenH),
                           child: Center(
@@ -186,6 +186,21 @@ class FifaDetails extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withOpacity(0.5),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(9),
+                                topRight: Radius.circular(9)),
+                          ),
+                        ):Container(
+                          width: double.infinity,
+                          height: h * (50 / kScreenH),
+                          child: Center(
+                            child: Text(
+                              'Room for just $seatsLeft more teams, HURRY!!',
+                              style: themeFont(),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withOpacity(0.4),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(9),
                                 topRight: Radius.circular(9)),

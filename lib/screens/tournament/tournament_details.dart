@@ -8,29 +8,18 @@ import 'package:huddle_and_score/screens/tournament/tournament_register_form.dar
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
-List<String> first = [
-  'Winners',
-  'Runners Up',
-  'Best Goalkeeper',
-  'Best Defender',
-  'Man of the match',
-];
-List<String> second = [
-  '₹ 30,000',
-  '₹ 15,000',
-  '₹ 1,000',
-  '₹ 1,000',
-  'Vouchers'
-];
+
 
 class TournamentDetails extends StatelessWidget {
   ButtonClickBloc _bloc;
   Tournament tournament;
   bool isReg;
-  TournamentDetails({this.tournament, this.isReg});
 
+  TournamentDetails({this.tournament, this.isReg});
   @override
   Widget build(BuildContext context) {
+    int seatsLeft = tournament.main.room.total- tournament.main.room.registered.length;
+
     _bloc = BlocProvider.of<ButtonClickBloc>(context);
     print('User is registered:- $isReg');
 
@@ -195,7 +184,7 @@ class TournamentDetails extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        (seatsLeft ==0)?Container(
                           width: double.infinity,
                           height: h * (50 / kScreenH),
                           child: Center(
@@ -206,6 +195,21 @@ class TournamentDetails extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withOpacity(0.5),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(9),
+                                topRight: Radius.circular(9)),
+                          ),
+                        ):Container(
+                          width: double.infinity,
+                          height: h * (50 / kScreenH),
+                          child: Center(
+                            child: Text(
+                              'Room for just $seatsLeft more teams, HURRY!!',
+                              style: themeFont(),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withOpacity(0.4),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(9),
                                 topRight: Radius.circular(9)),
@@ -503,26 +507,27 @@ class TournamentDetails extends StatelessWidget {
                                             width: double.infinity,
                                             // height: h * 0.2,
                                             child: ListView.separated(
+                                              physics: NeverScrollableScrollPhysics(),
                                               separatorBuilder: (_, ind) {
                                                 return SizedBox(
                                                   height: 10,
                                                 );
                                               },
-                                              itemCount: first.length - 2,
+                                              itemCount: tournament.prizePool.length - 2,
                                               itemBuilder: (_, ind) {
                                                 return Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      first[ind + 2],
+                                                      tournament.prizePool[(ind+2).toString()][0],
                                                       style: themeFont(
                                                         color: Colors.black
                                                             .withOpacity(0.7),
                                                       ),
                                                     ),
                                                     Text(
-                                                      second[ind + 2],
+                                                      tournament.prizePool[(ind+2).toString()][1],
                                                       style: themeFont(),
                                                     ),
                                                   ],

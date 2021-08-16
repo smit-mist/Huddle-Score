@@ -7,9 +7,7 @@
 
 BackEnd..
 Priority
-//TODO: Fifa.
 // TODO: All 4 Forms??2.
-// TODO: Tournament ID + User ID method isRegister.
 // TODO: Logout, Edit Profile, email verification
 
 After
