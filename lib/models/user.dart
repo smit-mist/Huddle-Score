@@ -62,11 +62,11 @@ class FifaBooking {
         fifaRegDetails: data['RegDetails'],
         amount: data['number'],
         bookingId: data['bookingID'],
-        tourData: data['data'],
+       // tourData: data['data'],
         paymentMethod: data['paymentMethod'],
         recordedAt: data['recordedAt'],
         taxes: data['taxes'],
-        tourId: data['tourID'],
+      //  tourId: data['tourID'],
       );
 }
 
