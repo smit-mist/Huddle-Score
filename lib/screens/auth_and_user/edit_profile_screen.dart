@@ -6,19 +6,18 @@ import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/user/user_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
+import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
+  HomeNavBarBloc _bloc;
+  String name, email;
+  EditProfileScreen({this.email, this.name});
   @override
   Widget build(BuildContext context) {
-    Future<void> dispose() async {
-      await BlocProvider.of<HomeBloc>(context);
-      await BlocProvider.of<UserBloc>(context).close();
-      await BlocProvider.of<ButtonClickBloc>(context).close();
-    }
-
+    _bloc = BlocProvider.of<HomeNavBarBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -56,7 +55,13 @@ class EditProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               TextField(
-                decoration: normalTextDecoration('Test User').copyWith(
+                textInputAction: TextInputAction.done,
+                onSubmitted: (value) async {
+                  _bloc.add(HomeIconPressed());
+                  await UserRepository().changeUserName(value);
+                  _bloc.add(ProfileIconPressed());
+                },
+                decoration: normalTextDecoration(name).copyWith(
                   suffixIcon: Icon(
                     Icons.edit,
                   ),
@@ -73,10 +78,11 @@ class EditProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               TextField(
+                readOnly: true,
                 style: themeFont(
                   color: Colors.redAccent,
                 ),
-                decoration: normalTextDecoration('test@gmail.com').copyWith(
+                decoration: normalTextDecoration(email).copyWith(
                     hintStyle: themeFont(
                   color: Colors.redAccent,
                 )),
@@ -132,9 +138,7 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   );
                   await AuthRepository().signOut();
-
-                  BlocProvider.of<HomeNavBarBloc>(context)
-                      .add(HomeIconPressed());
+                  _bloc.add(HomeIconPressed());
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => WelcomeScreen()),
