@@ -28,7 +28,10 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
       final isSignedIn = await _repository.isSignedIn();
       if (isSignedIn) {
         final User user = await _repository.getCurrentUser();
-        yield UserProfileScreenState(email: user.email,name: user.displayName,);
+        yield UserProfileScreenState(
+          email: user.email,
+          name: user.displayName,
+        );
       } else
         yield AnonymousProfileScreenState();
     }

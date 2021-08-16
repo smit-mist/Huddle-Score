@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
+import 'package:huddle_and_score/blocs/home/home_bloc.dart';
+import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
+import 'package:huddle_and_score/blocs/user/user_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.dart';
@@ -8,6 +13,12 @@ import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future<void> dispose() async {
+      await BlocProvider.of<HomeBloc>(context);
+      await BlocProvider.of<UserBloc>(context).close();
+      await BlocProvider.of<ButtonClickBloc>(context).close();
+    }
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -121,6 +132,9 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   );
                   await AuthRepository().signOut();
+
+                  BlocProvider.of<HomeNavBarBloc>(context)
+                      .add(HomeIconPressed());
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => WelcomeScreen()),
