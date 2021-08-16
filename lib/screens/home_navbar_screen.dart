@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
 
 import 'auth_and_user/anonymous_profile_screen.dart';
 import 'auth_and_user/user_profile_screen.dart';
@@ -28,7 +29,7 @@ class HomeNavBar extends StatelessWidget {
             } else if (state is SearchScreenState) {
               return AnonymousProfileScreen();
             } else if (state is CartScreenState) {
-              return HomeScreen();
+              return BookingNotSignIn();
             } else if (state is AnonymousProfileScreenState) {
               return AnonymousProfileScreen();
             }
