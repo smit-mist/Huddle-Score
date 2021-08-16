@@ -7,22 +7,11 @@
 
 BackEnd..
 Priority
-// TODO: All 4 Forms??2.
+// TODO: All 4 Forms and forward.
 // TODO: FeedBack Dialog Few UI Changes tobe done.
-
-// TODO: Logout, Edit Profile, email verification
-
-After
-
+// TODO: email verification
 // TODO: User History
 // TODO: CityWise in Home
-// TODO: FeedBack Form
-
-
-
-
-UI Screens Priority Wise.
-// TODO: My Booking Page
 // TODO: Page 12 Dialog Box City
 
 

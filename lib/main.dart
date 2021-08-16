@@ -24,18 +24,7 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // print('earlier');
-  // await PartnerRepository().submitPartnerDetails(ParnterDetails(
-  //   email: 'smit@gmail.com',
-  //   city: 'rjt',
-  //   contactNumber: 23423,
-  //   tourName: 'test',
-  //   tourType: 'online',
-  //   name: 'test',
-  //   type: 'tour',
-  //   state: 'test',
-  // ));
-  // print('after');
+  //UserRepository().getBookings();
   runApp(MyApp());
 }
 
