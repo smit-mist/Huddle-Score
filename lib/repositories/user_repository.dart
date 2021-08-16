@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:huddle_and_score/models/user.dart';
 
 class UserRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   Future<void> changeUserName(String name) async {
     await _auth.currentUser.updateDisplayName(name);
   }
@@ -12,9 +15,14 @@ class UserRepository {
 
   Future<void> changeUserPassword(String password) async {
     await _auth.currentUser.updatePassword(password).then((_) {
-      print("Successfully changed password");
     }).catchError((error) {
-      print("Password can't be changed" + error.toString());
     });
+  }
+  Future<UserModel> getBookings()async{
+    print('Booking Fetching Started');
+    String id =  _auth.currentUser.uid;
+    var response = FirebaseFirestore.instance.collection('users/$id/records');
+
+
   }
 }
