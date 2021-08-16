@@ -2,9 +2,11 @@ class UserModel {
   Map<String, TourBooking> tours;
   Map<String, FifaBooking> fifas;
   UserModel({this.fifas, this.tours});
-  factory UserModel.fromMap(Map<String, dynamic> data, String id) => UserModel(
-        tours: {id: TourBooking.fromMap(data['tour'])},
-        fifas: data['fifa'],
+  factory UserModel.fromMap(
+          Map<String, dynamic> data, String tourId, String fifaId) =>
+      UserModel(
+        tours: {tourId: TourBooking.fromMap(data['tour'])},
+        fifas: {fifaId: FifaBooking.fromMap(data['fifa'])},
       );
 }
 
@@ -59,14 +61,14 @@ class FifaBooking {
     this.taxes,
   });
   factory FifaBooking.fromMap(Map<String, dynamic> data) => FifaBooking(
-        fifaRegDetails: data['RegDetails'],
+        fifaRegDetails: FifaRegDetails.fromMap(data['RegDetails']),
         amount: data['number'],
         bookingId: data['bookingID'],
-        tourData: data['data'],
+        fifaData: FifaData.fromMap(data['data']),
         paymentMethod: data['paymentMethod'],
         recordedAt: data['recordedAt'],
         taxes: data['taxes'],
-        tourId: data['tourID'],
+        fifaId: data['fifaID'],
       );
 }
 
@@ -81,6 +83,12 @@ class FifaRegDetails {
     this.fullName,
     this.teamName,
   });
+  factory FifaRegDetails.fromMap(Map<String, dynamic> data) => FifaRegDetails(
+        contact: data['contact'],
+        email: data['email'],
+        fullName: data['fullName'],
+        teamName: data['teamName'],
+      );
 }
 
 class FifaData {
@@ -96,6 +104,13 @@ class FifaData {
     this.title,
     this.venue,
   });
+  factory FifaData.fromMap(Map<String, dynamic> data) => FifaData(
+    gameDate: data['gameDate'],
+    poster: data['poster'],
+    time: data['time'],
+    title: data['title'],
+    venue: Venue.fromMap(data['venue']),
+  );
 }
 
 class TourRegDetails {
@@ -158,9 +173,9 @@ class Captain {
     this.fullName,
   });
   factory Captain.fromMap(Map<String, dynamic> data) => Captain(
-    contact: data['contact'],
-    age: data['age'],
-    email: data['email'],
-    fullName: data['name'],
-  );
+        contact: data['contact'],
+        age: data['age'],
+        email: data['email'],
+        fullName: data['name'],
+      );
 }
