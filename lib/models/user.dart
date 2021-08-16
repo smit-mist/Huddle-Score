@@ -2,6 +2,10 @@ class UserModel {
   Map<String, TourBooking> tours;
   Map<String, FifaBooking> fifas;
   UserModel({this.fifas, this.tours});
+  factory UserModel.fromMap(Map<String, dynamic> data, String id) => UserModel(
+        tours: {id: TourBooking.fromMap(data['tour'])},
+        fifas: data['fifa'],
+      );
 }
 
 class TourBooking {
@@ -17,10 +21,22 @@ class TourBooking {
     this.amount,
     this.bookingId,
     this.tourId,
+    this.tourData,
     this.paymentMethod,
     this.recordedAt,
     this.regDetails,
+    this.taxes,
   });
+  factory TourBooking.fromMap(Map<String, dynamic> data) => TourBooking(
+        regDetails: TourRegDetails.fromMap(data['RegDetails']),
+        amount: data['number'],
+        bookingId: data['bookingID'],
+        tourData: TourData.fromMap(data['data']),
+        paymentMethod: data['paymentMethod'],
+        recordedAt: data['recordedAt'],
+        taxes: data['taxes'],
+        tourId: data['tourID'],
+      );
 }
 
 class FifaBooking {
@@ -42,6 +58,16 @@ class FifaBooking {
     this.recordedAt,
     this.taxes,
   });
+  factory FifaBooking.fromMap(Map<String, dynamic> data) => FifaBooking(
+        fifaRegDetails: data['RegDetails'],
+        amount: data['number'],
+        bookingId: data['bookingID'],
+        tourData: data['data'],
+        paymentMethod: data['paymentMethod'],
+        recordedAt: data['recordedAt'],
+        taxes: data['taxes'],
+        tourId: data['tourID'],
+      );
 }
 
 class FifaRegDetails {
@@ -81,6 +107,11 @@ class TourRegDetails {
     this.teamName,
     this.viceCaptain,
   });
+  factory TourRegDetails.fromMap(Map<String, dynamic> data) => TourRegDetails(
+        captain: Captain.fromMap(data['cap']),
+        teamName: data['teamName'],
+        viceCaptain: Captain.fromMap(data['viceCaptain']),
+      );
 }
 
 class TourData {
@@ -96,6 +127,13 @@ class TourData {
     this.title,
     this.venue,
   });
+  factory TourData.fromMap(Map<String, dynamic> data) => TourData(
+        ageRec: data['ageRec'],
+        poster: data['poster'],
+        timeLine: data['timeline'].cast<String>(),
+        title: data['title'],
+        venue: Venue.fromMap(data['venue']),
+      );
 }
 
 class Venue {
@@ -119,4 +157,10 @@ class Captain {
     this.email,
     this.fullName,
   });
+  factory Captain.fromMap(Map<String, dynamic> data) => Captain(
+    contact: data['contact'],
+    age: data['age'],
+    email: data['email'],
+    fullName: data['name'],
+  );
 }
