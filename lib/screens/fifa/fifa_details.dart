@@ -100,14 +100,14 @@ class FifaDetails extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                // Container(
-                //   height: h * (390 / kScreenH),
-                //   width: double.infinity,
-                //   child: Image.network(
-                //     fifa.poster,
-                //     fit: BoxFit.cover,
-                //   ),
-                // ),
+                Container(
+                  height: h * (390 / kScreenH),
+                  width: double.infinity,
+                  child: Image.network(
+                    fifa.poster,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 SizedBox(
                   height: 20,
                 ),

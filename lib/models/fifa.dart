@@ -83,7 +83,7 @@ class Info {
   Info({this.mode, this.registrationFee, this.time});
   factory Info.fromMap(Map<String, dynamic> map) => Info(
         mode: map['mode'],
-        registrationFee: map['regestrationFee'],
+        registrationFee: map['regestrationFee'].toString(),
         time: map['time'],
       );
 }
