@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_details.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 
@@ -14,15 +15,22 @@ class FifaTile extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () async {
-        Fifa here = await Fifa().fromHomeFifa(fifa: fifa);
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => FifaDetails(
-              fifa: here,
-            ),
-          ),
+          MaterialPageRoute(builder: (_) => LoadingScreen()),
         );
+        print('start fetch');
+        Fifa().fromHomeFifa(fifa: fifa).then(
+              (value) => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => FifaDetails(
+                    fifa: value,
+                  ),
+                ),
+              ),
+            );
+        //print('====>>>>${here.fifaId}');
       },
       child: Stack(
         alignment: Alignment.center,

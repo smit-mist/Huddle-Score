@@ -3,17 +3,15 @@ import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/repositories/fifa_repository.dart';
 
 class Fifa {
-  Map<String, Record> utils; //String is tour id
   Details details;
   String email;
   Info info;
   Main main;
   String orderId;
   String poster;
-  Map<String, List<String>> prizePool;
+  Map<String, List<dynamic>> prizePool;
   String fifaId;
   Fifa({
-    this.utils,
     this.details,
     this.orderId,
     this.poster,
@@ -23,16 +21,21 @@ class Fifa {
     this.main,
     this.prizePool,
   });
-  factory Fifa.fromMap(Map<String, dynamic> data, String id) => Fifa(
-        fifaId: id,
-        email: data['email'],
-        orderId: data['orderID'],
-        prizePool: data['prizePool'].cast<String, List<String>>(),
-        main: Main.fromMap(data['main']),
-        info: Info.fromMap(data['info']),
-        poster: data['poster'],
-        details: Details.fromMap(data['details']),
-      );
+  factory Fifa.fromMap(Map<String, dynamic> data, String id) {
+    print(data['email']);
+    print(id);
+    print(data['poster']);
+    return Fifa(
+      fifaId: id,
+      email: data['email'],
+      orderId: data['orderID'],
+      prizePool: data['prizePool'].cast<String, List<dynamic>>(),
+      main: Main.fromMap(data['main']),
+      info: Info.fromMap(data['info']),
+      poster: data['poster'],
+      details: Details.fromMap(data['details']),
+    );
+  }
 
   Future<Fifa> fromHomeFifa({HomeFifa fifa}) async {
     return await FifaRepository().getFifaById(fifa.fifaId);
@@ -80,7 +83,7 @@ class Info {
   Info({this.mode, this.registrationFee, this.time});
   factory Info.fromMap(Map<String, dynamic> map) => Info(
         mode: map['mode'],
-        registrationFee: map['registrationFee'],
+        registrationFee: map['regestrationFee'],
         time: map['time'],
       );
 }

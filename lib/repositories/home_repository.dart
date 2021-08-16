@@ -5,19 +5,19 @@ import 'package:huddle_and_score/models/home_event.dart';
 
 class HomeRepository {
   Future<List<HomeTour>> fetchTours() async {
-    print("Tournament Fetching started");
+    //print("Tournament Fetching started");
     final String baseUrl =
         "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
     List<HomeTour> tours = [];
     var response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       Map<String, dynamic> docs = jsonDecode(response.body)['tour'];
-      print(docs.runtimeType);
+      //print(docs.runtimeType);
       docs.forEach((key, value) {
         //print(value);
         HomeTour temp = HomeTour.fromJson(key, value, "tour");
         tours.add(temp);
-        print(temp.name);
+        //print(temp.name);
       });
       return tours;
     } else {
@@ -28,7 +28,7 @@ class HomeRepository {
   }
 
   Future<List<HomeFifa>> fetchFifas() async {
-    print("fifa Fetching started");
+    //print("fifa Fetching started");
 
     final String baseUrl =
         "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
@@ -41,7 +41,7 @@ class HomeRepository {
         //print(value);
         HomeFifa temp = HomeFifa.fromJson(key, value, "fifa");
         fifas.add(temp);
-        print(temp.name);
+       // print(temp.name);
       });
       return fifas;
     } else {
