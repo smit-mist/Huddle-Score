@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.dart';
+import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
   @override
@@ -109,10 +112,26 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Text(
-                'Log Out',
-                style:
-                    themeFont().copyWith(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LoadingScreen(),
+                    ),
+                  );
+                  await AuthRepository().signOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => WelcomeScreen()),
+                    (route) => false,
+                  );
+                },
+                child: Text(
+                  'Log Out',
+                  style: themeFont()
+                      .copyWith(decoration: TextDecoration.underline),
+                ),
               ),
               SizedBox(
                 height: 20,

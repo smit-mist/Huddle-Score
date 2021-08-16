@@ -46,7 +46,7 @@ class Fifa {
 
     }
     print(this.main.rooms.taken);
-    String id = "pocnMcYmlMZGFhmE5JbQInj9GpA2";//value.uid;
+    String id = value.uid;
 
     for(int i=0;i<this.main.rooms.taken.length;i++){
       print(i);
