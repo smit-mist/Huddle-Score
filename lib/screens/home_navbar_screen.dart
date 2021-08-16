@@ -4,6 +4,7 @@ import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
 import 'package:huddle_and_score/screens/booking/booking_history_screen.dart';
+import 'package:huddle_and_score/screens/search_screen.dart';
 
 import 'auth_and_user/anonymous_profile_screen.dart';
 import 'auth_and_user/user_profile_screen.dart';
@@ -28,7 +29,7 @@ class HomeNavBar extends StatelessWidget {
                 name: state.name,
               );
             } else if (state is SearchScreenState) {
-              return AnonymousProfileScreen();
+              return SearchScreen();
             } else if (state is CartScreenState) {
               return BookingHistoryScreen();
             } else if (state is AnonymousProfileScreenState) {
