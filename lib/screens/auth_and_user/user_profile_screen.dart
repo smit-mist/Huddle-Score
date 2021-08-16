@@ -73,7 +73,7 @@ class UserProfileScreen extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => EditProfileScreen()));
+                        MaterialPageRoute(builder: (_) => EditProfileScreen(email: email,name: name,)));
                   },
                   title: Text(
                     'Account',

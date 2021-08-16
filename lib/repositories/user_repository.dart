@@ -11,6 +11,10 @@ class UserRepository {
   }
 
   Future<void> changeUserPassword(String password) async {
-    await _auth.currentUser.updatePassword(password);
+    await _auth.currentUser.updatePassword(password).then((_) {
+      print("Successfully changed password");
+    }).catchError((error) {
+      print("Password can't be changed" + error.toString());
+    });
   }
 }
