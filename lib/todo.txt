@@ -7,14 +7,13 @@
 
 BackEnd..
 Priority
-// TODO: Null operator for all models to map..
+//TODO: Fifa.
 // TODO: All 4 Forms??2.
-// TODO: UI Update Bloc SetState Prize Pool.
 // TODO: Tournament ID + User ID method isRegister.
+// TODO: Logout, Edit Profile, email verification
 
 After
 
-// TODO: Logout, Edit Profile, email verification
 // TODO: User History
 // TODO: CityWise in Home
 // TODO: FeedBack Form
@@ -23,10 +22,8 @@ After
 
 
 UI Screens Priority Wise.
-//TODO: Loading Screen
-// TODO: All static Pages
 // TODO: My Booking Page
 // TODO: Page 12 Dialog Box City
-// TODO: Page 14 Dialog for FeedBack
 
+// TODO: FeedBack Dialog Few UI Changes tobe done.
 

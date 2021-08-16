@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:huddle_and_score/screens/auth_and_user/about_app_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/edit_profile_screen.dart';
 
 import '../../constants.dart';
 import '../home_navbar_screen.dart';
+import 'help_and_support_screen.dart';
 
 class UserProfileScreen extends StatelessWidget {
   final String name;
   final String email;
-  UserProfileScreen({this.email,this.name});
+  UserProfileScreen({this.email, this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +71,9 @@ class UserProfileScreen extends StatelessWidget {
             child: ListView(
               children: [
                 ListTile(
-                  onTap:(){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>EditProfileScreen()));
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => EditProfileScreen()));
                   },
                   title: Text(
                     'Account',
@@ -98,6 +101,14 @@ class UserProfileScreen extends StatelessWidget {
                 ),
                 Divider(),
                 ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HelpAndSupportScreen(),
+                      ),
+                    );
+                  },
                   title: Text(
                     'Help & Support',
                     style: themeFont(),
@@ -112,6 +123,14 @@ class UserProfileScreen extends StatelessWidget {
                 ),
                 Divider(),
                 ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AboutAppScreen(),
+                      ),
+                    );
+                  },
                   title: Text(
                     'About',
                     style: themeFont(),

@@ -1,12 +1,379 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
 
-class TournamentReceiptScreen extends StatelessWidget {
+class TournamentReceiptScreen extends StatefulWidget {
+  @override
+  _TournamentReceiptScreenState createState() =>
+      _TournamentReceiptScreenState();
+}
+
+class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
+  double liked = 0.5;
+  int firstOption = 0, secondOption = 0;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    Widget feedBackFrom = StatefulBuilder(
+      builder: (context, setState) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: h * (550 / kScreenH),
+              width: w * (370 / kScreenW),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: h*(480/kScreenH),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'We\'d love your feedback!',
+                            style: themeFont(color: kThemeColor, s: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'How satisfied are you with the booking experience?',
+                            style: themeFont(s: 15),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('Sad'),
+                              Slider(
+                                value: liked,
+                                onChanged: (double nw) {
+                                  setState(() {
+                                    liked = nw;
+                                  });
+                                },
+                              ),
+                              Text('Happy'),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Would you recommend Huddle & Score to your friends?',
+                            style: themeFont(s: 15),
+                          ),
+                          SizedBox(
+                            height: 7,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      firstOption = 0;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    child: Center(
+                                      child: Text(
+                                        'Definitely',
+                                        style: themeFont(
+                                          color: (firstOption == 0)
+                                              ? kThemeColor
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(
+                                        color: ((firstOption == 0)
+                                            ? kThemeColor
+                                            : Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      firstOption = 1;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    child: Center(
+                                      child: Text(
+                                        'May be',
+                                        style: themeFont(
+                                          color: (firstOption == 1)
+                                              ? kThemeColor
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(
+                                        color: ((firstOption == 1)
+                                            ? kThemeColor
+                                            : Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      firstOption = 2;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    child: Center(
+                                      child: Text(
+                                        'Not at all',
+                                        style: themeFont(
+                                          color: (firstOption == 2)
+                                              ? kThemeColor
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(
+                                        color: ((firstOption == 2)
+                                            ? kThemeColor
+                                            : Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'How did you hear about us?',
+                            style: themeFont(),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Wrap(
+                            spacing: 5,
+                            runSpacing: 5,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    secondOption = 0;
+                                  });
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: w * (150 / kScreenW),
+                                  child: Center(
+                                    child: Text(
+                                      'Social Media',
+                                      style: themeFont(
+                                        color: (secondOption == 0)
+                                            ? kThemeColor
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: ((secondOption == 0)
+                                          ? kThemeColor
+                                          : Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    secondOption = 1;
+                                  });
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: w * (150 / kScreenW),
+                                  child: Center(
+                                    child: Text(
+                                      'Search Engine',
+                                      style: themeFont(
+                                        color: (secondOption == 1)
+                                            ? kThemeColor
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: ((secondOption == 1)
+                                          ? kThemeColor
+                                          : Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    secondOption = 2;
+                                  });
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: w * (150 / kScreenW),
+                                  child: Center(
+                                    child: Text(
+                                      'Word of mouth',
+                                      style: themeFont(
+                                        color: (secondOption == 2)
+                                            ? kThemeColor
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: ((secondOption == 2)
+                                          ? kThemeColor
+                                          : Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    secondOption = 3;
+                                  });
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: w * (150 / kScreenW),
+                                  child: Center(
+                                    child: Text(
+                                      'At a turf',
+                                      style: themeFont(
+                                        color: (secondOption == 3)
+                                            ? kThemeColor
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: ((secondOption == 3)
+                                          ? kThemeColor
+                                          : Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    secondOption = 4;
+                                  });
+                                },
+                                child: TextField(
+                                  decoration: normalTextDecoration('Other'),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'How can we make your experience even better?',
+                            style: themeFont(),
+                          ),
+                          SizedBox(
+                            height: 7,
+                          ),
+                          TextField(
+                            decoration:
+                                normalTextDecoration('Leave a suggestion to us..'),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    width:double.infinity,
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        Container(
+                          width: 100,
+                          height: 40,
+                          child: ActionButton(
+                            child: Text('Submit',style: themeFont(color: Colors.white,),),
+                            bgColor: kThemeColor,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -35,29 +402,36 @@ class TournamentReceiptScreen extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 40,
-                width: w * 0.45,
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.download_rounded,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Download Receipt',
-                        style: themeFont(
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext _) => feedBackFrom);
+                },
+                child: Container(
+                  height: 40,
+                  width: w * 0.45,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.download_rounded,
                           color: Colors.white,
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Download Receipt',
+                          style: themeFont(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: kThemeColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: kThemeColor,
+                  ),
                 ),
               ),
             ],
@@ -107,7 +481,7 @@ class TournamentReceiptScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            height:h*(150/kScreenH),
+                            height: h * (150 / kScreenH),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -157,63 +531,65 @@ class TournamentReceiptScreen extends StatelessWidget {
                           style: themeFont(s: 12),
                         ),
                       ),
-                     Column(
-                       children: [
-                         SizedBox(
-                           width: double.infinity,
-                           child: Text(
-                             'Following identity proofs will be accepted:',
-                             style: themeFont(s: 12),
-                           ),
-                         ),
-                         SizedBox(
-                           width: double.infinity,
-                           child: Row(
-                             children: [
-                               Text(
-                                 '• ',
-                                 style: themeFont(color: kThemeColor, s: 17),
-                               ),
-                               Text(
-                                 'Aadhar Card',
-                                 style: themeFont(),
-                               ),
-                             ],
-                           ),
-                         ),
-                         SizedBox(
-                           width: double.infinity,
-                           child: Row(
-                             children: [
-                               Text(
-                                 '• ',
-                                 style: themeFont(color: kThemeColor, s: 17),
-                               ),
-                               Text(
-                                 'Driver\'s License',
-                                 style: themeFont(),
-                               ),
-                             ],
-                           ),
-                         ),
-                         SizedBox(
-                           width: double.infinity,
-                           child: Row(
-                             children: [
-                               Text(
-                                 '• ',
-                                 style: themeFont(color: kThemeColor, s: 17),
-                               ),
-                               Text(
-                                 'Voter Id',
-                                 style: themeFont(),
-                               ),
-                             ],
-                           ),
-                         ),
-                       ],
-                     ),
-                      SizedBox(height: 1,),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              'Following identity proofs will be accepted:',
+                              style: themeFont(s: 12),
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(color: kThemeColor, s: 17),
+                                ),
+                                Text(
+                                  'Aadhar Card',
+                                  style: themeFont(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(color: kThemeColor, s: 17),
+                                ),
+                                Text(
+                                  'Driver\'s License',
+                                  style: themeFont(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(color: kThemeColor, s: 17),
+                                ),
+                                Text(
+                                  'Voter Id',
+                                  style: themeFont(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1,
+                      ),
                     ],
                   ),
                 ),
@@ -348,7 +724,9 @@ class TournamentReceiptScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
