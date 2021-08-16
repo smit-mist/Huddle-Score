@@ -25,12 +25,14 @@ List<String> second = [
 class TournamentDetails extends StatelessWidget {
   ButtonClickBloc _bloc;
   Tournament tournament;
-  TournamentDetails({this.tournament});
+  bool isReg;
+  TournamentDetails({this.tournament,this.isReg});
 
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<ButtonClickBloc>(context);
-    print(_bloc.state.tournamentDetailExpanded);
+    print('User is registered:- $isReg');
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return SafeArea(

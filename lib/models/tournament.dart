@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 
 class Tournament {
@@ -21,13 +23,36 @@ class Tournament {
     this.main,
     this.prizePool,
   });
+  Future<bool> registeredIn() async{
+    User value=await AuthRepository().getCurrentUser();
+      if (value == null){
+        print("Not Found");
+        return false;
+
+      }
+      print(this.main.room.registered);
+      String id = "Giy0JEBBf4MbY1kvFFL2IABBRg22";
+      for(int i=0;i<this.main.room.registered.length;i++){
+        print(i);
+        if(this.main.room.registered[i] == id){
+          print("Found");
+          return true;
+
+        }
+      }
+      print("Not Found");
+
+      return false;
+
+
+  }
 
   factory Tournament.fromMap(Map<String, dynamic> data, String id) =>
       Tournament(
         tourId: id,
         email: data['email'],
         orderId: data['orderID'],
-        prizePool: (data['prizePool']).cast<String,List<dynamic>>(),
+        prizePool: (data['prizePool']).cast<String, List<dynamic>>(),
         main: Main.fromMap(data['main']),
         info: Info.fromMap(data['info']),
         details: Details.fromMap(data['details']),
@@ -69,8 +94,7 @@ class Room {
   int total;
   Room({this.registered, this.total});
   factory Room.fromMap(Map<String, dynamic> map) => Room(
-        registered:
-            map['registered'].cast<String>(),
+        registered: map['registered'].cast<String>(),
         total: map['total'],
       );
 }
@@ -113,8 +137,8 @@ class Details {
   });
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'],
-      pdf: (map['pdf'] ==null?null:map['pdf'].cast<String>()),
-      //  pdf: map['pdf'].cast<String>(),
+        pdf: (map['pdf'] == null ? null : map['pdf'].cast<String>()),
+        //  pdf: map['pdf'].cast<String>(),
         poster: map['poster'],
         title: map['title'],
       );
