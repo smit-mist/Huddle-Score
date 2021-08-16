@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/widgets/booked_event_tile.dart';
 
 class BookingNotSignIn extends StatelessWidget {
   @override
@@ -63,7 +64,8 @@ class BookingNotSignIn extends StatelessWidget {
               style: themeFont(),
               textAlign: TextAlign.center,
             ),
-          )
+          ),
+          BookedEventTile(),
         ],
       ),
     );
