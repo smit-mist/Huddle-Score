@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
 import 'fifa_registration_form.dart';
@@ -11,13 +12,16 @@ import 'fifa_registration_form.dart';
 class FifaDetails extends StatelessWidget {
   ButtonClickBloc _bloc;
   Fifa fifa;
-  FifaDetails({this.fifa});
+  bool isReg;
+  FifaDetails({this.fifa, this.isReg});
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<ButtonClickBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    print('User is registered:- $isReg');
+
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -48,6 +52,8 @@ class FifaDetails extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
+                  if(isReg)
+                    return;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -55,20 +61,37 @@ class FifaDetails extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Register',
-                      style: themeFont(color: Colors.white),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
-                ),
+                child: (isReg)
+                    ? Container(
+                        child: ActionButton(
+                          child: Center(
+                            child: Text(
+                              'You\'ve already registered!',
+                              style: themeFont(
+                                color: kThemeColor,
+                                s: 15,
+                              ),
+                            ),
+                          ),
+                          bgColor: Colors.white,
+                        ),
+                        height: 40,
+                        width: w * 0.5,
+                      )
+                    : Container(
+                        height: 40,
+                        width: w * 0.3,
+                        child: Center(
+                          child: Text(
+                            'Register',
+                            style: themeFont(color: Colors.white),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: kThemeColor,
+                        ),
+                      ),
               )
             ],
           ),
@@ -297,14 +320,14 @@ class FifaDetails extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                   fifa.prizePool[
-                                                       ind.toString()][0],
+                                                  fifa.prizePool[ind.toString()]
+                                                      [0],
                                                   //'200',
                                                   style: themeFont(),
                                                 ),
                                                 Text(
-                                                  fifa.prizePool[
-                                                      ind.toString()][1],
+                                                  fifa.prizePool[ind.toString()]
+                                                      [1],
                                                   //'hello',
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
@@ -415,15 +438,13 @@ class FifaDetails extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                fifa.prizePool[
-                                                    ind.toString()][0],
-                                                
+                                                fifa.prizePool[ind.toString()]
+                                                    [0],
                                                 style: themeFont(),
                                               ),
                                               Text(
-                                                fifa.prizePool[
-                                                    ind.toString()][1],
-                                                
+                                                fifa.prizePool[ind.toString()]
+                                                    [1],
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
                                                   w: FontWeight.bold,
@@ -460,15 +481,16 @@ class FifaDetails extends StatelessWidget {
                                                   height: 10,
                                                 );
                                               },
-                                              itemCount: fifa.prizePool.length - 2,
+                                              itemCount:
+                                                  fifa.prizePool.length - 2,
                                               itemBuilder: (_, ind) {
                                                 return Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      fifa.prizePool[
-                                                          (ind+2).toString()][0],
+                                                      fifa.prizePool[(ind + 2)
+                                                          .toString()][0],
                                                       style: themeFont(
                                                         color: Colors.black
                                                             .withOpacity(0.7),
@@ -557,7 +579,7 @@ class FifaDetails extends StatelessWidget {
                         ),
                         DataShower(
                           type: 'Time',
-                          data:fifa.info.time,
+                          data: fifa.info.time,
                         ),
                         SizedBox(
                           height: 10,

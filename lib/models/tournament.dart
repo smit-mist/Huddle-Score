@@ -31,7 +31,7 @@ class Tournament {
 
       }
       print(this.main.room.registered);
-      String id = "Giy0JEBBf4MbY1kvFFL2IABBRg22";
+      String id = value.uid;
       for(int i=0;i<this.main.room.registered.length;i++){
         print(i);
         if(this.main.room.registered[i] == id){

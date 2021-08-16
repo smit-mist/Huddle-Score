@@ -20,16 +20,18 @@ class FifaTile extends StatelessWidget {
           MaterialPageRoute(builder: (_) => LoadingScreen()),
         );
         print('start fetch');
-        Fifa().fromHomeFifa(fifa: fifa).then(
-              (value) => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => FifaDetails(
-                    fifa: value,
-                  ),
-                ),
+        Fifa().fromHomeFifa(fifa: fifa).then((value) async{
+          bool here = await value.registeredIn();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => FifaDetails(
+                fifa: value,
+                isReg:here,
               ),
-            );
+            ),
+          );
+        });
         //print('====>>>>${here.fifaId}');
       },
       child: Stack(

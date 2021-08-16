@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/models/record.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/fifa_repository.dart';
 
 class Fifa {
@@ -35,6 +37,30 @@ class Fifa {
       poster: data['poster'],
       details: Details.fromMap(data['details']),
     );
+  }
+  Future<bool> registeredIn() async{
+    User value=await AuthRepository().getCurrentUser();
+    if (value == null){
+      print("Not Found");
+      return false;
+
+    }
+    print(this.main.rooms.taken);
+    String id = "pocnMcYmlMZGFhmE5JbQInj9GpA2";//value.uid;
+
+    for(int i=0;i<this.main.rooms.taken.length;i++){
+      print(i);
+      if(this.main.rooms.taken[i] == id){
+        print("Found");
+        return true;
+
+      }
+    }
+    print("Not Found");
+
+    return false;
+
+
   }
 
   Future<Fifa> fromHomeFifa({HomeFifa fifa}) async {

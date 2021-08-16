@@ -5,6 +5,7 @@ import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
+import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
 List<String> first = [
@@ -26,7 +27,7 @@ class TournamentDetails extends StatelessWidget {
   ButtonClickBloc _bloc;
   Tournament tournament;
   bool isReg;
-  TournamentDetails({this.tournament,this.isReg});
+  TournamentDetails({this.tournament, this.isReg});
 
   @override
   Widget build(BuildContext context) {
@@ -65,27 +66,51 @@ class TournamentDetails extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => TournamentRegisterForm(currentTour: tournament,),
-                    ),
-                  );
+                  if (isReg) {
+                    print('Already did');
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TournamentRegisterForm(
+                          currentTour: tournament,
+                        ),
+                      ),
+                    );
+                  }
                 },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Register',
-                      style: themeFont(color: Colors.white),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
-                ),
+                child: (isReg)
+                    ? Container(
+                        child: ActionButton(
+                          child: Center(
+                            child: Text(
+                              'You\'ve already registered!',
+                              style: themeFont(
+                                color: kThemeColor,
+                                s: 15,
+                              ),
+                            ),
+                          ),
+                          bgColor: Colors.white,
+
+                        ),
+                        height: 40,
+                        width: w * 0.5,
+                      )
+                    : Container(
+                        height: 40,
+                        width: w * 0.3,
+                        child: Center(
+                          child: Text(
+                            'Register',
+                            style: themeFont(color: Colors.white),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: kThemeColor,
+                        ),
+                      ),
               )
             ],
           ),
@@ -642,8 +667,6 @@ class TournamentDetails extends StatelessWidget {
     );
   }
 }
-
-
 
 /*
 
