@@ -6,8 +6,12 @@ class AuthRepository {
     this._auth = FirebaseAuth.instance;
   }
 
-  User getCurrentUser(){
+  User getCurrentUser() {
     return _auth.currentUser;
+  }
+
+  bool isEmailVerified(){
+   return _auth.currentUser.emailVerified;
   }
 
   Future<void> sendEmailVerificationLink() async {

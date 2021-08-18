@@ -87,25 +87,55 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Row(
-                children: [
-                  Spacer(),
-                  RichText(
-                    text: TextSpan(
-                      style: themeFont(),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Email not verified! ',
-                            style: themeFont(color: Colors.redAccent, s: 12)),
-                        TextSpan(
-                          text: 'Verify Email',
-                          style: themeFont(color: kThemeColor, s: 12)
-                              .copyWith(decoration: TextDecoration.underline),
+              BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
+                builder: (context, state) {
+                  if (state is EmailVerifiedState) {
+                    return Row(
+                      children: [
+                        Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            style: themeFont(),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Email verified! ',
+                                style:
+                                    themeFont(color: Colors.greenAccent, s: 12),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                ],
+                    );
+                  }
+                  return Row(
+                    children: [
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          _bloc.add(EmailVerificationInit());
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            style: themeFont(),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'Email not verified! ',
+                                  style: themeFont(
+                                      color: Colors.redAccent, s: 12)),
+                              TextSpan(
+                                text: 'Verify Email',
+                                style: themeFont(color: kThemeColor, s: 12)
+                                    .copyWith(
+                                        decoration: TextDecoration.underline),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               Spacer(),
               GestureDetector(

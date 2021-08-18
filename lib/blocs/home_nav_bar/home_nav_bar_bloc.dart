@@ -37,8 +37,9 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
         );
       } else
         yield AnonymousProfileScreenState();
-    }else if(event is EmailVerificationInit){
-
+    } else if (event is EmailVerificationInit) {
+      await _repository.sendEmailVerificationLink();
+      if (_repository.isEmailVerified()) yield EmailVerifiedState();
     }
   }
 }
