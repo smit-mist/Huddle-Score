@@ -42,8 +42,8 @@ class FifaTile extends StatelessWidget {
               bottom: 2.0,
             ),
             child: Container(
-              width: w * (145 / kScreenW),
-              height: h * (212 / kScreenH),
+              width: w * (155 / kScreenW),
+              height: h * (225 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
@@ -72,10 +72,10 @@ class FifaTile extends StatelessWidget {
                       ),
                     ),
                     height: h * (112 / kScreenH),
-                    width: w * (147 / kScreenW),
+                    width: w * (155 / kScreenW),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 7,right: 7),
                     height: h * (99 / kScreenH),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,18 +83,18 @@ class FifaTile extends StatelessWidget {
                       children: [
                         Text(
                           fifa.name,
-                          style: themeFont(s: 12),
+                          style: themeFont(s: 12,w:'m'),
                         ),
                         SizedBox(
                           height: 1,
                         ),
                         Text(
                           fifa.venue.join(' '),
-                          style: themeFont(s: 12),
+                          style: themeFont(s: 12,w:'r'),
                         ),
                         Text(
                           fifa.date,
-                          style: themeFont(s: 12),
+                          style: themeFont(s: 12,w:'r'),
                         ),
                       ],
                     ),

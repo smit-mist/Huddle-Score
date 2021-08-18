@@ -12,7 +12,7 @@ import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  String _chosenValue = "Rajkot";
+  String _chosenValue = "Ahmedabad";
   HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Huddle & Score',
-                      style: themeFont(
-                        color: kThemeColor,
-                        s: 26,
-                      ),
+                      style: themeFont(color: kThemeColor, s: 26, w: 'sb'),
                     ),
                     DropdownButton<String>(
                       focusColor: Colors.white,
@@ -55,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       underline: Container(),
                       items: <String>[
-                        'Ahmd',
+                        'Ahmedabad',
                         'Surat',
                         'Rajkot',
                         'Mumbai',
@@ -71,18 +68,27 @@ class HomeScreen extends StatelessWidget {
                       hint: Text(
                         "City",
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Spacer(),
                 Icon(
+                  Icons.notifications_none,
+                  color: kThemeColor,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Icon(
                   Icons.qr_code_scanner,
                   color: kThemeColor,
-                  size: 35,
+                  size: 30,
                 )
               ],
             ),
@@ -118,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Popular Tournaments',
                   style: themeFont(
-                    s: 18,
+                    s: 18,w: 'm'
                   ),
                 ),
                 Spacer(),
@@ -133,14 +139,14 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: Text(
                     'View all',
-                    style: themeFont(s: 13, color: kThemeColor)
+                    style: themeFont(s: 13, color: kThemeColor,w:'m')
                         .copyWith(decoration: TextDecoration.underline),
                   ),
                 )
               ],
             ),
             SizedBox(
-              height: 7,
+              height: 15,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
@@ -177,7 +183,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Fifa Tournaments',
+                  'Online Tournaments',
                   style: themeFont(
                     s: 18,
                   ),
@@ -201,11 +207,11 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 7,
+              height: 15,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
-              height: h * (215 / kScreenH),
+              height: h * (225 / kScreenH),
               child: BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   if (state is Loading) {
@@ -220,19 +226,13 @@ class HomeScreen extends StatelessWidget {
                   return ListView.separated(
                       separatorBuilder: (_, index) {
                         return SizedBox(
-                          width: 20 + (w * (15 / kScreenW)),
+                          width: 20,
                         );
                       },
                       scrollDirection: Axis.horizontal,
                       itemCount: state.allFifa.length,
                       itemBuilder: (_, int index) {
-                        if (index == 0)
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              left: 5,
-                            ),
-                            child: FifaTile(fifa: state.allFifa[index]),
-                          );
+
                         return FifaTile(
                           fifa: state.allFifa[index],
                         );
@@ -245,7 +245,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Turfs Around You',
-              style: themeFont(s: 18),
+              style: themeFont(s: 18,w: 'm'),
             ),
             SizedBox(
               height: 20,
@@ -284,8 +284,8 @@ class HomeScreen extends StatelessWidget {
                     width: double.infinity,
                   ),
                   Text(
-                    'Coming Soon',
-                    style: themeFont(color: kThemeColor, s: 23),
+                    'COMING SOON',
+                    style: themeFont(color: kThemeColor, s: 24,w:'m'),
                   ),
                   Text(
                     'Be the first one to know when the turfs go live',
@@ -325,7 +325,7 @@ class HomeScreen extends StatelessWidget {
               height: 20,
             ),
             Container(
-              height: h * (157 / kScreenH),
+              height: h * (170 / kScreenH),
               width: w * (354 / kScreenW),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -347,6 +347,7 @@ class HomeScreen extends StatelessWidget {
                       style: themeFont(s: 18),
                     ),
                   ),
+                  SizedBox(height: 1,),
                   Column(
                     children: [
                       SizedBox(
@@ -381,6 +382,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 1,),
+
                   Container(
                     height: 45,
                     width: double.infinity,

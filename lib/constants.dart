@@ -44,7 +44,7 @@ InputDecoration normalTextDecoration(String name) {
     hintStyle: themeFont(color: Color(0xff626262), s: 14,w: 'r'),
     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
     filled: true,
-    fillColor: Colors.white.withOpacity(0),
+    fillColor: Color(0xFFF1F1F1),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide.none,

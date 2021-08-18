@@ -13,6 +13,8 @@ class TournamentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    bool fullFilled = false;
+    if(here.room.total == here.room.taken.length)fullFilled = true;
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -54,56 +56,62 @@ class TournamentTile extends StatelessWidget {
                 ],
                 color: Colors.white,
               ),
-              child: Column(
-                children: [
-                  Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(
-                          12,
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                            12,
+                          ),
+                          topRight: Radius.circular(
+                            12,
+                          ),
                         ),
-                        topRight: Radius.circular(
-                          12,
+                        child: Image.network(
+                          here.photo,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      child: Image.network(
-                        here.photo,
-                        fit: BoxFit.cover,
+                      height: h * (112 / kScreenH),
+                      width: w * (155 / kScreenW),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:5.0),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 7),
+                        height: h * (120 / kScreenH),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                here.name,
+                                style: themeFont(s: 12,w: 'm'),
+                              ),
+
+                              Text(
+                                here.venue.join(''),
+                                style: themeFont(s: 12,w: 'r'),
+                              ),
+                              Text(
+                                here.finalsDate[0],
+                                style: themeFont(s: 12,w:'r'),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    height: h * (112 / kScreenH),
-                    width: w * (155 / kScreenW),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    height: h * (120 / kScreenH),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          here.name,
-                          style: themeFont(s: 12,),
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text(
-                          here.venue.join(''),
-                          style: themeFont(s: 12),
-                        ),
-                        Text(
-                          here.finalsDate[0],
-                          style: themeFont(s: 12),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-          Positioned(
+          (fullFilled)? Positioned(
             top: h * (100 / kScreenH),
             child: Container(
               height: 20,
@@ -118,7 +126,7 @@ class TournamentTile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ):Container(),
         ],
       ),
     );
