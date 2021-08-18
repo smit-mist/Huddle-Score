@@ -18,24 +18,33 @@ const MaterialColor kThemeColor = const MaterialColor(
 );
 const double kScreenW = 424;
 const double kScreenH = 911;
-
-TextStyle themeFont({Color color, FontWeight w, double s}) {
-  return GoogleFonts.lexendDeca(
+Map<String,FontWeight>convertMe = {
+  "Thin":FontWeight.w100,
+  "t":FontWeight.w100,
+  "l":FontWeight.w300,
+  "r":FontWeight.w400,
+  "m":FontWeight.w500,
+  "sb":FontWeight.w600,
+  "b":FontWeight.w700,
+  "eb":FontWeight.w800,
+};
+TextStyle themeFont({Color color, String w, double s}) {
+  return TextStyle(
+    fontFamily: 'Lexend',
       color: color ?? Colors.black,
-      fontWeight: w ?? FontWeight.normal,
+      fontWeight: (w == null || convertMe[w] == null) ? FontWeight.w500:convertMe[w],
       fontSize: s ?? 14);
   // return TextStyle(color: color, fontWeight: w, fontSize: 14);
 }
 
+
 InputDecoration normalTextDecoration(String name) {
   return InputDecoration(
     hintText: name,
-    hintStyle: themeFont(color: Color(0xff626262), w: FontWeight.normal, s: 14),
+    hintStyle: themeFont(color: Color(0xff626262), s: 14,w: 'r'),
     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
     filled: true,
-    fillColor: Colors.grey.withOpacity(
-      0.14,
-    ),
+    fillColor: Colors.white.withOpacity(0),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide.none,

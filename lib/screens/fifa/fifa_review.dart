@@ -104,7 +104,7 @@ class FifaReview extends StatelessWidget {
                   children: [
                     Text(
                       'Summary',
-                      style: themeFont(w: FontWeight.bold),
+                      style: themeFont(w: 'b'),
                     ),
                     SizedBox(
                       height: 1,
@@ -142,7 +142,7 @@ class FifaReview extends StatelessWidget {
                   children: [
                     Text(
                       'Amount Payable',
-                      style: themeFont(s: 16, w: FontWeight.bold),
+                      style: themeFont(s: 16, w: 'b'),
                     ),
                     SizedBox(
                       height: 1,
@@ -156,7 +156,7 @@ class FifaReview extends StatelessWidget {
                         Spacer(),
                         Text(
                           '₹ 750',
-                          style: themeFont(w: FontWeight.w600),
+                          style: themeFont(w: 'r'),
                         )
                       ],
                     ),
@@ -169,7 +169,7 @@ class FifaReview extends StatelessWidget {
                         Spacer(),
                         Text(
                           '0',
-                          style: themeFont(w: FontWeight.w600),
+                          style: themeFont(w: 'r'),
                         )
                       ],
                     ),
@@ -185,7 +185,7 @@ class FifaReview extends StatelessWidget {
                         Spacer(),
                         Text(
                           '₹ 750',
-                          style: themeFont(w: FontWeight.w600),
+                          style: themeFont(w: 'r'),
                         )
                       ],
                     ),
@@ -226,7 +226,7 @@ class DataShower extends StatelessWidget {
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: FontWeight.w600),
+              style: themeFont(w: 'r'),
             ),
           ),
         ],

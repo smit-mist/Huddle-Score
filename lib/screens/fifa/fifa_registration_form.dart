@@ -191,7 +191,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       TextSpan(
                         text: 'FIFA championship 2021.',
                         style: themeFont(
-                          w: FontWeight.bold,
+                          w: 'b',
                         ),
                       ),
                     ],

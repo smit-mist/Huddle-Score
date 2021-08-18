@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
@@ -24,7 +26,7 @@ class SignUpScreen extends StatelessWidget {
           child: Center(
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlocListener<SignupBloc, SignupState>(
                     listener: (context, state) {
@@ -50,9 +52,25 @@ class SignUpScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  Image.asset(
-                    'assets/images/huddle_logo.jpeg',
-                    height: h * 0.1,
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/huddle_logo.png',
+                        height: h * 0.1,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        'Huddle & Score',
+                        style: GoogleFonts.poppins(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 20,
@@ -62,7 +80,7 @@ class SignUpScreen extends StatelessWidget {
                     style: themeFont(
                       color: kThemeColor,
                       s: 20,
-                      w: FontWeight.w500,
+                      w: 'm',
                     ),
                   ),
                   SizedBox(
@@ -72,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
                     builder: (context, state) {
                       return Container(
                         // name
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
                         child: TextField(
                           controller: nameCtrl,
                           onTap: () {
@@ -80,10 +98,9 @@ class SignUpScreen extends StatelessWidget {
                           },
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'n',
                           ),
-                          decoration: normalTextDecoration(
-                              'Full Name'),
+                          decoration: normalTextDecoration('Full Name'),
                         ),
                       );
                     },
@@ -95,7 +112,8 @@ class SignUpScreen extends StatelessWidget {
                     builder: (context, state) {
                       return Container(
                         // email
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
+
                         child: TextField(
                           controller: emailCtrl,
                           onTap: () {
@@ -103,10 +121,9 @@ class SignUpScreen extends StatelessWidget {
                           },
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'n',
                           ),
-                          decoration: normalTextDecoration(
-                             'Email id'),
+                          decoration: normalTextDecoration('Email id'),
                         ),
                       );
                     },
@@ -118,7 +135,8 @@ class SignUpScreen extends StatelessWidget {
                     builder: (context, state) {
                       return Container(
                         // password
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
+
                         child: TextField(
                           controller: passwordCtrl,
                           onTap: () {
@@ -126,15 +144,13 @@ class SignUpScreen extends StatelessWidget {
                           },
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'n',
                           ),
                           obscureText: state.obscureText,
                           decoration: InputDecoration(
                             hintText: 'Password',
                             hintStyle: themeFont(
-                                color: Color(0xff626262),
-                                w: FontWeight.normal,
-                                s: 14),
+                                color: Color(0xff626262), w: 'n', s: 14),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 state.obscureText = !state.obscureText;
@@ -151,7 +167,7 @@ class SignUpScreen extends StatelessWidget {
                             contentPadding:
                                 EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                             filled: true,
-                            fillColor: Colors.grey.withOpacity(0.3),
+                            fillColor: Colors.grey.withOpacity(0),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
@@ -175,22 +191,21 @@ class SignUpScreen extends StatelessWidget {
                     builder: (context, state) {
                       return Container(
                         // confirm pass
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
+
                         child: TextField(
                           onTap: () {
                             _signupBloc.add(ConfirmPasswordOnTap());
                           },
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'n',
                           ),
                           obscureText: state.obscureText,
                           decoration: InputDecoration(
                             hintText: 'Confirm Password',
                             hintStyle: themeFont(
-                                color: Color(0xff626262),
-                                w: FontWeight.normal,
-                                s: 14),
+                                color: Color(0xff626262), w: 'n', s: 14),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 state.obscureText = !state.obscureText;
@@ -207,7 +222,7 @@ class SignUpScreen extends StatelessWidget {
                             contentPadding:
                                 EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                             filled: true,
-                            fillColor: Colors.grey.withOpacity(0.3),
+                            fillColor: Colors.grey.withOpacity(0),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
@@ -228,12 +243,13 @@ class SignUpScreen extends StatelessWidget {
                     height: 5,
                   ),
                   SizedBox(
-                    width: w * (356 / kScreenW),
+                    width: double.infinity,
                     child: Text(
                       'Password should be at least 6 characters long and must include at least 1 number. Ex. @,\$,%,!.',
                       style: themeFont(
                         color: Colors.black,
                         s: 10,
+                        w: 'r',
                       ),
                     ),
                   ),
@@ -241,7 +257,7 @@ class SignUpScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    width: w * (356 / kScreenW),
+                    width: double.infinity,
                     child: Row(
                       //mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,47 +271,51 @@ class SignUpScreen extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Container(
-                          width: w * (330 / kScreenW),
-                          child: Wrap(
-                            children: [
-                              Text(
-                                "By creating an account, I agree to Huddle & Score's ",
-                                style: themeFont(
-                                  s: 12.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text(
-                                  'Conditions of Use',
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              style: themeFont(),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text:
+                                      "By creating an account, I agree to Huddle & Score's ",
                                   style: themeFont(
                                     s: 12.0,
+                                    w: 'r',
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'Conditions of Use',
+                                  style: themeFont(
+                                    s: 12.0,
+                                    w: 'r',
                                     color: Colors.blue,
                                   ).copyWith(
                                       decoration: TextDecoration.underline),
                                 ),
-                              ),
-                              Text(
-                                ' and ',
-                                style: themeFont(
-                                  s: 12.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text(
-                                  'Privacy Policy',
+                                TextSpan(
+                                  text: ' and ',
                                   style: themeFont(
                                     s: 12.0,
+                                    w: 'r',
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'Privacy Policy',
+                                  style: themeFont(
+                                    s: 12.0,
+                                    w: 'r',
                                     color: Colors.blue,
                                   ).copyWith(
                                       decoration: TextDecoration.underline),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            // children: [
+
+                            // ],
                           ),
                         ),
                       ],
@@ -304,31 +324,55 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  ActionButton(
-                      bgColor: kThemeColor,
-                      child: Text(
-                        'Sign Up',
-                        style: themeFont(
-                          color: Colors.white,
-                          w: FontWeight.normal,
-                        ),
-                      ),
-                      onTap: () {
-                        _signupBloc.add(
-                          SignUpButtonPressed(
-                            email: emailCtrl.text,
-                            password: passwordCtrl.text,
-                            name: nameCtrl.text,
-                          ),
-                        );
-                      }),
+                  BlocBuilder<SignupBloc, SignupState>(
+                    builder: (context, state) {
+                      bool isOk = (state.emailTapped &
+                          state.passwordTapped &
+                          state.confirmPasswordTapped &
+                          state.nameTapped);
+                      print(isOk);
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ActionButton(
+                            bgColor: (isOk) ? kThemeColor : Colors.transparent,
+                            borderColor:
+                                (isOk) ? kThemeColor : Colors.transparent,
+                            child: Text(
+                              'Sign Up',
+                              style: themeFont(
+                                color: (isOk)
+                                    ? Colors.white
+                                    : Colors.grey.withOpacity(0.9),
+                                w: 'n',
+                              ),
+                            ),
+                            onTap: (isOk)
+                                ? () {
+                                    _signupBloc.add(
+                                      SignUpButtonPressed(
+                                        email: emailCtrl.text,
+                                        password: passwordCtrl.text,
+                                        name: nameCtrl.text,
+                                      ),
+                                    );
+                                  }
+                                : () {
+                                    print("Fill Everything");
+                                  }),
+                      );
+                    },
+                  ),
                   SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Already have an account?', style: themeFont(s: 13)),
+                      Text('Already have an account?',
+                          style: themeFont(
+                            s: 12,
+                            w: 'm',
+                          )),
                       SizedBox(
                         width: 5,
                       ),
@@ -339,7 +383,8 @@ class SignUpScreen extends StatelessWidget {
                         child: Text(
                           'Log in',
                           style: themeFont(
-                            s: 13,
+                            s: 12,
+                            w: 'm',
                             color: kThemeColor,
                           ),
                         ),

@@ -223,7 +223,7 @@ class TournamentRegisterForm extends StatelessWidget {
                       TextSpan(
                         text: 'Vamos\' 21',
                         style: themeFont(
-                          w: FontWeight.bold,
+                          w: 'b',
                         ),
                       ),
                     ],

@@ -49,13 +49,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 TextField(
                   style: themeFont(
                     color: Colors.black,
-                    w: FontWeight.normal,
                   ),
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Enter your current Password',
                     hintStyle: themeFont(
-                        color: Color(0xff626262), w: FontWeight.normal, s: 14),
+                        color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
                       onTap: () {},
                       child: Icon(
@@ -117,14 +116,13 @@ class ChangePasswordScreen extends StatelessWidget {
                 TextField(
                   style: themeFont(
                     color: Colors.black,
-                    w: FontWeight.normal,
                   ),
                   obscureText: true,
                   controller: passwordCtrl,
                   decoration: InputDecoration(
                     hintText: 'Enter your new Password',
                     hintStyle: themeFont(
-                        color: Color(0xff626262), w: FontWeight.normal, s: 14),
+                        color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
                       onTap: () {},
                       child: Icon(
@@ -178,13 +176,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 TextField(
                   style: themeFont(
                     color: Colors.black,
-                    w: FontWeight.normal,
                   ),
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Re-enter your new Password',
                     hintStyle: themeFont(
-                        color: Color(0xff626262), w: FontWeight.normal, s: 14),
+                        color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
                       onTap: () {},
                       child: Icon(

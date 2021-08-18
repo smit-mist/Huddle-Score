@@ -45,7 +45,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                           height: 50,
                         ),
                         Image.asset(
-                          'assets/images/huddle_logo.jpeg',
+                          'assets/images/huddle_logo.png',
                           height: h * 0.1,
                         ),
                         SizedBox(
@@ -77,8 +77,9 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                         ),
                         BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                           builder: (context, state) {
+                            bool isOk = state.emailTap;
                             return Container(
-                              width: w * (356 / kScreenW),
+                              width: double.infinity,
                               child: TextField(
                                 controller: _controller,
                                 onTap: () {
@@ -86,10 +87,8 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                                 },
                                 style: themeFont(
                                   color: Colors.black,
-                                  w: FontWeight.normal,
                                 ),
-                                decoration: normalTextDecoration(
-                                    'Email id'),
+                                decoration: normalTextDecoration('Email id'),
                               ),
                             );
                           },
@@ -98,7 +97,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                           height: 10,
                         ),
                         SizedBox(
-                          width: w * (356 / kScreenW),
+                          width: double.infinity,
                           height: 20,
                           child: Row(
                             children: [
@@ -109,18 +108,39 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: h * 0.2),
-                        ActionButton(
-                          bgColor: kThemeColor,
-                          child: Text(
-                            'Submit',
-                            style: themeFont(
-                              color: Colors.white,
-                              w: FontWeight.normal,
-                            ),
-                          ),
-                          onTap: () {
-                            _bloc.add(
-                              ForgotPasswordInitiated(email: _controller.text),
+                        BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                          builder: (context, state) {
+                            return SizedBox(
+                              width:double.infinity,
+
+                              child: ActionButton(
+                                bgColor: state.emailTap
+                                    ? kThemeColor
+                                    : Colors.transparent,
+                                borderColor: state.emailTap
+                                    ? kThemeColor
+                                    : Colors.transparent,
+                                child: Text(
+                                  'Submit',
+                                  style: themeFont(
+                                    s: 16,
+                                    w: 'm',
+                                    color: (state.emailTap)
+                                        ? Colors.white
+                                        : Colors.grey.withOpacity(0.9),
+                                  ),
+                                ),
+                                onTap: (state.emailTap)
+                                    ? () {
+                                        _bloc.add(
+                                          ForgotPasswordInitiated(
+                                              email: _controller.text),
+                                        );
+                                      }
+                                    : () {
+                                        print("Fill Everything");
+                                      },
+                              ),
                             );
                           },
                         ),
@@ -160,7 +180,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                     height: 50,
                   ),
                   Image.asset(
-                    'assets/images/huddle_logo.jpeg',
+                    'assets/images/huddle_logo.png',
                     height: h * 0.1,
                   ),
                   SizedBox(
@@ -175,28 +195,25 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                   ),
                   Text(
                     'Get back into your account with 2 quick steps!',
-                    style: themeFont(
-                      s: 12,
-                      color: Colors.grey.withOpacity(0.7),
-                    ),
+                    style: themeFont(s: 12, w: 'r'),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                   Text(
-                    'Enter the registered Email id to receive a link',
-                    style: themeFont(s: 14),
+                    'A link to reset your password has been sent to the following email id. ',
+                    style: themeFont(s: 14, w: 'm'),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Container(
-                    width: w * (356 / kScreenW),
+                    width: double.infinity,
                     child: TextField(
                       controller: _controller,
                       style: themeFont(
                         color: Colors.black,
-                        w: FontWeight.normal,
+                        w: 'n',
                       ),
                       decoration: normalTextDecoration('Email id'),
                     ),
@@ -205,7 +222,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                     height: 10,
                   ),
                   SizedBox(
-                    width: w * (356 / kScreenW),
+                    width: double.infinity,
                     height: 20,
                     child: Row(
                       children: [
@@ -216,7 +233,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                         ),
                         Text(
                           ('Resend'),
-                          style: themeFont(s: 13).copyWith(
+                          style: themeFont(s: 13, w: 'r').copyWith(
                               color: kThemeColor,
                               decoration: TextDecoration.underline),
                         ),
@@ -254,7 +271,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                     height: 50,
                   ),
                   Image.asset(
-                    'assets/images/huddle_logo.jpeg',
+                    'assets/images/huddle_logo.png',
                     height: h * 0.1,
                   ),
                   SizedBox(
@@ -262,7 +279,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                   ),
                   Text(
                     'Password Assistance',
-                    style: themeFont(color: kThemeColor, s: 20),
+                    style: themeFont(w: 'm', color: kThemeColor, s: 20),
                   ),
                   SizedBox(
                     height: 10,
@@ -271,7 +288,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                     'Get back into your account with 2 quick steps!',
                     style: themeFont(
                       s: 12,
-                      color: Colors.grey.withOpacity(0.7),
+                      w: 'r',
                     ),
                   ),
                   SizedBox(
@@ -279,18 +296,18 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter the registered Email id to receive a link',
-                    style: themeFont(s: 14),
+                    style: themeFont(s: 14, w: 'm'),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
-                    width: w * (356 / kScreenW),
+                    width: double.infinity,
                     child: TextField(
                       controller: _controller,
                       style: themeFont(
                         color: Colors.black,
-                        w: FontWeight.normal,
+                        w: 'n',
                       ),
                       decoration: normalTextDecoration('Email id'),
                     ),
@@ -305,7 +322,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Invalid Email-id!',
-                          style: themeFont(color: Colors.red, s: 12),
+                          style: themeFont(color: Colors.red, s: 12, w: 'r'),
                         ),
                         SizedBox(
                           width: 1,
@@ -314,27 +331,31 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: w * (356 / kScreenW),
-                    height: 30,
+                    width: double.infinity,
+                    height: 60,
                     child: Text(
                       'Please make sure you enter an email id that is associated with your Huddle & Score account.',
                       style: themeFont(
-                        color: Colors.grey.withOpacity(0.7),
-                        s: 12,
+                        w: 'r',
+                        s: 13,
                       ),
                     ),
                   ),
                   SizedBox(height: h * 0.2),
-                  ActionButton(
-                    bgColor: kThemeColor,
-                    child: Text(
-                      'Submit',
-                      style: themeFont(
-                        color: Colors.white,
-                        w: FontWeight.normal,
+                  SizedBox(
+                    width:double.infinity,
+
+                    child: ActionButton(
+                      bgColor: kThemeColor,
+                      child: Text(
+                        'Submit',
+                        style: themeFont(
+                          color: Colors.white,
+                          w: 'n',
+                        ),
                       ),
+                      onTap: () {},
                     ),
-                    onTap: () {},
                   ),
                 ],
               ),

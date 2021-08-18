@@ -362,7 +362,7 @@ class TournamentDetails extends StatelessWidget {
                                                       ind.toString()][1],
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
-                                                    w: FontWeight.bold,
+                                                    w: 'b',
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -477,7 +477,7 @@ class TournamentDetails extends StatelessWidget {
                                                     ind.toString()][1],
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
-                                                  w: FontWeight.bold,
+                                                  w: 'b',
                                                 ),
                                               ),
                                               SizedBox(
@@ -736,7 +736,7 @@ class TournamentDetails extends StatelessWidget {
                                                     ind.toString()][1],
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
-                                                  w: FontWeight.bold,
+                                                  w: 'b',
                                                 ),
                                               ),
                                               SizedBox(

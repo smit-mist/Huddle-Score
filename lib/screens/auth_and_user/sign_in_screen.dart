@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
@@ -50,8 +52,20 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    'assets/images/huddle_logo.jpeg',
+                    'assets/images/huddle_logo.png',
                     height: h * 0.2,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Huddle & Score',
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -59,7 +73,8 @@ class SignInScreen extends StatelessWidget {
                   BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       return Container(
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
+
                         child: TextField(
                           onTap: () {
                             _loginBloc.add(EmailFieldPressed());
@@ -67,7 +82,7 @@ class SignInScreen extends StatelessWidget {
                           controller: emailCtrl,
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'r',
                           ),
                           decoration: normalTextDecoration(
                             'Email id',
@@ -80,30 +95,36 @@ class SignInScreen extends StatelessWidget {
                     height: 10,
                   ),
                   BlocBuilder<LoginBloc, LoginState>(
+                    buildWhen: (prev, curr) {
+                      print("Should rebuild because $prev to $curr");
+                      return true;
+                    },
                     builder: (context, state) {
                       print(state);
+                      print("Rebuild");
+
                       return Container(
-                        width: w * (356 / kScreenW),
+                        width: double.infinity,
+
                         child: TextField(
                           onTap: () {
-                            print('=');
                             _loginBloc.add(PasswordFieldPressed());
-                            print('=>');
                           },
                           controller: passwordCtrl,
                           style: themeFont(
                             color: Colors.black,
-                            w: FontWeight.normal,
+                            w: 'r',
                           ),
                           obscureText: state.obscureText,
                           decoration: InputDecoration(
                             hintText: 'Password',
                             hintStyle: themeFont(
                                 color: Color(0xff626262),
-                                w: FontWeight.normal,
+                                w: 'r',
                                 s: 14),
                             suffixIcon: GestureDetector(
                               onTap: () {
+                                print("OBSCURE PRESSED");
                                 _loginBloc.add(ObscureTextPressed());
                               },
                               child: Icon(
@@ -118,7 +139,7 @@ class SignInScreen extends StatelessWidget {
                             contentPadding:
                                 EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                             filled: true,
-                            fillColor: Colors.grey.withOpacity(0.3),
+                            fillColor: Colors.transparent,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
@@ -151,7 +172,7 @@ class SignInScreen extends StatelessWidget {
                             'Forgot Password?',
                             style: themeFont(
                                 color: kThemeColor,
-                                w: FontWeight.normal,
+                                w: 'n',
                                 s: 11),
                           ),
                         ),
@@ -161,23 +182,26 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 50,
                   ),
-                  ActionButton(
-                    bgColor: kThemeColor,
-                    child: Text(
-                      'Log In',
-                      style: themeFont(
-                        color: Colors.white,
-                        w: FontWeight.normal,
-                      ),
-                    ),
-                    onTap: () {
-                      _loginBloc.add(
-                        LoginButtonPressed(
-                          email: emailCtrl.text,
-                          password: passwordCtrl.text,
+                  SizedBox(
+                    width: double.infinity,
+                    child: ActionButton(
+                      bgColor: kThemeColor,
+                      child: Text(
+                        'Log In',
+                        style: themeFont(
+                          color: Colors.white,
+                          w: 'm',s: 16
                         ),
-                      );
-                    },
+                      ),
+                      onTap: () {
+                        _loginBloc.add(
+                          LoginButtonPressed(
+                            email: emailCtrl.text,
+                            password: passwordCtrl.text,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -185,7 +209,7 @@ class SignInScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('New to Huddle & Score?', style: themeFont(s: 13)),
+                      Text('New to Huddle & Score?', style: themeFont(s: 12,w: 'm')),
                       SizedBox(
                         width: 5,
                       ),
@@ -196,7 +220,7 @@ class SignInScreen extends StatelessWidget {
                         child: Text(
                           'Sign up',
                           style: themeFont(
-                            s: 13,
+                            s: 12,w: 'm',
                             color: kThemeColor,
                           ),
                         ),

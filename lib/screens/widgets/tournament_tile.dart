@@ -83,7 +83,7 @@ class TournamentTile extends StatelessWidget {
                       children: [
                         Text(
                           here.name,
-                          style: themeFont(s: 12, w: FontWeight.w500),
+                          style: themeFont(s: 12,),
                         ),
                         SizedBox(
                           height: 1,

@@ -346,7 +346,7 @@ class FifaDetails extends StatelessWidget {
                                                   //'hello',
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
-                                                    w: FontWeight.bold,
+                                                    w: 'b',
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -461,7 +461,7 @@ class FifaDetails extends StatelessWidget {
                                                     [1],
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
-                                                  w: FontWeight.bold,
+                                                  w: 'b',
                                                 ),
                                               ),
                                               SizedBox(

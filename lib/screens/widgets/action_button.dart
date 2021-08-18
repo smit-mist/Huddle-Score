@@ -6,7 +6,8 @@ class ActionButton extends StatefulWidget {
   Widget child;
   Color bgColor;
   Function onTap;
-  ActionButton({this.child, this.bgColor, this.onTap});
+  Color borderColor;
+  ActionButton({this.borderColor,this.child, this.bgColor, this.onTap});
   @override
   _ActionButtonState createState() => _ActionButtonState();
 }
@@ -28,7 +29,7 @@ class _ActionButtonState extends State<ActionButton> {
           color: widget.bgColor,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: kThemeColor,
+            color: widget.borderColor?? kThemeColor,
           ),
         ),
       ),

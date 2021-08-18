@@ -42,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         'Skip',
                         style: themeFont(
                           color: kThemeColor,
-                          w: FontWeight.normal,
+                          w: 'n',
                           s: 12,
                         ),
                       ),
@@ -53,8 +53,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 30,
                 ),
                 Image.asset(
-                  'assets/images/huddle_logo.jpeg',
+                  'assets/images/huddle_logo.png',
                   height: h * 0.3,
+                ),
+                SizedBox(height: 5,),
+                Text(
+                  'Huddle & Score',
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -64,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'Sign Up',
                     style: themeFont(
-                        color: Colors.white, w: FontWeight.normal, s: 16),
+                        color: Colors.white, w: 'm', s: 16),
                   ),
                   bgColor: kThemeColor,
                   onTap: () {
@@ -78,7 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'Login',
                     style: themeFont(
-                        color: kThemeColor, w: FontWeight.normal, s: 16),
+                        color: kThemeColor, w: 'm', s: 16),
                   ),
                   bgColor: Colors.white,
                   onTap: () {
