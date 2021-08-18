@@ -13,3 +13,5 @@ class SearchIconPressed extends HomeNavBarEvent {}
 class CartIconPressed extends HomeNavBarEvent {}
 
 class ProfileIconPressed extends HomeNavBarEvent {}
+
+class EmailVerificationInit extends HomeNavBarEvent{}

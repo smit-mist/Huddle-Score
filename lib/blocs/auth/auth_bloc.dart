@@ -22,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final bool isSignIn = await _repository.isSignedIn();
         if (isSignIn) {
-          yield Authenticated(user: await _repository.getCurrentUser());
+          yield Authenticated(user: _repository.getCurrentUser());
         } else {
           yield UnAuthenticated();
         }

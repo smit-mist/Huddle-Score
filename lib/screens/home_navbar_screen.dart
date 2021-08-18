@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
-import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
 import 'package:huddle_and_score/screens/booking/booking_history_screen.dart';
 import 'package:huddle_and_score/screens/search_screen.dart';
 

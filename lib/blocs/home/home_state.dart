@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/home_event.dart';
-import 'package:huddle_and_score/models/tournament.dart';
 
 abstract class HomeState extends Equatable {
   List<HomeTour> allTournaments;

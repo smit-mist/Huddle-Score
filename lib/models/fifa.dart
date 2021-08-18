@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/home_event.dart';
-import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/fifa_repository.dart';
 
@@ -38,8 +37,8 @@ class Fifa {
       details: Details.fromMap(data['details']),
     );
   }
-  Future<bool> registeredIn() async{
-    User value=await AuthRepository().getCurrentUser();
+  bool registeredIn(){
+    User value=AuthRepository().getCurrentUser();
     if (value == null){
       print("Not Found");
       return false;

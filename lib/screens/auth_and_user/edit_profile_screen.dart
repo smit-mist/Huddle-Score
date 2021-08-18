@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
-import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
-import 'package:huddle_and_score/blocs/user/user_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';

@@ -360,7 +360,6 @@ class FifaDetails extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                // TODO: Price Pool
                                 Expanded(
                                   child: Container(
                                     padding:
@@ -476,7 +475,6 @@ class FifaDetails extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              // TODO: Price Pool
                               Expanded(
                                 child: Container(
                                   width: double.infinity,

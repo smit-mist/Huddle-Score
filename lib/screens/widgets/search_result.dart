@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/models/home_event.dart';
-import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../../constants.dart';

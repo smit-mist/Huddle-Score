@@ -22,7 +22,7 @@ class TournamentTile extends StatelessWidget {
           ),
         );
         Tournament tournament = await Tournament().fromHomeTour(here);
-        bool isReg = await tournament.registeredIn();
+        bool isReg = tournament.registeredIn();
         print('in tile $isReg');
         Navigator.pushReplacement(
           context,

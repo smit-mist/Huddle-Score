@@ -11,7 +11,7 @@ class PartnerRepository {
       print('before');
       final String baseUrl =
           "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
-      final User user = await AuthRepository().getCurrentUser();
+      final User user = AuthRepository().getCurrentUser();
       print(user.uid);
       final String jwt = await user.getIdToken();
       var response = await http.post(

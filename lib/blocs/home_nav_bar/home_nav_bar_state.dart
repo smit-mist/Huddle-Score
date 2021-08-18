@@ -20,3 +20,5 @@ class UserProfileScreenState extends HomeNavBarState {
 }
 
 class AnonymousProfileScreenState extends HomeNavBarState {}
+
+class EmailVerifiedState extends HomeNavBarState{}

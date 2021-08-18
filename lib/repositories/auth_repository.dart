@@ -6,8 +6,13 @@ class AuthRepository {
     this._auth = FirebaseAuth.instance;
   }
 
-  Future<User> getCurrentUser() async {
+  User getCurrentUser(){
     return _auth.currentUser;
+  }
+
+  Future<void> sendEmailVerificationLink() async {
+    final User user = _auth.currentUser;
+    await user.sendEmailVerification();
   }
 
   Future<String> getJwtToken() async {

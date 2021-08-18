@@ -4,7 +4,6 @@ import 'package:huddle_and_score/screens/auth_and_user/about_app_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/edit_profile_screen.dart';
 
 import '../../constants.dart';
-import '../home_navbar_screen.dart';
 import 'help_and_support_screen.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -44,14 +43,14 @@ class UserProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hey, ${name}',
+                      'Hey, $name',
                       style: themeFont(
                         color: kThemeColor,
                         s: 20,
                       ),
                     ),
                     Text(
-                      '${email}',
+                      '$email',
                       style: themeFont(
                         color: Colors.red,
                         s: 10,

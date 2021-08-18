@@ -376,7 +376,6 @@ class TournamentDetails extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                // TODO: Price Pool
                                 Expanded(
                                   child: Container(
                                     padding:
@@ -492,7 +491,6 @@ class TournamentDetails extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              // TODO: Price Pool
                               Expanded(
                                 child: Container(
                                   width: double.infinity,

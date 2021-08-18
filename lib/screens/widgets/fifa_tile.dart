@@ -20,8 +20,8 @@ class FifaTile extends StatelessWidget {
           MaterialPageRoute(builder: (_) => LoadingScreen()),
         );
         print('start fetch');
-        Fifa().fromHomeFifa(fifa: fifa).then((value) async{
-          bool here = await value.registeredIn();
+        Fifa().fromHomeFifa(fifa: fifa).then((value){
+          bool here = value.registeredIn();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

@@ -23,8 +23,8 @@ class Tournament {
     this.main,
     this.prizePool,
   });
-  Future<bool> registeredIn() async{
-    User value=await AuthRepository().getCurrentUser();
+  bool registeredIn(){
+    User value=AuthRepository().getCurrentUser();
       if (value == null){
         print("Not Found");
         return false;
