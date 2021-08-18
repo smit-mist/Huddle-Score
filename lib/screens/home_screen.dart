@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
       width: w,
       height: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +252,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               height: h * (442 / kScreenH),
-              width: w * (354 / kScreenW),
+              width:double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
@@ -326,7 +326,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               height: h * (170 / kScreenH),
-              width: w * (354 / kScreenW),
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
