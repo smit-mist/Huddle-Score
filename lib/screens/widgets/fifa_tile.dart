@@ -13,6 +13,9 @@ class FifaTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    WeirdDateFormat st = WeirdDateFormat(date: fifa.date);
+
+
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -93,7 +96,7 @@ class FifaTile extends StatelessWidget {
                           style: themeFont(s: 12,w:'r'),
                         ),
                         Text(
-                          fifa.date,
+                          st.printNormal(),
                           style: themeFont(s: 12,w:'r'),
                         ),
                       ],

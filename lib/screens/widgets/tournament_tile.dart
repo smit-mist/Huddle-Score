@@ -14,6 +14,17 @@ class TournamentTile extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     bool fullFilled = false;
+    WeirdDateFormat st = WeirdDateFormat(date: here.finalsDate[0]),
+        en = WeirdDateFormat(date: here.finalsDate[1]);
+    String timeLine = "";
+    timeLine += st.getDate();
+    timeLine += '- ';
+    timeLine += en.getDate();
+    timeLine += ' ';
+    timeLine += st.getMonth();
+    timeLine += ', ';
+    timeLine += st.getYear();
+    print(timeLine);
     if(here.room.total == here.room.taken.length)fullFilled = true;
     return GestureDetector(
       onTap: () async {
@@ -98,7 +109,7 @@ class TournamentTile extends StatelessWidget {
                                 style: themeFont(s: 12,w: 'r'),
                               ),
                               Text(
-                                here.finalsDate[0],
+                                timeLine,
                                 style: themeFont(s: 12,w:'r'),
                               ),
                             ],

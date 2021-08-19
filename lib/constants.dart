@@ -59,3 +59,44 @@ InputDecoration normalTextDecoration(String name) {
 
   );
 }
+
+Map<int,String>getMonthName = {
+  1:"January",
+  2:'February',
+  3:'March',
+  4:'April',
+  5: 'May',
+  6: 'June',
+  7: 'July',
+  8: 'August',
+  9:'September',
+  10:'October',
+  11:'November',
+  12:'December'
+};
+class WeirdDateFormat{
+  String date;
+  WeirdDateFormat({@required this.date});
+  String getDate(){
+    return date.substring(8,10);
+  }
+  String getMonth(){
+
+    return getMonthName[int.parse(date.substring(5,7))];
+  }
+  String getYear(){
+    return date.substring(0,4);
+  }
+
+  String printNormal(){
+    return getDate() + ' ' + getMonth() + ', '+getYear();
+  }
+
+}
+String getSuperScript(int x){
+  x %= 10;
+  if(x == 1)return "st";
+  if(x == 2)return "nd";
+  if(x == 3)return "rd";
+  return "th";
+}
