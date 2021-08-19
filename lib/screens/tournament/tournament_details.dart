@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,24 +9,43 @@ import 'package:huddle_and_score/screens/tournament/tournament_register_form.dar
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
-class TournamentDetails extends StatelessWidget {
-  ButtonClickBloc _bloc;
+class TournamentDetails extends StatefulWidget {
   Tournament tournament;
   bool isReg;
 
   TournamentDetails({this.tournament, this.isReg});
+
+  @override
+  _TournamentDetailsState createState() => _TournamentDetailsState();
+}
+
+class _TournamentDetailsState extends State<TournamentDetails> {
+  ButtonClickBloc _bloc;
+@override
+  void initState() {
+    // TODO: implement initState
+  _bloc = ButtonClickBloc();
+  super.initState();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _bloc.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+
     int seatsLeft =
-        tournament.main.room.total - tournament.main.room.registered.length;
+        widget.tournament.main.room.total - widget.tournament.main.room.registered.length;
     String timeLine = "";
-    WeirdDateFormat st = WeirdDateFormat(date: tournament.main.timeLine[0]),
-        en = WeirdDateFormat(date: tournament.main.timeLine[1]),
+    WeirdDateFormat st = WeirdDateFormat(date: widget.tournament.main.timeLine[0]),
+        en = WeirdDateFormat(date: widget.tournament.main.timeLine[1]),
         deadLine = WeirdDateFormat(
-          date: tournament.main.deadline,
+          date: widget.tournament.main.deadline,
         ),
-        semi = WeirdDateFormat(date: tournament.info.dates['semiFinal']),
-        finals = WeirdDateFormat(date: tournament.info.dates['final']);
+        semi = WeirdDateFormat(date: widget.tournament.info.dates['semiFinal']),
+        finals = WeirdDateFormat(date: widget.tournament.info.dates['final']);
     timeLine += st.getDate();
     timeLine += '- ';
     timeLine += en.getDate();
@@ -67,20 +87,20 @@ class TournamentDetails extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  if (isReg) {
+                  if (widget.isReg) {
                     print('Already did');
                   } else {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => TournamentRegisterForm(
-                          currentTour: tournament,
+                          currentTour: widget.tournament,
                         ),
                       ),
                     );
                   }
                 },
-                child: (isReg)
+                child: (widget.isReg)
                     ? Container(
                         child: ActionButton(
                           child: Center(
@@ -128,7 +148,7 @@ class TournamentDetails extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      tournament.details.title,
+                      widget.tournament.details.title,
                       style: themeFont(
                         color: kThemeColor,
                         s: 23,
@@ -146,7 +166,7 @@ class TournamentDetails extends StatelessWidget {
                   height: h * (390 / kScreenH),
                   width: double.infinity,
                   child: Image.network(
-                    tournament.details.poster,
+                    widget.tournament.details.poster,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -156,7 +176,7 @@ class TournamentDetails extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    tournament.details.description,
+                    widget.tournament.details.description,
                     style: themeFont(s: 12, w: 'm'),
                   ),
                 ),
@@ -173,7 +193,7 @@ class TournamentDetails extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                (tournament.details.pdf != null)
+                (widget.tournament.details.pdf != null)
                     ? SizedBox(
                         width: double.infinity,
                         child: Text(
@@ -257,7 +277,7 @@ class TournamentDetails extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      tournament.main.venue.address.join(', '),
+                                      widget.tournament.main.venue.address.join(', '),
                                       style: themeFont(s: 13),
                                     ),
                                     Row(
@@ -289,7 +309,7 @@ class TournamentDetails extends StatelessWidget {
                         ),
                         DataShower(
                           type: 'Category',
-                          data: tournament.main.ageRec,
+                          data: widget.tournament.main.ageRec,
                         ),
                         SizedBox(
                           height: 10,
@@ -354,7 +374,9 @@ class TournamentDetails extends StatelessWidget {
                 ),
                 //===================
                 BlocBuilder<ButtonClickBloc, ButtonClickState>(
+                  bloc: _bloc,
                   builder: (context, state) {
+                    print(_bloc);
                     if (!(state is ExpandedState)) {
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -400,12 +422,12 @@ class TournamentDetails extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${tournament.prizePool[ind.toString()][0]}',
+                                                '${widget.tournament.prizePool[ind.toString()][0]}',
                                                 style:
                                                     themeFont(s: 12, w: 'sb'),
                                               ),
                                               Text(
-                                                '₹ ${tournament.prizePool[ind.toString()][1]}',
+                                                '₹ ${widget.tournament.prizePool[ind.toString()][1]}',
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
                                                   w: (ind == 0) ? 'b' : 'sb',
@@ -440,10 +462,11 @@ class TournamentDetails extends StatelessWidget {
                                       Spacer(),
                                       TextButton(
                                         onPressed: () {
+                                          print(_bloc);
                                           _bloc.add(TournamentDetailExpanded());
                                         },
                                         child: Text(
-                                          'View all prizes',
+                                          'View all',
                                           style: themeFont(
                                                   color: kThemeColor, s: 10)
                                               .copyWith(
@@ -470,7 +493,7 @@ class TournamentDetails extends StatelessWidget {
                         duration: Duration(milliseconds: 200),
                         width: double.infinity,
                         height:
-                            (0.3 + (tournament.prizePool.length - 2) * 0.04) *
+                            (0.3 + (widget.tournament.prizePool.length - 2) * 0.04) *
                                 h,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -512,11 +535,11 @@ class TournamentDetails extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${tournament.prizePool[ind.toString()][0]}',
+                                              '${widget.tournament.prizePool[ind.toString()][0]}',
                                               style: themeFont(s: 12, w: 'sb'),
                                             ),
                                             Text(
-                                              '₹ ${tournament.prizePool[ind.toString()][1]}',
+                                              '₹ ${widget.tournament.prizePool[ind.toString()][1]}',
                                               style: themeFont(
                                                 s: (ind == 0 ? 20 : 18),
                                                 w: (ind == 0) ? 'b' : 'sb',
@@ -555,14 +578,14 @@ class TournamentDetails extends StatelessWidget {
                                               );
                                             },
                                             itemCount:
-                                                tournament.prizePool.length - 2,
+                                                widget.tournament.prizePool.length - 2,
                                             itemBuilder: (_, ind) {
                                               return Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    tournament.prizePool[
+                                                    ' ' +widget.tournament.prizePool[
                                                         (ind + 2)
                                                             .toString()][0],
                                                     style: themeFont(
@@ -571,7 +594,7 @@ class TournamentDetails extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Text(
-                                                    '₹ ${tournament.prizePool[(ind + 2).toString()][1]}',
+                                                    ' ₹ ${widget.tournament.prizePool[(ind + 2).toString()][1]}',
                                                     style: themeFont(
                                                         s: 13, w: 'm'),
                                                   ),
@@ -592,7 +615,7 @@ class TournamentDetails extends StatelessWidget {
                                                     TournamentDetailExpanded());
                                               },
                                               child: Text(
-                                                'View less prizes',
+                                                'View less',
                                                 style: themeFont(
                                                         color: kThemeColor,
                                                         s: 10)
@@ -627,7 +650,7 @@ class TournamentDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(3.0),
                   child: Container(
                     width: double.infinity,
-                    height: h * (300 / kScreenH),
+                    height: h * (320 / kScreenH),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -648,28 +671,28 @@ class TournamentDetails extends StatelessWidget {
                         DataShower(
                           type: 'Registration Fee',
                           data:
-                              '₹ ${tournament.info.registrationFee.toString()}/ team',
+                              '₹ ${widget.tournament.info.registrationFee.toString()}/ team',
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
                           type: 'Players per team',
-                          data: tournament.info.playersPerTeam.toString(),
+                          data: widget.tournament.info.playersPerTeam.toString(),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
                           type: 'Substitutes',
-                          data: tournament.info.substituteAllowed.toString(),
+                          data: widget.tournament.info.substituteAllowed.toString(),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         DataShower(
                           type: 'Type',
-                          data: tournament.info.type,
+                          data: widget.tournament.info.type,
                         ),
                         SizedBox(
                           height: 10,
@@ -677,7 +700,7 @@ class TournamentDetails extends StatelessWidget {
                         DataShower(
                           type: 'Duration per match',
                           data:
-                              '${tournament.info.durationPerMatch.toString()} minutes',
+                              '${widget.tournament.info.durationPerMatch.toString()} minutes',
                         ),
                         SizedBox(
                           height: 20,
