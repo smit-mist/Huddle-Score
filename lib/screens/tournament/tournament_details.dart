@@ -121,6 +121,7 @@ class TournamentDetails extends StatelessWidget {
                       style: themeFont(
                         color: kThemeColor,
                         s: 23,
+                        w: 'sb',
                       ),
                     ),
                     Spacer(),
@@ -145,7 +146,7 @@ class TournamentDetails extends StatelessWidget {
                   width: double.infinity,
                   child: Text(
                     tournament.details.description,
-                    style: themeFont(s: 12),
+                    style: themeFont(s: 12,w: 'm'),
                   ),
                 ),
                 SizedBox(
@@ -155,7 +156,7 @@ class TournamentDetails extends StatelessWidget {
                   width: double.infinity,
                   child: Text(
                     'Kindly go through rules and regulations of the tournament before registering.',
-                    style: themeFont(s: 12),
+                    style: themeFont(s: 12,w: 'm'),
                   ),
                 ),
                 SizedBox(
@@ -167,7 +168,7 @@ class TournamentDetails extends StatelessWidget {
                         child: Text(
                           //TODO: Add download link here. on tap.
                           'Download Rulebook',
-                          style: themeFont(s: 12, color: kThemeColor).copyWith(
+                          style: themeFont(s: 11, color: kThemeColor,w: 'm').copyWith(
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -190,7 +191,7 @@ class TournamentDetails extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Oops! No more room left.',
-                              style: themeFont(),
+                              style: themeFont(s: 14,w: 'sb'),
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -205,7 +206,7 @@ class TournamentDetails extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Room for just $seatsLeft more teams, HURRY!!',
-                              style: themeFont(),
+                              style: themeFont(s: 14,w: 'sb'),
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -309,7 +310,7 @@ class TournamentDetails extends StatelessWidget {
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 200),
                           width: double.infinity,
-                          height: 0.3 * h,
+                          height: 0.27 * h,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(9),
@@ -318,126 +319,6 @@ class TournamentDetails extends StatelessWidget {
                                   color: Colors.grey, offset: Offset(2, 2))
                             ],
                           ),
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 1),
-                            height: 0.3 * h,
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Prize pool',
-                                    style: themeFont(),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  width: double.infinity,
-                                  height: h * 0.15,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: ListView.builder(
-                                          itemCount: 2,
-                                          itemBuilder: (_, ind) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  tournament.prizePool[
-                                                      ind.toString()][0],
-                                                  style: themeFont(),
-                                                ),
-                                                Text(
-                                                  tournament.prizePool[
-                                                      ind.toString()][1],
-                                                  style: themeFont(
-                                                    s: (ind == 0 ? 20 : 18),
-                                                    w: 'b',
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    width: double.infinity,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'And many more... ',
-                                          style: themeFont(
-                                            color: Colors.black.withOpacity(
-                                              0.7,
-                                            ),
-                                            s: 10,
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        TextButton(
-                                          onPressed: () {
-                                            _bloc.add(
-                                                TournamentDetailExpanded());
-                                          },
-                                          child: Text(
-                                            'View all prizes',
-                                            style: themeFont(
-                                                    color: kThemeColor, s: 10)
-                                                .copyWith(
-                                                    decoration: TextDecoration
-                                                        .underline),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down_sharp,
-                                          color: kThemeColor,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        width: double.infinity,
-                        height: 0.42 * h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(9),
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
-                          ],
-                        ),
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 1),
-                          height: 0.42 * h,
-                          width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -445,7 +326,7 @@ class TournamentDetails extends StatelessWidget {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
                                   'Prize pool',
-                                  style: themeFont(),
+                                  style: themeFont(s:13,w:'m'),
                                 ),
                               ),
                               SizedBox(
@@ -457,7 +338,8 @@ class TournamentDetails extends StatelessWidget {
                                 height: h * 0.15,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       child: ListView.builder(
@@ -468,16 +350,16 @@ class TournamentDetails extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                tournament.prizePool[
-                                                    ind.toString()][0],
-                                                style: themeFont(),
+                                                '${tournament.prizePool[
+                                                ind.toString()][0]}',
+                                                style: themeFont(s: 12,w:'sb'),
                                               ),
                                               Text(
-                                                tournament.prizePool[
-                                                    ind.toString()][1],
+                                                '₹ ${tournament.prizePool[
+                                                ind.toString()][1]}',
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
-                                                  w: 'b',
+                                                  w:(ind == 0)? 'b':'sb',
                                                 ),
                                               ),
                                               SizedBox(
@@ -493,51 +375,162 @@ class TournamentDetails extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20),
                                   width: double.infinity,
-                                  child: Container(
-                                    child: Column(
-                                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 20),
-                                            width: double.infinity,
-                                            // height: h * 0.2,
-                                            child: ListView.separated(
-                                              physics: NeverScrollableScrollPhysics(),
-                                              separatorBuilder: (_, ind) {
-                                                return SizedBox(
-                                                  height: 10,
-                                                );
-                                              },
-                                              itemCount: tournament.prizePool.length - 2,
-                                              itemBuilder: (_, ind) {
-                                                return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      tournament.prizePool[(ind+2).toString()][0],
-                                                      style: themeFont(
-                                                        color: Colors.black
-                                                            .withOpacity(0.7),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      tournament.prizePool[(ind+2).toString()][1],
-                                                      style: themeFont(),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'And many more... ',
+                                        style: themeFont(
+                                          color: Colors.black.withOpacity(
+                                            0.7,
+                                          ),
+                                          s: 10,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      TextButton(
+                                        onPressed: () {
+                                          _bloc.add(
+                                              TournamentDetailExpanded());
+                                        },
+                                        child: Text(
+                                          'View all prizes',
+                                          style: themeFont(
+                                                  color: kThemeColor, s: 10)
+                                              .copyWith(
+                                                  decoration: TextDecoration
+                                                      .underline),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_down_sharp,
+                                        color: kThemeColor,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 200),
+                        width: double.infinity,
+                        height:  (0.3+(tournament.prizePool.length-2)*0.04) * h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9),
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                'Prize pool',
+                                style: themeFont(s:13,w:'m',),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              width: double.infinity,
+                              height: h * 0.15,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: 2,
+                                      itemBuilder: (_, ind) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${tournament.prizePool[
+                                                  ind.toString()][0]}',
+                                              style: themeFont(s: 12,w:'sb'),
                                             ),
+                                            Text(
+                                              '₹ ${tournament.prizePool[
+                                              ind.toString()][1]}',
+                                              style: themeFont(
+                                                s: (ind == 0 ? 20 : 18),
+                                                w: (ind ==0)?'b':'sb',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                child: Container(
+                                  child: Column(
+                                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          width: double.infinity,
+                                          // height: h * 0.2,
+                                          child: ListView.separated(
+                                            physics: NeverScrollableScrollPhysics(),
+                                            separatorBuilder: (_, ind) {
+                                              return SizedBox(
+                                                height: 10,
+                                              );
+                                            },
+                                            itemCount: tournament.prizePool.length - 2,
+                                            itemBuilder: (_, ind) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    tournament.prizePool[(ind+2).toString()][0],
+                                                    style: themeFont(
+                                                      s: 11,w: 'sb',
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '₹ ${tournament.prizePool[(ind+2).toString()][1]}',
+                                                    style: themeFont(s: 13,w: 'm'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+
                                           children: [
+                                            Spacer(),
                                             TextButton(
                                               onPressed: () {
                                                 _bloc.add(
@@ -560,13 +553,13 @@ class TournamentDetails extends StatelessWidget {
                                             )
                                           ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -670,212 +663,3 @@ class TournamentDetails extends StatelessWidget {
     );
   }
 }
-
-/*
-
-
-                BlocBuilder<ButtonClickBloc, ButtonClickState>(
-                  builder: (context, state) {
-                    print(_bloc.state.tournamentDetailExpanded);
-                    return Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        width: double.infinity,
-                        height: ((_bloc.state.tournamentDetailExpanded == true)
-                            ? 0.42 * h
-                            : 0.3 * h),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(9),
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
-                          ],
-                        ),
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 1),
-                          height: (_bloc.state.tournamentDetailExpanded
-                              ? 0.42 * h
-                              : 0.3 * h),
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                  'Prize pool',
-                                  style: themeFont(),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                width: double.infinity,
-                                height: h * 0.15,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: ListView.builder(
-                                        itemCount: 2,
-                                        itemBuilder: (_, ind) {
-                                          return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                tournament.prizePool[ind.toString()][0],
-                                                style: themeFont(),
-                                              ),
-                                              Text(
-                                                tournament.prizePool[
-                                                    ind.toString()][1],
-                                                style: themeFont(
-                                                  s: (ind == 0 ? 20 : 18),
-                                                  w: 'b',
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              // TODO: Price Pool
-                              (_bloc.state.tournamentDetailExpanded == true
-                                  ? Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        width: double.infinity,
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'And many more... ',
-                                              style: themeFont(
-                                                color: Colors.black.withOpacity(
-                                                  0.7,
-                                                ),
-                                                s: 10,
-                                              ),
-                                            ),
-                                            Spacer(),
-                                            TextButton(
-                                              onPressed: () {
-                                                _bloc.add(
-                                                    TournamentDetailExpanded());
-                                              },
-                                              child: Text(
-                                                'View all prizes',
-                                                style: themeFont(
-                                                        color: kThemeColor,
-                                                        s: 10)
-                                                    .copyWith(
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline),
-                                              ),
-                                            ),
-                                            Icon(
-                                              Icons.arrow_drop_down_sharp,
-                                              color: kThemeColor,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  : Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        child: Container(
-                                          child: Column(
-                                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                                  width: double.infinity,
-                                                  // height: h * 0.2,
-                                                  child: ListView.separated(
-                                                    separatorBuilder: (_, ind) {
-                                                      return SizedBox(
-                                                        height: 10,
-                                                      );
-                                                    },
-                                                    itemCount: first.length - 2,
-                                                    itemBuilder: (_, ind) {
-                                                      return Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            first[ind + 2],
-                                                            style: themeFont(
-                                                              color: Colors
-                                                                  .black
-                                                                  .withOpacity(
-                                                                      0.7),
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            second[ind + 2],
-                                                            style: themeFont(),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      _bloc.add(
-                                                          TournamentDetailExpanded());
-                                                    },
-                                                    child: Text(
-                                                      'View less prizes',
-                                                      style: themeFont(
-                                                              color:
-                                                                  kThemeColor,
-                                                              s: 10)
-                                                          .copyWith(
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .underline),
-                                                    ),
-                                                  ),
-                                                  Icon(
-                                                    Icons.arrow_drop_up_sharp,
-                                                    color: kThemeColor,
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-
- */

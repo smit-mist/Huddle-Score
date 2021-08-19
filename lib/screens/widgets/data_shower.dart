@@ -17,14 +17,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7), s: 13),
+            style: themeFont(color: Colors.black.withOpacity(0.7), s: 13,w:'m'),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(s: 13),
+              style: themeFont(s: 13,w:'m'),
             ),
           ),
         ],

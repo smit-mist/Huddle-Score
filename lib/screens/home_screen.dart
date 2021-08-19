@@ -107,8 +107,8 @@ class HomeScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9),
                 child: Container(
-                  width: w * (355 / kScreenW),
-                  height: h * (146 / kScreenH),
+                  width:double.infinity,
+                  height: h * (146 / kScreenH ),
                   child: Image.network(
                     'https://picsum.photos/300/200',
                     fit: BoxFit.cover,
