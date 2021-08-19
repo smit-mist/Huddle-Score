@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,25 +20,27 @@ class TournamentDetails extends StatefulWidget {
 
 class _TournamentDetailsState extends State<TournamentDetails> {
   ButtonClickBloc _bloc;
-@override
+  @override
   void initState() {
     // TODO: implement initState
-  _bloc = ButtonClickBloc();
-  super.initState();
+    _bloc = ButtonClickBloc();
+    super.initState();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     _bloc.close();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
-    int seatsLeft =
-        widget.tournament.main.room.total - widget.tournament.main.room.registered.length;
+    int seatsLeft = widget.tournament.main.room.total -
+        widget.tournament.main.room.registered.length;
     String timeLine = "";
-    WeirdDateFormat st = WeirdDateFormat(date: widget.tournament.main.timeLine[0]),
+    WeirdDateFormat st =
+            WeirdDateFormat(date: widget.tournament.main.timeLine[0]),
         en = WeirdDateFormat(date: widget.tournament.main.timeLine[1]),
         deadLine = WeirdDateFormat(
           date: widget.tournament.main.deadline,
@@ -277,7 +278,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      widget.tournament.main.venue.address.join(', '),
+                                      widget.tournament.main.venue.address
+                                          .join(', '),
                                       style: themeFont(s: 13),
                                     ),
                                     Row(
@@ -440,7 +442,15 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                           );
                                         },
                                       ),
-                                    )
+                                    ),
+                                    Container(
+                                      child: Image.asset(
+                                        'assets/images/player_1.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      height: h * (130 / kScreenW),
+                                      width: w * (130 / kScreenW),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -492,9 +502,10 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 200),
                         width: double.infinity,
-                        height:
-                            (0.3 + (widget.tournament.prizePool.length - 2) * 0.04) *
-                                h,
+                        height: (0.3 +
+                                (widget.tournament.prizePool.length - 2) *
+                                    0.04) *
+                            h,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(9),
@@ -524,7 +535,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               height: h * 0.15,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
                                     child: ListView.builder(
@@ -536,7 +548,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                           children: [
                                             Text(
                                               '${widget.tournament.prizePool[ind.toString()][0]}',
-                                              style: themeFont(s: 12, w: 'sb'),
+                                              style:
+                                                  themeFont(s: 12, w: 'sb'),
                                             ),
                                             Text(
                                               '₹ ${widget.tournament.prizePool[ind.toString()][1]}',
@@ -552,7 +565,15 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                         );
                                       },
                                     ),
-                                  )
+                                  ),
+                                  Container(
+                                    child: Image.asset(
+                                      'assets/images/player_1.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    height: h * (130 / kScreenW),
+                                    width: w * (130 / kScreenW),
+                                  ),
                                 ],
                               ),
                             ),
@@ -577,16 +598,20 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                 height: 10,
                                               );
                                             },
-                                            itemCount:
-                                                widget.tournament.prizePool.length - 2,
+                                            itemCount: widget.tournament
+                                                    .prizePool.length -
+                                                2,
                                             itemBuilder: (_, ind) {
                                               return Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                    CrossAxisAlignment
+                                                        .start,
                                                 children: [
                                                   Text(
-                                                    ' ' +widget.tournament.prizePool[
-                                                        (ind + 2)
+                                                    ' ' +
+                                                        widget.tournament
+                                                            .prizePool[(ind +
+                                                                2)
                                                             .toString()][0],
                                                     style: themeFont(
                                                       s: 11,
@@ -678,17 +703,19 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         ),
                         DataShower(
                           type: 'Players per team',
-                          data: widget.tournament.info.playersPerTeam.toString(),
+                          data:
+                              widget.tournament.info.playersPerTeam.toString(),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
                           type: 'Substitutes',
-                          data: widget.tournament.info.substituteAllowed.toString(),
+                          data: widget.tournament.info.substituteAllowed
+                              .toString(),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         DataShower(
                           type: 'Type',
@@ -703,7 +730,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               '${widget.tournament.info.durationPerMatch.toString()} minutes',
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         DataShower(
                           type: 'Date of Semi-Finals',
