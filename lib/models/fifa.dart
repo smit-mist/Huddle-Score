@@ -23,9 +23,9 @@ class Fifa {
     this.prizePool,
   });
   factory Fifa.fromMap(Map<String, dynamic> data, String id) {
-    print(data['email']);
-    print(id);
-    print(data['poster']);
+   // print(data['email']);
+  //  print(id);
+  //  print(data['poster']);
     return Fifa(
       fifaId: id,
       email: data['email'],
@@ -44,18 +44,18 @@ class Fifa {
       return false;
 
     }
-    print(this.main.rooms.taken);
+ //   print(this.main.rooms.taken);
     String id = value.uid;
 
     for(int i=0;i<this.main.rooms.taken.length;i++){
-      print(i);
+   //   print(i);
       if(this.main.rooms.taken[i] == id){
-        print("Found");
+     //   print("Found");
         return true;
 
       }
     }
-    print("Not Found");
+    //print("Not Found");
 
     return false;
 

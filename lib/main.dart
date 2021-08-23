@@ -22,7 +22,7 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   print('not called');
+  // print('not called');
   // await PartnerRepository().submitPartnerDetailsForTurf(PartnerDetailsTurf(
   //   city: 'surat',
   //   contactNumber: 9898989898,
@@ -32,7 +32,7 @@ void main() async {
   //   email: 'yyashjain2001@gmail.com',
   //   name: 'yash',
   // ));
-  print('called');
+  //print('called');
   runApp(MyApp());
 }
 

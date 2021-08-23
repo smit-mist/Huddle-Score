@@ -4,9 +4,12 @@ import '../../constants.dart';
 import 'loading_screen.dart';
 
 class BottomBar extends StatelessWidget {
-  Function onPressed;
+  Function onPressed, onBack;
   String actionName;
-  BottomBar({this.onPressed,this.actionName});
+  BottomBar(
+      {@required this.onPressed,
+      @required this.actionName,
+      @required this.onBack});
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -17,9 +20,7 @@ class BottomBar extends StatelessWidget {
       height: h * 0.08,
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            blurRadius: 7,
-            spreadRadius: 1)
+            color: Colors.grey.withOpacity(0.5), blurRadius: 7, spreadRadius: 1)
       ]),
       child: Row(
         children: [
@@ -29,7 +30,7 @@ class BottomBar extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              onBack();
             },
             child: Text(
               'Back',
@@ -47,7 +48,7 @@ class BottomBar extends StatelessWidget {
               child: Center(
                 child: Text(
                   actionName,
-                  style: themeFont(color: Colors.white,s:15,w:'sb'),
+                  style: themeFont(color: Colors.white, s: 15, w: 'sb'),
                 ),
               ),
               decoration: BoxDecoration(
