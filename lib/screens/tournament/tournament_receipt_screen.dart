@@ -46,14 +46,14 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           ),
                           Text(
                             'We\'d love your feedback!',
-                            style: themeFont(color: kThemeColor, s: 20),
+                            style: themeFont(color: kThemeColor, s: 20,w:'sb',),
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
                             'How satisfied are you with the booking experience?',
-                            style: themeFont(s: 15),
+                            style: themeFont(s: 15,w:'r',),
                           ),
                           SizedBox(
                             height: 10,

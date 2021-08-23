@@ -272,8 +272,8 @@ class HomeScreen extends StatelessWidget {
                           12,
                         ),
                       ),
-                      child: Image.network(
-                        'https://picsum.photos/id/237/200/300',
+                      child: Image.asset(
+                        'assets/images/turf_subs.png',
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -210,7 +210,7 @@ class TournamentRegisterForm extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: h * 0.025,
+                  height: h * 0.03,
                 ),
                 RichText(
                   text: TextSpan(
@@ -230,15 +230,21 @@ class TournamentRegisterForm extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: h * 0.025,
+                  height: h * 0.027,
                 ),
+                Text(
+                  'Name of your team',
+                  style: themeFont(s: 12,),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: teamName,
                   decoration: normalTextDecoration('Team Name'),
                 ),
                 SizedBox(
-                  height: h * 0.025,
+                  height: h * 0.035,
                 ),
+
                 Text(
                   'Captain details',
                   style: themeFont(s: 15),
@@ -248,11 +254,16 @@ class TournamentRegisterForm extends StatelessWidget {
                 ),
                 Text(
                   'All communication regarding the tournament will be done with the captain or vice-captain of the team.',
-                  style: themeFont(s: 13, color: Colors.black.withOpacity(0.7)),
+                  style: themeFont(s: 12,),
                 ),
                 SizedBox(
                   height: h * 0.02,
                 ),
+                Text(
+                  'Full Name',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: capName,
                   decoration: normalTextDecoration('Captain\'s Name'),
@@ -260,6 +271,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Contact Number',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: capNum,
                   decoration: normalTextDecoration('Captain\'s Contact Number')
@@ -293,6 +309,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Email ID',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: capEmail,
                   decoration: normalTextDecoration('Captain\'s Email'),
@@ -300,12 +321,17 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Age',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: capAge,
                   decoration: normalTextDecoration('Captain\'s Age'),
                 ),
                 SizedBox(
-                  height: h * (0.025),
+                  height: h * (0.035),
                 ),
                 Text(
                   'Vice Captain details',
@@ -314,6 +340,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Full Name',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: vCapName,
                   decoration: normalTextDecoration('Vice Captain\'s Name'),
@@ -321,6 +352,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Contact Number',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: vCapNum,
                   decoration:
@@ -355,6 +391,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Email ID',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: vCapEmail,
                   decoration: normalTextDecoration('Vice Captain\'s Email'),
@@ -362,6 +403,11 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
+                Text(
+                  'Age',
+                  style: themeFont(s: 12),
+                ),
+                SizedBox(height: 7,),
                 TextField(
                   controller: vCapAge,
                   decoration: normalTextDecoration('Vice Captain\'s Age'),

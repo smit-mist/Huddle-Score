@@ -7,6 +7,7 @@ import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
+import 'package:huddle_and_score/screens/widgets/bottom_bar_widget.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -63,66 +64,24 @@ class _TournamentReviewState extends State<TournamentReview> {
     double h = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1)
-          ]),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
+        bottomNavigationBar: BottomBar(
+          actionName: 'Proceed to pay',
+          onPressed: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => LoadingScreen(),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Back',
-                  style: themeFont(),
-                ),
+            );
+            await TournamentRepository().registerInTournament(
+                widget.currentTour, widget.userRecord);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => TournamentReceiptScreen(),
               ),
-              Spacer(),
-              GestureDetector(
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => LoadingScreen(),
-                    ),
-                  );
-                  await TournamentRepository().registerInTournament(
-                      widget.currentTour, widget.userRecord);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => TournamentReceiptScreen(),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Proceed to pay',
-                      style: themeFont(color: Colors.white),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 30),
@@ -148,7 +107,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (400 / kScreenH),
+                  height: h * (420 / kScreenH),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -166,7 +125,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     children: [
                       Text(
                         'Summary',
-                        style: themeFont(w: 'b'),
+                        style: themeFont(w: 'm',s:16),
                       ),
                       SizedBox(
                         height: 1,
@@ -188,6 +147,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                       DataShower(
                           type: 'Vice Captain',
                           data: widget.userRecord.viceCaptain.fullName),
+                      DataShower(
+                          type: 'Phone No.',
+                          data: widget.userRecord.captain.contact.toString()),
                       DataShower(
                           type: 'Email Id',
                           data: widget.userRecord.viceCaptain.email),
@@ -224,7 +186,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     children: [
                       Text(
                         'Amount Payable',
-                        style: themeFont(s: 16, w: 'b'),
+                        style: themeFont(s: 16, w: 'm'),
                       ),
                       SizedBox(
                         height: 1,
@@ -233,12 +195,12 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Charges',
-                            style: themeFont(),
+                            style: themeFont(s:12,w:'m',),
                           ),
                           Spacer(),
                           Text(
                             '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:12,w:'m',),
                           )
                         ],
                       ),
@@ -246,12 +208,12 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Taxes',
-                            style: themeFont(),
+                            style: themeFont(s:12,w:'m',),
                           ),
                           Spacer(),
                           Text(
                             '0',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:12,w:'m',),
                           )
                         ],
                       ),
@@ -262,12 +224,12 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Total Amount',
-                            style: themeFont(),
+                            style: themeFont(s:15,w:'m',),
                           ),
                           Spacer(),
                           Text(
                             '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:15,w:'sb',),
                           )
                         ],
                       ),
@@ -302,14 +264,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7)),
+            style: themeFont(s:13,w:'m',),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'r'),
+              style: themeFont(w: 'sb',s:14),
             ),
           ),
         ],
