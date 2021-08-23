@@ -1,3 +1,4 @@
+
 class Record {
   RegDetails regDetails;
   int amount;
@@ -24,6 +25,13 @@ class RegDetails {
     this.teamName,
     this.viceCaptain,
   });
+  Map<String, dynamic> toMap(RegDetails details) {
+    return <String, dynamic>{
+      'teamName': details.teamName,
+      'cap':Captain().toMap(details.captain),
+      'viceCaptain':Captain().toMap(details.viceCaptain),
+    };
+  }
 }
 
 class Captain {
@@ -37,4 +45,12 @@ class Captain {
     this.email,
     this.fullName,
   });
+  Map<String, dynamic> toMap(Captain captain) {
+    return <String, dynamic>{
+      'contact':captain.contact,
+      'age':captain.age,
+      'email':captain.email,
+      'name':captain.fullName,
+    };
+  }
 }
