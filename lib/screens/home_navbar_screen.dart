@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
 import 'package:huddle_and_score/screens/booking/booking_history_screen.dart';
 import 'package:huddle_and_score/screens/search_screen.dart';
 
@@ -30,11 +31,16 @@ class HomeNavBar extends StatelessWidget {
             } else if (state is SearchScreenState) {
               return SearchScreen();
             } else if (state is CartScreenState) {
-              return BookingHistoryScreen();
+              print(state.bookings == null);
+              return BookingHistoryScreen(
+                bookedTours: state.bookings,
+              );
             } else if (state is AnonymousProfileScreenState) {
               return AnonymousProfileScreen();
+            } else if (state is GuestCartScreenState) {
+              return BookingNotSignIn();
             }
-            if(showMe != null)return showMe;
+            if (showMe != null) return showMe;
             return HomeScreen();
           },
         ),

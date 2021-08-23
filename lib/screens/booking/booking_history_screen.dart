@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/screens/widgets/booked_event_tile.dart';
 
 import '../../constants.dart';
 
 class BookingHistoryScreen extends StatelessWidget {
   String selected = "Tournaments";
+  final List<BookingDetails> bookedTours;
+  BookingHistoryScreen({this.bookedTours});
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -55,13 +58,15 @@ class BookingHistoryScreen extends StatelessWidget {
             child: Container(
               width: w,
               child: ListView.separated(
-                separatorBuilder: (_,i){
-                  return SizedBox(height: 10,);
+                separatorBuilder: (_, i) {
+                  return SizedBox(
+                    height: 10,
+                  );
                 },
                 itemBuilder: (_, ind) {
-                  return BookedEventTile();
+                  return BookedEventTile(booking: bookedTours[ind],);
                 },
-                itemCount: 10,
+                itemCount: bookedTours.length,
               ),
             ),
           ),

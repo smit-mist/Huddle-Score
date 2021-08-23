@@ -1,16 +1,62 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../constants.dart';
 
-class TournamentReview extends StatelessWidget {
+class TournamentReview extends StatefulWidget {
   Tournament currentTour;
   RegDetails userRecord;
   TournamentReview({@required this.currentTour, @required this.userRecord});
+
+  @override
+  _TournamentReviewState createState() => _TournamentReviewState();
+}
+
+class _TournamentReviewState extends State<TournamentReview> {
+  Razorpay razorpay;
+  User user = AuthRepository().getCurrentUser();
+  @override
+  void initState() {
+    super.initState();
+    razorpay = Razorpay();
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    razorpay.clear();
+  }
+
+  void _handlePaymentSuccess() {}
+  void _handlePaymentError() {}
+  void _handleExternalWallet() {}
+  void checkoutOptions(RegDetails regDetails) {
+    var options = {
+      'key': 'rzp_test_Q9uimXdoWQRLSv',
+      'prefill': {
+        'name': user.displayName,
+        'email': user.email,
+      },
+      'notes': {
+        'uid': user.uid,
+        'payload': jsonEncode(regDetails),
+      },
+    };
+    razorpay.open(options);
+  }
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -51,8 +97,8 @@ class TournamentReview extends StatelessWidget {
                       builder: (_) => LoadingScreen(),
                     ),
                   );
-                  await TournamentRepository()
-                      .registerInTournament(currentTour, userRecord);
+                  await TournamentRepository().registerInTournament(
+                      widget.currentTour, widget.userRecord);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -125,24 +171,29 @@ class TournamentReview extends StatelessWidget {
                       SizedBox(
                         height: 1,
                       ),
-                      DataShower(type: 'Team Name', data: userRecord.teamName),
                       DataShower(
-                          type: 'Captain', data: userRecord.captain.fullName),
+                          type: 'Team Name', data: widget.userRecord.teamName),
+                      DataShower(
+                          type: 'Captain',
+                          data: widget.userRecord.captain.fullName),
                       DataShower(
                           type: 'Phone No.',
-                          data: userRecord.captain.contact.toString()),
+                          data: widget.userRecord.captain.contact.toString()),
                       DataShower(
-                          type: 'Email Id', data: userRecord.captain.email),
-                      DataShower(
-                          type: 'Age', data: userRecord.captain.age.toString()),
-                      DataShower(
-                          type: 'Vice Captain',
-                          data: userRecord.viceCaptain.fullName),
-                      DataShower(
-                          type: 'Email Id', data: userRecord.viceCaptain.email),
+                          type: 'Email Id',
+                          data: widget.userRecord.captain.email),
                       DataShower(
                           type: 'Age',
-                          data: userRecord.viceCaptain.age.toString()),
+                          data: widget.userRecord.captain.age.toString()),
+                      DataShower(
+                          type: 'Vice Captain',
+                          data: widget.userRecord.viceCaptain.fullName),
+                      DataShower(
+                          type: 'Email Id',
+                          data: widget.userRecord.viceCaptain.email),
+                      DataShower(
+                          type: 'Age',
+                          data: widget.userRecord.viceCaptain.age.toString()),
                       SizedBox(
                         height: 1,
                       ),
@@ -186,7 +237,7 @@ class TournamentReview extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            '₹ ${currentTour.info.registrationFee}',
+                            '₹ ${widget.currentTour.info.registrationFee}',
                             style: themeFont(w: 'r'),
                           )
                         ],
@@ -215,7 +266,7 @@ class TournamentReview extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            '₹ ${currentTour.info.registrationFee}',
+                            '₹ ${widget.currentTour.info.registrationFee}',
                             style: themeFont(w: 'r'),
                           )
                         ],

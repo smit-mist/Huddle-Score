@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/booking.dart';
 
 import '../../constants.dart';
 
-class Event {
-  String title, venue, date, time, poster;
-  Event({this.venue, this.date, this.title, this.time, this.poster});
-}
-
 class BookedEventTile extends StatelessWidget {
-  Event currentEvent = Event(
-      venue: 'Maninagar, Ahmedabad',
-      poster: 'https://picsum.photos/200/300',
-      title: 'Kankaria Complex',
-      date: '12/04/2021',
-      time: '4:30 - 5:30 pm');
+  final BookingDetails booking;
+  BookedEventTile({this.booking});
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -44,7 +36,7 @@ class BookedEventTile extends StatelessWidget {
                 ),
               ),
               child: Image.network(
-                currentEvent.poster,
+                booking.data.poster,
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,40 +51,40 @@ class BookedEventTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                currentEvent.title,
+                booking.data.title,
                 style: themeFont(),
               ),
               Text(
-                currentEvent.venue,
+                booking.data.venue.address.join(' '),
                 style: themeFont(),
               ),
               Text(
-                currentEvent.date,
+                '4th August',
                 style: themeFont(),
               ),
               Text(
-                currentEvent.time,
+                booking.recordedAt,
                 style: themeFont(),
               ),
               Container(
                 height: 20,
-                width: w*(0.4),
+                width: w * (0.4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                   // Spacer(),
+                    // Spacer(),
                     Text(
                       'View Receipt',
-                      style: themeFont(
-                        color: kThemeColor,s: 12
-                      ).copyWith(
+                      style: themeFont(color: kThemeColor, s: 12).copyWith(
                         decoration: TextDecoration.underline,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 1,),
+              SizedBox(
+                height: 1,
+              ),
             ],
           )
         ],

@@ -30,9 +30,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^7.1.0
   flutter_svg: ^0.22.0
+  fluttertoast: ^8.0.8
   google_fonts: ^2.1.0
   http: ^0.13.3
-
+  razorpay_flutter: ^1.2.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,8 +71,6 @@ flutter:
         - asset: assets/fonts/Lexend/Lexend-Medium.ttf
         - asset: assets/fonts/Lexend/Lexend-SemiBold.ttf
         - asset: assets/fonts/Lexend/Lexend-Thin.ttf
-
-
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

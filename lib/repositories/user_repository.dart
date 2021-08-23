@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:huddle_and_score/models/user.dart';
+import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 
 class UserRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,20 +15,23 @@ class UserRepository {
   }
 
   Future<void> changeUserPassword(String password) async {
-    await _auth.currentUser
-        .updatePassword(password)
-        .then((_) {})
-        .catchError((error) {});
+    await _auth.currentUser.updatePassword(password);
   }
 
-  Future<void> getBookings() async {
+  Future<List<BookingDetails>> getBookings() async {
     print('Booking Fetching Started');
-    String id = 'Giy0JEBBf4MbY1kvFFL2IABBRg22';
-    var response = FirebaseFirestore.instance.collection('users/$id/records');
-    UserModel userModel = await response.get().then((value) {
-      for (var x in value.docs) {
-        print(x.id);
-      }
-    });
+    try {
+      String uid = AuthRepository().getCurrentUser().uid;
+      var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
+      // ignore: missing_return
+      var bookingsData = await response.get();
+      List<BookingDetails> bookings=[];
+      bookingsData.data().forEach((key, value) {
+        bookings.add(BookingDetails.fromMap(value));
+      });
+      return bookings;
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

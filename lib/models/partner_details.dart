@@ -1,8 +1,8 @@
-class ParnterDetails {
+class ParnterDetailsTour {
   String city, name, tourName, state, type, email;
   int contactNumber;
   String tourType;
-  ParnterDetails({
+  ParnterDetailsTour({
     this.email,
     this.city,
     this.tourType,
@@ -12,16 +12,18 @@ class ParnterDetails {
     this.contactNumber,
     this.tourName,
   });
-  // Map<String, String> convertToMap() {
-  //   return {
-  //     "city": this.city,
-  //     "contact": this.contactNumber.toString(),
-  //     "email": this.email,
-  //     "name": this.name,
-  //     "state": this.state,
-  //     "type": this.type,
-  //     "tourType": this.tourType,
-  //     "tourName": this.tourName,
-  //   };
-  //}
+}
+
+class PartnerDetailsTurf {
+  String city, name, turfName, state, type, email;
+  int contactNumber;
+  PartnerDetailsTurf({
+    this.city,
+    this.contactNumber,
+    this.email,
+    this.name,
+    this.state,
+    this.turfName,
+    this.type,
+  });
 }

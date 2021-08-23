@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
+import 'package:huddle_and_score/repositories/user_repository.dart';
 
 part 'home_nav_bar_event.dart';
 part 'home_nav_bar_state.dart';
@@ -19,14 +21,19 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
     HomeNavBarEvent event,
   ) async* {
     print(state);
+    final isSignedIn = await _repository.isSignedIn();
     if (event is HomeIconPressed) {
       yield HomeScreenState();
     } else if (event is SearchIconPressed) {
       yield SearchScreenState();
     } else if (event is CartIconPressed) {
-      yield CartScreenState();
+      if (isSignedIn) {
+        List<BookingDetails> bookings = await UserRepository().getBookings();
+        yield CartScreenState(bookings: bookings);
+      } else {
+        yield GuestCartScreenState();
+      }
     } else if (event is ProfileIconPressed) {
-      final isSignedIn = await _repository.isSignedIn();
       if (isSignedIn) {
         final User user = _repository.getCurrentUser();
         print(user.email);

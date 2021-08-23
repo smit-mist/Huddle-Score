@@ -12,7 +12,12 @@ class HomeScreenState extends HomeNavBarState {}
 
 class SearchScreenState extends HomeNavBarState {}
 
-class CartScreenState extends HomeNavBarState {}
+class CartScreenState extends HomeNavBarState {
+  List<BookingDetails> bookings;
+  CartScreenState({this.bookings}):super();
+}
+
+class GuestCartScreenState extends HomeNavBarState {}
 
 class UserProfileScreenState extends HomeNavBarState {
   final String email, name;
@@ -21,4 +26,4 @@ class UserProfileScreenState extends HomeNavBarState {
 
 class AnonymousProfileScreenState extends HomeNavBarState {}
 
-class EmailVerifiedState extends HomeNavBarState{}
+class EmailVerifiedState extends HomeNavBarState {}

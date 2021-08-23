@@ -107,8 +107,8 @@ class HomeScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9),
                 child: Container(
-                  width:double.infinity,
-                  height: h * (146 / kScreenH ),
+                  width: double.infinity,
+                  height: h * (146 / kScreenH),
                   child: Image.network(
                     'https://picsum.photos/300/200',
                     fit: BoxFit.cover,
@@ -123,9 +123,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Text(
                   'Popular Tournaments',
-                  style: themeFont(
-                    s: 18,w: 'm'
-                  ),
+                  style: themeFont(s: 18, w: 'm'),
                 ),
                 Spacer(),
                 GestureDetector(
@@ -139,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: Text(
                     'View all',
-                    style: themeFont(s: 13, color: kThemeColor,w:'m')
+                    style: themeFont(s: 13, color: kThemeColor, w: 'm')
                         .copyWith(decoration: TextDecoration.underline),
                   ),
                 )
@@ -232,7 +230,6 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: state.allFifa.length,
                       itemBuilder: (_, int index) {
-
                         return FifaTile(
                           fifa: state.allFifa[index],
                         );
@@ -245,14 +242,14 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Turfs Around You',
-              style: themeFont(s: 18,w: 'm'),
+              style: themeFont(s: 18, w: 'm'),
             ),
             SizedBox(
               height: 20,
             ),
             Container(
               height: h * (442 / kScreenH),
-              width:double.infinity,
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
@@ -285,7 +282,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     'COMING SOON',
-                    style: themeFont(color: kThemeColor, s: 24,w:'m'),
+                    style: themeFont(color: kThemeColor, s: 24, w: 'm'),
                   ),
                   Text(
                     'Be the first one to know when the turfs go live',
@@ -347,7 +344,9 @@ class HomeScreen extends StatelessWidget {
                       style: themeFont(s: 18),
                     ),
                   ),
-                  SizedBox(height: 1,),
+                  SizedBox(
+                    height: 1,
+                  ),
                   Column(
                     children: [
                       SizedBox(
@@ -382,8 +381,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 1,),
-
+                  SizedBox(
+                    height: 1,
+                  ),
                   Container(
                     height: 45,
                     width: double.infinity,
