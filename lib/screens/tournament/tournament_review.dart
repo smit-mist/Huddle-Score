@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
@@ -39,22 +40,48 @@ class _TournamentReviewState extends State<TournamentReview> {
     razorpay.clear();
   }
 
-  void _handlePaymentSuccess() {}
-  void _handlePaymentError() {}
-  void _handleExternalWallet() {}
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => TournamentReceiptScreen(),
+      ),
+    );
+    print(response.paymentId);
+    Fluttertoast.showToast(msg: "Success");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print(response.message);
+    Fluttertoast.showToast(msg: "Error");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print(response.walletName);
+    Fluttertoast.showToast(msg: "External");
+  }
+
   void checkoutOptions(RegDetails regDetails) {
+    print(widget.currentTour.info.registrationFee);
     var options = {
       'key': 'rzp_test_Q9uimXdoWQRLSv',
       'prefill': {
         'name': user.displayName,
         'email': user.email,
       },
+      'currency': 'INR',
+      'amount': widget.currentTour.info.registrationFee.toString(),
+      'order_id': widget.currentTour.orderId,
       'notes': {
         'uid': user.uid,
-        'payload': jsonEncode(regDetails),
+        'payload': jsonEncode(RegDetails().toMap(regDetails)),
       },
     };
-    razorpay.open(options);
+    try {
+      razorpay.open(options);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override
@@ -69,9 +96,10 @@ class _TournamentReviewState extends State<TournamentReview> {
           height: h * 0.08,
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1)
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 7,
+              spreadRadius: 1,
+            )
           ]),
           child: Row(
             children: [
@@ -106,18 +134,23 @@ class _TournamentReviewState extends State<TournamentReview> {
                     ),
                   );
                 },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Proceed to pay',
-                      style: themeFont(color: Colors.white),
+                child: GestureDetector(
+                  onTap: () {
+                    checkoutOptions(widget.userRecord);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: w * 0.3,
+                    child: Center(
+                      child: Text(
+                        'Proceed to pay',
+                        style: themeFont(color: Colors.white),
+                      ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: kThemeColor,
+                    ),
                   ),
                 ),
               ),
