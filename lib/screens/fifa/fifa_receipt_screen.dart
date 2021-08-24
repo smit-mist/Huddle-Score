@@ -10,7 +10,7 @@ class FifaReceiptScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 15),
           width: w,
           height: h * 0.08,
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -62,7 +62,7 @@ class FifaReceiptScreen extends StatelessWidget {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
           height: double.infinity,
           child: Column(
@@ -75,7 +75,7 @@ class FifaReceiptScreen extends StatelessWidget {
                 'Receipt',
                 style: themeFont(
                   color: kThemeColor,
-                  s: 23,
+                  s: 23,w:'sb'
                 ),
               ),
               SizedBox(
@@ -83,7 +83,7 @@ class FifaReceiptScreen extends StatelessWidget {
               ),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 height: h * (150 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -91,14 +91,16 @@ class FifaReceiptScreen extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
-                      spreadRadius: 2,
+                      blurRadius: 7,
+                      spreadRadius: 0.1,
+                        offset: Offset(7,7)
+
                     )
                   ],
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,19 +111,19 @@ class FifaReceiptScreen extends StatelessWidget {
                         ),
                         Text(
                           'Fifa Championship',
-                          style: themeFont(w: 'b'),
+                          style: themeFont(w: 'sb',s:14),
                         ),
                         Text(
                           '8 September 2021',
-                          style: themeFont(w: 'b'),
+                          style: themeFont(w: 'sb',s:14),
                         ),
                         Text(
                           'LD College, Ahmedabad',
-                          style: themeFont(w: 'b'),
+                          style: themeFont(w: 'sb',s:14),
                         ),
                         Text(
                           '4 p.m. onwards',
-                          style: themeFont(w: 'b'),
+                          style: themeFont(w: 'sb',s:14),
                         ),
                         SizedBox(
                           height: 1,
@@ -147,7 +149,7 @@ class FifaReceiptScreen extends StatelessWidget {
               ),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 height: h * (220 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -156,7 +158,10 @@ class FifaReceiptScreen extends StatelessWidget {
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       blurRadius: 5,
-                      spreadRadius: 2,
+                                    spreadRadius: 0.1,
+
+                        offset: Offset(7,7)
+
                     )
                   ],
                 ),
@@ -166,7 +171,7 @@ class FifaReceiptScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Your participation has been confirmed.',
-                      style: themeFont(color: kThemeColor),
+                      style: themeFont(color: kThemeColor,w: 'sb',s:14),
                     ),
                     SizedBox(
                       height: 1,
@@ -187,7 +192,7 @@ class FifaReceiptScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (175 / kScreenH),
+                height: h * (120 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -195,7 +200,9 @@ class FifaReceiptScreen extends StatelessWidget {
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       blurRadius: 5,
-                      spreadRadius: 2,
+                        spreadRadius: 0.1,
+
+                        offset: Offset(7,7)
                     )
                   ],
                 ),
@@ -203,13 +210,7 @@ class FifaReceiptScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      'Amount Payable',
-                      style: themeFont(s: 16, w: 'b'),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
+
                     Row(
                       children: [
                         Text(
@@ -282,14 +283,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7)),
+            style: themeFont(w: 'm',s:14),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'r'),
+              style: themeFont(w: 'm',s:14),
             ),
           ),
         ],

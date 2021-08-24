@@ -161,7 +161,7 @@ class _FifaReviewState extends State<FifaReview> {
                 'Review',
                 style: themeFont(
                   color: kThemeColor,
-                  s: 23,
+                  s: 23,w:'sb'
                 ),
               ),
               SizedBox(
@@ -188,7 +188,7 @@ class _FifaReviewState extends State<FifaReview> {
                   children: [
                     Text(
                       'Summary',
-                      style: themeFont(w: 'b'),
+                      style: themeFont(w: 'm',s:16),
                     ),
                     SizedBox(
                       height: 1,
@@ -210,7 +210,7 @@ class _FifaReviewState extends State<FifaReview> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (175 / kScreenH),
+                height: h * (165 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -226,9 +226,12 @@ class _FifaReviewState extends State<FifaReview> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    SizedBox(height: 1,),
+                    SizedBox(height: 1,),
+
                     Text(
                       'Amount Payable',
-                      style: themeFont(s: 16, w: 'b'),
+                      style: themeFont(s: 16, w: 'm'),
                     ),
                     SizedBox(
                       height: 1,
@@ -237,12 +240,12 @@ class _FifaReviewState extends State<FifaReview> {
                       children: [
                         Text(
                           'Charges',
-                          style: themeFont(),
+                          style: themeFont(w: 'm',s:12),
                         ),
                         Spacer(),
                         Text(
                           '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'r'),
+                          style: themeFont(w: 'm',s:12),
                         )
                       ],
                     ),
@@ -250,34 +253,37 @@ class _FifaReviewState extends State<FifaReview> {
                       children: [
                         Text(
                           'Taxes',
-                          style: themeFont(),
+                          style: themeFont(w: 'm',s:12),
                         ),
                         Spacer(),
                         Text(
                           '0',
-                          style: themeFont(w: 'r'),
+                          style: themeFont(w: 'm',s:12),
                         )
                       ],
                     ),
                     Divider(
                       color: Colors.black.withOpacity(0.5),
                     ),
+                  //  SizedBox(height: 1,),
                     Row(
                       children: [
                         Text(
                           'Total Amount',
-                          style: themeFont(),
+                          style: themeFont(w: 'm',s:15),
                         ),
                         Spacer(),
                         Text(
                           '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'r'),
+                          style: themeFont(w: 'sb',s:16),
                         )
                       ],
                     ),
                     SizedBox(
                       height: 1,
                     ),
+                    SizedBox(height: 1,),
+
                     SizedBox(
                       height: 1,
                     ),
@@ -305,14 +311,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7)),
+            style: themeFont(w: 'm',s:14),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'r'),
+              style: themeFont(w: 'm',s:15),
             ),
           ),
         ],
