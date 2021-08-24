@@ -8,7 +8,7 @@ import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.d
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
-
+import 'dart:ui';
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
 
@@ -20,6 +20,91 @@ class HomeScreen extends StatelessWidget {
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    int current = 1;
+    Widget selectCity = StatefulBuilder(
+      builder: (context, setState) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: h * (450 / kScreenH),
+              width: w * (370 / kScreenW),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Select Your City',
+                    style: themeFont(s: 17, w: 'sb'),
+                  ),
+                  Text(
+                    'so we can look for best turfs and tournaments around you',
+                    style: themeFont(s: 12, w: 'm'),
+                  ),
+                  Container(
+                    width: w * (350 / kScreenW),
+                    height: h * (230 / kScreenH),
+                    child: GridView.builder(
+                        itemCount: 15,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: (101) / (42),
+                        ),
+                        itemBuilder: (_, int ind) {
+                          return GestureDetector(
+                            onTap: (){
+                              setState((){
+                                current = ind;
+                              });
+                            },
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  'City ${ind + 1}',
+                                  style: themeFont(s: 12),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                    color: (current == ind)
+                                        ? kThemeColor
+                                        : Colors.transparent),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                  Row(
+                    children: [
+                      Spacer(),
+                      Container(
+                        height: 42,
+                        width: 105,
+                        child: ActionButton(
+                          child: Text(
+                            'Proceed',
+                            style: themeFont(color: Colors.white, s: 12, w: 'm'),
+                          ),
+                          bgColor: kThemeColor,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
     return Container(
       width: w,
       height: double.infinity,
@@ -87,8 +172,10 @@ class HomeScreen extends StatelessWidget {
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>TournamentReceiptScreen()));
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext _) => selectCity);
                   },
                   child: Icon(
                     Icons.qr_code_scanner,
