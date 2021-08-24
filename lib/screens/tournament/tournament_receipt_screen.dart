@@ -30,7 +30,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               height: h * (550 / kScreenH),
               width: w * (370 / kScreenW),
               child: Column(
@@ -452,276 +452,288 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   'Receipt',
                   style: themeFont(
                     color: kThemeColor,
-                    s: 23,
+                    s: 23,w:'sb',
                   ),
                 ),
                 SizedBox(
                   height: h * 0.04,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (333 / kScreenH),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: h * (150 / kScreenH),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                Text(
-                                  'Fifa Championship',
-                                  style: themeFont(w: 'b'),
-                                ),
-                                Text(
-                                  '8 September 2021',
-                                  style: themeFont(w: 'b'),
-                                ),
-                                Text(
-                                  'LD College, Ahmedabad',
-                                  style: themeFont(w: 'b'),
-                                ),
-                                Text(
-                                  '4 p.m. onwards',
-                                  style: themeFont(w: 'b'),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: h * (147 / kScreenH),
-                            width: w * (134 / kScreenW),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(
-                                'https://picsum.photos/300/300',
-                                fit: BoxFit.cover,
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: h * (333 / kScreenH),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          offset: Offset(5,5),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: h * (150 / kScreenH),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: 1,
+                                  ),
+                                  Text(
+                                    'Fifa Championship',
+                                    style: themeFont(w: 'sb',s: 14,),
+                                  ),
+                                  Text(
+                                    '8 September 2021',
+                                    style: themeFont(w: 'sb',s: 14,),
+                                  ),
+                                  Text(
+                                    'LD College, Ahmedabad',
+                                    style: themeFont(w: 'sb',s: 14,),
+                                  ),
+                                  Text(
+                                    '4 p.m. onwards',
+                                    style: themeFont(w: 'sb',s: 14,),
+                                  ),
+                                  SizedBox(
+                                    height: 1,
+                                  ),
+                                ],
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '*All players will be required to show identity proof at the time of the tournament.',
-                          style: themeFont(s: 12),
+                            Container(
+                              height: h * (147 / kScreenH),
+                              width: w * (120 / kScreenW),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  'https://picsum.photos/300/300',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              'Following identity proofs will be accepted:',
-                              style: themeFont(s: 12),
-                            ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            '*All players will be required to show identity proof at the time of the tournament.',
+                            style: themeFont(s: 13,w:'m'),
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '• ',
-                                  style: themeFont(color: kThemeColor, s: 17),
-                                ),
-                                Text(
-                                  'Aadhar Card',
-                                  style: themeFont(),
-                                ),
-                              ],
+                        ),
+                        SizedBox(height: 1,),
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                'Following identity proofs will be accepted:',
+                                style: themeFont(s: 13,w:'m'),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '• ',
-                                  style: themeFont(color: kThemeColor, s: 17),
-                                ),
-                                Text(
-                                  'Driver\'s License',
-                                  style: themeFont(),
-                                ),
-                              ],
+                            SizedBox(height: 2,),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '• ',
+                                    style: themeFont(color: kThemeColor, s: 15),
+                                  ),
+                                  Text(
+                                    'Aadhar Card',
+                                    style: themeFont(s: 13,w:'m'),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '• ',
-                                  style: themeFont(color: kThemeColor, s: 17),
-                                ),
-                                Text(
-                                  'Voter Id',
-                                  style: themeFont(),
-                                ),
-                              ],
+                            SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '• ',
+                                    style: themeFont(color: kThemeColor, s: 15),
+                                  ),
+                                  Text(
+                                    'Driver\'s License',
+                                    style: themeFont(s: 13,w:'m'),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                    ],
+                            SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '• ',
+                                    style: themeFont(color: kThemeColor, s: 15),
+                                  ),
+                                  Text(
+                                    'Voter Id',
+                                    style: themeFont(s: 13,w:'m'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (400 / kScreenH),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Your participation has been confirmed.',
-                        style: themeFont(
-                          color: kThemeColor,
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: h * (390 / kScreenH),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          offset: Offset(5,5),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Your participation has been confirmed.',
+                          style: themeFont(
+                            color: kThemeColor,
+                            s: 14,w:'m',
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      DataShower(type: 'Team Name', data: 'Supreme FC'),
-                      DataShower(type: 'Captain', data: 'Sunil'),
-                      DataShower(type: 'Phone No.', data: '9934923912'),
-                      DataShower(type: 'Email Id', data: 'abc@gmail.com'),
-                      DataShower(type: 'Vice Captain', data: 'Bob'),
-                      DataShower(type: 'Phone No.', data: '9934923912'),
-                      DataShower(type: 'Email Id', data: 'xyz@gmail.com'),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
-                          style: themeFont(s: 12),
+                        SizedBox(
+                          height: 5,
                         ),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                    ],
+                        DataShower(type: 'Team Name', data: 'Supreme FC'),
+                        DataShower(type: 'Captain', data: 'Sunil'),
+                        DataShower(type: 'Contact Number', data: '9934923912'),
+                        DataShower(type: 'Email Id', data: 'abc@gmail.com'),
+                        DataShower(type: 'Vice Captain', data: 'Bob'),
+                        DataShower(type: 'Contact Number', data: '9934923912'),
+                        DataShower(type: 'Email Id', data: 'xyz@gmail.com'),
+                        SizedBox(
+                          height: 1,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
+                            style: themeFont(s: 12,w:'m',),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (175 / kScreenH),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Amount Payable',
-                        style: themeFont(s: 16, w: 'b'),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Charges',
-                            style: themeFont(),
-                          ),
-                          Spacer(),
-                          Text(
-                            '₹ 750',
-                            style: themeFont(w: 'r'),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Taxes',
-                            style: themeFont(),
-                          ),
-                          Spacer(),
-                          Text(
-                            '0',
-                            style: themeFont(w: 'r'),
-                          )
-                        ],
-                      ),
-                      Divider(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Total Amount',
-                            style: themeFont(),
-                          ),
-                          Spacer(),
-                          Text(
-                            '₹ 750',
-                            style: themeFont(w: 'r'),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: h * (130 / kScreenH),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          offset: Offset(5,5),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+
+                        Row(
+                          children: [
+                            Text(
+                              'Charges',
+                              style: themeFont(s: 12,w:'m',),
+                            ),
+                            Spacer(),
+                            Text(
+                              '₹ 750',
+                              style: themeFont(s: 12,w:'m',),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Taxes',
+                              style: themeFont(s: 12,w:'m',),
+                            ),
+                            Spacer(),
+                            Text(
+                              '0',
+                              style: themeFont(s: 12,w:'m',),
+                            )
+                          ],
+                        ),
+                        Divider(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Total Amount',
+                              style: themeFont(s: 15,w:'m',),
+                            ),
+                            Spacer(),
+                            Text(
+                              '₹ 750',
+                              style: themeFont(s: 15,w:'sb',),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -749,14 +761,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7)),
+            style: themeFont(s: 14,w:'m',),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'r'),
+              style: themeFont(s: 14,w:'sb',),
             ),
           ),
         ],

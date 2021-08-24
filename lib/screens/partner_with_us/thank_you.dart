@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 
 import '../../constants.dart';
 
@@ -28,7 +29,7 @@ class ThankYou extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>HomeNavBar()));
                 },
                 child: Text(
                   'Back to home',

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
+import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
@@ -85,10 +86,15 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Icon(
-                  Icons.qr_code_scanner,
-                  color: kThemeColor,
-                  size: 30,
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>TournamentReceiptScreen()));
+                  },
+                  child: Icon(
+                    Icons.qr_code_scanner,
+                    color: kThemeColor,
+                    size: 30,
+                  ),
                 )
               ],
             ),
@@ -274,7 +280,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Image.asset(
                         'assets/images/turf_subs.png',
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                     ),
                     height: h * (170 / kScreenH),

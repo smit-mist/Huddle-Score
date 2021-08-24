@@ -14,7 +14,7 @@ class FifaTile extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     WeirdDateFormat st = WeirdDateFormat(date: fifa.date);
-
+    String venue = fifa.venue.join(', ');
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -90,7 +90,7 @@ class FifaTile extends StatelessWidget {
                           height: 1,
                         ),
                         Text(
-                          fifa.venue.join(' '),
+                          venue.length > 25?venue.substring(0,25)+'...':venue,
                           style: themeFont(s: 12, w: 'r'),
                         ),
                         Text(
