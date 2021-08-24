@@ -52,7 +52,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    print(response.message);
+    print("${response.message} hereherehere");
     Fluttertoast.showToast(msg: "Error");
   }
 
@@ -70,7 +70,7 @@ class _TournamentReviewState extends State<TournamentReview> {
         'email': user.email,
       },
       'currency': 'INR',
-      'amount': widget.currentTour.info.registrationFee.toString(),
+      'amount': widget.currentTour.info.registrationFee*100,
       'order_id': widget.currentTour.orderId,
       'notes': {
         'uid': user.uid,
@@ -223,7 +223,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                           data: widget.userRecord.viceCaptain.fullName),
                       DataShower(
                           type: 'Phone No.',
-                          data: widget.userRecord.captain.contact.toString()),
+                          data: widget.userRecord.viceCaptain.contact.toString()),
                       DataShower(
                           type: 'Email Id',
                           data: widget.userRecord.viceCaptain.email),

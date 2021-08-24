@@ -15,7 +15,6 @@ class FifaTile extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     WeirdDateFormat st = WeirdDateFormat(date: fifa.date);
 
-
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -23,18 +22,17 @@ class FifaTile extends StatelessWidget {
           MaterialPageRoute(builder: (_) => LoadingScreen()),
         );
         print('start fetch');
-        Fifa().fromHomeFifa(fifa: fifa).then((value){
-          bool here = value.registeredIn();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => FifaDetails(
-                fifa: value,
-                isReg:here,
-              ),
+        Fifa here = await Fifa().fromHomeFifa(fifa: fifa);
+        bool isReg = here.registeredIn();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => FifaDetails(
+              fifa: here,
+              isReg: isReg,
             ),
-          );
-        });
+          ),
+        );
         //print('====>>>>${here.fifaId}');
       },
       child: Stack(
@@ -78,7 +76,7 @@ class FifaTile extends StatelessWidget {
                     width: w * (155 / kScreenW),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 7,right: 7),
+                    padding: EdgeInsets.only(left: 7, right: 7),
                     height: h * (99 / kScreenH),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,18 +84,18 @@ class FifaTile extends StatelessWidget {
                       children: [
                         Text(
                           fifa.name,
-                          style: themeFont(s: 12,w:'m'),
+                          style: themeFont(s: 12, w: 'm'),
                         ),
                         SizedBox(
                           height: 1,
                         ),
                         Text(
                           fifa.venue.join(' '),
-                          style: themeFont(s: 12,w:'r'),
+                          style: themeFont(s: 12, w: 'r'),
                         ),
                         Text(
                           st.printNormal(),
-                          style: themeFont(s: 12,w:'r'),
+                          style: themeFont(s: 12, w: 'r'),
                         ),
                       ],
                     ),

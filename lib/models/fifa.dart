@@ -23,9 +23,9 @@ class Fifa {
     this.prizePool,
   });
   factory Fifa.fromMap(Map<String, dynamic> data, String id) {
-   // print(data['email']);
-  //  print(id);
-  //  print(data['poster']);
+    // print(data['email']);
+    //  print(id);
+    //  print(data['poster']);
     return Fifa(
       fifaId: id,
       email: data['email'],
@@ -37,32 +37,29 @@ class Fifa {
       details: Details.fromMap(data['details']),
     );
   }
-  bool registeredIn(){
-    User value=AuthRepository().getCurrentUser();
-    if (value == null){
+  bool registeredIn() {
+    User value = AuthRepository().getCurrentUser();
+    if (value == null) {
       print("Not Found");
       return false;
-
     }
- //   print(this.main.rooms.taken);
+    //   print(this.main.rooms.taken);
     String id = value.uid;
 
-    for(int i=0;i<this.main.rooms.taken.length;i++){
-   //   print(i);
-      if(this.main.rooms.taken[i] == id){
-     //   print("Found");
+    for (int i = 0; i < this.main.rooms.taken.length; i++) {
+      //   print(i);
+      if (this.main.rooms.taken[i] == id) {
+        //   print("Found");
         return true;
-
       }
     }
     //print("Not Found");
 
     return false;
-
-
   }
 
   Future<Fifa> fromHomeFifa({HomeFifa fifa}) async {
+    print("here converting to fifa");
     return await FifaRepository().getFifaById(fifa.fifaId);
   }
 }

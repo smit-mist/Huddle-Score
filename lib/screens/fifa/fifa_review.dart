@@ -1,9 +1,92 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/models/fifa_record.dart';
+import 'package:huddle_and_score/models/user.dart';
+import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../constants.dart';
 
-class FifaReview extends StatelessWidget {
+class FifaReview extends StatefulWidget {
+  final Fifa currFifa;
+  final FifaRecord record;
+  FifaReview({
+    this.currFifa,
+    this.record,
+  });
+
+  @override
+  _FifaReviewState createState() => _FifaReviewState();
+}
+
+class _FifaReviewState extends State<FifaReview> {
+  Razorpay razorpay;
+  User user = AuthRepository().getCurrentUser();
+  @override
+  void initState() {
+    super.initState();
+    razorpay = Razorpay();
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    razorpay.clear();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => FifaReceiptScreen(),
+      ),
+    );
+    print(response.paymentId);
+    Fluttertoast.showToast(msg: "Success");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print("${response.message} hereherehere");
+    Fluttertoast.showToast(msg: "Error");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print(response.walletName);
+    Fluttertoast.showToast(msg: "External");
+  }
+
+  void checkoutOptions(FifaRecord regDetails) {
+    print(widget.currFifa.info.registrationFee);
+    var options = {
+      'key': 'rzp_test_Q9uimXdoWQRLSv',
+      'prefill': {
+        'name': user.displayName,
+        'email': user.email,
+      },
+      'currency': 'INR',
+      'amount': widget.currFifa.info.registrationFee * 100,
+      'order_id': widget.currFifa.orderId,
+      'notes': {
+        'uid': user.uid,
+        'payload': jsonEncode(FifaRecord().toMap(regDetails)),
+      },
+    };
+    try {
+      razorpay.open(options);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -38,6 +121,7 @@ class FifaReview extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
+                  checkoutOptions(widget.record);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -109,9 +193,11 @@ class FifaReview extends StatelessWidget {
                     SizedBox(
                       height: 1,
                     ),
-                    DataShower(type: 'Name', data: 'Person Name'),
-                    DataShower(type: 'Phone No.', data: '9934923912'),
-                    DataShower(type: 'Email Id', data: 'abc@gmail.com'),
+                    DataShower(type: 'Name', data: widget.record.name),
+                    DataShower(
+                        type: 'Phone No.',
+                        data: widget.record.number.toString()),
+                    DataShower(type: 'Email Id', data: widget.record.email),
                     SizedBox(
                       height: 1,
                     ),
@@ -155,7 +241,7 @@ class FifaReview extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          '₹ 750',
+                          '₹ ${widget.currFifa.info.registrationFee}',
                           style: themeFont(w: 'r'),
                         )
                       ],
@@ -184,7 +270,7 @@ class FifaReview extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          '₹ 750',
+                          '₹ ${widget.currFifa.info.registrationFee}',
                           style: themeFont(w: 'r'),
                         )
                       ],

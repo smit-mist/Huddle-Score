@@ -1,19 +1,24 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/models/fifa_record.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_details.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
 
 import '../../constants.dart';
 
 class FifaRegistrationForm extends StatefulWidget {
+  final Fifa fifa;
+  FifaRegistrationForm({this.fifa});
   @override
   _FifaRegistrationFormState createState() => _FifaRegistrationFormState();
 }
 
 class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
-  bool name = false, contact = false, email = false;
-
+  TextEditingController name = TextEditingController();
+  TextEditingController contact = TextEditingController();
+  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -137,7 +142,14 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => FifaReview(),
+                      builder: (_) => FifaReview(
+                        currFifa: widget.fifa,
+                        record: FifaRecord(
+                          email: email.text,
+                          name: name.text,
+                          number: int.parse(contact.text),
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -189,7 +201,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                             'Kindly fill in the following details to register in ',
                       ),
                       TextSpan(
-                        text: 'FIFA championship 2021.',
+                        text: widget.fifa.details.title ?? 'Fifa',
                         style: themeFont(
                           w: 'b',
                         ),
@@ -215,11 +227,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                   height: 5,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      name = true;
-                    });
-                  },
+                  controller: name,
                   decoration: normalTextDecoration('Your Full Name'),
                 ),
                 SizedBox(
@@ -233,10 +241,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                   height: 5,
                 ),
                 TextField(
-                  //        controller: _contact,
-                  onTap: () {
-                    contact = true;
-                  },
+                  controller: contact,
                   decoration:
                       normalTextDecoration('Your Contact Number').copyWith(
                     prefixIcon: Container(
@@ -276,11 +281,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                   height: 5,
                 ),
                 TextField(
-                  onTap: () {
-                    setState(() {
-                      email = true;
-                    });
-                  },
+                  controller: email,
                   decoration: normalTextDecoration('Your Email ID'),
                 ),
                 SizedBox(

@@ -1,8 +1,10 @@
+import 'package:huddle_and_score/models/fifa_record.dart';
+
 class BookingDetails {
   RegDetails regDetails;
   int amount;
   String bookingId;
-  Data data;
+  TourData data;
   String paymentMethod;
   String recordedAt;
   int taxes;
@@ -26,24 +28,24 @@ class BookingDetails {
         taxes: doc['taxes'],
         tourId: doc['tourID'],
         regDetails: RegDetails.fromMap(doc['RegDetails']),
-        data: Data.fromMap(doc['data']),
+        data: TourData.fromMap(doc['data']),
       );
 }
 
-class Data {
+class TourData {
   String ageRec;
   String poster;
   List<dynamic> timeLine;
   String title;
   Venue venue;
-  Data({
+  TourData({
     this.ageRec,
     this.poster,
     this.timeLine,
     this.title,
     this.venue,
   });
-  factory Data.fromMap(Map<String, dynamic> doc) => Data(
+  factory TourData.fromMap(Map<String, dynamic> doc) => TourData(
         ageRec: doc['ageRec'],
         poster: doc['poster'],
         timeLine: doc['timeLine'],
@@ -73,10 +75,10 @@ class RegDetails {
   });
 
   factory RegDetails.fromMap(Map<String, dynamic> doc) => RegDetails(
-    captain: Captain.fromMap(doc['cap']),
-    teamName: doc['teamName'],
-    viceCaptain: Captain.fromMap(doc['viceCaptain']),
-  );
+        captain: Captain.fromMap(doc['cap']),
+        teamName: doc['teamName'],
+        viceCaptain: Captain.fromMap(doc['viceCaptain']),
+      );
 }
 
 class Captain {
@@ -91,9 +93,9 @@ class Captain {
     this.fullName,
   });
   factory Captain.fromMap(Map<String, dynamic> doc) => Captain(
-    contact: doc['contact'],
-    age: doc['age'],
-    email: doc['email'],
-    fullName: doc['name'],
-  );
+        contact: doc['contact'],
+        age: doc['age'],
+        email: doc['email'],
+        fullName: doc['name'],
+      );
 }

@@ -57,7 +57,7 @@ class FifaDetails extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => FifaRegistrationForm(),
+                      builder: (_) => FifaRegistrationForm(fifa: fifa,),
                     ),
                   );
                 },

@@ -144,21 +144,21 @@ class TournamentRegisterForm extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   RegDetails temp = RegDetails(
-                    teamName: 'Stunners',
+                    teamName: teamName.text,
                     captain: Captain(
-                      fullName: 'Smit Mistry',
-                      email: 'smit33@gmail.com',
-                      contact: int.parse('9876543210'),
+                      fullName: capName.text,
+                      email: capEmail.text,
+                      contact: int.parse(capNum.text),
                       age: int.parse(
-                        '20',
+                        capAge.text,
                       ),
                     ),
                     viceCaptain: Captain(
-                      fullName: 'Yash Jain',
-                      email: 'yash201@gmail.com',
-                      contact: int.parse('9876543211'),
+                      fullName: vCapName.text,
+                      email: vCapEmail.text,
+                      contact: int.parse(vCapNum.text),
                       age: int.parse(
-                        '19',
+                        vCapAge.text,
                       ),
                     ),
                   );
@@ -221,7 +221,7 @@ class TournamentRegisterForm extends StatelessWidget {
                             'Kindly fill in the following details to register your team in ',
                       ),
                       TextSpan(
-                        text: 'Vamos\' 21',
+                        text: currentTour.details.title,
                         style: themeFont(
                           w: 'b',
                         ),

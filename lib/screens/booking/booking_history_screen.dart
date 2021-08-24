@@ -54,22 +54,26 @@ class BookingHistoryScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Expanded(
-            child: Container(
-              width: w,
-              child: ListView.separated(
-                separatorBuilder: (_, i) {
-                  return SizedBox(
-                    height: 10,
-                  );
-                },
-                itemBuilder: (_, ind) {
-                  return BookedEventTile(booking: bookedTours[ind],);
-                },
-                itemCount: bookedTours.length,
-              ),
-            ),
-          ),
+          (bookedTours == null)
+              ? Center(child: Text('No bookings'))
+              : Expanded(
+                  child: Container(
+                    width: w,
+                    child: ListView.separated(
+                      separatorBuilder: (_, i) {
+                        return SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemBuilder: (_, ind) {
+                        return BookedEventTile(
+                          booking: bookedTours[ind],
+                        );
+                      },
+                      itemCount: bookedTours.length,
+                    ),
+                  ),
+                ),
         ],
       ),
     );
