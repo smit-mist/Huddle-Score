@@ -44,10 +44,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.passwordTapped = true;
       yield state;
     } else if (event is ObscureTextPressed) {
-      print("inside bloc");
-      print(state.obscureText);
+   //   print("inside bloc");
+    //  print(state.obscureText);
       state.obscureText = !state.obscureText;
-      print(state.obscureText);
+    //  print(state.obscureText);
       yield LoginInitial(state.emailTapped, state.passwordTapped, state.obscureText);
     }
   }

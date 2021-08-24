@@ -95,12 +95,12 @@ class SignInScreen extends StatelessWidget {
                   ),
                   BlocBuilder<LoginBloc, LoginState>(
                     buildWhen: (prev, curr) {
-                      print("Should rebuild because $prev to $curr");
+                 //     print("Should rebuild because $prev to $curr");
                       return true;
                     },
                     builder: (context, state) {
-                      print(state);
-                      print("Rebuild");
+              //        print(state);
+               //       print("Rebuild");
 
                       return Container(
                         width: double.infinity,
@@ -123,7 +123,7 @@ class SignInScreen extends StatelessWidget {
                                 s: 14),
                             suffixIcon: GestureDetector(
                               onTap: () {
-                                print("OBSCURE PRESSED");
+                  //              print("OBSCURE PRESSED");
                                 _loginBloc.add(ObscureTextPressed());
                               },
                               child: Icon(

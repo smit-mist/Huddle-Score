@@ -26,14 +26,14 @@ class Tournament {
   bool registeredIn(){
     User value=AuthRepository().getCurrentUser();
       if (value == null){
-        print("Not Found");
+  //      print("Not Found");
         return false;
 
       }
-      print(this.main.room.registered);
+    //  print(this.main.room.registered);
       String id = value.uid;
       for(int i=0;i<this.main.room.registered.length;i++){
-        print(i);
+   //     print(i);
         if(this.main.room.registered[i] == id){
           print("Found");
           return true;

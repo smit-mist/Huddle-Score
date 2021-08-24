@@ -45,6 +45,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
               Spacer(),
               GestureDetector(
                 onTap: () {
+                  print("Pressed");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -54,11 +55,11 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                 },
                 child: Container(
                   height: 40,
-                  width: w * 0.3,
+                  width: w * 0.35,
                   child: Center(
                     child: Text(
                       'Book Now',
-                      style: themeFont(color: Colors.white),
+                      style: themeFont(color: Colors.white,s:15,w:'sb'),
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -74,133 +75,150 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
           width: w,
           height: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Partner With Us',
-                style: themeFont(
-                  s: 23,
-                  color: kThemeColor,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: h*0.05,),
+                Text(
+                  'Partner With Us',
+                  style: themeFont(
+                    s: 23,
+                    color: kThemeColor,
+                  ),
                 ),
-              ),
-              showText(
-                'We, at Huddle & Score, understand the significance of quality relations with our partners. We recognize the fact that our partners bring incredible value to the business as well as the community we aim to build and foster.',
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFirst = true;
-                      });
-                    },
-                    child: Container(
-                      height: (h * (209 / kScreenH)),
-                      width: (w * (173 / kScreenW)),
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: (isFirst)
-                                ? kThemeColor.withOpacity(0.5)
-                                : Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                          ),
-                        ],
-                        border: (isFirst)
-                            ? (Border.all(
-                                color: kThemeColor,
-                                style: BorderStyle.solid,
-                              ))
-                            : Border(),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: h * (140 / kScreenH),
-                            child: Image.network(
-                              'https://picsum.photos/200/300',
-                              fit: BoxFit.cover,
+                SizedBox(height: h*0.03,),
+                showText(
+                  'We, at Huddle & Score, understand the significance of quality relations with our partners. We recognize the fact that our partners bring incredible value to the business as well as the community we aim to build and foster.',
+                ),
+                SizedBox(height: h*0.06,),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isFirst = true;
+                        });
+                      },
+                      child: Container(
+                        height: (h * (209 / kScreenH)),
+                        width: (w * (173 / kScreenW)),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          boxShadow: [
+                            BoxShadow(
+                              color: (isFirst)
+                                  ? kThemeColor
+                                  : Colors.grey.withOpacity(0.3),
+                              spreadRadius: 3,
+                              blurRadius:(isFirst)? 0:3,
                             ),
-                          ),
-                          Text(
-                            'Turfs',
-                            style: themeFont(),
-                          ),
-                        ],
+                          ],
+                          border: (isFirst)
+                              ? (Border.all(
+                                  color: kThemeColor,
+                                  style: BorderStyle.solid,
+                                ))
+                              : Border(),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: h * (140 / kScreenH),
+                              child: Image.asset(
+                                'assets/images/player_2.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Text(
+                              'Turfs',
+                              style: themeFont(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFirst = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: (h * (209 / kScreenH)),
-                      width: (w * (173 / kScreenW)),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: (isFirst)
-                                ? Colors.grey.withOpacity(0.5)
-                                : kThemeColor.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                          ),
-                        ],
-                        border: (!isFirst)
-                            ? (Border.all(
-                                color: kThemeColor,
-                                style: BorderStyle.solid,
-                              ))
-                            : Border(),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: h * (140 / kScreenH),
-                            child: Image.network(
-                              'https://picsum.photos/200/300',
-                              fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isFirst = false;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: (h * (209 / kScreenH)),
+                        width: (w * (173 / kScreenW)),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          boxShadow: [
+                            BoxShadow(
+                              color: (!isFirst)
+                                  ? kThemeColor
+                                  : Colors.grey.withOpacity(0.3),
+                              spreadRadius: 3,
+                              blurRadius:(!isFirst)? 0:3,
                             ),
-                          ),
-                          Text(
-                            'Tournaments',
-                            style: themeFont(),
-                          ),
-                        ],
+                          ],
+                          border: (!isFirst)
+                              ? (Border.all(
+                                  color: kThemeColor,
+                                  style: BorderStyle.solid,
+                                ))
+                              : Border(),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: h * (140 / kScreenH),
+                              child: Image.asset(
+                                'assets/images/player_1.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Text(
+                              'Tournaments',
+                              style: themeFont(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              showText(
-                'Join us to become part of our community and reap the benefits that our platform offers.',
-              ),
-              showText(
-                'On listing with us, you open yourself up to a much greater audience. And because of this increased visibility, your turf will always be brimming with sportspeople, and your tournaments will be a booming success.',
-              ),
-              showText(
-                ' We believe that we are engaging in the creation of a platform that individuals can rely on, and be happy to be a part of.',
-              ),
-            ],
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Row(
+                  children: [
+                    Spacer(),
+                    Text('Select a card to proceed',style:themeFont(s: 12,w:'r'))
+                  ],
+                ),
+                SizedBox(height: h*0.033,),
+
+                showText(
+                  'Join us to become part of our community and reap the benefits that our platform offers.',
+                ),
+                SizedBox(height: 15,),
+                showText(
+                  'On listing with us, you open yourself up to a much greater audience. And because of this increased visibility, your turf will always be brimming with sportspeople, and your tournaments will be a booming success.',
+                ),
+                SizedBox(height: 15,),
+
+                showText(
+                  'We believe that we are engaging in the creation of a platform that individuals can rely on, and be happy to be a part of.',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -213,7 +231,7 @@ Widget showText(String text) {
     width: double.infinity,
     child: Text(
       text,
-      style: themeFont(),
+      style: themeFont(s:14,w:'r'),
     ),
   );
 }

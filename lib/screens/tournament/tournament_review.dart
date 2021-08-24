@@ -140,11 +140,11 @@ class _TournamentReviewState extends State<TournamentReview> {
                   },
                   child: Container(
                     height: 40,
-                    width: w * 0.3,
+                    width: w * 0.35,
                     child: Center(
                       child: Text(
                         'Proceed to pay',
-                        style: themeFont(color: Colors.white),
+                        style: themeFont(color: Colors.white,s:15,w:'sb'),
                       ),
                     ),
                     decoration: BoxDecoration(
@@ -187,8 +187,8 @@ class _TournamentReviewState extends State<TournamentReview> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
+                        color: Colors.grey.withOpacity(0.3),
+                        blurRadius: 15,
                         spreadRadius: 2,
                       )
                     ],
@@ -199,7 +199,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     children: [
                       Text(
                         'Summary',
-                        style: themeFont(w: 'b'),
+                        style: themeFont(w: 'm',s:16),
                       ),
                       SizedBox(
                         height: 1,
@@ -221,6 +221,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                       DataShower(
                           type: 'Vice Captain',
                           data: widget.userRecord.viceCaptain.fullName),
+                      DataShower(
+                          type: 'Phone No.',
+                          data: widget.userRecord.captain.contact.toString()),
                       DataShower(
                           type: 'Email Id',
                           data: widget.userRecord.viceCaptain.email),
@@ -245,33 +248,34 @@ class _TournamentReviewState extends State<TournamentReview> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
+                        color: Colors.grey.withOpacity(0.3),
+                        blurRadius: 15,
                         spreadRadius: 2,
                       )
                     ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      SizedBox(height: 15,),
                       Text(
                         'Amount Payable',
                         style: themeFont(s: 16, w: 'b'),
                       ),
                       SizedBox(
-                        height: 1,
+                        height: 10,
                       ),
                       Row(
                         children: [
                           Text(
                             'Charges',
-                            style: themeFont(),
+                            style: themeFont(s:12,w:'m'),
                           ),
                           Spacer(),
                           Text(
                             '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:12,w:'m'),
                           )
                         ],
                       ),
@@ -279,37 +283,37 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Taxes',
-                            style: themeFont(),
+                            style: themeFont(s:12,w:'m'),
                           ),
                           Spacer(),
                           Text(
                             '0',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:12,w:'m'),
                           )
                         ],
                       ),
                       Divider(
                         color: Colors.black.withOpacity(0.5),
                       ),
+                      SizedBox(height: 1,),
+
                       Row(
                         children: [
                           Text(
                             'Total Amount',
-                            style: themeFont(),
+                            style: themeFont(s:15,w:'m'),
                           ),
                           Spacer(),
                           Text(
                             '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(w: 'r'),
+                            style: themeFont(s:15,w:'sb'),
                           )
                         ],
                       ),
                       SizedBox(
-                        height: 1,
+                        height: 15,
                       ),
-                      SizedBox(
-                        height: 1,
-                      ),
+
                     ],
                   ),
                 ),
@@ -335,14 +339,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(color: Colors.black.withOpacity(0.7)),
+            style: themeFont(s:14,w:'m'),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'r'),
+              style: themeFont(s:15,w:'sb'),
             ),
           ),
         ],
