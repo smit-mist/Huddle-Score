@@ -22,14 +22,12 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   ButtonClickBloc _bloc;
   @override
   void initState() {
-    // TODO: implement initState
     _bloc = ButtonClickBloc();
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _bloc.close();
     super.dispose();
   }
