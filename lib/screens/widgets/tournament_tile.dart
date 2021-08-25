@@ -24,8 +24,11 @@ class TournamentTile extends StatelessWidget {
     timeLine += st.getMonth();
     timeLine += ', ';
     timeLine += st.getYear();
+    String venue = here.venue.join(', ');
+    print(here.name);
+    print(venue);
     print(timeLine);
-    if(here.room.total == here.room.taken.length)fullFilled = true;
+    if (here.room.total == here.room.taken.length) fullFilled = true;
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -42,7 +45,7 @@ class TournamentTile extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) => TournamentDetails(
               tournament: tournament,
-              isReg:isReg,
+              isReg: isReg,
             ),
           ),
         );
@@ -90,10 +93,11 @@ class TournamentTile extends StatelessWidget {
                       width: w * (155 / kScreenW),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top:5.0),
+                      padding: const EdgeInsets.only(top: 5.0),
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 7),
                         height: h * (120 / kScreenH),
+                        width: double.infinity,
                         child: Center(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,16 +105,17 @@ class TournamentTile extends StatelessWidget {
                             children: [
                               Text(
                                 here.name,
-                                style: themeFont(s: 12,w: 'm'),
+                                style: themeFont(s: 12, w: 'm'),
                               ),
-
                               Text(
-                                here.venue.join(''),
-                                style: themeFont(s: 12,w: 'r'),
+                                venue.length > 25
+                                    ? venue.substring(0, 25) + '...'
+                                    : venue,
+                                style: themeFont(s: 12, w: 'r'),
                               ),
                               Text(
                                 timeLine,
-                                style: themeFont(s: 12,w:'r'),
+                                style: themeFont(s: 12, w: 'r'),
                               ),
                             ],
                           ),
@@ -122,22 +127,18 @@ class TournamentTile extends StatelessWidget {
               ),
             ),
           ),
-          (fullFilled)? Positioned(
-            top: h * (100 / kScreenH),
-            child: Container(
-              height: 20,
-              width: w * (155 / kScreenW),
-              color: Colors.red,
-              child: Center(
-                child: Text(
-                  'Fully Booked!',
-                  style: themeFont(
-                    color: Colors.white,
+          (fullFilled)
+              ? Positioned(
+                  top: h * (95 / kScreenH),
+                  child: Container(
+                    width: w*(160/kScreenW),
+                    child: Image.asset(
+                      'assets/images/filling_fast_banner.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ):Container(),
+                )
+              : Container(),
         ],
       ),
     );

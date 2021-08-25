@@ -186,7 +186,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                   'Registration',
                   style: themeFont(
                     color: kThemeColor,
-                    s: 23,
+                    s: 23,w:'sb'
                   ),
                 ),
                 SizedBox(
@@ -199,11 +199,12 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       TextSpan(
                         text:
                             'Kindly fill in the following details to register in ',
+                        style: themeFont(s:14,w:'m'),
                       ),
                       TextSpan(
                         text: widget.fifa.details.title ?? 'Fifa',
                         style: themeFont(
-                          w: 'b',
+                          w: 'b',s:14,
                         ),
                       ),
                     ],
@@ -214,14 +215,14 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
                 Text(
                   'Further communication will be carried out via the contact details you provide below.',
-                  style: themeFont(s: 13, color: Colors.black.withOpacity(0.7)),
+                  style: themeFont(s: 15,w:'m'),
                 ),
                 SizedBox(
                   height: h * 0.03,
                 ),
                 Text(
                   'Name',
-                  style: themeFont(),
+                  style: themeFont(s:12,w:'m'),
                 ),
                 SizedBox(
                   height: 5,
@@ -235,7 +236,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
                 Text(
                   'Contact Number',
-                  style: themeFont(),
+                  style: themeFont(s:12,w:'m'),
                 ),
                 SizedBox(
                   height: 5,
@@ -275,7 +276,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
                 Text(
                   'Email',
-                  style: themeFont(),
+                  style: themeFont(s:12,w:'m'),
                 ),
                 SizedBox(
                   height: 5,

@@ -9,19 +9,27 @@ import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 
 import 'fifa_registration_form.dart';
 
-class FifaDetails extends StatelessWidget {
-  ButtonClickBloc _bloc;
+class FifaDetails extends StatefulWidget {
   Fifa fifa;
   bool isReg;
   FifaDetails({this.fifa, this.isReg});
+
+  @override
+  _FifaDetailsState createState() => _FifaDetailsState();
+}
+
+class _FifaDetailsState extends State<FifaDetails> {
+  ButtonClickBloc _bloc;
+
   bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<ButtonClickBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    print('User is registered:- $isReg');
-    int seatsLeft = fifa.main.rooms.total- fifa.main.rooms.taken.length;
+    print('User is registered:- ${widget.isReg}');
+    int seatsLeft = widget.fifa.main.rooms.total- widget.fifa.main.rooms.taken.length;
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -52,16 +60,16 @@ class FifaDetails extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  if(isReg)
+                  if(widget.isReg)
                     return;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => FifaRegistrationForm(fifa: fifa,),
+                      builder: (_) => FifaRegistrationForm(fifa: widget.fifa,),
                     ),
                   );
                 },
-                child: (isReg)
+                child: (widget.isReg)
                     ? Container(
                         child: ActionButton(
                           child: Center(
@@ -109,11 +117,12 @@ class FifaDetails extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      fifa.details.title,
+                      widget.fifa.details.title,
                       //'details',
                       style: themeFont(
                         color: kThemeColor,
                         s: 23,
+                        w:'sb',
                       ),
                     ),
                     Spacer(),
@@ -126,9 +135,13 @@ class FifaDetails extends StatelessWidget {
                 Container(
                   height: h * (390 / kScreenH),
                   width: double.infinity,
-                  child: Image.network(
-                    fifa.poster,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius:BorderRadius.circular(15),
+
+                    child: Image.network(
+                      widget.fifa.poster,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -137,9 +150,9 @@ class FifaDetails extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    fifa.details.description,
+                    widget.fifa.details.description,
                     //'details',
-                    style: themeFont(s: 12),
+                    style: themeFont(s: 12,w:'m'),
                   ),
                 ),
                 SizedBox(
@@ -181,7 +194,7 @@ class FifaDetails extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Oops! No more room left.',
-                              style: themeFont(),
+                              style: themeFont(s: 14,w:'sb'),
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -196,7 +209,7 @@ class FifaDetails extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Room for just $seatsLeft more teams, HURRY!!',
-                              style: themeFont(),
+                              style: themeFont(s: 14,w:'sb'),
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -211,7 +224,7 @@ class FifaDetails extends StatelessWidget {
                         ),
                         DataShower(
                           type: 'Game Date',
-                          data: fifa.main.gameDate,
+                          data: widget.fifa.main.gameDate,
                         ),
                         SizedBox(
                           height: 10,
@@ -233,7 +246,7 @@ class FifaDetails extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      fifa.main.venue.address.join(' '),
+                                      widget.fifa.main.venue.address.join(' '),
                                       style: themeFont(s: 13),
                                     ),
                                     Row(
@@ -264,7 +277,7 @@ class FifaDetails extends StatelessWidget {
                         ),
                         DataShower(
                           type: 'Booking Deadline',
-                          data: fifa.main.deadLine,
+                          data: widget.fifa.main.deadLine,
                         ),
                         SizedBox(
                           height: 20,
@@ -291,7 +304,7 @@ class FifaDetails extends StatelessWidget {
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 200),
                           width: double.infinity,
-                          height: 0.3 * h,
+                          height: 0.27 * h,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(9),
@@ -300,128 +313,6 @@ class FifaDetails extends StatelessWidget {
                                   color: Colors.grey, offset: Offset(2, 2))
                             ],
                           ),
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 1),
-                            height: 0.3 * h,
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Prize pool',
-                                    style: themeFont(),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  width: double.infinity,
-                                  height: h * 0.15,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: ListView.builder(
-                                          itemCount: 2,
-                                          itemBuilder: (_, ind) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  fifa.prizePool[ind.toString()]
-                                                      [0],
-                                                  //'200',
-                                                  style: themeFont(),
-                                                ),
-                                                Text(
-                                                  fifa.prizePool[ind.toString()]
-                                                      [1],
-                                                  //'hello',
-                                                  style: themeFont(
-                                                    s: (ind == 0 ? 20 : 18),
-                                                    w: 'b',
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    width: double.infinity,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'And many more... ',
-                                          style: themeFont(
-                                            color: Colors.black.withOpacity(
-                                              0.7,
-                                            ),
-                                            s: 10,
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        TextButton(
-                                          onPressed: () {
-                                            _bloc.add(
-                                                TournamentDetailExpanded());
-                                          },
-                                          child: Text(
-                                            'View all prizes',
-                                            style: themeFont(
-                                                    color: kThemeColor, s: 10)
-                                                .copyWith(
-                                                    decoration: TextDecoration
-                                                        .underline),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down_sharp,
-                                          color: kThemeColor,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        width: double.infinity,
-                        height: 0.42 * h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(9),
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
-                          ],
-                        ),
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 1),
-                          height: 0.42 * h,
-                          width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -429,7 +320,7 @@ class FifaDetails extends StatelessWidget {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
                                   'Prize pool',
-                                  style: themeFont(),
+                                  style: themeFont(s: 13, w: 'm'),
                                 ),
                               ),
                               SizedBox(
@@ -441,7 +332,8 @@ class FifaDetails extends StatelessWidget {
                                 height: h * 0.15,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       child: ListView.builder(
@@ -452,16 +344,18 @@ class FifaDetails extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                fifa.prizePool[ind.toString()]
+                                                widget.fifa.prizePool[ind.toString()]
                                                     [0],
-                                                style: themeFont(),
+                                                //'200',
+                                                style: themeFont(s: 12, w: 'sb'),
                                               ),
                                               Text(
-                                                fifa.prizePool[ind.toString()]
+                                                widget.fifa.prizePool[ind.toString()]
                                                     [1],
+                                                //'hello',
                                                 style: themeFont(
                                                   s: (ind == 0 ? 20 : 18),
-                                                  w: 'b',
+                                                  w: (ind == 0) ? 'b' : 'sb',
                                                 ),
                                               ),
                                               SizedBox(
@@ -471,56 +365,188 @@ class FifaDetails extends StatelessWidget {
                                           );
                                         },
                                       ),
-                                    )
+                                    ),
+                                    Container(
+                                      child: Image.asset(
+                                        'assets/images/player_1.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      height: h * (130 / kScreenW),
+                                      width: w * (130 / kScreenW),
+                                    ),
                                   ],
                                 ),
                               ),
                               Expanded(
                                 child: Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20),
                                   width: double.infinity,
-                                  child: Container(
-                                    child: Column(
-                                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 20),
-                                            width: double.infinity,
-                                            // height: h * 0.2,
-                                            child: ListView.separated(
-                                              separatorBuilder: (_, ind) {
-                                                return SizedBox(
-                                                  height: 10,
-                                                );
-                                              },
-                                              itemCount:
-                                                  fifa.prizePool.length - 2,
-                                              itemBuilder: (_, ind) {
-                                                return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      fifa.prizePool[(ind + 2)
-                                                          .toString()][0],
-                                                      style: themeFont(
-                                                        color: Colors.black
-                                                            .withOpacity(0.7),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      fifa.prizePool[(ind + 2)
-                                                          .toString()][1],
-                                                      style: themeFont(),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'And many more... ',
+                                        style: themeFont(
+                                          color: Colors.black.withOpacity(
+                                            0.7,
+                                          ),
+                                          s: 10,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      TextButton(
+                                        onPressed: () {
+                                          _bloc.add(
+                                              TournamentDetailExpanded());
+                                        },
+                                        child: Text(
+                                          'View all prizes',
+                                          style: themeFont(
+                                                  color: kThemeColor, s: 10)
+                                              .copyWith(
+                                                  decoration: TextDecoration
+                                                      .underline),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_down_sharp,
+                                        color: kThemeColor,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 200),
+                        width: double.infinity,
+                        height: (0.3 +
+                      (widget.fifa.prizePool.length - 2) *
+                          0.04) *
+                        h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9),
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                'Prize pool',
+                                style: themeFont( s: 13,
+                                  w: 'm',),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              width: double.infinity,
+                              height: h * 0.15,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: 2,
+                                      itemBuilder: (_, ind) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              widget.fifa.prizePool[ind.toString()]
+                                                  [0],
+                                              style: themeFont(s: 12, w: 'sb'),
                                             ),
+                                            Text(
+                                              widget.fifa.prizePool[ind.toString()]
+                                                  [1],
+                                              style: themeFont(
+                                                s: (ind == 0 ? 20 : 18),
+                                                w: (ind == 0) ? 'b' : 'sb',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),Container(
+                                    child: Image.asset(
+                                      'assets/images/player_1.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    height: h * (130 / kScreenW),
+                                    width: w * (130 / kScreenW),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                child: Container(
+                                  child: Column(
+                                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          width: double.infinity,
+                                          // height: h * 0.2,
+                                          child: ListView.separated(
+                                            separatorBuilder: (_, ind) {
+                                              return SizedBox(
+                                                height: 10,
+                                              );
+                                            },
+                                            itemCount:
+                                                widget.fifa.prizePool.length - 2,
+                                            itemBuilder: (_, ind) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    widget.fifa.prizePool[(ind + 2)
+                                                        .toString()][0],
+                                                    style: themeFont(
+                                                      s: 11,
+                                                      w: 'sb',
+
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    widget.fifa.prizePool[(ind + 2)
+                                                        .toString()][1],
+                                                    style: themeFont(s: 13, w: 'm'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           ),
                                         ),
-                                        Row(
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(right:20.0),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
@@ -530,7 +556,7 @@ class FifaDetails extends StatelessWidget {
                                                     TournamentDetailExpanded());
                                               },
                                               child: Text(
-                                                'View less prizes',
+                                                'View less',
                                                 style: themeFont(
                                                         color: kThemeColor,
                                                         s: 10)
@@ -546,13 +572,13 @@ class FifaDetails extends StatelessWidget {
                                             )
                                           ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -576,7 +602,7 @@ class FifaDetails extends StatelessWidget {
                             width: double.infinity,
                             child: Text(
                               'More Information',
-                              style: themeFont(),
+                              style: themeFont(s:13,w:'m'),
                             ),
                           ),
                         ),
@@ -585,21 +611,21 @@ class FifaDetails extends StatelessWidget {
                         ),
                         DataShower(
                           type: 'Registration Fee',
-                          data: '₹ ${fifa.info.registrationFee} per head',
+                          data: '₹ ${widget.fifa.info.registrationFee} per head',
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
                           type: 'Time',
-                          data: fifa.info.time,
+                          data: widget.fifa.info.time,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         DataShower(
                           type: 'Mode',
-                          data: fifa.info.mode,
+                          data: widget.fifa.info.mode,
                         ),
                         SizedBox(
                           height: 20,

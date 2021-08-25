@@ -14,7 +14,7 @@ class FifaTile extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     WeirdDateFormat st = WeirdDateFormat(date: fifa.date);
-
+    String venue = fifa.venue.join(', ');
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -23,8 +23,9 @@ class FifaTile extends StatelessWidget {
         );
         print('start fetch');
         Fifa here = await Fifa().fromHomeFifa(fifa: fifa);
-        bool isReg = here.registeredIn();
-        Navigator.push(
+        bool isReg =false;// here.registeredIn();
+        //TODO: Unhandled Exception: NoSuchMethodError: The method 'registeredIn' was called on null.
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (_) => FifaDetails(
@@ -90,7 +91,7 @@ class FifaTile extends StatelessWidget {
                           height: 1,
                         ),
                         Text(
-                          fifa.venue.join(' '),
+                          venue.length > 25?venue.substring(0,25)+'...':venue,
                           style: themeFont(s: 12, w: 'r'),
                         ),
                         Text(

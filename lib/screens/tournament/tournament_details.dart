@@ -164,9 +164,12 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 Container(
                   height: h * (390 / kScreenH),
                   width: double.infinity,
-                  child: Image.network(
-                    widget.tournament.details.poster,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius:BorderRadius.circular(15),
+                    child: Image.network(
+                      widget.tournament.details.poster,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(
