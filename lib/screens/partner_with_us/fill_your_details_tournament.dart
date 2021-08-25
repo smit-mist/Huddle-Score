@@ -28,9 +28,10 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
           height: h * 0.08,
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1)
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 7,
+              spreadRadius: 1,
+            )
           ]),
           child: Row(
             children: [

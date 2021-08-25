@@ -45,8 +45,9 @@ class ThankYou extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(height: h*0.08,),
+
               Text(
                 'Your details have been recorded!',
                 style: themeFont(
@@ -54,11 +55,14 @@ class ThankYou extends StatelessWidget {
                   color: kThemeColor,
                 ),
               ),
+              SizedBox(height: h*0.075,),
               Icon(
                 Icons.check_circle,
                 color: kThemeColor,
                 size: 100,
               ),
+              SizedBox(height: h*0.1,),
+
               Text(
                 'Thank You for your interest!',
                 style: themeFont(
@@ -66,14 +70,13 @@ class ThankYou extends StatelessWidget {
                   color: kThemeColor,
                 ),
               ),
+              SizedBox(height: h*0.025,),
               Text(
                 'One of our business executives will get in touch with you to take it forward.',
                 textAlign: TextAlign.center,
                 style: themeFont(s: 18),
               ),
-              SizedBox(
-                height: h * 0.2,
-              ),
+
             ],
           ),
         ),

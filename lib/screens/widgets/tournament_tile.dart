@@ -25,9 +25,7 @@ class TournamentTile extends StatelessWidget {
     timeLine += ', ';
     timeLine += st.getYear();
     String venue = here.venue.join(', ');
-    print(here.name);
-    print(venue);
-    print(timeLine);
+
     if (here.room.total == here.room.taken.length) fullFilled = true;
     return GestureDetector(
       onTap: () async {
@@ -39,7 +37,6 @@ class TournamentTile extends StatelessWidget {
         );
         Tournament tournament = await Tournament().fromHomeTour(here);
         bool isReg =tournament.registeredIn();
-        print('in tile $isReg');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

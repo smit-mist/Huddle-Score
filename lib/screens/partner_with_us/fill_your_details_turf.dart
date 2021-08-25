@@ -84,7 +84,9 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: h*0.05,),
+                SizedBox(
+                  height: h * 0.05,
+                ),
                 Text(
                   'Contact Details',
                   style: themeFont(
@@ -92,27 +94,32 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     s: 23,
                   ),
                 ),
-                SizedBox(height: h*0.02,),
-
+                SizedBox(
+                  height: h * 0.03,
+                ),
                 Text(
                   'Your Full Name',
                   style: themeFont(),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _name,
                   decoration: normalTextDecoration(
                     'Full Name',
                   ),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Your Contact Number',
                   style: themeFont(),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _contact,
                   decoration: normalTextDecoration(' ').copyWith(
@@ -142,22 +149,25 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   'Your Email ID',
                   style: themeFont(),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _emailId,
                   decoration: normalTextDecoration(
                     '',
                   ),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   width: w,
                   child: Row(
@@ -286,22 +296,25 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 30,
+                ),
                 Text(
                   'Name of Your Turf',
                   style: themeFont(),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: _nameTurf,
                   decoration: normalTextDecoration(
                     '',
                   ),
                 ),
-                SizedBox(height: 20,),
-
+                SizedBox(
+                  height: 40,
+                ),
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,

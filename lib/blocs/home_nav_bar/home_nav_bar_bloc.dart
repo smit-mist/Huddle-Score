@@ -20,7 +20,6 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
   Stream<HomeNavBarState> mapEventToState(
     HomeNavBarEvent event,
   ) async* {
-   // print(state);
     final isSignedIn = await _repository.isSignedIn();
     if (event is HomeIconPressed) {
       yield HomeScreenState();
@@ -36,8 +35,6 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
     } else if (event is ProfileIconPressed) {
       if (isSignedIn) {
         final User user = _repository.getCurrentUser();
-    //    print(user.email);
-    //    print(user.displayName);
         yield UserProfileScreenState(
           email: user.email,
           name: user.displayName,

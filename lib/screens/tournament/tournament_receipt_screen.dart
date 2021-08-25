@@ -198,8 +198,9 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             height: 10,
                           ),
                           Wrap(
-                            spacing: 5,
-                            runSpacing: 5,
+                            alignment: WrapAlignment.center,
+                            spacing: 10,
+                            runSpacing: 10,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -209,7 +210,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 },
                                 child: Container(
                                   height: 40,
-                                  width: w * (150 / kScreenW),
+                                  width: w * (120 / kScreenW),
                                   child: Center(
                                     child: Text(
                                       'Social Media',
@@ -238,7 +239,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 },
                                 child: Container(
                                   height: 40,
-                                  width: w * (150 / kScreenW),
+                                  width: w * (120 / kScreenW),
                                   child: Center(
                                     child: Text(
                                       'Search Engine',
@@ -267,7 +268,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 },
                                 child: Container(
                                   height: 40,
-                                  width: w * (150 / kScreenW),
+                                  width: w * (120 / kScreenW),
                                   child: Center(
                                     child: Text(
                                       'Word of mouth',
@@ -296,7 +297,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 },
                                 child: Container(
                                   height: 40,
-                                  width: w * (150 / kScreenW),
+                                  width: w * (120 / kScreenW),
                                   child: Center(
                                     child: Text(
                                       'At a turf',
