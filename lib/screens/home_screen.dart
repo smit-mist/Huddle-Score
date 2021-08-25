@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    int current = 1;
+    int current = 0;
     Widget selectCity = StatefulBuilder(
       builder: (context, setState) {
         return BackdropFilter(
@@ -59,16 +59,20 @@ class HomeScreen extends StatelessWidget {
                         ),
                         itemBuilder: (_, int ind) {
                           return GestureDetector(
-                            onTap: (){
-                              setState((){
-                                current = ind;
+                            onTap: () {
+                              setState(() {
+                                if (ind == 0) current = ind;
                               });
                             },
                             child: Container(
                               child: Center(
                                 child: Text(
                                   'City ${ind + 1}',
-                                  style: themeFont(s: 12),
+                                  style: themeFont(s: 12).copyWith(
+                                    decoration: ind == 0
+                                        ? TextDecoration.none
+                                        : TextDecoration.lineThrough,
+                                  ),
                                 ),
                               ),
                               decoration: BoxDecoration(
@@ -91,7 +95,8 @@ class HomeScreen extends StatelessWidget {
                         child: ActionButton(
                           child: Text(
                             'Proceed',
-                            style: themeFont(color: Colors.white, s: 12, w: 'm'),
+                            style:
+                                themeFont(color: Colors.white, s: 12, w: 'm'),
                           ),
                           bgColor: kThemeColor,
                         ),

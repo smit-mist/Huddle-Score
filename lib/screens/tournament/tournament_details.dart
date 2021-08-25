@@ -52,7 +52,12 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     timeLine += st.getMonth();
     timeLine += ' ';
     timeLine += st.getYear();
-    print(timeLine);
+    DateTime today = DateTime.now();
+    DateTime given = DateTime.parse(widget.tournament.main.deadline);
+    bool canRegister = true;
+    if (today.isAfter(given)) {
+      canRegister = false;
+    }
 
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -88,6 +93,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 onTap: () {
                   if (widget.isReg) {
                     print('Already did');
+                  } else if (canRegister == false) {
+                    print('deadline finished');
                   } else {
                     Navigator.push(
                       context,
@@ -116,20 +123,38 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         height: 40,
                         width: w * 0.5,
                       )
-                    : Container(
-                        height: 40,
-                        width: w * 0.3,
-                        child: Center(
-                          child: Text(
-                            'Register',
-                            style: themeFont(color: Colors.white),
+                    : (canRegister == false)
+                        ? Container(
+                            child: ActionButton(
+                              child: Center(
+                                child: Text(
+                                  'Booking deadline has passed!',
+                                  style: themeFont(
+                                    color: kThemeColor,
+                                    s: 15,
+                                  ),
+                                ),
+                              ),
+                              bgColor: Colors.white,
+
+                            ),
+                            height: 40,
+                            width: w * 0.6,
+                          )
+                        : Container(
+                            height: 40,
+                            width: w * 0.3,
+                            child: Center(
+                              child: Text(
+                                'Register',
+                                style: themeFont(color: Colors.white),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: kThemeColor,
+                            ),
                           ),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: kThemeColor,
-                        ),
-                      ),
               )
             ],
           ),
@@ -165,7 +190,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                   height: h * (390 / kScreenH),
                   width: double.infinity,
                   child: ClipRRect(
-                    borderRadius:BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15),
                     child: Image.network(
                       widget.tournament.details.poster,
                       fit: BoxFit.cover,
@@ -536,8 +561,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               height: h * 0.15,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
                                     child: ListView.builder(
@@ -549,8 +573,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                           children: [
                                             Text(
                                               '${widget.tournament.prizePool[ind.toString()][0]}',
-                                              style:
-                                                  themeFont(s: 12, w: 'sb'),
+                                              style: themeFont(s: 12, w: 'sb'),
                                             ),
                                             Text(
                                               '₹ ${widget.tournament.prizePool[ind.toString()][1]}',
@@ -605,15 +628,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                             itemBuilder: (_, ind) {
                                               return Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     ' ' +
                                                         widget.tournament
-                                                            .prizePool[(ind +
-                                                                2)
-                                                            .toString()][0],
+                                                                .prizePool[
+                                                            (ind + 2)
+                                                                .toString()][0],
                                                     style: themeFont(
                                                       s: 11,
                                                       w: 'sb',
