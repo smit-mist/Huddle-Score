@@ -30,7 +30,7 @@ class _FifaDetailsState extends State<FifaDetails> {
     double h = MediaQuery.of(context).size.height;
     print('User is registered:- ${widget.isReg}');
     int seatsLeft = widget.fifa.main.rooms.total- widget.fifa.main.rooms.taken.length;
-    return SafeArea(
+    return widget.fifa==null ?Container():SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -40,7 +40,7 @@ class _FifaDetailsState extends State<FifaDetails> {
             BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 blurRadius: 7,
-                spreadRadius: 1)
+                spreadRadius: 1,)
           ]),
           child: Row(
             children: [

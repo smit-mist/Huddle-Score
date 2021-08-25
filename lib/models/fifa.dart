@@ -122,7 +122,7 @@ class Details {
 
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'],
-        pdf: map['pdf'].cast<String>(),
+        pdf: map['pdf'].cast<String>()??[],
         title: map['title'],
       );
 }
