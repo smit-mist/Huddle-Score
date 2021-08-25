@@ -24,7 +24,7 @@ class FifaTile extends StatelessWidget {
         print('start fetch');
         Fifa here = await Fifa().fromHomeFifa(fifa: fifa);
         print(here == null);
-        bool isReg = false; // here.registeredIn();
+        bool isReg = here.registeredIn();
         //TODO: Unhandled Exception: NoSuchMethodError: The method 'registeredIn' was called on null.
         Navigator.pushReplacement(
           context,

@@ -23,44 +23,46 @@ class Tournament {
     this.main,
     this.prizePool,
   });
-  bool registeredIn(){
-    User value=AuthRepository().getCurrentUser();
-      if (value == null){
-  //      print("Not Found");
-        return false;
-
-      }
-    //  print(this.main.room.registered);
-      String id = value.uid;
-      for(int i=0;i<this.main.room.registered.length;i++){
-   //     print(i);
-        if(this.main.room.registered[i] == id){
-          print("Found");
-          return true;
-
-        }
-      }
-      print("Not Found");
-
+  bool registeredIn() {
+    User value = AuthRepository().getCurrentUser();
+    if (value == null) {
+      //      print("Not Found");
       return false;
+    }
+    //  print(this.main.room.registered);
+    String id = value.uid;
+    for (int i = 0; i < this.main.room.registered.length; i++) {
+      //     print(i);
+      if (this.main.room.registered[i] == id) {
+        print("Found");
+        return true;
+      }
+    }
+    print("Not Found");
 
-
+    return false;
   }
 
-  factory Tournament.fromMap(Map<String, dynamic> data, String id) =>
-      Tournament(
-        tourId: id,
-        email: data['email'],
-        orderId: data['orderID'],
-        prizePool: (data['prizePool']).cast<String, List<dynamic>>(),
-        main: Main.fromMap(data['main']),
-        info: Info.fromMap(data['info']),
-        details: Details.fromMap(data['details']),
-      );
+  factory Tournament.fromMap(Map<String, dynamic> data, String id) {
+
+
+    var ok =  Tournament(
+      tourId: id,
+      email: data['email'],
+      orderId: data['orderID'],
+      prizePool: (data['prizePool']).cast<String, List<dynamic>>(),
+      main: Main.fromMap(data['main']),
+     info: Info.fromMap(data['info']),
+     details: Details.fromMap(data['details']),
+    );
+
+    return ok;
+  }
 
   Future<Tournament> fromHomeTour(HomeTour tour) async {
     return await TournamentRepository().getTournamentById(tour.tourId);
   }
+
 }
 
 class Main {
@@ -137,8 +139,7 @@ class Details {
   });
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'],
-        //pdf: (map['pdf'] == null ? null : map['pdf'].cast<String>()),
-        pdf: map['pdf'].cast<String>(),
+        pdf: (map['pdf'] == null ? null : map['pdf'].cast<String>()),
         poster: map['poster'],
         title: map['title'],
       );
