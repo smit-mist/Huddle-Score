@@ -7,8 +7,10 @@ import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/blocs/user/user_bloc.dart';
+import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/home_repository.dart';
+import 'package:huddle_and_score/repositories/partner_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
@@ -22,17 +24,6 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // print('not called');
-  // await PartnerRepository().submitPartnerDetailsForTurf(PartnerDetailsTurf(
-  //   city: 'surat',
-  //   contactNumber: 9898989898,
-  //   type: 'turf',
-  //   turfName: 'acers',
-  //   state: 'gujarat',
-  //   email: 'yyashjain2001@gmail.com',
-  //   name: 'yash',
-  // ));
-  //print('called');
   runApp(MyApp());
 }
 

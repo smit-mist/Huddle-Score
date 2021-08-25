@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,15 +33,16 @@ class PartnerRepository {
           "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
       var response = await http.post(
         Uri.parse(baseUrl),
-        body: <String, dynamic>{
+        headers: {'Content-Type':'Application/json'},
+        body: jsonEncode(<String, dynamic>{
           'name': details.name,
           'turfName': details.turfName,
-          'contact': details.contactNumber.toString(),
+          'contact': details.contactNumber,
           'email': details.email,
           'city': details.city,
           'type': details.type,
           'state': details.state,
-        },
+        }),
       );
       print(response.statusCode);
       print(response.body);
