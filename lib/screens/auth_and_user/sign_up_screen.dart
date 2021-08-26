@@ -7,11 +7,27 @@ import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool nameTap = false,
+      emaiTap = false,
+      passTap = false,
+      conPassTap = false,
+      passVis = false,
+      conPassVis = false,
+      termAgreed = false;
   SignupBloc _signupBloc;
+
   TextEditingController emailCtrl = TextEditingController();
+
   TextEditingController passwordCtrl = TextEditingController();
+
   TextEditingController nameCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     _signupBloc = BlocProvider.of<SignupBloc>(context);
@@ -85,158 +101,171 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder<SignupBloc, SignupState>(
-                    builder: (context, state) {
-                      return Container(
-                        // name
-                        width: double.infinity,
-                        child: TextField(
-                          controller: nameCtrl,
-                          onTap: () {
-                            _signupBloc.add(NameOnTap());
-                          },
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'n',
-                          ),
-                          decoration: normalTextDecoration('Full Name'),
-                        ),
-                      );
-                    },
+                  Container(
+                    // name
+                    width: double.infinity,
+                    child: TextField(
+                      controller: nameCtrl,
+                      onTap: () {
+                        setState(() {
+                          nameTap = true;
+                        });
+                      },
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'n',
+                      ),
+                      decoration: textFieldDecoration('Full Name', nameTap),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  BlocBuilder<SignupBloc, SignupState>(
-                    builder: (context, state) {
-                      return Container(
-                        // email
-                        width: double.infinity,
+                  Container(
+                    // email
+                    width: double.infinity,
 
-                        child: TextField(
-                          controller: emailCtrl,
-                          onTap: () {
-                            _signupBloc.add(EmailOnTap());
-                          },
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'n',
-                          ),
-                          decoration: normalTextDecoration('Email id'),
-                        ),
-                      );
-                    },
+                    child: TextField(
+                      controller: emailCtrl,
+                      onTap: () {
+                        setState(() {
+                          emaiTap = true;
+                        });
+                      },
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'n',
+                      ),
+                      decoration: textFieldDecoration('Email id', emaiTap),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  BlocBuilder<SignupBloc, SignupState>(
-                    builder: (context, state) {
-                      return Container(
-                        // password
-                        width: double.infinity,
+                  Container(
+                    // password
+                    width: double.infinity,
 
-                        child: TextField(
-                          controller: passwordCtrl,
+                    child: TextField(
+                      controller: passwordCtrl,
+                      onTap: () {
+                        setState(() {
+                          passTap = true;
+                        });
+                      },
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'n',
+                      ),
+                      obscureText: !passVis,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle:
+                            themeFont(color: Color(0xff626262), w: 'n', s: 14),
+                        suffixIcon: GestureDetector(
                           onTap: () {
-                            _signupBloc.add(PasswordOnTap());
+                            setState(() {
+                              passVis = !passVis;
+                              passTap = true;
+                            });
                           },
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'n',
-                          ),
-                          obscureText: state.obscureText,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: themeFont(
-                                color: Color(0xff626262), w: 'n', s: 14),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                state.obscureText = !state.obscureText;
-                              },
-                              child: Icon(
-                                (state.obscureText == false
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                color: (state.passwordTapped == true)
-                                    ? kThemeColor
-                                    : Colors.grey.withOpacity(0.4),
-                              ),
-                            ),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                            filled: true,
-                            fillColor: Colors.grey.withOpacity(0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                width: 2,
-                                color: kThemeColor,
-                              ),
-                            ),
+                          child: Icon(
+                            (passVis == true
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            color: (passTap == true)
+                                ? kThemeColor
+                                : Colors.grey.withOpacity(0.4),
                           ),
                         ),
-                      );
-                    },
+                        contentPadding:
+                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                        filled: true,
+                        fillColor: Colors.grey.withOpacity(0),
+                        enabledBorder: (passTap == false)
+                            ? OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              )
+                            : OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: kThemeColor,
+                                ),
+                              ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: kThemeColor,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  BlocBuilder<SignupBloc, SignupState>(
-                    builder: (context, state) {
-                      return Container(
-                        // confirm pass
-                        width: double.infinity,
+                  Container(
+                    // confirm pass
+                    width: double.infinity,
 
-                        child: TextField(
+                    child: TextField(
+                      onTap: () {
+                        setState(() {
+                          conPassTap = true;
+                        });
+                      },
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'n',
+                      ),
+                      obscureText: !conPassVis,
+                      decoration: InputDecoration(
+                        hintText: 'Confirm Password',
+                        hintStyle:
+                            themeFont(color: Color(0xff626262), w: 'n', s: 14),
+                        suffixIcon: GestureDetector(
                           onTap: () {
-                            _signupBloc.add(ConfirmPasswordOnTap());
+                            setState(() {
+                              conPassVis = !conPassVis;
+                            });
                           },
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'n',
-                          ),
-                          obscureText: state.obscureText,
-                          decoration: InputDecoration(
-                            hintText: 'Confirm Password',
-                            hintStyle: themeFont(
-                                color: Color(0xff626262), w: 'n', s: 14),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                state.obscureText = !state.obscureText;
-                              },
-                              child: Icon(
-                                (state.obscureText == false
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                color: (state.confirmPasswordTapped == true)
-                                    ? kThemeColor
-                                    : Colors.grey.withOpacity(0.4),
-                              ),
-                            ),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                            filled: true,
-                            fillColor: Colors.grey.withOpacity(0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                width: 2,
-                                color: kThemeColor,
-                              ),
-                            ),
+                          child: Icon(
+                            (conPassVis == true
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            color: (conPassTap == true)
+                                ? kThemeColor
+                                : Colors.grey.withOpacity(0.4),
                           ),
                         ),
-                      );
-                    },
+                        contentPadding:
+                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                        filled: true,
+                        fillColor: Colors.grey.withOpacity(0),
+                        enabledBorder: (conPassTap == false)
+                            ? OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              )
+                            : OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: kThemeColor,
+                                ),
+                              ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: kThemeColor,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 5,
@@ -261,12 +290,23 @@ class SignUpScreen extends StatelessWidget {
                       //mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                            color: kThemeColor,
-                            child: SvgPicture.asset(
-                              'assets/icons/checkbox.svg',
-                              color: Colors.white,
-                            )),
+                        GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              termAgreed = !termAgreed;
+                            });
+                          },
+                          child: Container(
+                            height: 20,width: 20,
+                            color:(!termAgreed)? (Colors.grey.withOpacity(0.5)):kThemeColor,
+                            child: (termAgreed == true)
+                                ? SvgPicture.asset(
+                                    'assets/icons/checkbox.svg',
+                                    color: Colors.white,
+                                  )
+                                : Container(),
+                          ),
+                        ),
                         SizedBox(
                           width: 10.0,
                         ),
@@ -325,10 +365,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   BlocBuilder<SignupBloc, SignupState>(
                     builder: (context, state) {
-                      bool isOk = (state.emailTapped &
-                          state.passwordTapped &
-                          state.confirmPasswordTapped &
-                          state.nameTapped);
+                      bool isOk = (emaiTap & passTap & nameTap & conPassTap);
                       print(isOk);
                       return SizedBox(
                         width: double.infinity,

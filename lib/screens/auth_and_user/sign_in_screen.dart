@@ -93,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Colors.black,
                         w: 'r',
                       ),
-                      decoration: tryTextDeco('Email id', emailTapped),
+                      decoration: textFieldDecoration('Email id', emailTapped),
                     ),
                   ),
                   SizedBox(

@@ -58,7 +58,7 @@ InputDecoration normalTextDecoration(String name) {
   );
 }
 
-InputDecoration tryTextDeco(String name, bool touched) {
+InputDecoration textFieldDecoration(String name, bool touched) {
   if (!touched)
     return InputDecoration(
       hintText: name,
