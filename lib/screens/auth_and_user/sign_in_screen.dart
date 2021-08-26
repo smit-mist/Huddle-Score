@@ -6,10 +6,21 @@ import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   LoginBloc _loginBloc;
+
+  bool visible = false;
+  bool emailTapped = false;
+  bool passTapped = false;
   TextEditingController emailCtrl = TextEditingController();
+
   TextEditingController passwordCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
@@ -69,91 +80,84 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder<LoginBloc, LoginState>(
-                    builder: (context, state) {
-                      return Container(
-                        width: double.infinity,
-
-                        child: TextField(
-                          onTap: () {
-                            _loginBloc.add(EmailFieldPressed());
-                          },
-                          controller: emailCtrl,
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'r',
-                          ),
-                          decoration: normalTextDecoration(
-                            'Email id',
-                          ),
-                        ),
-                      );
-                    },
+                  Container(
+                    width: double.infinity,
+                    child: TextField(
+                      onTap: () {
+                        setState(() {
+                          emailTapped = true;
+                        });
+                      },
+                      controller: emailCtrl,
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'r',
+                      ),
+                      decoration: tryTextDeco('Email id', emailTapped),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  BlocBuilder<LoginBloc, LoginState>(
-                    buildWhen: (prev, curr) {
-                 //     print("Should rebuild because $prev to $curr");
-                      return true;
-                    },
-                    builder: (context, state) {
-              //        print(state);
-               //       print("Rebuild");
-
-                      return Container(
-                        width: double.infinity,
-
-                        child: TextField(
+                  Container(
+                    width: double.infinity,
+                    child: TextField(
+                      onTap: () {
+                        setState(() {
+                          passTapped = true;
+                        });
+                      },
+                      controller: passwordCtrl,
+                      style: themeFont(
+                        color: Colors.black,
+                        w: 'r',
+                      ),
+                      obscureText: !visible,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle:
+                            themeFont(color: Color(0xff626262), w: 'r', s: 14),
+                        suffixIcon: GestureDetector(
                           onTap: () {
-                            _loginBloc.add(PasswordFieldPressed());
+                            setState(() {
+                              passTapped = true;
+                              visible = !visible;
+                            });
                           },
-                          controller: passwordCtrl,
-                          style: themeFont(
-                            color: Colors.black,
-                            w: 'r',
-                          ),
-                          obscureText: state.obscureText,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: themeFont(
-                                color: Color(0xff626262),
-                                w: 'r',
-                                s: 14),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                  //              print("OBSCURE PRESSED");
-                                _loginBloc.add(ObscureTextPressed());
-                              },
-                              child: Icon(
-                                (state.obscureText == false
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                color: (state.passwordTapped == true)
-                                    ? kThemeColor
-                                    : Colors.grey.withOpacity(0.4),
-                              ),
-                            ),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                width: 2,
-                                color: kThemeColor,
-                              ),
-                            ),
+                          child: Icon(
+                            (visible == true
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            color: (passTapped == true)
+                                ? kThemeColor
+                                : Colors.grey.withOpacity(0.4),
                           ),
                         ),
-                      );
-                    },
+                        contentPadding:
+                            EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        enabledBorder: (passTapped == false)
+                            ? OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              )
+                            : OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: kThemeColor,
+                                ),
+                              ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: kThemeColor,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 5,
@@ -169,10 +173,7 @@ class SignInScreen extends StatelessWidget {
                           },
                           child: Text(
                             'Forgot Password?',
-                            style: themeFont(
-                                color: kThemeColor,
-                                w: 'n',
-                                s: 11),
+                            style: themeFont(color: kThemeColor, w: 'n', s: 11),
                           ),
                         ),
                       ),
@@ -187,10 +188,7 @@ class SignInScreen extends StatelessWidget {
                       bgColor: kThemeColor,
                       child: Text(
                         'Log In',
-                        style: themeFont(
-                          color: Colors.white,
-                          w: 'm',s: 16
-                        ),
+                        style: themeFont(color: Colors.white, w: 'm', s: 16),
                       ),
                       onTap: () {
                         _loginBloc.add(
@@ -208,7 +206,8 @@ class SignInScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('New to Huddle & Score?', style: themeFont(s: 12,w: 'm')),
+                      Text('New to Huddle & Score?',
+                          style: themeFont(s: 12, w: 'm')),
                       SizedBox(
                         width: 5,
                       ),
@@ -219,7 +218,8 @@ class SignInScreen extends StatelessWidget {
                         child: Text(
                           'Sign up',
                           style: themeFont(
-                            s: 12,w: 'm',
+                            s: 12,
+                            w: 'm',
                             color: kThemeColor,
                           ),
                         ),

@@ -17,30 +17,30 @@ const MaterialColor kThemeColor = const MaterialColor(
 );
 const double kScreenW = 424;
 const double kScreenH = 911;
-Map<String,FontWeight>convertMe = {
-  "Thin":FontWeight.w100,
-  "t":FontWeight.w100,
-  "l":FontWeight.w300,
-  "r":FontWeight.w400,
-  "m":FontWeight.w500,
-  "sb":FontWeight.w600,
-  "b":FontWeight.w700,
-  "eb":FontWeight.w800,
+Map<String, FontWeight> convertMe = {
+  "Thin": FontWeight.w100,
+  "t": FontWeight.w100,
+  "l": FontWeight.w300,
+  "r": FontWeight.w400,
+  "m": FontWeight.w500,
+  "sb": FontWeight.w600,
+  "b": FontWeight.w700,
+  "eb": FontWeight.w800,
 };
 TextStyle themeFont({Color color, String w, double s}) {
   return TextStyle(
-    fontFamily: 'Lexend',
+      fontFamily: 'Lexend',
       color: color ?? Colors.black,
-      fontWeight: (w == null || convertMe[w] == null) ? FontWeight.w500:convertMe[w],
+      fontWeight:
+          (w == null || convertMe[w] == null) ? FontWeight.w500 : convertMe[w],
       fontSize: s ?? 14);
   // return TextStyle(color: color, fontWeight: w, fontSize: 14);
 }
 
-
 InputDecoration normalTextDecoration(String name) {
   return InputDecoration(
     hintText: name,
-    hintStyle: themeFont(color: Color(0xff626262), s: 14,w: 'r'),
+    hintStyle: themeFont(color: Color(0xff626262), s: 14, w: 'r'),
     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
     filled: true,
     fillColor: Color(0xFFF1F1F1),
@@ -55,48 +55,99 @@ InputDecoration normalTextDecoration(String name) {
         color: kThemeColor,
       ),
     ),
-
   );
 }
 
-Map<int,String>getMonthName = {
-  1:"January",
-  2:'February',
-  3:'March',
-  4:'April',
+InputDecoration tryTextDeco(String name, bool touched) {
+  if (!touched)
+    return InputDecoration(
+      hintText: name,
+      hintStyle: themeFont(color: Color(0xff626262), s: 14, w: 'r'),
+      contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+      filled: true,
+      fillColor: Color(0xFFF1F1F1),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+    );
+  else
+    return InputDecoration(
+      hintText: name,
+      hintStyle: themeFont(color: Color(0xff626262), s: 14, w: 'r'),
+      contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+      filled: true,
+      fillColor: Color(0xFFF1F1F1),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+    );
+}
+
+Map<int, String> getMonthName = {
+  1: "January",
+  2: 'February',
+  3: 'March',
+  4: 'April',
   5: 'May',
   6: 'June',
   7: 'July',
   8: 'August',
-  9:'September',
-  10:'October',
-  11:'November',
-  12:'December'
+  9: 'September',
+  10: 'October',
+  11: 'November',
+  12: 'December'
 };
-class WeirdDateFormat{
+
+class WeirdDateFormat {
   String date;
   WeirdDateFormat({@required this.date});
-  String getDate(){
-    return date.substring(8,10);
-  }
-  String getMonth(){
-
-    return getMonthName[int.parse(date.substring(5,7))];
-  }
-  String getYear(){
-    return date.substring(0,4);
+  String getDate() {
+    return date.substring(8, 10);
   }
 
-  String printNormal(){
-    return getDate() + ' ' + getMonth() + ', '+getYear();
+  String getMonth() {
+    return getMonthName[int.parse(date.substring(5, 7))];
   }
 
+  String getYear() {
+    return date.substring(0, 4);
+  }
 
+  String printNormal() {
+    return getDate() + ' ' + getMonth() + ', ' + getYear();
+  }
 }
-String getSuperScript(int x){
+
+String getSuperScript(int x) {
   x %= 10;
-  if(x == 1)return "st";
-  if(x == 2)return "nd";
-  if(x == 3)return "rd";
+  if (x == 1) return "st";
+  if (x == 2) return "nd";
+  if (x == 3) return "rd";
   return "th";
 }

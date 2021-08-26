@@ -11,9 +11,3 @@ class LoginButtonPressed extends LoginEvent {
   String email, password;
   LoginButtonPressed({this.email, this.password});
 }
-
-class EmailFieldPressed extends LoginEvent {}
-
-class PasswordFieldPressed extends LoginEvent {}
-
-class ObscureTextPressed extends LoginEvent {}
