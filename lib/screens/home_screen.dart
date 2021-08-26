@@ -264,7 +264,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       },
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: state.allTournaments.length,
                       itemBuilder: (_, int index) {
                         return TournamentTile(
                             here: state.allTournaments[index]);

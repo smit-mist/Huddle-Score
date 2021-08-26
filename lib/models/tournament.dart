@@ -44,16 +44,18 @@ class Tournament {
   }
 
   factory Tournament.fromMap(Map<String, dynamic> data, String id) {
-
-
-    var ok =  Tournament(
+    var ok = Tournament(
       tourId: id,
-      email: data['email'],
-      orderId: data['orderID'],
-      prizePool: (data['prizePool']).cast<String, List<dynamic>>(),
+      email: data['email'] ?? 'Not found',
+      orderId: data['orderID'] ?? "NULL",
+      prizePool: data['prizePool'] == null
+          ? {
+              'First': [100]
+            }
+          : (data['prizePool']).cast<String, List<dynamic>>(),
       main: Main.fromMap(data['main']),
-     info: Info.fromMap(data['info']),
-     details: Details.fromMap(data['details']),
+      info: Info.fromMap(data['info']),
+      details: Details.fromMap(data['details']),
     );
 
     return ok;
@@ -62,7 +64,6 @@ class Tournament {
   Future<Tournament> fromHomeTour(HomeTour tour) async {
     return await TournamentRepository().getTournamentById(tour.tourId);
   }
-
 }
 
 class Main {
@@ -71,76 +72,108 @@ class Main {
   Room room;
   List<String> timeLine;
   Venue venue;
-  Main({this.ageRec, this.deadline, this.room, this.timeLine, this.venue});
-  factory Main.fromMap(Map<String, dynamic> map) => Main(
-        ageRec: map['ageRec'],
-        deadline: map['deadline'],
-        timeLine: map['timeline'].cast<String>(),
-        venue: Venue.fromMap(map['venue']),
-        room: Room.fromMap(map['rooms']),
-      );
+  Main(
+      {this.ageRec = 'NULL',
+      this.deadline = "NULL",
+      this.room = const Room(),
+      this.timeLine = const ["NOT FOUND"],
+      this.venue = const Venue()});
+  factory Main.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Main();
+    return Main(
+      ageRec: map['ageRec'] ?? 'NULL',
+      deadline: map['deadline'] ?? 'NULL',
+      timeLine: map['timeline'] == null
+          ? ["Not found"]
+          : map['timeline'].cast<String>(),
+      venue: Venue.fromMap(map['venue']),
+      room: Room.fromMap(map['rooms']),
+    );
+  }
 }
 
 class Venue {
-  List<String> address;
-  Map<String, double> coordinates;
-  Venue({this.address, this.coordinates});
-  factory Venue.fromMap(Map<String, dynamic> map) => Venue(
-        address: map['address'].cast<String>(),
-        coordinates: map['coordinates'].cast<String, double>(),
-      );
+  final List<String> address;
+  final Map<String, double> coordinates;
+  const Venue(
+      {this.address = const ["No address found its null"],
+      this.coordinates = const {'latitude': 23.121}});
+  factory Venue.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Venue();
+    return Venue(
+      address: map['address'] == null
+          ? const ["No add found"]
+          : map['address'].cast<String>(),
+      coordinates: map['coordinates'] == null
+          ? const {'lat': 23.121}
+          : map['coordinates'].cast<String, double>(),
+    );
+  }
 }
 
 class Room {
-  List<String> registered;
-  int total;
-  Room({this.registered, this.total});
-  factory Room.fromMap(Map<String, dynamic> map) => Room(
-        registered: map['registered'].cast<String>(),
-        total: map['total'],
-      );
+  final List<String> registered;
+  final int total;
+  const Room({this.registered = const ['none'], this.total = 37});
+  factory Room.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Room();
+    return Room(
+      registered: map['registered'] == null
+          ? ['is null']
+          : map['registered'].cast<String>(),
+      total: map['total'] ?? 37,
+    );
+  }
 }
 
 class Info {
-  Map<String, String> dates;
-  int durationPerMatch;
-  int playersPerTeam;
-  int registrationFee;
-  int substituteAllowed;
-  String type;
-  Info({
-    this.dates,
-    this.durationPerMatch,
-    this.playersPerTeam,
-    this.registrationFee,
-    this.substituteAllowed,
-    this.type,
+  final Map<String, String> dates;
+  final int durationPerMatch;
+  final int playersPerTeam;
+  final int registrationFee;
+  final int substituteAllowed;
+  final String type;
+  const Info({
+    this.dates = const {'Null': 'NULL'},
+    this.durationPerMatch = 37,
+    this.playersPerTeam = 37,
+    this.registrationFee = 37,
+    this.substituteAllowed = 37,
+    this.type = "NULL",
   });
-  factory Info.fromMap(Map<String, dynamic> map) => Info(
-        dates: map['dates'].cast<String, String>(),
-        durationPerMatch: map['durationPerMatch'],
-        playersPerTeam: map['playersPerTeam'],
-        registrationFee: map['regestrationFee'],
-        substituteAllowed: map['substituteAllowed'],
-        type: map['type'],
-      );
+  factory Info.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Info();
+    return Info(
+      dates: map['dates'] == null
+          ? {'No date': 'Null found'}
+          : map['dates'].cast<String, String>(),
+      durationPerMatch: map['durationPerMatch'] ?? 37,
+      playersPerTeam: map['playersPerTeam'] ?? 37,
+      registrationFee: map['regestrationFee'] ?? 37,
+      substituteAllowed: map['substituteAllowed'] ?? 37,
+      type: map['type'] ?? "NUll",
+    );
+  }
 }
 
 class Details {
-  String description;
-  List<String> pdf;
-  String poster;
-  String title;
-  Details({
-    this.description,
-    this.pdf,
-    this.poster,
-    this.title,
+  final String description;
+  final List<String> pdf;
+  final String poster;
+  final String title;
+  const Details({
+    this.description = "NULL",
+    this.pdf = const ["NOT FOUND"],
+    this.poster = "NULL",
+    this.title = 'null',
   });
-  factory Details.fromMap(Map<String, dynamic> map) => Details(
-        description: map['discription'],
-        pdf: (map['pdf'] == null ? null : map['pdf'].cast<String>()),
-        poster: map['poster'],
-        title: map['title'],
-      );
+  factory Details.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Details();
+    return Details(
+      description: map['discription'] ?? 'NULL',
+      pdf: (map['pdf'] == null ? ["This is null"] : map['pdf'].cast<String>()),
+      poster: map['poster'] ?? 'NULL',
+      title: map['title'] ?? 'NULL',
+    );
+  }
 }
