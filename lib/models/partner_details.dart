@@ -1,8 +1,8 @@
-class ParnterDetailsTour {
+class PartnerDetailsTour {
   String city, name, tourName, state, type, email;
   int contactNumber;
   String tourType;
-  ParnterDetailsTour({
+  PartnerDetailsTour({
     this.email,
     this.city,
     this.tourType,
