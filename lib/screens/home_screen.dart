@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
-import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
@@ -12,9 +11,20 @@ import 'dart:ui';
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   String _chosenValue = "Ahmedabad";
+
   HomeBloc _bloc;
+
+  bool isValid = false;
+
+  TextEditingController _emailCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<HomeBloc>(context);
@@ -319,18 +329,19 @@ class HomeScreen extends StatelessWidget {
                     return Container();
                   }
                   return ListView.separated(
-                      separatorBuilder: (_, index) {
-                        return SizedBox(
-                          width: 20,
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.allFifa.length,
-                      itemBuilder: (_, int index) {
-                        return FifaTile(
-                          fifa: state.allFifa[index],
-                        );
-                      });
+                    separatorBuilder: (_, index) {
+                      return SizedBox(
+                        width: 20,
+                      );
+                    },
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.allFifa.length,
+                    itemBuilder: (_, int index) {
+                      return FifaTile(
+                        fifa: state.allFifa[index],
+                      );
+                    },
+                  );
                 },
               ),
             ),
@@ -390,21 +401,42 @@ class HomeScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      controller: _emailCtrl,
                       decoration:
                           normalTextDecoration('Enter your email address')
-                              .copyWith(fillColor: Colors.white),
+                              .copyWith(
+                        fillColor: Colors.white,
+                        errorText: isValid
+                            ? 'Please enter a valid email address'
+                            : null,
+                      ),
                     ),
                   ),
-                  Container(
-                    height: 45,
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: ActionButton(
-                      bgColor: kThemeColor,
-                      child: Text(
-                        'Subscribe',
-                        style: themeFont(
-                          color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      if (!RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(_emailCtrl.text)) {
+                        setState(() {
+                          isValid = true;
+                        });
+                      } else {
+                        setState(() {
+                          isValid = false;
+                        });
+                      }
+                    },
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: ActionButton(
+                        bgColor: kThemeColor,
+                        child: Text(
+                          'Subscribe',
+                          style: themeFont(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
