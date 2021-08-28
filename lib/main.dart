@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:huddle_and_score/blocs/forms/forms_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/blocs/user/user_bloc.dart';
-import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/home_repository.dart';
 import 'package:huddle_and_score/repositories/partner_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/routes.dart';
-import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
+import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/home/home_bloc.dart';
@@ -31,11 +31,15 @@ class MyApp extends StatelessWidget {
   final AuthRepository _authRepository = AuthRepository();
   final HomeRepository _homeRepository = HomeRepository();
   final UserRepository _userRepository = UserRepository();
+  final PartnerRepository _partnerRepository = PartnerRepository();
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<FormsBloc>(
+          create: (_) => FormsBloc(_partnerRepository),
+        ),
         BlocProvider<UserBloc>(
           create: (_) => UserBloc(_userRepository),
         ),
