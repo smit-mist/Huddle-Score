@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
+import 'package:huddle_and_score/repositories/home_repository.dart';
 import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
@@ -413,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (!RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(_emailCtrl.text)) {
@@ -424,6 +425,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() {
                           isValid = false;
                         });
+                        await HomeRepository()
+                            .subscribeTurf('yyashjain2001@gmail.com');
                       }
                     },
                     child: Container(
