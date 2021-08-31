@@ -1,17 +1,14 @@
-@ the end.
-//TODO: SMIT Add checkbox for agreement in SignUp Screen
-// TODO: SMIT Change filled color for text field.
-//TODO: FORM Validation
+// TODO: Smit - Sign Up
+// TODO: Smit - Tournament Registration Form
+// TODO: Smit- All Icons
+// TODO: Smit - Fifa search
+// TODO: Smit - Border in all forms.
 
-====================================
+// TODO: Yash&Smit- Email Verify.
 
-BackEnd..
-Priority
-// TODO: All 4 Forms and forward.
-// TODO: FeedBack Dialog Few UI Changes tobe done.
-// TODO: email verification
-// TODO: User History
-// TODO: CityWise in Home
-// TODO: Page 12 Dialog Box City
-
+// TODO: Yash - Tournament Model updated.
+// TODO: Yash - Pass correct order ID in payment / test it.
+// TODO: Yash - Send data to the receipt page (after payment)
+// TODO: Yash - FIfa Null Aware
+// TODO: Yash - Form validation also password as mentioned.
 

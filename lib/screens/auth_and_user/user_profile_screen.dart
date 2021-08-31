@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/screens/auth_and_user/about_app_screen.dart';
@@ -6,15 +7,25 @@ import 'package:huddle_and_score/screens/auth_and_user/edit_profile_screen.dart'
 import '../../constants.dart';
 import 'help_and_support_screen.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   final String name;
   final String email;
   UserProfileScreen({this.email, this.name});
 
   @override
+  _UserProfileScreenState createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  bool verified;
+
+  @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    verified = FirebaseAuth.instance.currentUser.emailVerified;
+
+    print("in user profile $verified");
     return Container(
       width: w,
       height: double.infinity,
@@ -43,14 +54,14 @@ class UserProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hey, $name',
+                      'Hey, ${widget.name}',
                       style: themeFont(
                         color: kThemeColor,
                         s: 20,
                       ),
                     ),
                     Text(
-                      '$email',
+                      '${widget.email}',
                       style: themeFont(
                         color: Colors.red,
                         s: 10,
@@ -72,7 +83,7 @@ class UserProfileScreen extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => EditProfileScreen(email: email,name: name,)));
+                        MaterialPageRoute(builder: (_) => EditProfileScreen(email: widget.email,name: widget.name,)));
                   },
                   title: Text(
                     'Account',
@@ -86,6 +97,7 @@ class UserProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        (verified)?Container():
                         Icon(
                           Icons.warning_amber_rounded,
                           color: Colors.red,

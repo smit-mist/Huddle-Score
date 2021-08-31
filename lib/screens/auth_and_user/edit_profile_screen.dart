@@ -10,6 +10,8 @@ import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.da
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
+import '../home_navbar_screen.dart';
+
 class EditProfileScreen extends StatelessWidget {
   HomeNavBarBloc _bloc;
   String name, email;
@@ -95,9 +97,20 @@ class EditProfileScreen extends StatelessWidget {
                   Spacer(),
                   GestureDetector(
                     onTap: () async {
+                      _bloc.add(HomeIconPressed());
+                      print(FirebaseAuth.instance.currentUser.emailVerified);
+
                       await FirebaseAuth.instance.currentUser
                           .sendEmailVerification();
                       Fluttertoast.showToast(msg: 'Verification email sent');
+                      print(FirebaseAuth.instance.currentUser.emailVerified);
+                      print("On tap khatam");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => HomeNavBar(),
+                        ),
+                      );
                     },
                     child: RichText(
                       text: TextSpan(

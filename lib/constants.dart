@@ -61,6 +61,14 @@ InputDecoration normalTextDecoration(String name) {
 InputDecoration textFieldDecoration(String name, bool touched) {
   if (!touched)
     return InputDecoration(
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
       hintText: name,
       hintStyle: themeFont(color: Color(0xff626262), s: 14, w: 'r'),
       contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
@@ -86,6 +94,20 @@ InputDecoration textFieldDecoration(String name, bool touched) {
       filled: true,
       fillColor: Color(0xFFF1F1F1),
       border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          width: 2,
+          color: kThemeColor,
+        ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
           width: 2,

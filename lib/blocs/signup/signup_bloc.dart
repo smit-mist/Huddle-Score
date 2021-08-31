@@ -12,7 +12,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final AuthRepository _repository;
   SignupBloc({AuthRepository authRepository})
       : _repository = authRepository,
-        super(SignupInitial(false, false, false, false, false));
+        super(SignupInitial());
 
   @override
   Stream<SignupState> mapEventToState(
@@ -20,41 +20,18 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   ) async* {
     if (event is SignUpButtonPressed) {
       try {
-        yield SignUpLoading(true, true, false, true, true);
+        yield SignUpLoading();
         User user =
             await _repository.signUp(event.email, event.password, event.name);
         yield SignUpSuccess(
           user: user,
-          emailTapped: true,
-          passwordTapped: true,
-          obscureText: false,
-          nameTapped: true,
-          confirmPasswordTapped: true,
         );
       } catch (e) {
         yield SignUpFailure(
-            message: e.toString(),
-            nameTapped: true,
-            emailTapped: true,
-            confirmPasswordTapped: true,
-            passwordTapped: true,
-            obscureText: false);
+          message: e.toString(),
+        );
       }
-    } else if (event is NameOnTap) {
-      state.nameTapped = true;
-      yield state;
-    } else if (event is EmailOnTap) {
-      state.emailTapped = true;
-      yield state;
-    } else if (event is PasswordOnTap) {
-      state.passwordTapped = true;
-      yield state;
-    } else if (event is ConfirmPasswordOnTap) {
-      state.confirmPasswordTapped = true;
-      yield state;
-    } else if (event is ObscureTextOnTap) {
-      state.obscureText = true;
-      yield state;
     }
+    yield state;
   }
 }
