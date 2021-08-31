@@ -62,7 +62,6 @@ class _TournamentReviewState extends State<TournamentReview> {
   }
 
   void checkoutOptions(RegDetails regDetails) {
-    print(widget.currentTour.info.registrationFee);
     var options = {
       'key': 'rzp_test_Q9uimXdoWQRLSv',
       'prefill': {
@@ -70,7 +69,7 @@ class _TournamentReviewState extends State<TournamentReview> {
         'email': user.email,
       },
       'currency': 'INR',
-      'amount': widget.currentTour.info.registrationFee*100,
+      'amount': 500,
       'order_id': widget.currentTour.orderId,
       'notes': {
         'uid': user.uid,
@@ -144,7 +143,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     child: Center(
                       child: Text(
                         'Proceed to pay',
-                        style: themeFont(color: Colors.white,s:15,w:'sb'),
+                        style: themeFont(color: Colors.white, s: 15, w: 'sb'),
                       ),
                     ),
                     decoration: BoxDecoration(
@@ -199,7 +198,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     children: [
                       Text(
                         'Summary',
-                        style: themeFont(w: 'm',s:16),
+                        style: themeFont(w: 'm', s: 16),
                       ),
                       SizedBox(
                         height: 1,
@@ -223,7 +222,8 @@ class _TournamentReviewState extends State<TournamentReview> {
                           data: widget.userRecord.viceCaptain.fullName),
                       DataShower(
                           type: 'Phone No.',
-                          data: widget.userRecord.viceCaptain.contact.toString()),
+                          data:
+                              widget.userRecord.viceCaptain.contact.toString()),
                       DataShower(
                           type: 'Email Id',
                           data: widget.userRecord.viceCaptain.email),
@@ -258,7 +258,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Text(
                         'Amount Payable',
                         style: themeFont(s: 16, w: 'b'),
@@ -270,12 +272,12 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Charges',
-                            style: themeFont(s:12,w:'m'),
+                            style: themeFont(s: 12, w: 'm'),
                           ),
                           Spacer(),
                           Text(
-                            '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(s:12,w:'m'),
+                            '₹ 10}',
+                            style: themeFont(s: 12, w: 'm'),
                           )
                         ],
                       ),
@@ -283,37 +285,37 @@ class _TournamentReviewState extends State<TournamentReview> {
                         children: [
                           Text(
                             'Taxes',
-                            style: themeFont(s:12,w:'m'),
+                            style: themeFont(s: 12, w: 'm'),
                           ),
                           Spacer(),
                           Text(
                             '0',
-                            style: themeFont(s:12,w:'m'),
+                            style: themeFont(s: 12, w: 'm'),
                           )
                         ],
                       ),
                       Divider(
                         color: Colors.black.withOpacity(0.5),
                       ),
-                      SizedBox(height: 1,),
-
+                      SizedBox(
+                        height: 1,
+                      ),
                       Row(
                         children: [
                           Text(
                             'Total Amount',
-                            style: themeFont(s:15,w:'m'),
+                            style: themeFont(s: 15, w: 'm'),
                           ),
                           Spacer(),
                           Text(
-                            '₹ ${widget.currentTour.info.registrationFee}',
-                            style: themeFont(s:15,w:'sb'),
+                            '₹ 10',
+                            style: themeFont(s: 15, w: 'sb'),
                           )
                         ],
                       ),
                       SizedBox(
                         height: 15,
                       ),
-
                     ],
                   ),
                 ),
@@ -339,14 +341,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(s:14,w:'m'),
+            style: themeFont(s: 14, w: 'm'),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(s:15,w:'sb'),
+              style: themeFont(s: 15, w: 'sb'),
             ),
           ),
         ],

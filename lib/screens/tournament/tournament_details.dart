@@ -39,8 +39,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   }
 
   void preComputer() {
-    seatsLeft = widget.tournament.main.room.total -
-        widget.tournament.main.room.registered.length;
+    seatsLeft = 20; // TODO: UPdate it.
     timeLine = "";
     st = WeirdDateFormat(date: widget.tournament.main.timeLine[0]);
     en = WeirdDateFormat(date: widget.tournament.main.timeLine[1]);
@@ -739,7 +738,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             DataShower(
                               type: 'Registration Fee',
                               data:
-                                  '₹ ${widget.tournament.info.registrationFee.toString()}/ team',
+                                  '₹ 37/ team',
                             ),
                             SizedBox(
                               height: 10,

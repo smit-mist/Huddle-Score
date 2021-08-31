@@ -5,7 +5,7 @@ import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 
 class Tournament {
-  Map<String, Record> utils; //String is tour id
+  Map<String, ContactDetails> contact;
   Details details;
   String email;
   Info info;
@@ -13,8 +13,9 @@ class Tournament {
   String orderId;
   Main main;
   Map<String, List<dynamic>> prizePool;
+  Map<String, Room> rooms;
   Tournament({
-    this.utils,
+    this.contact,
     this.details,
     this.tourId,
     this.email,
@@ -24,21 +25,21 @@ class Tournament {
     this.prizePool,
   });
   bool registeredIn() {
-    User value = AuthRepository().getCurrentUser();
-    if (value == null) {
-      //      print("Not Found");
-      return false;
-    }
-    //  print(this.main.room.registered);
-    String id = value.uid;
-    for (int i = 0; i < this.main.room.registered.length; i++) {
-      //     print(i);
-      if (this.main.room.registered[i] == id) {
-        print("Found");
-        return true;
-      }
-    }
-    print("Not Found");
+    // User value = AuthRepository().getCurrentUser();
+    // if (value == null) {
+    //   //      print("Not Found");
+    //   return false;
+    // }
+    // //  print(this.main.room.registered);
+    // String id = value.uid;
+    // for (int i = 0; i < this.main.room.registered.length; i++) {
+    //   //     print(i);
+    //   if (this.main.room.registered[i] == id) {
+    //     print("Found");
+    //     return true;
+    //   }
+    // }
+    // print("Not Found");
 
     return false;
   }
@@ -46,6 +47,7 @@ class Tournament {
   factory Tournament.fromMap(Map<String, dynamic> data, String id) {
     var ok = Tournament(
       tourId: id,
+      contact: {"1": ContactDetails()},
       email: data['email'] ?? 'Not found',
       orderId: data['orderID'] ?? "NULL",
       prizePool: data['prizePool'] == null
@@ -66,16 +68,23 @@ class Tournament {
   }
 }
 
+class ContactDetails {
+  String name, email;
+  int contactNumber;
+  ContactDetails(
+      {this.name = "NOTHING",
+      this.email = "NOT MAIL",
+      this.contactNumber = 373737373737});
+}
+
 class Main {
   String ageRec;
   String deadline;
-  Room room;
   List<String> timeLine;
   Venue venue;
   Main(
       {this.ageRec = 'NULL',
       this.deadline = "NULL",
-      this.room = const Room(),
       this.timeLine = const ["NOT FOUND"],
       this.venue = const Venue()});
   factory Main.fromMap(Map<String, dynamic> map) {
@@ -87,7 +96,6 @@ class Main {
           ? ["Not found"]
           : map['timeline'].cast<String>(),
       venue: Venue.fromMap(map['venue']),
-      room: Room.fromMap(map['rooms']),
     );
   }
 }
@@ -113,15 +121,23 @@ class Venue {
 
 class Room {
   final List<String> registered;
-  final int total;
-  const Room({this.registered = const ['none'], this.total = 37});
+  final int fees;
+  final int maxSeats;
+  final String orderId;
+  final String category;
+  const Room({
+    this.registered = const ['none'],
+    this.fees = 37,
+    this.maxSeats = 37,
+    this.orderId = "NOT ORDER ID",
+    this.category = "No cater",
+  });
   factory Room.fromMap(Map<String, dynamic> map) {
     if (map == null) return Room();
     return Room(
       registered: map['registered'] == null
           ? ['is null']
           : map['registered'].cast<String>(),
-      total: map['total'] ?? 37,
     );
   }
 }
@@ -130,14 +146,12 @@ class Info {
   final Map<String, String> dates;
   final int durationPerMatch;
   final int playersPerTeam;
-  final int registrationFee;
   final int substituteAllowed;
   final String type;
   const Info({
     this.dates = const {'Null': 'NULL'},
     this.durationPerMatch = 37,
     this.playersPerTeam = 37,
-    this.registrationFee = 37,
     this.substituteAllowed = 37,
     this.type = "NULL",
   });
@@ -149,7 +163,6 @@ class Info {
           : map['dates'].cast<String, String>(),
       durationPerMatch: map['durationPerMatch'] ?? 37,
       playersPerTeam: map['playersPerTeam'] ?? 37,
-      registrationFee: map['regestrationFee'] ?? 37,
       substituteAllowed: map['substituteAllowed'] ?? 37,
       type: map['type'] ?? "NUll",
     );
@@ -160,8 +173,10 @@ class Details {
   final String description;
   final List<String> pdf;
   final String poster;
+  final String term;
   final String title;
   const Details({
+    this.term = "Not term here",
     this.description = "NULL",
     this.pdf = const ["NOT FOUND"],
     this.poster = "NULL",
@@ -170,6 +185,7 @@ class Details {
   factory Details.fromMap(Map<String, dynamic> map) {
     if (map == null) return Details();
     return Details(
+      term: map['terms'] ?? 'Not here',
       description: map['discription'] ?? 'NULL',
       pdf: (map['pdf'] == null ? ["This is null"] : map['pdf'].cast<String>()),
       poster: map['poster'] ?? 'NULL',

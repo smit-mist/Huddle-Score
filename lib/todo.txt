@@ -10,5 +10,5 @@
 // TODO: Yash - Pass correct order ID in payment / test it.
 // TODO: Yash - Send data to the receipt page (after payment)
 // TODO: Yash - FIfa Null Aware
-// TODO: Yash - Form validation also password as mentioned.
+// done: Yash - Form validation also password as mentioned.
 
