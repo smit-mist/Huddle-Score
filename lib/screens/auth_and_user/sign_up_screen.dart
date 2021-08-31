@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 w: 'n',
                               ),
                               decoration:
-                              textFieldDecoration('Full Name', typedName),
+                                  textFieldDecoration('Full Name', typedName),
                             ),
                           ),
                           SizedBox(
@@ -140,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: TextFormField(
                               validator: (value) {
                                 if (!RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(value))
                                   return 'Please enter a valid email';
                                 return null;
@@ -159,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 w: 'n',
                               ),
                               decoration:
-                              textFieldDecoration('Email Id', typedEmail),
+                                  textFieldDecoration('Email Id', typedEmail),
                             ),
                           ),
                           SizedBox(
@@ -173,7 +173,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               validator: (value) {
                                 if (value.isEmpty ||
                                     value == null ||
-                                    value.length < 8)
+                                    !RegExp(r"^(?=.*?[!@#\$&*~])$.{6,}")
+                                        .hasMatch(value))
                                   return 'Please Enter the password in the given mannner';
                                 return null;
                               },
@@ -192,7 +193,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               obscureText: !showP1,
                               decoration: InputDecoration(
-
                                 hintText: 'Password',
                                 hintStyle: themeFont(
                                     color: Color(0xff626262), w: 'r', s: 14),
@@ -213,45 +213,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                 ),
                                 contentPadding:
-                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                                    EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 focusedErrorBorder: (typedP1 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 errorBorder: (typedP1 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 enabledBorder: (typedP1 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
@@ -312,45 +312,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                 ),
                                 contentPadding:
-                                EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                                    EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                                 filled: true,
                                 fillColor: Colors.transparent,
                                 focusedErrorBorder: (typedP2 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 errorBorder: (typedP2 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 enabledBorder: (typedP2 == false)
                                     ? OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                )
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none,
+                                      )
                                     : OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    width: 2,
-                                    color: kThemeColor,
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: kThemeColor,
+                                        ),
+                                      ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
@@ -400,7 +400,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       children: <TextSpan>[
                                         TextSpan(
                                           text:
-                                          "By creating an account, I agree to Huddle & Score's ",
+                                              "By creating an account, I agree to Huddle & Score's ",
                                           style: themeFont(
                                             s: 12.0,
                                             w: 'r',
@@ -415,7 +415,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.blue,
                                           ).copyWith(
                                               decoration:
-                                              TextDecoration.underline),
+                                                  TextDecoration.underline),
                                         ),
                                         TextSpan(
                                           text: ' and ',
@@ -433,7 +433,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.blue,
                                           ).copyWith(
                                               decoration:
-                                              TextDecoration.underline),
+                                                  TextDecoration.underline),
                                         ),
                                       ],
                                     ),
@@ -451,15 +451,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           BlocBuilder<SignupBloc, SignupState>(
                             builder: (context, state) {
                               bool isOk =
-                              (typedEmail & typedName & typedP1 & typedP2);
+                                  (typedEmail & typedName & typedP1 & typedP2);
                               print(isOk);
                               return SizedBox(
                                 width: double.infinity,
                                 child: ActionButton(
-                                    bgColor:
-                                    (isOk) ? kThemeColor : Colors.transparent,
-                                    borderColor:
-                                    (isOk) ? kThemeColor : Colors.transparent,
+                                    bgColor: (isOk)
+                                        ? kThemeColor
+                                        : Colors.transparent,
+                                    borderColor: (isOk)
+                                        ? kThemeColor
+                                        : Colors.transparent,
                                     child: Text(
                                       'Sign Up',
                                       style: themeFont(
@@ -471,19 +473,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     onTap: (isOk)
                                         ? () {
-                                      if (_key.currentState.validate()) {
-                                        _signupBloc.add(
-                                          SignUpButtonPressed(
-                                            email: emailCtrl.text,
-                                            password: passwordCtrl.text,
-                                            name: nameCtrl.text,
-                                          ),
-                                        );
-                                      }
-                                    }
+                                            if (_key.currentState.validate()) {
+                                              _signupBloc.add(
+                                                SignUpButtonPressed(
+                                                  email: emailCtrl.text,
+                                                  password: passwordCtrl.text,
+                                                  name: nameCtrl.text,
+                                                ),
+                                              );
+                                            }
+                                          }
                                         : () {
-                                      print("Fill Everything");
-                                    }),
+                                            print("Fill Everything");
+                                          }),
                               );
                             },
                           ),
@@ -655,7 +657,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             obscureText: !showP1,
                             decoration: InputDecoration(
-
                               hintText: 'Password',
                               hintStyle: themeFont(
                                   color: Color(0xff626262), w: 'r', s: 14),
@@ -676,45 +677,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                               contentPadding:
-                              EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                                  EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                               filled: true,
                               fillColor: Colors.transparent,
                               focusedErrorBorder: (typedP1 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               errorBorder: (typedP1 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               enabledBorder: (typedP1 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
@@ -754,7 +755,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             obscureText: !showP2,
                             decoration: InputDecoration(
-                            //  errorText: (isFailed) ? 'Invalid pass' : null,
+                              //  errorText: (isFailed) ? 'Invalid pass' : null,
                               hintText: 'Confirm Password',
                               hintStyle: themeFont(
                                   color: Color(0xff626262), w: 'r', s: 14),
@@ -775,45 +776,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                               contentPadding:
-                              EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
+                                  EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                               filled: true,
                               fillColor: Colors.transparent,
                               focusedErrorBorder: (typedP2 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               errorBorder: (typedP2 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               enabledBorder: (typedP2 == false)
                                   ? OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              )
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    )
                                   : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: kThemeColor,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: kThemeColor,
+                                      ),
+                                    ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
