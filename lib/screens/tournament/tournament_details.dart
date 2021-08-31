@@ -25,6 +25,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   WeirdDateFormat st, en, deadLine, semi, finals;
   bool canRegister;
   ScrollController ctrl;
+  bool clickedOnRegister = false;
   @override
   void initState() {
     _bloc = ButtonClickBloc();
@@ -104,14 +105,17 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       } else if (canRegister == false) {
                         print('deadline finished');
                       } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => TournamentRegisterForm(
-                              currentTour: widget.tournament,
-                            ),
-                          ),
-                        );
+                        setState(() {
+                          clickedOnRegister = true;
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (_) => TournamentRegisterForm(
+                        //       currentTour: widget.tournament,
+                        //     ),
+                        //   ),
+                        // );
                       }
                     },
                     child: (widget.isReg)
@@ -737,8 +741,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             ),
                             DataShower(
                               type: 'Registration Fee',
-                              data:
-                                  '₹ 37/ team',
+                              data: '₹ 37/ team',
                             ),
                             SizedBox(
                               height: 10,
@@ -807,34 +810,121 @@ class _TournamentDetailsState extends State<TournamentDetails> {
               ),
             ),
           ),
-          DraggableScrollableSheet(
-            builder: (_, ctrl) {
+          (clickedOnRegister)
+              ? DraggableScrollableSheet(
+                  builder: (_, ctrl) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 2,
+                                spreadRadius: 2,
+                                offset: Offset(-3, -5)),
+                          ]),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      height: h * 0.5,
+                      child: SingleChildScrollView(
+                        controller: ctrl,
+                        child: Container(
+                          height: h * 0.5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Terms & Conditions',
+                                style: themeFont(
+                                  w: 'sb',
+                                ).copyWith(decoration: TextDecoration.none),
+                              ),
+                              SizedBox(height: 10,),
+                              Text(
+                                widget.tournament.details.term,
+                                style: themeFont().copyWith(
+                                    decoration: TextDecoration.none),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  minChildSize: 0.25,
+                  maxChildSize: 0.4,
+                  initialChildSize: 0.25,
+                )
+              : Container(),
+          (clickedOnRegister)
+              ? Positioned(
+                  bottom: 10,
+                  child: Container(
+                    width: w,
+                    height: 65,
+                    color: Colors.white,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            print("OK");
+                            setState(() {
+                              clickedOnRegister = false;
+                            });
+                          },
+                          child: Container(
+                            width: w*0.4,
+                            child: ActionButton(
 
-              return SingleChildScrollView(
-                controller: ctrl,
-                child: Container(
-                  height: h*0.8,
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(),
-                          Container(
-                            child: Row(
-
+                              bgColor: Colors.white,
+                              child: Text(
+                                'Cancel',
+                                style: themeFont(
+                                  color: Colors.black,
+                                ).copyWith(decoration: TextDecoration.none),
+                              ),
+                              borderColor: kThemeColor,
                             ),
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        Container(
+                          width: w*0.4,
+                          child: ActionButton(
+                            bgColor: kThemeColor,
+                            child: Text(
+                              'Accept',
+                              style: themeFont(
+                                color: Colors.white,
+                              ).copyWith(decoration: TextDecoration.none),
+                            ),
+                            onTap: (){
+                              setState(() {
+                                clickedOnRegister = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => TournamentRegisterForm(
+                                    currentTour: widget.tournament,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
-              );
-            },
-            minChildSize: 0.25,
-            maxChildSize: 1,
-            initialChildSize: 0.25,
-          ),
+              : Container(),
         ],
       ),
     );
