@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:huddle_and_score/models/home_event.dart';
 
 class HomeRepository {
+  final String baseUrl =
+      "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
   Future<List<HomeTour>> fetchTours() async {
     //print("Tournament Fetching started");
-    final String baseUrl =
-        "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
     List<HomeTour> tours = [];
     var response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
@@ -24,14 +25,10 @@ class HomeRepository {
       print('Error!!!! In fetching tournaments');
       return null;
     }
-
   }
 
   Future<List<HomeFifa>> fetchFifas() async {
     //print("fifa Fetching started");
-
-    final String baseUrl =
-        "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
     List<HomeFifa> fifas = [];
     var response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
@@ -41,12 +38,30 @@ class HomeRepository {
         //print(value);
         HomeFifa temp = HomeFifa.fromJson(key, value, "fifa");
         fifas.add(temp);
-       // print(temp.name);
+        // print(temp.name);
       });
       return fifas;
     } else {
       print('Error!!!! in fifa fetching');
       return null;
     }
+  }
+
+  Future<void> subscribeTurf(String email) async {
+    final String url =
+        "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/sub";
+    ;
+    final String jwt = await FirebaseAuth.instance.currentUser.getIdToken();
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {'authorization': 'Bearer $jwt'},
+      body: <String, dynamic>{
+        'city': '**',
+        'email': email,
+      },
+    );
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 200) print('successssssssssssssssssss');
   }
 }
