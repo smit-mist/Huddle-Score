@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/home_event.dart';
-import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 
 class Tournament {
-  Map<String, ContactDetails> contact;
+  List<ContactDetails> contact;
   Details details;
   String email;
   Info info;
@@ -13,41 +12,42 @@ class Tournament {
   String orderId;
   Main main;
   Map<String, List<dynamic>> prizePool;
-  Map<String, Room> rooms;
+  List<Room> rooms;
+  List<dynamic> totalReg;
   Tournament({
     this.contact,
     this.details,
     this.tourId,
     this.email,
+    this.rooms,
     this.orderId,
     this.info,
     this.main,
     this.prizePool,
+    this.totalReg,
   });
   bool registeredIn() {
-    // User value = AuthRepository().getCurrentUser();
-    // if (value == null) {
-    //   //      print("Not Found");
-    //   return false;
-    // }
-    // //  print(this.main.room.registered);
-    // String id = value.uid;
-    // for (int i = 0; i < this.main.room.registered.length; i++) {
-    //   //     print(i);
-    //   if (this.main.room.registered[i] == id) {
-    //     print("Found");
-    //     return true;
-    //   }
-    // }
-    // print("Not Found");
-
+    User value = AuthRepository().getCurrentUser();
+    if (value == null) {
+      return false;
+    }
+    String id = value.uid;
+    for (int i = 0; i < this.totalReg.length; i++) {
+      if (this.totalReg[i] == id) {
+        print("Found");
+        return true;
+      }
+    }
+    print("Not Found");
     return false;
   }
 
   factory Tournament.fromMap(Map<String, dynamic> data, String id) {
+    //print(data['rooms'].toString());
+    print(id);
     var ok = Tournament(
       tourId: id,
-      contact: {"1": ContactDetails()},
+      contact: contactToList(data['contact']),
       email: data['email'] ?? 'Not found',
       orderId: data['orderID'] ?? "NULL",
       prizePool: data['prizePool'] == null
@@ -56,16 +56,47 @@ class Tournament {
             }
           : (data['prizePool']).cast<String, List<dynamic>>(),
       main: Main.fromMap(data['main']),
+      rooms: toList(data['rooms']),
       info: Info.fromMap(data['info']),
       details: Details.fromMap(data['details']),
+      totalReg: data['rooms']['totalReg'],
     );
-
     return ok;
   }
-
   Future<Tournament> fromHomeTour(HomeTour tour) async {
     return await TournamentRepository().getTournamentById(tour.tourId);
   }
+}
+
+List<ContactDetails> contactToList(Map<String, dynamic> data) {
+  List<ContactDetails> res = [];
+  data.forEach(
+    (key, value) {
+      res.add(
+        ContactDetails(
+          name: value['name'],
+          contactNumber: value['num'],
+          email: value['email'],
+        ),
+      );
+    },
+  );
+  return res;
+}
+
+List<Room> toList(Map<String, dynamic> data) {
+  List<Room> res = [];
+  data.forEach(
+    (k, v) {
+      if (k == 'total' || k == 'totalReg') {
+      } else {
+        v.forEach((x, y) {
+          res.add(Room.fromMap(y, k, x));
+        });
+      }
+    },
+  );
+  return res;
 }
 
 class ContactDetails {
@@ -80,7 +111,7 @@ class ContactDetails {
 class Main {
   String ageRec;
   String deadline;
-  List<String> timeLine;
+  List<dynamic> timeLine;
   Venue venue;
   Main(
       {this.ageRec = 'NULL',
@@ -101,7 +132,7 @@ class Main {
 }
 
 class Venue {
-  final List<String> address;
+  final List<dynamic> address;
   final Map<String, double> coordinates;
   const Venue(
       {this.address = const ["No address found its null"],
@@ -120,24 +151,32 @@ class Venue {
 }
 
 class Room {
-  final List<String> registered;
+  final List<dynamic> registered;
   final int fees;
   final int maxSeats;
   final String orderId;
   final String category;
+  final String subCategory;
   const Room({
     this.registered = const ['none'],
     this.fees = 37,
+    this.subCategory,
     this.maxSeats = 37,
     this.orderId = "NOT ORDER ID",
     this.category = "No cater",
   });
-  factory Room.fromMap(Map<String, dynamic> map) {
+  factory Room.fromMap(
+      Map<String, dynamic> map, String category, String subCate) {
     if (map == null) return Room();
     return Room(
       registered: map['registered'] == null
           ? ['is null']
           : map['registered'].cast<String>(),
+      category: category,
+      subCategory: subCate,
+      fees: map['fee'],
+      orderId: map['orderID'],
+      maxSeats: map['max'],
     );
   }
 }
@@ -171,7 +210,7 @@ class Info {
 
 class Details {
   final String description;
-  final List<String> pdf;
+  final List<dynamic> pdf;
   final String poster;
   final String term;
   final String title;

@@ -11,9 +11,7 @@ import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
   bool isReg;
-
   TournamentDetails({this.tournament, this.isReg});
-
   @override
   _TournamentDetailsState createState() => _TournamentDetailsState();
 }
