@@ -108,6 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             width: double.infinity,
                             child: TextFormField(
                               validator: (value) {
+                                //     print("THIS IS EMASIL");
                                 if (value.isEmpty || value == null)
                                   return 'Please Enter your name';
                                 return null;
@@ -115,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: nameCtrl,
                               onChanged: (ok) {
                                 setState(() {
-                                  print(ok.length);
+                                  //    print(ok.length);
                                   if (ok.length == 0)
                                     typedName = false;
                                   else
@@ -171,10 +172,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             child: TextFormField(
                               validator: (value) {
+                                //   print("inside validator");
+                                //     print(value.contains(
+                                //     RegExp(
+                                //   r'[!@#$%^&*(),.?":{}|<>]',
+                                //   ),
+                                // ));
                                 if (value.isEmpty ||
                                     value == null ||
-                                    !RegExp(r"^(?=.*?[!@#\$&*~])$.{6,}")
-                                        .hasMatch(value))
+                                    value.contains(
+                                          RegExp(
+                                            r'[!@#$%^&*(),.?":{}|<>]',
+                                          ),
+                                        ) ==
+                                        false)
                                   return 'Please Enter the password in the given mannner';
                                 return null;
                               },
@@ -452,7 +463,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             builder: (context, state) {
                               bool isOk =
                                   (typedEmail & typedName & typedP1 & typedP2);
-                              print(isOk);
+                              //  print(isOk);
                               return SizedBox(
                                 width: double.infinity,
                                 child: ActionButton(
@@ -580,7 +591,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: nameCtrl,
                             onChanged: (ok) {
                               setState(() {
-                                print(ok.length);
+                                //     print(ok.length);
                                 if (ok.length == 0)
                                   typedName = false;
                                 else
@@ -638,7 +649,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             validator: (value) {
                               if (value.isEmpty ||
                                   value == null ||
-                                  value.length < 8)
+                                  value.length < 8 ||
+                                  value.contains(
+                                        RegExp(
+                                          r'[!@#$%^&*(),.?":{}|<>]',
+                                        ),
+                                      ) ==
+                                      false)
                                 return 'Please Enter the password in the given mannner';
                               return null;
                             },
@@ -916,7 +933,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, state) {
                             bool isOk =
                                 (typedEmail & typedName & typedP1 & typedP2);
-                            print(isOk);
+                            //     print(isOk);
                             return SizedBox(
                               width: double.infinity,
                               child: ActionButton(
