@@ -16,7 +16,8 @@ class FillYourDetailsTurf extends StatefulWidget {
 class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
   FormsBloc _bloc;
   final _key = GlobalKey<FormState>();
-  String city = "Ahmd";
+  bool typedName = false, typedMob = false, typedEmail = false, typedTurf = false;
+  String city = "Ahmedabad";
   String statee = "Gujarat";
   TextEditingController _name = TextEditingController(),
       _contact = TextEditingController(),
@@ -145,8 +146,14 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                         return null;
                       },
                       controller: _name,
-                      decoration: normalTextDecoration(
-                        'Full Name',
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedName = false;
+                          else typedName = true;
+                        });
+                      },
+                      decoration: textFieldDecoration(
+                        'Full Name',typedName
                       ),
                     ),
                     SizedBox(
@@ -168,7 +175,13 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                         return null;
                       },
                       controller: _contact,
-                      decoration: normalTextDecoration(' ').copyWith(
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedMob = false;
+                          else typedMob = true;
+                        });
+                      },
+                      decoration: textFieldDecoration(' ',typedMob).copyWith(
                         prefixIcon: Container(
                           width: w * 0.15,
                           padding: EdgeInsets.only(left: 15),
@@ -213,9 +226,15 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                           return 'Please enter a valid email';
                         return null;
                       },
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedEmail = false;
+                          else typedEmail = true;
+                        });
+                      },
                       controller: _emailId,
-                      decoration: normalTextDecoration(
-                        '',
+                      decoration: textFieldDecoration(
+                        '',typedEmail
                       ),
                     ),
                     SizedBox(
@@ -254,7 +273,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                     ),
                                     underline: Container(),
                                     items: <String>[
-                                      'Ahmd',
+                                      'Ahmedabad',
                                       'Surat',
                                       'Rajkot',
                                       'Mumbai',
