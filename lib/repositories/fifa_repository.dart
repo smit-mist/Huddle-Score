@@ -8,15 +8,19 @@ class FifaRepository {
       print('fifa fetch started');
       var response = _firestore.doc('fifas/$iD');
       Fifa fifa = await response.get().then(
-            (value) => Fifa.fromMap(
-              value.data(),
-              value.id,
-            ),
+        (value) {
+          print(value.id);
+          return Fifa.fromMap(
+            value.data(),
+            value.id,
           );
+        },
+      );
       print('fetch started for ${fifa.fifaId}');
       print('complete');
       return fifa;
     } catch (e) {
+      print('====>Failed=====');
       print(e.toString());
     }
   }

@@ -17,21 +17,37 @@ class TournamentReview extends StatefulWidget {
   Tournament currentTour;
   RegDetails userRecord;
   int formType;
-  TournamentReview(
-      {@required this.currentTour,
-      @required this.userRecord,
-      @required this.formType});
+  String cat, subCat;
+  TournamentReview({
+    @required this.currentTour,
+    @required this.userRecord,
+    @required this.formType,
+    @required this.cat,
+    @required this.subCat,
+  });
 
   @override
   _TournamentReviewState createState() => _TournamentReviewState();
 }
 
 class _TournamentReviewState extends State<TournamentReview> {
+  Room room;
   Razorpay razorpay;
   User user = AuthRepository().getCurrentUser();
+
+  void precomputer() {
+    for (var x in widget.currentTour.rooms) {
+      if (x.category == widget.cat && x.subCategory == widget.subCat) {
+        room = x;
+        break;
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    precomputer();
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -186,7 +202,13 @@ class _TournamentReviewState extends State<TournamentReview> {
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * ((widget.formType == 0?400:(widget.formType == 1)?370:250) / kScreenH),
+                  height: h *
+                      ((widget.formType == 0
+                              ? 400
+                              : (widget.formType == 1)
+                                  ? 370
+                                  : 250) /
+                          kScreenH),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -215,7 +237,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                               data: widget.userRecord.teamName)
                           : Container(),
                       DataShower(
-                          type: (widget.formType == 0)?'Captain':'Player 1',
+                          type: (widget.formType == 0) ? 'Captain' : 'Player 1',
                           data: widget.userRecord.captain.fullName),
                       DataShower(
                           type: 'Phone No.',
@@ -238,19 +260,20 @@ class _TournamentReviewState extends State<TournamentReview> {
                       (widget.formType == 2)
                           ? Container()
                           : DataShower(
-                          type: 'Phone No.',
-                          data:
-                              widget.userRecord.viceCaptain.contact.toString()),
+                              type: 'Phone No.',
+                              data: widget.userRecord.viceCaptain.contact
+                                  .toString()),
                       (widget.formType == 2)
                           ? Container()
                           : DataShower(
-                          type: 'Email Id',
-                          data: widget.userRecord.viceCaptain.email),
+                              type: 'Email Id',
+                              data: widget.userRecord.viceCaptain.email),
                       (widget.formType == 2)
                           ? Container()
                           : DataShower(
-                          type: 'Age',
-                          data: widget.userRecord.viceCaptain.age.toString()),
+                              type: 'Age',
+                              data:
+                                  widget.userRecord.viceCaptain.age.toString()),
                       SizedBox(
                         height: 1,
                       ),

@@ -14,12 +14,14 @@ String nameValidator(String val) {
     return 'Enter Valid Name';
   return null;
 }
-String ageValidator(String val){
+
+String ageValidator(String val) {
   if (val == null || val.isEmpty) return 'Enter Age';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Age';
   return null;
 }
+
 String emailValidator(String val) {
   if (val == null || val.isEmpty) return 'Enter Email';
   if (!RegExp(
@@ -281,13 +283,14 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             currentTour: widget.currentTour,
                             userRecord: temp,
                             formType: typeOfForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
                           ),
                         ),
                       );
                     }
-                  }
-                  else if(typeOfForm == 1){
-                    if(_key.currentState.validate()){
+                  } else if (typeOfForm == 1) {
+                    if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
                         captain: Captain(
                           fullName: name1.text,
@@ -307,21 +310,22 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             currentTour: widget.currentTour,
                             userRecord: temp,
                             formType: typeOfForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
                           ),
                         ),
                       );
                     }
-                  }
-                  else if(typeOfForm ==2){
-                    if(_key.currentState.validate()){
+                  } else if (typeOfForm == 2) {
+                    if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
-                        captain:Captain(
+                        captain: Captain(
                           fullName: name1.text,
                           email: email1.text,
                           contact: int.parse(mob1.text),
                         ),
                         viceCaptain: Captain(),
-                        teamName:  "ok",
+                        teamName: "ok",
                       );
                       Navigator.push(
                         context,
@@ -330,6 +334,8 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             currentTour: widget.currentTour,
                             userRecord: temp,
                             formType: typeOfForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
                           ),
                         ),
                       );
@@ -679,7 +685,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       });
                                     }
                                   },
-                                  validator: (val){
+                                  validator: (val) {
                                     return ageValidator(val);
                                   },
                                   controller: age1,
@@ -830,7 +836,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       });
                                     }
                                   },
-                                  validator: (val){
+                                  validator: (val) {
                                     return ageValidator(val);
                                   },
                                   controller: age2,
@@ -1000,7 +1006,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
-                                      validator: (val){
+                                      validator: (val) {
                                         return ageValidator(val);
                                       },
                                       controller: age1,
@@ -1152,7 +1158,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
-                                      validator: (val){
+                                      validator: (val) {
                                         return ageValidator(val);
                                       },
                                       controller: age2,
@@ -1321,7 +1327,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
-                                      validator: (val){
+                                      validator: (val) {
                                         return ageValidator(val);
                                       },
                                       controller: age1,

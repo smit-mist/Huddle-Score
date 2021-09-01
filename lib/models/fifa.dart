@@ -103,7 +103,7 @@ class Room {
   int total;
   Room({this.taken, this.total = 37});
   factory Room.fromMap(Map<String, dynamic> map) => Room(
-        taken: (map['taken' == null])
+        taken: (map['taken']==null)
             ? const ['NULL']
             : map['taken'].cast<String>(),
         total: map['total'] ?? 37,
@@ -126,15 +126,18 @@ class Details {
   String description;
   List<String> pdf;
   String title;
+  String terms;
   Details({
     this.description = 'NULL',
     this.pdf = const ['NULL'],
     this.title = 'NULL',
+    this.terms = 'NULL',
   });
 
   factory Details.fromMap(Map<String, dynamic> map) => Details(
         description: map['discription'] ?? 'NULL',
         pdf: (map['pdf'] == null) ? const ['NULL'] : map['pdf'].cast<String>(),
         title: map['title'] ?? 'NULL',
+        terms: map['terms'] ?? 'NULL',
       );
 }
