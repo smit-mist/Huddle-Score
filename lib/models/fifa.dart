@@ -14,21 +14,24 @@ class Fifa {
   String fifaId;
   Fifa({
     this.details,
-    this.orderId,
-    this.poster,
-    this.fifaId,
-    this.email,
+    this.orderId = 'NULL',
+    this.poster = 'NULL',
+    this.fifaId = 'NULL',
+    this.email = 'Not Found',
     this.info,
     this.main,
     this.prizePool,
   });
   factory Fifa.fromMap(Map<String, dynamic> data, String id) {
-
     return Fifa(
-      fifaId: id,
-      email: data['email'],
-      orderId: data['orderID'],
-      prizePool: data['prizePool'].cast<String, List<dynamic>>(),
+      fifaId: id ?? 'NULL',
+      email: data['email'] ?? 'NULL',
+      orderId: data['orderID'] ?? 'NULL',
+      prizePool: (data['prizePool'] == null)
+          ? const {
+              'NULL': ['NULL']
+            }
+          : data['prizePool'].cast<String, List<dynamic>>(),
       main: Main.fromMap(data['main']),
       info: Info.fromMap(data['info']),
       poster: data['poster'],
@@ -66,32 +69,44 @@ class Main {
   String gameDate;
   Room rooms;
   Venue venue;
-  Main({this.deadLine, this.gameDate, this.rooms, this.venue});
+  Main(
+      {this.deadLine = 'NULL', this.gameDate = 'NULL', this.rooms, this.venue});
   factory Main.fromMap(Map<String, dynamic> map) => Main(
-        deadLine: map['deadLine'],
-        gameDate: map['gameDate'],
+        deadLine: map['deadLine'] ?? 'NULL',
+        gameDate: map['gameDate'] ?? 'NULL',
         rooms: Room.fromMap(map['rooms']),
         venue: Venue.fromMap(map['venue']),
       );
 }
 
 class Venue {
-  List<String> address;
-  Map<String, double> coordinates;
-  Venue({this.address, this.coordinates});
-  factory Venue.fromMap(Map<String, dynamic> map) => Venue(
-        address: map['address'].cast<String>(),
-        coordinates: map['coordinates'].cast<String, double>(),
-      );
+  final List<dynamic> address;
+  final Map<String, double> coordinates;
+  const Venue(
+      {this.address = const ["No address found its null"],
+      this.coordinates = const {'latitude': 23.121}});
+  factory Venue.fromMap(Map<String, dynamic> map) {
+    if (map == null) return Venue();
+    return Venue(
+      address: map['address'] == null
+          ? const ["No add found"]
+          : map['address'].cast<String>(),
+      coordinates: map['coordinates'] == null
+          ? const {'lat': 23.121}
+          : map['coordinates'].cast<String, double>(),
+    );
+  }
 }
 
 class Room {
   List<String> taken;
   int total;
-  Room({this.taken, this.total});
+  Room({this.taken, this.total = 37});
   factory Room.fromMap(Map<String, dynamic> map) => Room(
-        taken: map['taken'].cast<String>(),
-        total: map['total'],
+        taken: (map['taken' == null])
+            ? const ['NULL']
+            : map['taken'].cast<String>(),
+        total: map['total'] ?? 37,
       );
 }
 
@@ -99,11 +114,11 @@ class Info {
   String mode;
   String registrationFee;
   String time;
-  Info({this.mode, this.registrationFee, this.time});
+  Info({this.mode = 'NULL', this.registrationFee = 'NULL', this.time = 'NULL'});
   factory Info.fromMap(Map<String, dynamic> map) => Info(
-        mode: map['mode'],
-        registrationFee: map['regestrationFee'].toString(),
-        time: map['time'],
+        mode: map['mode'] ?? 'NULL',
+        registrationFee: map['regestrationFee'].toString() ?? 'NULL',
+        time: map['time'] ?? 'NULL',
       );
 }
 
@@ -112,14 +127,14 @@ class Details {
   List<String> pdf;
   String title;
   Details({
-    this.description,
-    this.pdf,
-    this.title,
+    this.description = 'NULL',
+    this.pdf = const ['NULL'],
+    this.title = 'NULL',
   });
 
   factory Details.fromMap(Map<String, dynamic> map) => Details(
-        description: map['discription'],
-        pdf: map['pdf'].cast<String>()??[],
-        title: map['title'],
+        description: map['discription'] ?? 'NULL',
+        pdf: (map['pdf'] == null) ? const ['NULL'] : map['pdf'].cast<String>(),
+        title: map['title'] ?? 'NULL',
       );
 }
