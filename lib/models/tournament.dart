@@ -7,14 +7,18 @@ class Tournament {
   List<ContactDetails> contact;
   Details details;
   String email;
+  int total;
   Info info;
   String tourId;
   String orderId;
   Main main;
   Map<String, List<dynamic>> prizePool;
   List<Room> rooms;
+  int selectedRoom = 0;
   List<dynamic> totalReg;
+
   Tournament({
+    this.total,
     this.contact,
     this.details,
     this.tourId,
@@ -38,7 +42,7 @@ class Tournament {
         return true;
       }
     }
-    print("Not Found");
+    print("Not Registered");
     return false;
   }
 
@@ -60,6 +64,7 @@ class Tournament {
       info: Info.fromMap(data['info']),
       details: Details.fromMap(data['details']),
       totalReg: data['rooms']['totalReg'],
+      total: data['rooms']['total'],
     );
     return ok;
   }

@@ -7,6 +7,7 @@ import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
+import 'dart:math';
 
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
@@ -20,6 +21,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   ButtonClickBloc _bloc;
   int seatsLeft;
   String timeLine;
+  String combinedRegFees;
+  int minPrice, maxPrice;
   WeirdDateFormat st, en, deadLine, semi, finals;
   bool canRegister;
   ScrollController ctrl;
@@ -60,6 +63,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     if (today.isAfter(given)) {
       canRegister = false;
     }
+    minPrice = widget.tournament.rooms[0].fees;
+    maxPrice = minPrice;
+    for (int i = 0; i < widget.tournament.rooms.length; i++) {
+      minPrice = min(minPrice, widget.tournament.rooms[i].fees);
+      maxPrice = max(maxPrice, widget.tournament.rooms[i].fees);
+    }
+    combinedRegFees = "NOTHING";
+    combinedRegFees = minPrice.toString() + ' - ' + maxPrice.toString();
   }
 
   @override
@@ -739,7 +750,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             ),
                             DataShower(
                               type: 'Registration Fee',
-                              data: '₹ 37/ team',
+                              data: '₹ $combinedRegFees',
                             ),
                             SizedBox(
                               height: 10,
@@ -843,11 +854,13 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                   w: 'sb',
                                 ).copyWith(decoration: TextDecoration.none),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 widget.tournament.details.term,
-                                style: themeFont().copyWith(
-                                    decoration: TextDecoration.none),
+                                style: themeFont()
+                                    .copyWith(decoration: TextDecoration.none),
                               ),
                             ],
                           ),
@@ -872,16 +885,15 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             print("OK");
                             setState(() {
                               clickedOnRegister = false;
                             });
                           },
                           child: Container(
-                            width: w*0.4,
+                            width: w * 0.4,
                             child: ActionButton(
-
                               bgColor: Colors.white,
                               child: Text(
                                 'Cancel',
@@ -894,7 +906,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                           ),
                         ),
                         Container(
-                          width: w*0.4,
+                          width: w * 0.4,
                           child: ActionButton(
                             bgColor: kThemeColor,
                             child: Text(
@@ -903,7 +915,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 color: Colors.white,
                               ).copyWith(decoration: TextDecoration.none),
                             ),
-                            onTap: (){
+                            onTap: () {
                               setState(() {
                                 clickedOnRegister = false;
                               });

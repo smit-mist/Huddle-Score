@@ -8,9 +8,22 @@ import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
 
-class TournamentRegisterForm extends StatelessWidget {
+class TournamentRegisterForm extends StatefulWidget {
   Tournament currentTour;
   TournamentRegisterForm({this.currentTour});
+
+  @override
+  _TournamentRegisterFormState createState() => _TournamentRegisterFormState();
+}
+
+class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
+  List<String> tourType = ['Select'];
+  Map<String, List<String>> allCategory = {};
+  List<String> selectedSub = ["Select"];
+  String chosedType, chosedCat;
+
+  bool isMultiple = false;
+
   TextEditingController teamName = TextEditingController(),
       capName = TextEditingController(),
       capNum = TextEditingController(),
@@ -20,11 +33,47 @@ class TournamentRegisterForm extends StatelessWidget {
       vCapNum = TextEditingController(),
       vCapAge = TextEditingController(),
       vCapEmail = TextEditingController();
+  void preComputer() {
+    print("Inside compu");
+    for (int i = 0; i < widget.currentTour.rooms.length; i++) {
+      if (widget.currentTour.rooms[i].category == "2") {
+        isMultiple = true;
+        break;
+      }
+    }
+    chosedType = tourType[0];
+    if (isMultiple) {
+      tourType.add('Single');
+      tourType.add('Double');
+      allCategory = {
+        'Single': ["Select"],
+        'Double': ["Select"],
+        'Select': ["Select"],
+      };
+      for (var x in widget.currentTour.rooms) {
+        String here = "";
+        here += x.subCategory;
+        here += ' - ₹ ';
+        here += x.fees.toString();
+        if (x.category == "1")
+          allCategory["Single"].add(here);
+        else
+          allCategory['Double'].add(here);
+      }
+      chosedCat = allCategory['Single'][0];
+    }
+  }
+
+  @override
+  void initState() {
+    preComputer();
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Dialog(
@@ -56,7 +105,7 @@ class TournamentRegisterForm extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (_) => TournamentDetails(
-                                tournament: currentTour,
+                                tournament: widget.currentTour,
                               ),
                             ),
                             (route) => false);
@@ -110,7 +159,10 @@ class TournamentRegisterForm extends StatelessWidget {
         ),
       ),
     );
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
 
+    print(chosedType);
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -167,7 +219,7 @@ class TournamentRegisterForm extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (_) => TournamentReview(
-                        currentTour: currentTour,
+                        currentTour: widget.currentTour,
                         userRecord: temp,
                       ),
                     ),
@@ -221,7 +273,7 @@ class TournamentRegisterForm extends StatelessWidget {
                             'Kindly fill in the following details to register your team in ',
                       ),
                       TextSpan(
-                        text: currentTour.details.title,
+                        text: widget.currentTour.details.title,
                         style: themeFont(
                           w: 'b',
                         ),
@@ -232,11 +284,103 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: h * 0.027,
                 ),
+                Container(
+                  height: h*0.1,
+                  width: w,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width:w*0.3,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          focusColor: Colors.white,
+                          value: chosedType,
+                          style: TextStyle(color: Colors.white),
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: kThemeColor,
+                            size: 20,
+                          ),
+                          onChanged: (ok) {
+                            setState(() {
+                              chosedType = ok;
+                              selectedSub = allCategory[chosedType];
+                              chosedCat = selectedSub[0];
+                            });
+                          },
+                          underline: Container(),
+                          items: tourType
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                          hint: Text(
+                            "Type",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        width: w*0.4,
+                        child: DropdownButton<String>(
+                       isExpanded: true,
+                          focusColor: Colors.white,
+                          value: chosedCat,
+                          style: TextStyle(color: Colors.white),
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: kThemeColor,
+                            size: 20,
+                          ),
+                          onChanged: (ok) {
+                            setState(() {
+                              chosedCat = ok;
+                            });
+                          },
+                          underline: Container(),
+                          items: selectedSub
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                          hint: Text(
+                            "Type",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Text(
                   'Name of your team',
-                  style: themeFont(s: 12,),
+                  style: themeFont(
+                    s: 12,
+                  ),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: teamName,
                   decoration: normalTextDecoration('Team Name'),
@@ -244,7 +388,6 @@ class TournamentRegisterForm extends StatelessWidget {
                 SizedBox(
                   height: h * 0.035,
                 ),
-
                 Text(
                   'Captain details',
                   style: themeFont(s: 15),
@@ -254,7 +397,9 @@ class TournamentRegisterForm extends StatelessWidget {
                 ),
                 Text(
                   'All communication regarding the tournament will be done with the captain or vice-captain of the team.',
-                  style: themeFont(s: 12,),
+                  style: themeFont(
+                    s: 12,
+                  ),
                 ),
                 SizedBox(
                   height: h * 0.02,
@@ -263,7 +408,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Full Name',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: capName,
                   decoration: normalTextDecoration('Captain\'s Name'),
@@ -275,7 +422,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Contact Number',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: capNum,
                   decoration: normalTextDecoration('Captain\'s Contact Number')
@@ -313,7 +462,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Email ID',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: capEmail,
                   decoration: normalTextDecoration('Captain\'s Email'),
@@ -325,7 +476,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Age',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: capAge,
                   decoration: normalTextDecoration('Captain\'s Age'),
@@ -344,7 +497,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Full Name',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: vCapName,
                   decoration: normalTextDecoration('Vice Captain\'s Name'),
@@ -356,7 +511,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Contact Number',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: vCapNum,
                   decoration:
@@ -395,7 +552,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Email ID',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: vCapEmail,
                   decoration: normalTextDecoration('Vice Captain\'s Email'),
@@ -407,7 +566,9 @@ class TournamentRegisterForm extends StatelessWidget {
                   'Age',
                   style: themeFont(s: 12),
                 ),
-                SizedBox(height: 7,),
+                SizedBox(
+                  height: 7,
+                ),
                 TextField(
                   controller: vCapAge,
                   decoration: normalTextDecoration('Vice Captain\'s Age'),
