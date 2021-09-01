@@ -16,7 +16,11 @@ import '../../constants.dart';
 class TournamentReview extends StatefulWidget {
   Tournament currentTour;
   RegDetails userRecord;
-  TournamentReview({@required this.currentTour, @required this.userRecord});
+  int formType;
+  TournamentReview(
+      {@required this.currentTour,
+      @required this.userRecord,
+      @required this.formType});
 
   @override
   _TournamentReviewState createState() => _TournamentReviewState();
@@ -87,6 +91,8 @@ class _TournamentReviewState extends State<TournamentReview> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    print(widget.userRecord.captain.fullName);
+    print(widget.userRecord.viceCaptain.fullName);
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -180,7 +186,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (400 / kScreenH),
+                  height: h * ((widget.formType == 0?400:(widget.formType == 1)?370:250) / kScreenH),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -203,10 +209,13 @@ class _TournamentReviewState extends State<TournamentReview> {
                       SizedBox(
                         height: 1,
                       ),
+                      (widget.formType == 0)
+                          ? DataShower(
+                              type: 'Team Name',
+                              data: widget.userRecord.teamName)
+                          : Container(),
                       DataShower(
-                          type: 'Team Name', data: widget.userRecord.teamName),
-                      DataShower(
-                          type: 'Captain',
+                          type: (widget.formType == 0)?'Captain':'Player 1',
                           data: widget.userRecord.captain.fullName),
                       DataShower(
                           type: 'Phone No.',
@@ -217,17 +226,29 @@ class _TournamentReviewState extends State<TournamentReview> {
                       DataShower(
                           type: 'Age',
                           data: widget.userRecord.captain.age.toString()),
-                      DataShower(
-                          type: 'Vice Captain',
-                          data: widget.userRecord.viceCaptain.fullName),
-                      DataShower(
+                      (widget.formType == 2)
+                          ? Container()
+                          : (widget.formType == 1)
+                              ? DataShower(
+                                  type: 'Player 2',
+                                  data: widget.userRecord.viceCaptain.fullName)
+                              : DataShower(
+                                  type: 'Vice Captain',
+                                  data: widget.userRecord.viceCaptain.fullName),
+                      (widget.formType == 2)
+                          ? Container()
+                          : DataShower(
                           type: 'Phone No.',
                           data:
                               widget.userRecord.viceCaptain.contact.toString()),
-                      DataShower(
+                      (widget.formType == 2)
+                          ? Container()
+                          : DataShower(
                           type: 'Email Id',
                           data: widget.userRecord.viceCaptain.email),
-                      DataShower(
+                      (widget.formType == 2)
+                          ? Container()
+                          : DataShower(
                           type: 'Age',
                           data: widget.userRecord.viceCaptain.age.toString()),
                       SizedBox(
@@ -347,7 +368,7 @@ class DataShower extends StatelessWidget {
           SizedBox(
             width: w * (0.35),
             child: Text(
-              this.data,
+              this.data == null ? "NO DATA" : this.data,
               style: themeFont(s: 15, w: 'sb'),
             ),
           ),

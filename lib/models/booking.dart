@@ -65,13 +65,13 @@ class Venue {
 }
 
 class RegDetails {
-  Captain captain;
-  Captain viceCaptain;
-  String teamName;
-  RegDetails({
-    this.captain,
-    this.teamName,
-    this.viceCaptain,
+  final Captain captain;
+  final Captain viceCaptain;
+  final String teamName;
+  const RegDetails({
+    this.captain =  const Captain(fullName: "NULL",email: "NO MAIL",contact: 1212,age: 24),
+    this.teamName = "NO Team name",
+    this.viceCaptain = const Captain(fullName: "NULL",email: "NO MAIL",contact: 1212,age: 24),
   });
 
   factory RegDetails.fromMap(Map<String, dynamic> doc) => RegDetails(
@@ -82,15 +82,15 @@ class RegDetails {
 }
 
 class Captain {
-  int contact;
-  int age;
-  String email;
-  String fullName;
-  Captain({
-    this.contact,
-    this.age,
-    this.email,
-    this.fullName,
+  final int contact;
+  final int age;
+  final String email;
+  final String fullName;
+  const Captain({
+    this.contact = 373737,
+    this.age = 37,
+    this.email = "nomail@mail.com",
+    this.fullName = "No Name",
   });
   factory Captain.fromMap(Map<String, dynamic> doc) => Captain(
         contact: doc['contact'],

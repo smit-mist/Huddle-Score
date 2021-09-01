@@ -280,6 +280,56 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
+                            formType: typeOfForm,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                  else if(typeOfForm == 1){
+                    if(_key.currentState.validate()){
+                      RegDetails temp = RegDetails(
+                        captain: Captain(
+                          fullName: name1.text,
+                          email: email1.text,
+                          contact: int.parse(mob1.text),
+                        ),
+                        viceCaptain: Captain(
+                          fullName: name2.text,
+                          email: email2.text,
+                          contact: int.parse(mob2.text),
+                        ),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                            formType: typeOfForm,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                  else if(typeOfForm ==2){
+                    if(_key.currentState.validate()){
+                      RegDetails temp = RegDetails(
+                        captain:Captain(
+                          fullName: name1.text,
+                          email: email1.text,
+                          contact: int.parse(mob1.text),
+                        ),
+                        viceCaptain: Captain(),
+                        teamName:  "ok",
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                            formType: typeOfForm,
                           ),
                         ),
                       );
@@ -367,7 +417,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             setState(() {
                               chosedType = ok;
                               if (chosedType == "Single") {
-                                typeOfForm = 2;
+                                typeOfForm = 1;
                               } else if (chosedType == "Double") {
                                 typeOfForm = 0;
                               } else {
