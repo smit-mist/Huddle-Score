@@ -8,6 +8,29 @@ import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
 
 import '../../constants.dart';
 
+String nameValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Name';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
+    return 'Enter Valid Name';
+  return null;
+}
+
+String emailValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Email';
+  if (!RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(val)) return 'Please enter a valid email';
+  return null;
+}
+
+String mobileNumValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Mobile Number';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
+    return 'Enter Valid Mobile Number';
+  if (val.length != 10) return 'Enter Valid Mobile Number';
+  return null;
+}
+
 class FifaRegistrationForm extends StatefulWidget {
   final Fifa fifa;
   FifaRegistrationForm({this.fifa});
@@ -16,9 +39,11 @@ class FifaRegistrationForm extends StatefulWidget {
 }
 
 class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
+  bool typedName = false, typedContact = false, typedEmail = false;
   TextEditingController name = TextEditingController();
   TextEditingController contact = TextEditingController();
   TextEditingController email = TextEditingController();
+  final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -139,19 +164,21 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
               GestureDetector(
                 onTap: () {
                   print("pressed");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => FifaReview(
-                        currFifa: widget.fifa,
-                        record: FifaRecord(
-                          email: email.text,
-                          name: name.text,
-                          number: int.parse(contact.text),
+                  if (_key.currentState.validate()) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => FifaReview(
+                          currFifa: widget.fifa,
+                          record: FifaRecord(
+                            email: email.text,
+                            name: name.text,
+                            number: int.parse(contact.text),
+                          ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
                 child: Container(
                   height: 40,
@@ -184,10 +211,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
                 Text(
                   'Registration',
-                  style: themeFont(
-                    color: kThemeColor,
-                    s: 23,w:'sb'
-                  ),
+                  style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
                 ),
                 SizedBox(
                   height: h * 0.025,
@@ -199,12 +223,13 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       TextSpan(
                         text:
                             'Kindly fill in the following details to register in ',
-                        style: themeFont(s:14,w:'m'),
+                        style: themeFont(s: 14, w: 'm'),
                       ),
                       TextSpan(
                         text: widget.fifa.details.title ?? 'Fifa',
                         style: themeFont(
-                          w: 'b',s:14,
+                          w: 'b',
+                          s: 14,
                         ),
                       ),
                     ],
@@ -215,78 +240,131 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                 ),
                 Text(
                   'Further communication will be carried out via the contact details you provide below.',
-                  style: themeFont(s: 15,w:'m'),
+                  style: themeFont(s: 15, w: 'm'),
                 ),
                 SizedBox(
                   height: h * 0.03,
                 ),
-                Text(
-                  'Name',
-                  style: themeFont(s:12,w:'m'),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  controller: name,
-                  decoration: normalTextDecoration('Your Full Name'),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  'Contact Number',
-                  style: themeFont(s:12,w:'m'),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  controller: contact,
-                  decoration:
-                      normalTextDecoration('Your Contact Number').copyWith(
-                    prefixIcon: Container(
-                      width: w * 0.15,
-                      padding: EdgeInsets.only(left: 15),
-                      child: Row(
-                        children: [
-                          Text(
-                            '+91',
-                            style: themeFont(
-                              color: Colors.grey.withOpacity(
-                                0.7,
-                              ),
+                Form(
+                  key: _key,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name',
+                        style: themeFont(s: 12, w: 'm'),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return nameValidator(val);
+                        },
+                        controller: name,
+                        onChanged: (val) {
+                          if (val.length > 0) {
+                            setState(() {
+                              typedName = true;
+                            });
+                          } else {
+                            setState(() {
+                              typedName = false;
+                            });
+                          }
+                        },
+                        decoration:
+                            textFieldDecoration('Your Full Name', typedName),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        'Contact Number',
+                        style: themeFont(s: 12, w: 'm'),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return mobileNumValidator(val);
+                        },
+                        onChanged: (val) {
+                          if (val.length > 0) {
+                            setState(() {
+                              typedContact = true;
+                            });
+                          } else {
+                            setState(() {
+                              typedContact = false;
+                            });
+                          }
+                        },
+                        controller: contact,
+                        decoration: textFieldDecoration(
+                                'Your Contact Number', typedContact)
+                            .copyWith(
+                          prefixIcon: Container(
+                            width: w * 0.15,
+                            padding: EdgeInsets.only(left: 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  '+91',
+                                  style: themeFont(
+                                    color: Colors.grey.withOpacity(
+                                      0.7,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                Container(
+                                  height: 25,
+                                  width: 1,
+                                  color: Color(0xFFAFAFAF),
+                                )
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Container(
-                            height: 25,
-                            width: 1,
-                            color: Color(0xFFAFAFAF),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        'Email',
+                        style: themeFont(s: 12, w: 'm'),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return emailValidator(val);
+                        },
+                        onChanged: (val) {
+                          if (val.length > 0) {
+                            setState(() {
+                              typedEmail = true;
+                            });
+                          } else {
+                            setState(() {
+                              typedEmail = false;
+                            });
+                          }
+                        },
+                        controller: email,
+                        decoration:
+                            textFieldDecoration('Your Email ID', typedEmail),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  'Email',
-                  style: themeFont(s:12,w:'m'),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  controller: email,
-                  decoration: normalTextDecoration('Your Email ID'),
-                ),
-                SizedBox(
-                  height: 15,
                 ),
               ],
             ),
