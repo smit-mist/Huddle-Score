@@ -3,6 +3,7 @@
 // TODO: Smit - Fifa search
 // TODO: Smit - Border in all forms.
 // TODO: Smit- All Icons
+// TODO: Smit- Dispose all controller.
 // done: Smit - terms of reg
 
 // TODO: Yash&Smit- Email Verify.
