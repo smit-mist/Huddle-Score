@@ -36,8 +36,16 @@ class _TournamentReviewState extends State<TournamentReview> {
   User user = AuthRepository().getCurrentUser();
 
   void precomputer() {
+    String cur = '';
+    for (int i = 0; i < widget.subCat.length; i++) {
+      if (widget.subCat[i] == '-') break;
+      cur += widget.subCat[i];
+    }
+    cur = cur.trim();
+    String flag = widget.cat == 'Single' ? '1' : '2';
     for (var x in widget.currentTour.rooms) {
-      if (x.category == widget.cat && x.subCategory == widget.subCat) {
+      bool ok = x.category == flag && x.subCategory == cur;
+      if (ok) {
         room = x;
         break;
       }
@@ -89,11 +97,11 @@ class _TournamentReviewState extends State<TournamentReview> {
         'email': user.email,
       },
       'currency': 'INR',
-      'amount': 500,
-      'order_id': widget.currentTour.orderId,
+      'amount': room.fees * 100,
+      'order_id': room.orderId,
       'notes': {
         'uid': user.uid,
-        'payload': jsonEncode(RegDetails().toMap(regDetails)),
+        'payload': jsonEncode(Captain().toMap(regDetails.captain)),
       },
     };
     try {
@@ -320,7 +328,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                           ),
                           Spacer(),
                           Text(
-                            '₹ 10}',
+                            '₹ ${room.fees}',
                             style: themeFont(s: 12, w: 'm'),
                           )
                         ],
@@ -352,7 +360,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                           ),
                           Spacer(),
                           Text(
-                            '₹ 10',
+                            '₹ ${room.fees}',
                             style: themeFont(s: 15, w: 'sb'),
                           )
                         ],

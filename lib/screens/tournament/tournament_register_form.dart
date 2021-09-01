@@ -295,11 +295,13 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                         captain: Captain(
                           fullName: name1.text,
                           email: email1.text,
+                          age: int.parse(age1.text),
                           contact: int.parse(mob1.text),
                         ),
                         viceCaptain: Captain(
                           fullName: name2.text,
                           email: email2.text,
+                          age: int.parse(age2.text),
                           contact: int.parse(mob2.text),
                         ),
                       );
@@ -322,6 +324,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                         captain: Captain(
                           fullName: name1.text,
                           email: email1.text,
+                          age: int.parse(age1.text),
                           contact: int.parse(mob1.text),
                         ),
                         viceCaptain: Captain(),
@@ -423,7 +426,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             setState(() {
                               chosedType = ok;
                               if (chosedType == "Single") {
-                                typeOfForm = 1;
+                                typeOfForm = 2;
                               } else if (chosedType == "Double") {
                                 typeOfForm = 0;
                               } else {
