@@ -8,6 +8,29 @@ import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
 
+String nameValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Name';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
+    return 'Enter Valid Name';
+  return null;
+}
+
+String emailValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Email';
+  if (!RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(val)) return 'Please enter a valid email';
+  return null;
+}
+
+String mobileNumValidator(String val) {
+  if (val == null || val.isEmpty) return 'Enter Mobile Number';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
+    return 'Enter Valid Mobile Number';
+  if (val.length != 10) return 'Enter Valid Mobile Number';
+  return null;
+}
+
 class TournamentRegisterForm extends StatefulWidget {
   Tournament currentTour;
   TournamentRegisterForm({this.currentTour});
@@ -19,16 +42,11 @@ class TournamentRegisterForm extends StatefulWidget {
 class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   List<String> tourType = ['Select'];
   int typeOfForm = -1;
-  /*
-  * -1 - Means Empty Container.
-  * 0 - Means Team Form (Cap, Vice Cap)
-  * 1 - Means 2 Player Form (Player 1, Player 2)
-  * 2 - Means 1 Player Form. (PLayer 1)
-  * */
+
   Map<String, List<String>> allCategory = {};
   List<String> selectedSub = ["Select"];
   String chosedType, chosedCat;
-  GlobalKey _key = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
 
   bool isMultiple = false;
   bool typedTeamName = false,
@@ -218,36 +236,50 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
               ),
               Spacer(),
               GestureDetector(
+                /*
+                * -1 - Means Empty Container.
+                * 0 - Means Team Form (Cap, Vice Cap)
+                * 1 - Means 2 Player Form (Player 1, Player 2)
+                * 2 - Means 1 Player Form. (PLayer 1)
+                * */
                 onTap: () {
-                  RegDetails temp = RegDetails(
-                    teamName: teamName.text,
-                    captain: Captain(
-                      fullName: name1.text,
-                      email: email1.text,
-                      contact: int.parse(mob1.text),
-                      age: int.parse(
-                        age1.text,
-                      ),
-                    ),
-                    viceCaptain: Captain(
-                      fullName: name2.text,
-                      email: email2.text,
-                      contact: int.parse(mob2.text),
-                      age: int.parse(
-                        age2.text,
-                      ),
-                    ),
-                  );
+                  if (typeOfForm == -1) {
+                    print("Select a Form");
+                    return;
+                  }
+                  if (typeOfForm == 0) {
+                    if (_key.currentState.validate()) {
+                      RegDetails temp = RegDetails(
+                        teamName: teamName.text,
+                        captain: Captain(
+                          fullName: name1.text,
+                          email: email1.text,
+                          contact: int.parse(mob1.text),
+                          age: int.parse(
+                            age1.text,
+                          ),
+                        ),
+                        viceCaptain: Captain(
+                          fullName: name2.text,
+                          email: email2.text,
+                          contact: int.parse(mob2.text),
+                          age: int.parse(
+                            age2.text,
+                          ),
+                        ),
+                      );
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => TournamentReview(
-                        currentTour: widget.currentTour,
-                        userRecord: temp,
-                      ),
-                    ),
-                  );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                          ),
+                        ),
+                      );
+                    }
+                  }
                 },
                 child: Container(
                   height: 40,
@@ -330,9 +362,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             setState(() {
                               chosedType = ok;
                               if (chosedType == "Single") {
-                                typeOfForm = 0;
-                              } else if (chosedType == "Double") {
                                 typeOfForm = 2;
+                              } else if (chosedType == "Double") {
+                                typeOfForm = 0;
                               } else {
                                 typeOfForm = -1;
                               }
@@ -420,7 +452,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -433,6 +465,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     }
                                   },
                                   controller: teamName,
+                                  validator: (val) {
+                                    return nameValidator(val);
+                                  },
                                   decoration: textFieldDecoration(
                                       'Team Name', typedTeamName),
                                 ),
@@ -462,7 +497,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -473,6 +508,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                         typedName1 = false;
                                       });
                                     }
+                                  },
+                                  validator: (val) {
+                                    return nameValidator(val);
                                   },
                                   controller: name1,
                                   decoration: textFieldDecoration(
@@ -488,7 +526,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -500,6 +538,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       });
                                     }
                                   },
+                                  validator: (val) {
+                                    return mobileNumValidator(val);
+                                  },
+                                  keyboardType: TextInputType.phone,
                                   controller: mob1,
                                   decoration: textFieldDecoration(
                                           'Captain\'s Contact Number',
@@ -541,7 +583,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -552,6 +594,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                         typedEmail1 = false;
                                       });
                                     }
+                                  },
+                                  validator: (val) {
+                                    return emailValidator(val);
                                   },
                                   controller: email1,
                                   decoration: textFieldDecoration(
@@ -567,7 +612,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -600,7 +645,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -611,6 +656,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                         typedName2 = false;
                                       });
                                     }
+                                  },
+                                  validator: (val) {
+                                    return nameValidator(val);
                                   },
                                   controller: name2,
                                   decoration: textFieldDecoration(
@@ -626,7 +674,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -638,6 +686,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       });
                                     }
                                   },
+                                  validator: (val) {
+                                    return mobileNumValidator(val);
+                                  },
+                                  keyboardType: TextInputType.phone,
                                   controller: mob2,
                                   decoration: textFieldDecoration(
                                           'Vice Captain\'s Contact Number',
@@ -679,7 +731,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -690,6 +742,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                         typedEmail2 = false;
                                       });
                                     }
+                                  },
+                                  validator: (val) {
+                                    return emailValidator(val);
                                   },
                                   controller: email2,
                                   decoration: textFieldDecoration(
@@ -705,7 +760,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 SizedBox(
                                   height: 7,
                                 ),
-                                TextField(
+                                TextFormField(
                                   onChanged: (val) {
                                     if (val.length > 0) {
                                       setState(() {
@@ -756,7 +811,11 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
+                                      validator: (val) {
+                                        return nameValidator(val);
+                                      },
+                                      controller: name1,
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -768,7 +827,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
-                                      controller: name1,
                                       decoration: textFieldDecoration(
                                           'Player 1\'s Name', typedName1),
                                     ),
@@ -782,7 +840,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -794,6 +852,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
+                                      validator: (val) {
+                                        return mobileNumValidator(val);
+                                      },
+                                      keyboardType: TextInputType.phone,
                                       controller: mob1,
                                       decoration: textFieldDecoration(
                                               'Player 1\'s Contact Number',
@@ -836,7 +898,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -847,6 +909,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedEmail1 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val) {
+                                        return emailValidator(val);
                                       },
                                       controller: email1,
                                       decoration: textFieldDecoration(
@@ -862,7 +927,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -895,7 +960,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -906,6 +971,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedName2 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val) {
+                                        return nameValidator(val);
                                       },
                                       controller: name2,
                                       decoration: textFieldDecoration(
@@ -921,7 +989,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -933,6 +1001,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
+                                      validator: (val) {
+                                        return mobileNumValidator(val);
+                                      },
+                                      keyboardType: TextInputType.phone,
                                       controller: mob2,
                                       decoration: textFieldDecoration(
                                               'Player 2\'s Contact Number',
@@ -975,7 +1047,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -986,6 +1058,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedEmail2 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val) {
+                                        return emailValidator(val);
                                       },
                                       controller: email2,
                                       decoration: textFieldDecoration(
@@ -1001,7 +1076,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -1051,7 +1126,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -1062,6 +1137,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedName1 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val) {
+                                        return nameValidator(val);
                                       },
                                       controller: name1,
                                       decoration: textFieldDecoration(
@@ -1077,7 +1155,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -1089,6 +1167,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
+                                      validator: (val) {
+                                        return mobileNumValidator(val);
+                                      },
+                                      keyboardType: TextInputType.phone,
                                       controller: mob1,
                                       decoration: textFieldDecoration(
                                               'Player 1\'s Contact Number',
@@ -1131,7 +1213,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {
@@ -1142,6 +1224,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedEmail1 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val) {
+                                        return emailValidator(val);
                                       },
                                       controller: email1,
                                       decoration: textFieldDecoration(
@@ -1157,7 +1242,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     SizedBox(
                                       height: 7,
                                     ),
-                                    TextField(
+                                    TextFormField(
                                       onChanged: (val) {
                                         if (val.length > 0) {
                                           setState(() {

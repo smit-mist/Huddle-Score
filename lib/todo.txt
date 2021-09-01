@@ -1,5 +1,5 @@
 // Done: Smit - Sign Up
-// TODO: Smit - Tournament Registration Form
+// Done: Smit - Tournament Registration Form
 // TODO: Smit - Fifa search
 // TODO: Smit - Border in all forms.
 // TODO: Smit- All Icons
