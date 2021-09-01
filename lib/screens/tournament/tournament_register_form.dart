@@ -14,7 +14,12 @@ String nameValidator(String val) {
     return 'Enter Valid Name';
   return null;
 }
-
+String ageValidator(String val){
+  if (val == null || val.isEmpty) return 'Enter Age';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
+    return 'Enter Valid Age';
+  return null;
+}
 String emailValidator(String val) {
   if (val == null || val.isEmpty) return 'Enter Email';
   if (!RegExp(
@@ -624,6 +629,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       });
                                     }
                                   },
+                                  validator: (val){
+                                    return ageValidator(val);
+                                  },
                                   controller: age1,
                                   decoration: textFieldDecoration(
                                       'Captain\'s Age', typedAge1),
@@ -771,6 +779,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                         typedAge2 = false;
                                       });
                                     }
+                                  },
+                                  validator: (val){
+                                    return ageValidator(val);
                                   },
                                   controller: age2,
                                   decoration: textFieldDecoration(
@@ -939,6 +950,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           });
                                         }
                                       },
+                                      validator: (val){
+                                        return ageValidator(val);
+                                      },
                                       controller: age1,
                                       decoration: textFieldDecoration(
                                           'Player 1\'s Age', typedAge1),
@@ -1087,6 +1101,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedAge2 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val){
+                                        return ageValidator(val);
                                       },
                                       controller: age2,
                                       decoration: textFieldDecoration(
@@ -1253,6 +1270,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                             typedAge1 = false;
                                           });
                                         }
+                                      },
+                                      validator: (val){
+                                        return ageValidator(val);
                                       },
                                       controller: age1,
                                       decoration: textFieldDecoration(
