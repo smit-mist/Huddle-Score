@@ -122,12 +122,6 @@ class _FifaReviewState extends State<FifaReview> {
               GestureDetector(
                 onTap: () {
                   checkoutOptions(widget.record);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => FifaReceiptScreen(),
-                    ),
-                  );
                 },
                 child: Container(
                   height: 40,
@@ -159,10 +153,7 @@ class _FifaReviewState extends State<FifaReview> {
               ),
               Text(
                 'Review',
-                style: themeFont(
-                  color: kThemeColor,
-                  s: 23,w:'sb'
-                ),
+                style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
               ),
               SizedBox(
                 height: h * (0.04),
@@ -188,7 +179,7 @@ class _FifaReviewState extends State<FifaReview> {
                   children: [
                     Text(
                       'Summary',
-                      style: themeFont(w: 'm',s:16),
+                      style: themeFont(w: 'm', s: 16),
                     ),
                     SizedBox(
                       height: 1,
@@ -226,8 +217,12 @@ class _FifaReviewState extends State<FifaReview> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(height: 1,),
-                    SizedBox(height: 1,),
+                    SizedBox(
+                      height: 1,
+                    ),
+                    SizedBox(
+                      height: 1,
+                    ),
 
                     Text(
                       'Amount Payable',
@@ -240,12 +235,12 @@ class _FifaReviewState extends State<FifaReview> {
                       children: [
                         Text(
                           'Charges',
-                          style: themeFont(w: 'm',s:12),
+                          style: themeFont(w: 'm', s: 12),
                         ),
                         Spacer(),
                         Text(
                           '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'm',s:12),
+                          style: themeFont(w: 'm', s: 12),
                         )
                       ],
                     ),
@@ -253,36 +248,38 @@ class _FifaReviewState extends State<FifaReview> {
                       children: [
                         Text(
                           'Taxes',
-                          style: themeFont(w: 'm',s:12),
+                          style: themeFont(w: 'm', s: 12),
                         ),
                         Spacer(),
                         Text(
                           '0',
-                          style: themeFont(w: 'm',s:12),
+                          style: themeFont(w: 'm', s: 12),
                         )
                       ],
                     ),
                     Divider(
                       color: Colors.black.withOpacity(0.5),
                     ),
-                  //  SizedBox(height: 1,),
+                    //  SizedBox(height: 1,),
                     Row(
                       children: [
                         Text(
                           'Total Amount',
-                          style: themeFont(w: 'm',s:15),
+                          style: themeFont(w: 'm', s: 15),
                         ),
                         Spacer(),
                         Text(
                           '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'sb',s:16),
+                          style: themeFont(w: 'sb', s: 16),
                         )
                       ],
                     ),
                     SizedBox(
                       height: 1,
                     ),
-                    SizedBox(height: 1,),
+                    SizedBox(
+                      height: 1,
+                    ),
 
                     SizedBox(
                       height: 1,
@@ -311,14 +308,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(w: 'm',s:14),
+            style: themeFont(w: 'm', s: 14),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'm',s:15),
+              style: themeFont(w: 'm', s: 15),
             ),
           ),
         ],

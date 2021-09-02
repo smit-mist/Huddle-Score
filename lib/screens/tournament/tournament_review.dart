@@ -56,6 +56,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   void initState() {
     super.initState();
     precomputer();
+    print('====>===>' + room.category);
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -101,7 +102,14 @@ class _TournamentReviewState extends State<TournamentReview> {
       'order_id': room.orderId,
       'notes': {
         'uid': user.uid,
-        'payload': jsonEncode(Captain().toMap(regDetails.captain)),
+        'payload': jsonEncode(
+          Captain().toMap(regDetails.captain),
+        ),
+        'payload2': room.category == '2'
+            ? jsonEncode(
+                Captain().toMap(regDetails.viceCaptain),
+              )
+            : jsonEncode(Captain().toMap(regDetails.viceCaptain)),
       },
     };
     try {
