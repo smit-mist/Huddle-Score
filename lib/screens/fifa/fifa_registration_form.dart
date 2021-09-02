@@ -43,6 +43,14 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
   TextEditingController name = TextEditingController();
   TextEditingController contact = TextEditingController();
   TextEditingController email = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    name.dispose();
+    contact.dispose();
+    email.dispose();
+    super.dispose();
+  }
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

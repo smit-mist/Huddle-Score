@@ -16,11 +16,21 @@ class FillYourDetailsTournament extends StatefulWidget {
 class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
   final _key = GlobalKey<FormState>();
   FormsBloc _bloc;
+  bool typedName = false, typedMob = false, typedTour = false,typedEmail = false;
   String city = "Ahmd", statee = "Gujarat", tournamentType = "Blitz";
   TextEditingController _name = TextEditingController(),
       _contact = TextEditingController(),
       _emailId = TextEditingController(),
       _nameTour = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _name.dispose();
+    _contact.dispose();
+    _emailId.dispose();
+    _nameTour.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<FormsBloc>(context);
@@ -142,14 +152,20 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedName = false;
+                          else typedName = true;
+                        });
+                      },
                       validator: (value) {
                         if (value.isEmpty || value == null)
                           return 'Please Enter your name';
                         return null;
                       },
                       controller: _name,
-                      decoration: normalTextDecoration(
-                        'Full Name',
+                      decoration: textFieldDecoration(
+                        'Full Name',typedName
                       ),
                     ),
                     SizedBox(
@@ -163,6 +179,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedMob = false;
+                          else typedMob = true;
+                        });
+                      },
                       validator: (value) {
                         if (value.length != 10 ||
                             value.isEmpty ||
@@ -171,7 +193,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         return null;
                       },
                       controller: _contact,
-                      decoration: normalTextDecoration(' ').copyWith(
+                      decoration: textFieldDecoration(' ',typedMob).copyWith(
                         prefixIcon: Container(
                           width: w * 0.15,
                           padding: EdgeInsets.only(left: 15),
@@ -209,6 +231,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedEmail = false;
+                          else typedEmail = true;
+                        });
+                      },
                       validator: (value) {
                         if (!RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -217,8 +245,8 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         return null;
                       },
                       controller: _emailId,
-                      decoration: normalTextDecoration(
-                        '',
+                      decoration: textFieldDecoration(
+                        '',typedEmail,
                       ),
                     ),
                     SizedBox(
@@ -419,14 +447,20 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
+                      onChanged: (val){
+                        setState(() {
+                          if(val.length ==0)typedTour = false;
+                          else typedTour = true;
+                        });
+                      },
                       validator: (value) {
                         if (value.isEmpty || value == null)
                           return 'Please Enter the name of your tournament';
                         return null;
                       },
                       controller: _nameTour,
-                      decoration: normalTextDecoration(
-                        '',
+                      decoration: textFieldDecoration(
+                        '',typedTour
                       ),
                     ),
                     SizedBox(

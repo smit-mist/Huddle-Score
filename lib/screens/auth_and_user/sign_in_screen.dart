@@ -23,7 +23,13 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailCtrl = TextEditingController();
 
   TextEditingController passwordCtrl = TextEditingController();
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailCtrl.dispose();
+    passwordCtrl.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     _loginBloc = BlocProvider.of<LoginBloc>(context);

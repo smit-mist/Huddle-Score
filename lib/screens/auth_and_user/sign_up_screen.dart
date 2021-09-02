@@ -30,7 +30,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordCtrl = TextEditingController();
 
   TextEditingController nameCtrl = TextEditingController();
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailCtrl.dispose();
+    passwordCtrl.dispose();
+    nameCtrl.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     _signupBloc = BlocProvider.of<SignupBloc>(context);
