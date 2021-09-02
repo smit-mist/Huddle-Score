@@ -74,6 +74,20 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
       mob2 = TextEditingController(),
       age2 = TextEditingController(),
       email2 = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    teamName.dispose();
+    name1.dispose();
+    mob1.dispose();
+    email1.dispose();
+    age1.dispose();
+    name2.dispose();
+    mob2.dispose();
+    email2.dispose();
+    age2.dispose();
+    super.dispose();
+  }
   void preComputer() {
     print("Inside compu");
     for (int i = 0; i < widget.currentTour.rooms.length; i++) {

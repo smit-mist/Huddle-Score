@@ -1,18 +1,18 @@
 // Done: Smit - Sign Up
 // Done: Smit - Tournament Registration Form
 // TODO: Smit - Fifa search
-// TODO: Smit - Border in all forms.
+// done: Smit - Border in all forms.
 // TODO: Smit- All Icons
-// TODO: Smit- Dispose all controller.
+// done: Smit- Dispose all controller.
 // done: Smit - terms of reg
 
 // TODO: Yash&Smit- Email Verify.
 
 // done: Yash - Tournament Model updated.
 // done: Yash - subscritinos.
-// TODO: Yash - Pass correct order ID in payment / test it.
+// done: Yash - Pass correct order ID in payment / test it.
 // TODO: Yash - My booking page.
 // TODO: Yash - Send data to the receipt page (after payment)
-// TODO: Yash - FIfa Null Aware
+// done: Yash - FIfa Null Aware
 // done: Yash - Form validation also password as mentioned.
 

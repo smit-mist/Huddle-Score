@@ -24,6 +24,15 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
       _emailId = TextEditingController(),
       _nameTurf = TextEditingController();
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _name.dispose();
+    _contact.dispose();
+    _emailId.dispose();
+    _nameTurf.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<FormsBloc>(context);
     double h = MediaQuery.of(context).size.height;
@@ -408,7 +417,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                           width: 10.0,
                         ),
                         Container(
-                          width: w * (330 / kScreenW),
+                          width: w * (320 / kScreenW),
                           child: Wrap(
                             children: [
                               Text(
