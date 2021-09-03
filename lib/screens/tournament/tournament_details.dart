@@ -10,47 +10,7 @@ import 'package:huddle_and_score/screens/tournament/tournament_register_form.dar
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 import 'dart:math';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-class MapView extends StatefulWidget {
-  double lat, longi;
-  MapView({this.lat, this.longi});
-
-  @override
-  _MapViewState createState() => _MapViewState();
-}
-
-class _MapViewState extends State<MapView> {
-  CameraPosition _kGooglePlex;
-
-  Completer<GoogleMapController> _controller = Completer();
-  @override
-  void initState() {
-    // TODO: implement initState
-    _kGooglePlex = CameraPosition(
-      target: LatLng(
-        widget.lat,
-        widget.longi,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print(widget.lat);
-    print(widget.longi);
-    return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-    );
-  }
-}
+import 'package:url_launcher/url_launcher.dart';
 
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
@@ -120,6 +80,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    String mapUrl =
+        'https://www.google.com/maps/place/${widget.tournament.main.venue.coordinates['latitude']},${widget.tournament.main.venue.coordinates['longitude']}';
+    void _launchURL() async => await canLaunch(mapUrl)
+        ? await launch(mapUrl)
+        : throw 'Could not launch $mapUrl';
     return SafeArea(
       child: Stack(
         children: [
@@ -389,28 +354,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                       TextDecoration.underline,
                                                 ),
                                               ),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (_) => MapView(
-                                                      lat: widget
-                                                              .tournament
-                                                              .main
-                                                              .venue
-                                                              .coordinates[
-                                                          'latitude'],
-                                                      longi: widget
-                                                              .tournament
-                                                              .main
-                                                              .venue
-                                                              .coordinates[
-                                                          'longitude'],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              // TODO: Add google map view
+                                              onPressed: ()async{
+                                                await launch(mapUrl);
+                                              }
+
+                                              ,
                                             )
                                           ],
                                         )

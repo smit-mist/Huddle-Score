@@ -35,7 +35,7 @@ dependencies:
   http: ^0.13.3
   razorpay_flutter: ^1.2.7
   custom_dropdown: ^0.0.2
-  google_maps_flutter: ^2.0.8
+  url_launcher: ^6.0.10
 dev_dependencies:
   flutter_test:
     sdk: flutter
