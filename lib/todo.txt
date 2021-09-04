@@ -1,6 +1,5 @@
-// done: Smit - Fifa search
-
 // TODO: Smit- All Icons
+
 
 // TODO: Yash&Smit- Email Verify.
 
