@@ -8,6 +8,7 @@ class BookedEventTile extends StatelessWidget {
   BookedEventTile({this.booking});
   @override
   Widget build(BuildContext context) {
+    String venue = booking.data.venue.address.join(', ');
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(
@@ -55,15 +56,17 @@ class BookedEventTile extends StatelessWidget {
                 style: themeFont(),
               ),
               Text(
-                booking.data.venue.address.join(' '),
-                style: themeFont(),
+                venue.length > 25 ? venue.substring(0, 25) + '...' : venue,
+                style: themeFont(s: 12, w: 'r'),
               ),
               Text(
                 '4th August',
                 style: themeFont(),
               ),
               Text(
-                booking.recordedAt,
+                (booking.recordedAt.length > 20)
+                    ? booking.recordedAt.substring(0, 20)
+                    : booking.recordedAt,
                 style: themeFont(),
               ),
               Container(

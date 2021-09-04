@@ -21,12 +21,12 @@ class BookingDetails {
   });
 
   factory BookingDetails.fromMap(Map<String, dynamic> doc) => BookingDetails(
-        amount: doc['amount'],
-        bookingId: doc['bookingID'],
-        paymentMethod: doc['paymentMethod'],
-        recordedAt: doc['recordedAt'],
-        taxes: doc['taxes'],
-        tourId: doc['tourID'],
+        amount: doc['amount'] ?? 37,
+        bookingId: doc['bookingID']??"NO booking ID",
+        paymentMethod: doc['paymentMethod']??"NO Payment method",
+        recordedAt: doc['recordedAt']??'No time',
+        taxes: doc['taxes'] ?? 37,
+        tourId: doc['tourID']??"NO ID",
         regDetails: RegDetails.fromMap(doc['RegDetails']),
         data: TourData.fromMap(doc['data']),
       );
@@ -75,9 +75,9 @@ class RegDetails {
   });
 
   factory RegDetails.fromMap(Map<String, dynamic> doc) => RegDetails(
-        captain: Captain.fromMap(doc['cap']),
-        teamName: doc['teamName'],
-        viceCaptain: Captain.fromMap(doc['viceCaptain']),
+        captain: Captain.fromMap(doc['p1']),
+        teamName: doc['team'],
+        viceCaptain: Captain.fromMap(doc['p2']),
       );
 }
 
