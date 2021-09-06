@@ -19,13 +19,14 @@ class UserRepository {
   }
 
   Future<List<BookingDetails>> getBookings() async {
-   // print('Booking Fetching Started');
+    // print('Booking Fetching Started');
     try {
       String uid = AuthRepository().getCurrentUser().uid;
       var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
       // ignore: missing_return
+      print('in booking fetch');
       var bookingsData = await response.get();
-      List<BookingDetails> bookings=[];
+      List<BookingDetails> bookings = [];
       bookingsData.data().forEach((key, value) {
         bookings.add(BookingDetails.fromMap(value));
       });
