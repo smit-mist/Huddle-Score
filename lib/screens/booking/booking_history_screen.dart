@@ -25,72 +25,114 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       width: w,
       height: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'My Bookings',
-            style: themeFont(color: kThemeColor, s: 23),
-          ),
-          DropdownButton<String>(
-            focusColor: Colors.grey.withOpacity(0.14),
-            value: selected,
-            style: TextStyle(color: Colors.white),
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-              color: kThemeColor,
-              size: 20,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30.0,
             ),
-            underline: Container(),
-            items: <String>[
-              'Tournaments',
-              'Fifa',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(
-                  value,
-                  style: TextStyle(color: Colors.black),
-                ),
-              );
-            }).toList(),
-            onChanged: (s) {
-              setState(() {
-                selected = s;
-              });
-            },
-            hint: Text(
-              "Tournaments",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+            Text(
+              'My Bookings',
+              style: themeFont(color: kThemeColor, s: 23),
             ),
-          ),
-          (selected=='Fifa') ?
-          (widget.bookedFifa == null)
-              ? Center(child: Text('No bookings'))
-              : Expanded(
-                  child: Container(
-                    width: w,
-                    child: ListView.separated(
-                      separatorBuilder: (_, i) {
-                        return SizedBox(
-                          height: 10,
-                        );
-                      },
-                      itemBuilder: (_, ind) {
-                        return FifaBookingTile(
-                          booking: widget.bookedFifa[ind],
-                        );
-                      },
-                      itemCount: widget.bookedFifa.length,
-                    ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: DropdownButton<String>(
+                value: selected,
+                style: themeFont(color: kThemeColor),
+                icon: Padding(
+                  padding: const EdgeInsets.only(left:5.0),
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: kThemeColor,
+                    size: 25,
                   ),
-                ): (widget.bookedTours== null)
-                  ? Center(child: Text('No bookings'))
-                  : Expanded(
-                      child: Container(
+                ),
+                underline: Container(),
+                items: <String>[
+                  'Tournaments',
+                  'Fifa',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: themeFont(color: kThemeColor),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (s) {
+                  setState(() {
+                    selected = s;
+                  });
+                },
+                hint: Text(
+                  "Tournaments",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              child: Text(
+                'Recent',
+                style: themeFont(
+                  s: 16.0,
+                  w: 'r',
+                ),
+              ),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                    width: 5.0,
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            (selected == 'Fifa')
+                ? (widget.bookedFifa == null)
+                    ? Center(child: Text('No bookings'))
+                    : Container(
+                        width: w,
+                        height: h * 0.3,
+                        child: ListView.separated(
+                          separatorBuilder: (_, i) {
+                            return SizedBox(
+                              height: 10,
+                            );
+                          },
+                          itemBuilder: (_, ind) {
+                            return FifaBookingTile(
+                              booking: widget.bookedFifa[ind],
+                            );
+                          },
+                          itemCount: widget.bookedFifa.length,
+                        ),
+                      )
+                : (widget.bookedTours == null)
+                    ? Center(child: Text('No bookings'))
+                    : Container(
+                        height: h * 0.3,
                         width: w,
                         child: ListView.separated(
                           separatorBuilder: (_, i) {
@@ -106,8 +148,40 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                           itemCount: widget.bookedTours.length,
                         ),
                       ),
-                    ),
-        ],
+            SizedBox(
+              height: 10.0,
+            ),
+            Container(
+              child: Text(
+                'Earlier this month',
+                style: themeFont(
+                  s: 16.0,
+                  w: 'r',
+                ),
+              ),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                    width: 5.0,
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              'No Bookings',
+              style: themeFont(
+                color: Colors.red,
+                s: 18.0,
+                w: 'sb',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
