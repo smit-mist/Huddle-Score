@@ -181,39 +181,21 @@ class _TournamentReviewState extends State<TournamentReview> {
               ),
               Spacer(),
               GestureDetector(
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => LoadingScreen(),
-                    ),
-                  );
-                  await TournamentRepository().registerInTournament(
-                      widget.currentTour, widget.userRecord);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => TournamentReceiptScreen(),
-                    ),
-                  );
+                onTap: () {
+                  checkoutOptions(widget.userRecord);
                 },
-                child: GestureDetector(
-                  onTap: () {
-                    checkoutOptions(widget.userRecord);
-                  },
-                  child: Container(
-                    height: 40,
-                    width: w * 0.35,
-                    child: Center(
-                      child: Text(
-                        'Proceed to pay',
-                        style: themeFont(color: Colors.white, s: 15, w: 'sb'),
-                      ),
+                child: Container(
+                  height: 40,
+                  width: w * 0.35,
+                  child: Center(
+                    child: Text(
+                      'Proceed to pay',
+                      style: themeFont(color: Colors.white, s: 15, w: 'sb'),
                     ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: kThemeColor,
-                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: kThemeColor,
                   ),
                 ),
               ),

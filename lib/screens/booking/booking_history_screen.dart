@@ -114,7 +114,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                     ? Center(child: Text('No bookings'))
                     : Container(
                         width: w,
-                        height: h * 0.3,
+                        height: h * 0.4,
                         child: ListView.separated(
                           separatorBuilder: (_, i) {
                             return SizedBox(
@@ -122,8 +122,11 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                             );
                           },
                           itemBuilder: (_, ind) {
-                            return FifaBookingTile(
-                              booking: widget.bookedFifa[ind],
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: FifaBookingTile(
+                                booking: widget.bookedFifa[ind],
+                              ),
                             );
                           },
                           itemCount: widget.bookedFifa.length,
@@ -132,7 +135,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 : (widget.bookedTours == null)
                     ? Center(child: Text('No bookings'))
                     : Container(
-                        height: h * 0.3,
+                        height: h * 0.4,
                         width: w,
                         child: ListView.separated(
                           separatorBuilder: (_, i) {
@@ -141,8 +144,11 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                             );
                           },
                           itemBuilder: (_, ind) {
-                            return BookedEventTile(
-                              booking: widget.bookedTours[ind],
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom:5.0),
+                              child: BookedEventTile(
+                                booking: widget.bookedTours[ind],
+                              ),
                             );
                           },
                           itemCount: widget.bookedTours.length,
