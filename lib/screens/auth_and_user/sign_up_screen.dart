@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/user_tnc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
@@ -30,6 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordCtrl = TextEditingController();
 
   TextEditingController nameCtrl = TextEditingController();
+  TapGestureRecognizer _tapGestureRecognizer;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -38,8 +41,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     nameCtrl.dispose();
     super.dispose();
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _tapGestureRecognizer = TapGestureRecognizer();
+    // _longPressRecognizer = LongPressGestureRecognizer()
+    //   ..onLongPress = _handlePress;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    void _handlePress() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => UserTermsAndConditions(),
+        ),
+      );
+    }
+
+    _tapGestureRecognizer = TapGestureRecognizer()..onTap = _handlePress;
+
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -426,6 +450,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ),
                                         ),
                                         TextSpan(
+                                          recognizer: _tapGestureRecognizer,
                                           text: 'Conditions of Use',
                                           style: themeFont(
                                             s: 12.0,

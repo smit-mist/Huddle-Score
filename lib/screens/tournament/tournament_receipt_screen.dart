@@ -5,6 +5,7 @@ import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
+import '../home_navbar_screen.dart';
 
 class TournamentReceiptScreen extends StatefulWidget {
   BookingDetails details;
@@ -429,7 +430,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HomeNavBar(),
+                      ),
+                      (route) => false);
                 },
                 child: Text(
                   'Back',
