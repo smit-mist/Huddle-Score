@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 
@@ -28,7 +29,9 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
     } else if (event is CartIconPressed) {
       if (isSignedIn) {
         List<BookingDetails> bookings = await UserRepository().getBookings();
-        yield CartScreenState(bookings: bookings);
+        List<FifaBookingDetails> fifas =
+            await UserRepository().getFifaBookings();
+        yield CartScreenState(bookings: bookings,fifaBookings: fifas);
       } else {
         yield GuestCartScreenState();
       }

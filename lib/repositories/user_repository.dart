@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 
 class UserRepository {
@@ -18,10 +19,10 @@ class UserRepository {
     await _auth.currentUser.updatePassword(password);
   }
 
+  String uid = AuthRepository().getCurrentUser().uid;
   Future<List<BookingDetails>> getBookings() async {
     print('Booking Fetching Started');
     try {
-      String uid = AuthRepository().getCurrentUser().uid;
       var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
       // ignore: missing_return
       print('in booking fetch');
@@ -33,6 +34,25 @@ class UserRepository {
       return bookings;
     } catch (e) {
       print("ERROR");
+      print(e.toString());
+    }
+  }
+
+  Future<List<FifaBookingDetails>> getFifaBookings() async {
+    try {
+      print('fifa bookings fetch started');
+      var response = FirebaseFirestore.instance.doc('users/$uid/records/fifa');
+      var bookingsData = await response.get();
+      List<FifaBookingDetails> fifaBookings = [];
+      bookingsData.data().forEach((key, value) {
+        print('key :' + key);
+        fifaBookings.add(
+          FifaBookingDetails.fromMap(value),
+        );
+      });
+      return fifaBookings;
+    } catch (e) {
+      print("Error");
       print(e.toString());
     }
   }

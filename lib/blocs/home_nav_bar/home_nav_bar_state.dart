@@ -14,7 +14,11 @@ class SearchScreenState extends HomeNavBarState {}
 
 class CartScreenState extends HomeNavBarState {
   List<BookingDetails> bookings;
-  CartScreenState({this.bookings}):super();
+  List<FifaBookingDetails> fifaBookings;
+  CartScreenState({
+    this.bookings,
+    this.fifaBookings,
+  }) : super();
 }
 
 class GuestCartScreenState extends HomeNavBarState {}

@@ -1,13 +1,13 @@
-class BookingDetails {
+class FifaBookingDetails {
   RegDetails regDetails;
   int amount;
   String bookingId;
-  TourData data;
+  FifaData data;
   String paymentMethod;
   String recordedAt;
   int taxes;
-  String tourId;
-  BookingDetails({
+  String fifaId;
+  FifaBookingDetails({
     this.amount,
     this.bookingId,
     this.data,
@@ -15,38 +15,39 @@ class BookingDetails {
     this.paymentMethod,
     this.recordedAt,
     this.taxes,
-    this.tourId,
+    this.fifaId,
   });
 
-  factory BookingDetails.fromMap(Map<String, dynamic> doc) => BookingDetails(
+  factory FifaBookingDetails.fromMap(Map<String, dynamic> doc) =>
+      FifaBookingDetails(
         amount: doc['amount'] ?? 37,
         bookingId: doc['bookingID'] ?? "NO booking ID",
         paymentMethod: doc['paymentMethod'] ?? "NO Payment method",
         recordedAt: doc['recordedAt'] ?? 'No time',
         taxes: doc['taxes'] ?? 37,
-        tourId: doc['tourID'] ?? "NO ID",
+        fifaId: doc['fifaID'] ?? "NO ID",
         regDetails: RegDetails.fromMap(doc['RegDetails']),
-        data: TourData.fromMap(doc['data']),
+        data: FifaData.fromMap(doc['data']),
       );
 }
 
-class TourData {
-  String ageRec = 'NULL';
+class FifaData {
+  String gameDate = 'NULL';
   String poster = 'NOT FOUND';
-  List<dynamic> timeLine = ['NOT FOUND'];
+  String time = 'NO TIME';
   String title;
   Venue venue;
-  TourData({
-    this.ageRec = 'NOT FOUND',
+  FifaData({
+    this.gameDate = 'NOT FOUND',
     this.poster = 'NOT FOUND',
-    this.timeLine = const ['NOT FOUND'],
+    this.time = 'NOT FOUND',
     this.title = 'NOT FOUND',
     this.venue = const Venue(),
   });
-  factory TourData.fromMap(Map<String, dynamic> doc) => TourData(
-        ageRec: doc['ageRec'] ?? 'NOT FOUND',
+  factory FifaData.fromMap(Map<String, dynamic> doc) => FifaData(
+        gameDate: doc['gameDate'] ?? 'NOT FOUND',
         poster: doc['poster'] ?? 'NOT FOUND',
-        timeLine: doc['timeLine'] ?? ['NOT FOUND'],
+        time: doc['time'] ?? 'NOT FOUND',
         title: doc['title'] ?? ['NOT FOUND'],
         venue: Venue.fromMap(doc['venue']),
       );
@@ -70,40 +71,23 @@ class Venue {
     );
   }
 }
+
 class RegDetails {
-  final Captain captain;
-  final Captain viceCaptain;
+  final String name;
+  final String email;
+  final int contact;
   final String teamName;
   const RegDetails({
-    this.captain = const Captain(
-        fullName: "NULL", email: "NO MAIL", contact: 1212, age: 24),
-    this.teamName = "NO Team name",
-    this.viceCaptain = const Captain(
-        fullName: "NULL", email: "NO MAIL", contact: 1212, age: 24),
+    this.contact = 37,
+    this.email = 'NOT FOUND',
+    this.name = 'NOT FOUND',
+    this.teamName = 'NOT FOUND',
   });
 
   factory RegDetails.fromMap(Map<String, dynamic> doc) => RegDetails(
-        captain: Captain.fromMap(doc['p1']),
-        teamName: doc['team'],
-        viceCaptain: Captain.fromMap(doc['p2']),
-      );
-}
-
-class Captain {
-  final int contact;
-  final int age;
-  final String email;
-  final String fullName;
-  const Captain({
-    this.contact = 373737,
-    this.age = 37,
-    this.email = "nomail@mail.com",
-    this.fullName = "No Name",
-  });
-  factory Captain.fromMap(Map<String, dynamic> doc) => Captain(
+        name: doc['fullName']?? 'NOT FOUND',
+        email: doc['email']?? 'NOT FOUND',
         contact: doc['contact'] ?? 37,
-        age: doc['age'] ?? 37,
-        email: doc['email'] ?? 'NOT FOUND',
-        fullName: doc['name'] ?? 'NOT FOUND',
+        teamName: doc['teamName'] ?? 'NOT FOUND',
       );
 }

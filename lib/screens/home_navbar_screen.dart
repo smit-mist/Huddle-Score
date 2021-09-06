@@ -31,9 +31,10 @@ class HomeNavBar extends StatelessWidget {
             } else if (state is SearchScreenState) {
               return SearchScreen();
             } else if (state is CartScreenState) {
-              print(state.bookings == null);
+              print(state.fifaBookings == null);
               return BookingHistoryScreen(
                 bookedTours: state.bookings,
+                bookedFifa: state.fifaBookings,
               );
             } else if (state is AnonymousProfileScreenState) {
               return AnonymousProfileScreen();

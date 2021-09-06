@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/screens/widgets/booked_event_tile.dart';
 
 import '../../constants.dart';
 
-class BookingHistoryScreen extends StatelessWidget {
-  String selected = "Tournaments";
+class BookingHistoryScreen extends StatefulWidget {
   final List<BookingDetails> bookedTours;
-  BookingHistoryScreen({this.bookedTours});
+  final List<FifaBookingDetails> bookedFifa;
+  BookingHistoryScreen({this.bookedTours, this.bookedFifa});
+
+  @override
+  _BookingHistoryScreenState createState() => _BookingHistoryScreenState();
+}
+
+class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
+  String selected = "Tournaments";
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -45,7 +54,11 @@ class BookingHistoryScreen extends StatelessWidget {
                 ),
               );
             }).toList(),
-            onChanged: (s) {},
+            onChanged: (s) {
+              setState(() {
+                selected = s;
+              });
+            },
             hint: Text(
               "Tournaments",
               style: TextStyle(
@@ -54,7 +67,8 @@ class BookingHistoryScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          (bookedTours == null)
+          (selected=='Fifa') ?
+          (widget.bookedFifa == null)
               ? Center(child: Text('No bookings'))
               : Expanded(
                   child: Container(
@@ -66,14 +80,33 @@ class BookingHistoryScreen extends StatelessWidget {
                         );
                       },
                       itemBuilder: (_, ind) {
-                        return BookedEventTile(
-                          booking: bookedTours[ind],
+                        return FifaBookingTile(
+                          booking: widget.bookedFifa[ind],
                         );
                       },
-                      itemCount: bookedTours.length,
+                      itemCount: widget.bookedFifa.length,
                     ),
                   ),
-                ),
+                ): (widget.bookedTours== null)
+                  ? Center(child: Text('No bookings'))
+                  : Expanded(
+                      child: Container(
+                        width: w,
+                        child: ListView.separated(
+                          separatorBuilder: (_, i) {
+                            return SizedBox(
+                              height: 10,
+                            );
+                          },
+                          itemBuilder: (_, ind) {
+                            return BookedEventTile(
+                              booking: widget.bookedTours[ind],
+                            );
+                          },
+                          itemCount: widget.bookedTours.length,
+                        ),
+                      ),
+                    ),
         ],
       ),
     );
