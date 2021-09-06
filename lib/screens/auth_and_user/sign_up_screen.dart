@@ -32,7 +32,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordCtrl = TextEditingController();
 
   TextEditingController nameCtrl = TextEditingController();
-  TapGestureRecognizer _tapGestureRecognizer;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -43,26 +42,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    _tapGestureRecognizer = TapGestureRecognizer();
-    // _longPressRecognizer = LongPressGestureRecognizer()
-    //   ..onLongPress = _handlePress;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    void _handlePress() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => UserTermsAndConditions(),
-        ),
-      );
-    }
 
-    _tapGestureRecognizer = TapGestureRecognizer()..onTap = _handlePress;
 
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
@@ -439,7 +420,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: themeFont(),
-                                      children: <TextSpan>[
+                                      children: [
                                         TextSpan(
                                           text:
                                               "By creating an account, I agree to Huddle & Score's ",
@@ -449,8 +430,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.black,
                                           ),
                                         ),
+
                                         TextSpan(
-                                          recognizer: _tapGestureRecognizer,
                                           text: 'Conditions of Use',
                                           style: themeFont(
                                             s: 12.0,
@@ -480,6 +461,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ],
                                     ),
+
                                     // children: [
 
                                     // ],

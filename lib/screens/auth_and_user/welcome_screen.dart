@@ -4,6 +4,7 @@ import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../home_navbar_screen.dart';
+import '../static_screens/user_tnc.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => HomeNavBar(),
+                            builder: (_) => UserTermsAndConditions(),
                           ),
                         );
                       },
