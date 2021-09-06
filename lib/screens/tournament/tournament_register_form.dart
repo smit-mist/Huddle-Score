@@ -8,6 +8,7 @@ import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
+List<String> teamSports = ["cricket" ,"football","basketball","volleyball", "hockey","5v5","2v2"];
 
 String nameValidator(String val) {
   if (val == null || val.isEmpty) return 'Enter Name';
@@ -50,7 +51,15 @@ class TournamentRegisterForm extends StatefulWidget {
 class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   List<String> tourType = ['Select'];
   int typeOfForm = -1;
+  bool isTwoPlayer = false,isCap = false;
+  String sport ="";
 
+
+/*
+  * Proper team (Cap, Vice Cap) Like Cricket
+  * Player 1-2 Like Badminton Doubles
+  * Player 1 Single Player Game.
+  * */
   Map<String, List<String>> allCategory = {};
   List<String> selectedSub = ["Select"];
   String chosedType, chosedCat;
@@ -90,6 +99,15 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
     super.dispose();
   }
   void preComputer() {
+    sport = widget.currentTour.info.type.toLowerCase();
+    if(teamSports.contains(sport)){
+      isTwoPlayer = true;
+      isCap = true;
+    }
+    else{
+      isCap = false;
+
+    }
     print("Inside compu");
     for (int i = 0; i < widget.currentTour.rooms.length; i++) {
       if (widget.currentTour.rooms[i].category == "2") {
@@ -117,7 +135,21 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
           allCategory['Double'].add(here);
       }
       chosedCat = allCategory['Single'][0];
-    } else {}
+    } else {
+      tourType.add('Single');
+      allCategory = {
+        'Single': ["Select"],
+        'Select': ["Select"],
+      };
+      for (var x in widget.currentTour.rooms) {
+        String here = "";
+        here += x.subCategory;
+        here += ' - ₹ ';
+        here += x.fees.toString();
+          allCategory["Single"].add(here);
+      }
+      chosedCat = allCategory['Single'][0];
+    }
   }
   /*
   * Proper team (Cap, Vice Cap) Like Cricket
@@ -873,6 +905,37 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      'Name of your team',
+                                      style: themeFont(
+                                        s: 12,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 7,
+                                    ),
+                                    TextFormField(
+                                      onChanged: (val) {
+                                        if (val.length > 0) {
+                                          setState(() {
+                                            typedTeamName = true;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            typedTeamName = false;
+                                          });
+                                        }
+                                      },
+                                      controller: teamName,
+                                      validator: (val) {
+                                        return nameValidator(val);
+                                      },
+                                      decoration: textFieldDecoration(
+                                          'Team Name', typedTeamName),
+                                    ),
+                                    SizedBox(
+                                      height: h * 0.035,
+                                    ),
                                     Text(
                                       'Player 1 details',
                                       style: themeFont(s: 15),
