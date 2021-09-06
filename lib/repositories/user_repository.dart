@@ -19,7 +19,7 @@ class UserRepository {
   }
 
   Future<List<BookingDetails>> getBookings() async {
-    // print('Booking Fetching Started');
+    print('Booking Fetching Started');
     try {
       String uid = AuthRepository().getCurrentUser().uid;
       var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
@@ -32,6 +32,7 @@ class UserRepository {
       });
       return bookings;
     } catch (e) {
+      print("ERROR");
       print(e.toString());
     }
   }

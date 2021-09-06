@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:huddle_and_score/screens/tournament/tournament_register_form.dar
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 import 'dart:math';
+import 'package:url_launcher/url_launcher.dart';
 
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
@@ -77,6 +80,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    String mapUrl =
+        'https://www.google.com/maps/place/${widget.tournament.main.venue.coordinates['latitude']},${widget.tournament.main.venue.coordinates['longitude']}';
+    void _launchURL() async => await canLaunch(mapUrl)
+        ? await launch(mapUrl)
+        : throw 'Could not launch $mapUrl';
     return SafeArea(
       child: Stack(
         children: [
@@ -261,7 +269,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
                         width: double.infinity,
-                        height: h * (280 / kScreenH),
+                        height: h * (320 / kScreenH),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -299,14 +307,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                     ),
                                   ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             DataShower(
                               type: 'Tournament Timeline',
                               data: timeLine,
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -335,15 +343,22 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                               'View in ',
                                               style: themeFont(s: 12),
                                             ),
-                                            Text(
-                                              // TODO: Add google map view
-                                              'Maps',
-                                              style: themeFont(
-                                                      s: 12, color: kThemeColor)
-                                                  .copyWith(
-                                                decoration:
-                                                    TextDecoration.underline,
+                                            TextButton(
+                                              child: Text(
+                                                'Maps',
+                                                style: themeFont(
+                                                        s: 12,
+                                                        color: kThemeColor)
+                                                    .copyWith(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
                                               ),
+                                              onPressed: ()async{
+                                                await launch(mapUrl);
+                                              }
+
+                                              ,
                                             )
                                           ],
                                         )
@@ -354,14 +369,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             DataShower(
                               type: 'Category',
                               data: widget.tournament.main.ageRec,
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -405,7 +420,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                           ],
                         ),

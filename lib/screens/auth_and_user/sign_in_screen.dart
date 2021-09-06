@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
@@ -30,6 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
     passwordCtrl.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
@@ -103,9 +105,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                           onChanged: (ok) {
                             setState(() {
-                              if(ok.length>0)
-                              emailTapped = true;
-                              if(ok.length==0)emailTapped = false;
+                              if (ok.length > 0) emailTapped = true;
+                              if (ok.length == 0) emailTapped = false;
                             });
                           },
                           controller: emailCtrl,
@@ -124,15 +125,15 @@ class _SignInScreenState extends State<SignInScreen> {
                         width: double.infinity,
                         child: TextFormField(
                           validator: (value) {
-                           // if (isFailed) return null;
+                            // if (isFailed) return null;
                             if (value.isEmpty || value == null)
                               return 'Please enter your password';
                             return null;
                           },
                           onChanged: (ok) {
                             setState(() {
-                              if(ok.length>0)
-                              passTapped = true;
+                              if (ok.length > 0)
+                                passTapped = true;
                               else
                                 passTapped = false;
                             });
@@ -151,17 +152,27 @@ class _SignInScreenState extends State<SignInScreen> {
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
-                               //   passTapped = true;
+                                  //   passTapped = true;
                                   visible = !visible;
                                 });
                               },
-                              child: Icon(
-                                (visible == true
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                color: (passTapped == true)
-                                    ? kThemeColor
-                                    : Colors.grey.withOpacity(0.4),
+                              child: Container(
+                                padding: EdgeInsets.all(12),
+
+                             //   color: kThemeColor,
+                                child: SvgPicture.asset(
+                                  'assets/icons/password_eye_open.svg',
+                                  color: passTapped == true?kThemeColor:Colors.grey.withOpacity(0.7),
+                                ),
+
+                                // child: Icon(
+                                //   (visible == true
+                                //       ? Icons.visibility
+                                //       : Icons.visibility_off),
+                                //   color: (passTapped == true)
+                                //       ? kThemeColor
+                                //       : Colors.grey.withOpacity(0.4),
+                                // ),
                               ),
                             ),
                             contentPadding:

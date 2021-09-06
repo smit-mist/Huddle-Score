@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/models/home_event.dart';
+import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../../constants.dart';
@@ -16,12 +17,21 @@ class SearchResult extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     _bloc = BlocProvider.of<HomeBloc>(context);
-    List<HomeTour> toShow = [];
+    List<dynamic>toShow=[];
+    List<int>typeOf = [];
     for (int i = 0; i < _bloc.state.allTournaments.length; i++) {
       if (startsWith(_bloc.state.allTournaments[i].name, currentSearch)) {
         toShow.add(_bloc.state.allTournaments[i]);
+        typeOf.add(1);
       }
     }
+    for(int i=0;i<_bloc.state.allFifa.length;i++){
+      if(startsWith(_bloc.state.allFifa[i].name, currentSearch)){
+        toShow.add(_bloc.state.allFifa[i]);
+        typeOf.add(0);
+      }
+    }
+    // 0 for fifa and 1 for tournament.
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
         if (state is Loading) {
@@ -37,9 +47,15 @@ class SearchResult extends StatelessWidget {
 
           itemCount: toShow.length,
           itemBuilder: (_, ind) {
-            return TournamentTile(
-              here: toShow[ind],
-            );
+            if(typeOf[ind] == 1){
+              return TournamentTile(
+                here: toShow[ind],
+              );
+            }
+            else{
+              return FifaTile(fifa: toShow[ind],);
+            }
+
           },
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

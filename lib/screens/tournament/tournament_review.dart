@@ -70,6 +70,8 @@ class _TournamentReviewState extends State<TournamentReview> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print(response);
+
     Navigator.push(
       context,
       MaterialPageRoute(
