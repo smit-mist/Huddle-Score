@@ -56,4 +56,17 @@ class UserRepository {
       print(e.toString());
     }
   }
+
+  Future<FifaBookingDetails> getFifaBookingById(String paymentId) async {
+    try {
+      var response = FirebaseFirestore.instance.doc('users/$uid/records/fifa');
+      var bookingData = await response.get();
+      bookingData.get(paymentId);
+      print(bookingData.id);
+    } catch (e) {
+      print('Error in fifa booking by id');
+      print(e.toString());
+      return FifaBookingDetails();
+    }
+  }
 }

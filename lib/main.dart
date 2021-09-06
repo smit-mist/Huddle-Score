@@ -24,6 +24,7 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await UserRepository().getFifaBookingById('1630950659pay_HuGg7j4iIDWzWQ');
   runApp(MyApp());
 }
 
