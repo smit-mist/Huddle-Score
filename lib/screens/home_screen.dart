@@ -11,7 +11,18 @@ import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 import 'dart:ui';
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
-
+List<String> cities = [
+  "Ahmedabad",
+  "Mumbai",
+  "Kolkata",
+  "Hyderabad",
+  "Lucknow",
+  "Noida",
+  "Gurugram",
+  "Faridabad",
+  "Agra",
+  "Ajmer"
+];
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _chosenValue = "Ahmedabad";
+
 
   HomeBloc _bloc;
 
@@ -63,12 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: w * (350 / kScreenW),
                     height: h * (230 / kScreenH),
                     child: GridView.builder(
-                        itemCount: 15,
+                        itemCount: cities.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: (101) / (42),
                         ),
                         itemBuilder: (_, int ind) {
+
                           return GestureDetector(
                             onTap: () {
                               setState(() {
@@ -78,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Container(
                               child: Center(
                                 child: Text(
-                                  'City ${ind + 1}',
+                                  cities[ind],
                                   style: themeFont(s: 12).copyWith(
                                     decoration: ind == 0
                                         ? TextDecoration.none
@@ -95,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           );
+
                         }),
                   ),
                   Row(
@@ -104,6 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 42,
                         width: 105,
                         child: ActionButton(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
                           child: Text(
                             'Proceed',
                             style:
@@ -142,39 +159,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       'Huddle & Score',
                       style: themeFont(color: kThemeColor, s: 26, w: 'sb'),
                     ),
-                    DropdownButton<String>(
-                      focusColor: Colors.white,
-                      value: _chosenValue,
-                      style: TextStyle(color: Colors.white),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: kThemeColor,
-                        size: 12,
-                      ),
-                      underline: Container(),
-                      items: <String>[
-                        'Ahmedabad',
-                        'Surat',
-                        'Rajkot',
-                        'Mumbai',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        );
-                      }).toList(),
-                      hint: Text(
-                        "City",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                    SizedBox(
+                      height: 10,
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          _chosenValue,
+                          style: themeFont(),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext _) => selectCity);
+                            },
+                            child: Icon(
+                              Icons.keyboard_arrow_down,
+                              size: 20,
+                            )),
+                      ],
+                    )
                   ],
                 ),
                 Spacer(),
@@ -187,11 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext _) => selectCity);
-                  },
+                  onTap: () {},
                   child: Icon(
                     Icons.qr_code_scanner,
                     color: kThemeColor,

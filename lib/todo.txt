@@ -4,6 +4,5 @@
 // TODO: Yash&Smit- Email Verify.
 
 
-// TODO: Yash - My booking page.
-// TODO: Yash - Send data to the receipt page (after payment)
-
+// TODO: Yash - Receipt Page For Fifas.
+// TODO:
