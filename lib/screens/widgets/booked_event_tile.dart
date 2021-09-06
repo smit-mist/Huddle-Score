@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/fifa_booking.dart';
+import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 
 import '../../constants.dart';
 
@@ -77,10 +78,23 @@ class BookedEventTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     // Spacer(),
-                    Text(
-                      'View Receipt',
-                      style: themeFont(color: kThemeColor, s: 12).copyWith(
-                        decoration: TextDecoration.underline,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => TournamentReceiptScreen(
+                              details: booking,
+                              formType: 1,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'View Receipt',
+                        style: themeFont(color: kThemeColor, s: 12).copyWith(
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ],

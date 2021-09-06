@@ -1,3 +1,6 @@
+import 'captain.dart';
+import 'venue.dart';
+
 class UserModel {
   Map<String, TourBooking> tours;
   Map<String, FifaBooking> fifas;
@@ -148,34 +151,5 @@ class TourData {
         timeLine: data['timeline'].cast<String>(),
         title: data['title'],
         venue: Venue.fromMap(data['venue']),
-      );
-}
-
-class Venue {
-  List<String> address;
-  Map<String, double> coordinates;
-  Venue({this.address, this.coordinates});
-  factory Venue.fromMap(Map<String, dynamic> map) => Venue(
-        address: map['address'].cast<String>(),
-        coordinates: map['coordinates'].cast<String, double>(),
-      );
-}
-
-class Captain {
-  int contact;
-  int age;
-  String email;
-  String fullName;
-  Captain({
-    this.contact,
-    this.age,
-    this.email,
-    this.fullName,
-  });
-  factory Captain.fromMap(Map<String, dynamic> data) => Captain(
-        contact: data['contact'],
-        age: data['age'],
-        email: data['email'],
-        fullName: data['name'],
       );
 }

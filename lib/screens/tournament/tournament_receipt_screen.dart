@@ -1,11 +1,18 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
 
 class TournamentReceiptScreen extends StatefulWidget {
+  BookingDetails details;
+  int formType;
+  TournamentReceiptScreen({
+    this.details,
+    this.formType,
+  });
   @override
   _TournamentReceiptScreenState createState() =>
       _TournamentReceiptScreenState();
@@ -16,8 +23,21 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   int firstOption = 0, secondOption = 0;
   @override
   Widget build(BuildContext context) {
+    print(widget.formType);
+    String timeLine = "hello";
+    // var st = WeirdDateFormat(date: widget.details.data.timeLine[0]);
+    // var en = WeirdDateFormat(date: widget.details.data.timeLine[0]);
+    // timeLine += st.getDate();
+    // timeLine += '- ';
+    // timeLine += en.getDate();
+    // timeLine += ' ';
+    // timeLine += st.getMonth();
+    // timeLine += ' ';
+    // timeLine += st.getYear();
+    String address = widget.details.data.venue.address.join(', ');
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    print(widget.details.regDetails.captain == null);
     Widget feedBackFrom = StatefulBuilder(
       builder: (context, setState) {
         return BackdropFilter(
@@ -36,7 +56,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: h*(480/kScreenH),
+                    height: h * (480 / kScreenH),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,14 +66,21 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           ),
                           Text(
                             'We\'d love your feedback!',
-                            style: themeFont(color: kThemeColor, s: 20,w:'sb',),
+                            style: themeFont(
+                              color: kThemeColor,
+                              s: 20,
+                              w: 'sb',
+                            ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
                             'How satisfied are you with the booking experience?',
-                            style: themeFont(s: 15,w:'r',),
+                            style: themeFont(
+                              s: 15,
+                              w: 'r',
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -341,8 +368,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             height: 7,
                           ),
                           TextField(
-                            decoration:
-                                normalTextDecoration('Leave a suggestion to us..'),
+                            decoration: normalTextDecoration(
+                                'Leave a suggestion to us..'),
                           ),
                           SizedBox(
                             height: 10,
@@ -351,9 +378,11 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
-                    width:double.infinity,
+                    width: double.infinity,
                     child: Row(
                       children: [
                         Spacer(),
@@ -361,7 +390,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           width: 100,
                           height: 40,
                           child: ActionButton(
-                            child: Text('Submit',style: themeFont(color: Colors.white,),),
+                            child: Text(
+                              'Submit',
+                              style: themeFont(
+                                color: Colors.white,
+                              ),
+                            ),
                             bgColor: kThemeColor,
                           ),
                         )
@@ -453,7 +487,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   'Receipt',
                   style: themeFont(
                     color: kThemeColor,
-                    s: 23,w:'sb',
+                    s: 23,
+                    w: 'sb',
                   ),
                 ),
                 SizedBox(
@@ -473,7 +508,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           color: Colors.grey.withOpacity(0.5),
                           blurRadius: 10,
                           spreadRadius: 0,
-                          offset: Offset(5,5),
+                          offset: Offset(5, 5),
                         )
                       ],
                     ),
@@ -481,33 +516,48 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               height: h * (150 / kScreenH),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
                                     height: 1,
                                   ),
                                   Text(
-                                    'Fifa Championship',
-                                    style: themeFont(w: 'sb',s: 14,),
+                                    widget.details.data.title,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
                                   ),
                                   Text(
-                                    '8 September 2021',
-                                    style: themeFont(w: 'sb',s: 14,),
+                                    timeLine,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
                                   ),
                                   Text(
-                                    'LD College, Ahmedabad',
-                                    style: themeFont(w: 'sb',s: 14,),
+                                    address.length > 20
+                                        ? address.substring(0, 17) + '...'
+                                        : address,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
                                   ),
                                   Text(
-                                    '4 p.m. onwards',
-                                    style: themeFont(w: 'sb',s: 14,),
+                                    widget.details.data.ageRec,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 1,
@@ -521,7 +571,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(6),
                                 child: Image.network(
-                                  'https://picsum.photos/300/300',
+                                  widget.details.data.poster,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -532,20 +582,24 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           width: double.infinity,
                           child: Text(
                             '*All players will be required to show identity proof at the time of the tournament.',
-                            style: themeFont(s: 13,w:'m'),
+                            style: themeFont(s: 13, w: 'm'),
                           ),
                         ),
-                        SizedBox(height: 1,),
+                        SizedBox(
+                          height: 1,
+                        ),
                         Column(
                           children: [
                             SizedBox(
                               width: double.infinity,
                               child: Text(
                                 'Following identity proofs will be accepted:',
-                                style: themeFont(s: 13,w:'m'),
+                                style: themeFont(s: 13, w: 'm'),
                               ),
                             ),
-                            SizedBox(height: 2,),
+                            SizedBox(
+                              height: 2,
+                            ),
                             SizedBox(
                               width: double.infinity,
                               child: Row(
@@ -556,7 +610,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   ),
                                   Text(
                                     'Aadhar Card',
-                                    style: themeFont(s: 13,w:'m'),
+                                    style: themeFont(s: 13, w: 'm'),
                                   ),
                                 ],
                               ),
@@ -571,7 +625,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   ),
                                   Text(
                                     'Driver\'s License',
-                                    style: themeFont(s: 13,w:'m'),
+                                    style: themeFont(s: 13, w: 'm'),
                                   ),
                                 ],
                               ),
@@ -586,7 +640,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   ),
                                   Text(
                                     'Voter Id',
-                                    style: themeFont(s: 13,w:'m'),
+                                    style: themeFont(s: 13, w: 'm'),
                                   ),
                                 ],
                               ),
@@ -617,7 +671,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           color: Colors.grey.withOpacity(0.5),
                           blurRadius: 10,
                           spreadRadius: 0,
-                          offset: Offset(5,5),
+                          offset: Offset(5, 5),
                         )
                       ],
                     ),
@@ -629,19 +683,33 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           'Your participation has been confirmed.',
                           style: themeFont(
                             color: kThemeColor,
-                            s: 14,w:'m',
+                            s: 14,
+                            w: 'm',
                           ),
                         ),
                         SizedBox(
                           height: 5,
                         ),
-                        DataShower(type: 'Team Name', data: 'Supreme FC'),
-                        DataShower(type: 'Captain', data: 'Sunil'),
-                        DataShower(type: 'Contact Number', data: '9934923912'),
-                        DataShower(type: 'Email Id', data: 'abc@gmail.com'),
+                        // DataShower(
+                        //   type: 'Team Name',
+                        //   data: widget.details.regDetails.teamName,
+                        // ),
+                        DataShower(
+                            type: 'Captain',
+                            data: widget.details.regDetails.captain.fullName),
+                        DataShower(
+                            type: 'Contact Number',
+                            data: widget.details.regDetails.captain.contact
+                                .toString()),
+                        DataShower(
+                            type: 'Email Id',
+                            data: widget.details.regDetails.captain.email),
                         DataShower(type: 'Vice Captain', data: 'Bob'),
                         DataShower(type: 'Contact Number', data: '9934923912'),
                         DataShower(type: 'Email Id', data: 'xyz@gmail.com'),
+                        DataShower(
+                            type: 'Mode of Payment',
+                            data: widget.details.paymentMethod),
                         SizedBox(
                           height: 1,
                         ),
@@ -649,7 +717,10 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           width: double.infinity,
                           child: Text(
                             '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
-                            style: themeFont(s: 12,w:'m',),
+                            style: themeFont(
+                              s: 12,
+                              w: 'm',
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -676,7 +747,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           color: Colors.grey.withOpacity(0.5),
                           blurRadius: 10,
                           spreadRadius: 0,
-                          offset: Offset(5,5),
+                          offset: Offset(5, 5),
                         )
                       ],
                     ),
@@ -684,17 +755,22 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
                         Row(
                           children: [
                             Text(
                               'Charges',
-                              style: themeFont(s: 12,w:'m',),
+                              style: themeFont(
+                                s: 12,
+                                w: 'm',
+                              ),
                             ),
                             Spacer(),
                             Text(
                               '₹ 750',
-                              style: themeFont(s: 12,w:'m',),
+                              style: themeFont(
+                                s: 12,
+                                w: 'm',
+                              ),
                             )
                           ],
                         ),
@@ -702,12 +778,18 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           children: [
                             Text(
                               'Taxes',
-                              style: themeFont(s: 12,w:'m',),
+                              style: themeFont(
+                                s: 12,
+                                w: 'm',
+                              ),
                             ),
                             Spacer(),
                             Text(
                               '0',
-                              style: themeFont(s: 12,w:'m',),
+                              style: themeFont(
+                                s: 12,
+                                w: 'm',
+                              ),
                             )
                           ],
                         ),
@@ -718,12 +800,18 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           children: [
                             Text(
                               'Total Amount',
-                              style: themeFont(s: 15,w:'m',),
+                              style: themeFont(
+                                s: 15,
+                                w: 'm',
+                              ),
                             ),
                             Spacer(),
                             Text(
                               '₹ 750',
-                              style: themeFont(s: 15,w:'sb',),
+                              style: themeFont(
+                                s: 15,
+                                w: 'sb',
+                              ),
                             )
                           ],
                         ),
@@ -762,14 +850,20 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(s: 14,w:'m',),
+            style: themeFont(
+              s: 14,
+              w: 'm',
+            ),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(s: 14,w:'sb',),
+              style: themeFont(
+                s: 14,
+                w: 'sb',
+              ),
             ),
           ),
         ],

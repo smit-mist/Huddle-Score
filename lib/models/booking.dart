@@ -1,5 +1,8 @@
+import 'captain.dart';
+import 'venue.dart';
+
 class BookingDetails {
-  RegDetails regDetails;
+  BookingRegDetails regDetails;
   int amount;
   String bookingId;
   TourData data;
@@ -25,7 +28,7 @@ class BookingDetails {
         recordedAt: doc['recordedAt'] ?? 'No time',
         taxes: doc['taxes'] ?? 37,
         tourId: doc['tourID'] ?? "NO ID",
-        regDetails: RegDetails.fromMap(doc['RegDetails']),
+        regDetails: BookingRegDetails.fromMap(doc['RegDetails']),
         data: TourData.fromMap(doc['data']),
       );
 }
@@ -52,29 +55,11 @@ class TourData {
       );
 }
 
-class Venue {
-  final List<dynamic> address;
-  final Map<String, double> coordinates;
-  const Venue(
-      {this.address = const ["No address found its null"],
-      this.coordinates = const {'latitude': 23.121}});
-  factory Venue.fromMap(Map<String, dynamic> map) {
-    if (map == null) return Venue();
-    return Venue(
-      address: map['address'] == null
-          ? const ["No add found"]
-          : map['address'].cast<String>(),
-      coordinates: map['coordinates'] == null
-          ? const {'lat': 23.121}
-          : map['coordinates'].cast<String, double>(),
-    );
-  }
-}
-class RegDetails {
+class BookingRegDetails {
   final Captain captain;
   final Captain viceCaptain;
   final String teamName;
-  const RegDetails({
+  const BookingRegDetails({
     this.captain = const Captain(
         fullName: "NULL", email: "NO MAIL", contact: 1212, age: 24),
     this.teamName = "NO Team name",
@@ -82,28 +67,11 @@ class RegDetails {
         fullName: "NULL", email: "NO MAIL", contact: 1212, age: 24),
   });
 
-  factory RegDetails.fromMap(Map<String, dynamic> doc) => RegDetails(
+  factory BookingRegDetails.fromMap(Map<String, dynamic> doc) => BookingRegDetails(
         captain: Captain.fromMap(doc['p1']),
         teamName: doc['team'],
         viceCaptain: Captain.fromMap(doc['p2']),
       );
 }
 
-class Captain {
-  final int contact;
-  final int age;
-  final String email;
-  final String fullName;
-  const Captain({
-    this.contact = 373737,
-    this.age = 37,
-    this.email = "nomail@mail.com",
-    this.fullName = "No Name",
-  });
-  factory Captain.fromMap(Map<String, dynamic> doc) => Captain(
-        contact: doc['contact'] ?? 37,
-        age: doc['age'] ?? 37,
-        email: doc['email'] ?? 'NOT FOUND',
-        fullName: doc['name'] ?? 'NOT FOUND',
-      );
-}
+

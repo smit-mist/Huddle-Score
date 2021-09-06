@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:huddle_and_score/models/booking.dart';
+import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
@@ -75,7 +77,29 @@ class _TournamentReviewState extends State<TournamentReview> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => TournamentReceiptScreen(),
+        builder: (_) => TournamentReceiptScreen(
+          details: BookingDetails(
+            amount: room.fees,
+            bookingId: response.paymentId,
+            paymentMethod: 'Card',
+            recordedAt: DateTime.now().toString(),
+            taxes: 0,
+            tourId: widget.currentTour.tourId,
+            data: TourData(
+              ageRec: widget.currentTour.main.ageRec,
+              poster: widget.currentTour.details.poster,
+              timeLine: widget.currentTour.main.timeLine,
+              title: widget.currentTour.details.title,
+              venue: widget.currentTour.main.venue,
+            ),
+            regDetails: BookingRegDetails(
+              captain: widget.userRecord.captain,
+              viceCaptain: widget.userRecord.viceCaptain,
+              teamName: widget.userRecord.teamName,
+            ),
+          ),
+          formType: widget.formType,
+        ),
       ),
     );
     print(response.paymentId);
