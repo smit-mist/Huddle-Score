@@ -19,9 +19,10 @@ class UserRepository {
     await _auth.currentUser.updatePassword(password);
   }
 
-  String uid = AuthRepository().getCurrentUser().uid;
   Future<List<BookingDetails>> getBookings() async {
     print('Booking Fetching Started');
+
+    String uid = AuthRepository().getCurrentUser().uid;
     try {
       var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
       // ignore: missing_return
@@ -41,6 +42,8 @@ class UserRepository {
   Future<List<FifaBookingDetails>> getFifaBookings() async {
     try {
       print('fifa bookings fetch started');
+
+      String uid = AuthRepository().getCurrentUser().uid;
       var response = FirebaseFirestore.instance.doc('users/$uid/records/fifa');
       var bookingsData = await response.get();
       List<FifaBookingDetails> fifaBookings = [];
@@ -58,11 +61,12 @@ class UserRepository {
   }
 
   Future<FifaBookingDetails> getFifaBookingById(String paymentId) async {
+    
+  String uid = AuthRepository().getCurrentUser().uid;
     try {
       var response = FirebaseFirestore.instance.doc('users/$uid/records/fifa');
       var bookingData = await response.get();
       bookingData.get(paymentId);
-      print(bookingData.id);
     } catch (e) {
       print('Error in fifa booking by id');
       print(e.toString());
