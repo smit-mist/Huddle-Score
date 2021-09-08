@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/screens/widgets/booked_event_tile.dart';
+import 'package:huddle_and_score/screens/widgets/fifa_booked_tile.dart';
 
 import '../../constants.dart';
 
@@ -15,7 +16,7 @@ class BookingHistoryScreen extends StatefulWidget {
 }
 
 class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
-  String selected = "Tournaments";
+  String selected = "Fifa";
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +61,8 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 ),
                 underline: Container(),
                 items: <String>[
-                  'Tournaments',
                   'Fifa',
+                  'Tournaments',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

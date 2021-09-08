@@ -2,7 +2,5 @@
 
 
 // TODO: Yash&Smit- Email Verify.
-
-
-// TODO: Yash - Receipt Page For Fifas.
-// TODO: If date is gone add in earlier this month.
+// TODO: Receipt Page For Fifas.
+// TODO: Update Receipt page based on type.

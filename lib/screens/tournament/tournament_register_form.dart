@@ -8,7 +8,6 @@ import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
-List<String> teamSports = ["cricket" ,"football","basketball","volleyball", "hockey","5v5","2v2"];
 
 String nameValidator(String val) {
   if (val == null || val.isEmpty) return 'Enter Name';
@@ -51,9 +50,7 @@ class TournamentRegisterForm extends StatefulWidget {
 class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   List<String> tourType = ['Select'];
   int typeOfForm = -1;
-  bool isTwoPlayer = false,isCap = false;
-  String sport ="";
-
+  String sport = "";
 
 /*
   * Proper team (Cap, Vice Cap) Like Cricket
@@ -65,7 +62,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   String chosedType, chosedCat;
   final _key = GlobalKey<FormState>();
 
-  bool isMultiple = false;
   bool typedTeamName = false,
       typedName1 = false,
       typedName2 = false,
@@ -98,64 +94,82 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
     age2.dispose();
     super.dispose();
   }
+
   void preComputer() {
-    sport = widget.currentTour.info.type.toLowerCase();
-    if(teamSports.contains(sport)){
-      isTwoPlayer = true;
-      isCap = true;
-    }
-    else{
-      isCap = false;
+    print("Inside compu");
+    sport = widget.currentTour.info.type;
+    typeOfForm = getFormType(sport);
+    if (typeOfForm == 0) {
+      tourType[0] = "Team";
+      allCategory = {
+        'Team': ['Select'],
+      };
+      for (var x in widget.currentTour.rooms) {
+        String here = "";
+        here += x.subCategory;
+        here += ' - ₹ ';
+        here += x.fees.toString();
+        allCategory['Team'].add(here);
+      }
+      chosedType = tourType[0];
+      chosedCat = allCategory['Team'][0];
+      selectedSub = allCategory['Team'];
+
 
     }
-    print("Inside compu");
-    for (int i = 0; i < widget.currentTour.rooms.length; i++) {
-      if (widget.currentTour.rooms[i].category == "2") {
+    else {
+      bool isMultiple = false;
+      int one = 0,two = 0;
+      for(var x in widget.currentTour.rooms){
+          if(x.category == "1")one = 1;
+          else two = 1;
+      }
+      if(one + two ==2){
+        typeOfForm = 1;
         isMultiple = true;
-        break;
       }
-    }
-    chosedType = tourType[0];
-    if (isMultiple) {
-      tourType.add('Single');
-      tourType.add('Double');
-      allCategory = {
-        'Single': ["Select"],
-        'Double': ["Select"],
-        'Select': ["Select"],
-      };
-      for (var x in widget.currentTour.rooms) {
-        String here = "";
-        here += x.subCategory;
-        here += ' - ₹ ';
-        here += x.fees.toString();
-        if (x.category == "1")
-          allCategory["Single"].add(here);
-        else
-          allCategory['Double'].add(here);
+      if(isMultiple){
+        tourType.add('Single');
+        tourType.add('Double');
+        allCategory = {
+          'Single': ["Select"],
+          'Double': ["Select"],
+          'Select': ["Select"],
+        };
+        for (var x in widget.currentTour.rooms) {
+          String here = "";
+          here += x.subCategory;
+          here += ' - ₹ ';
+          here += x.fees.toString();
+          if (x.category == "1")
+            allCategory["Single"].add(here);
+          else
+            allCategory['Double'].add(here);
+        }
+        chosedCat = allCategory['Single'][0];
+
       }
-      chosedCat = allCategory['Single'][0];
-    } else {
-      tourType.add('Single');
-      allCategory = {
-        'Single': ["Select"],
-        'Select': ["Select"],
-      };
-      for (var x in widget.currentTour.rooms) {
-        String here = "";
-        here += x.subCategory;
-        here += ' - ₹ ';
-        here += x.fees.toString();
-          allCategory["Single"].add(here);
+      else{
+        typeOfForm = 2;
+        tourType[0] = "Single";
+        allCategory = {
+          'Single': ['Select'],
+        };
+        for (var x in widget.currentTour.rooms) {
+          String here = "";
+          here += x.subCategory;
+          here += ' - ₹ ';
+          here += x.fees.toString();
+          allCategory['Single'].add(here);
+        }
+        chosedType = tourType[0];
+        chosedCat = allCategory['Single'][0];
+        selectedSub = allCategory['Single'];
+        print(chosedCat.length);
       }
-      chosedCat = allCategory['Single'][0];
+
     }
   }
-  /*
-  * Proper team (Cap, Vice Cap) Like Cricket
-  * Player 1-2 Like Badminton Doubles
-  * Player 1 Single Player Game.
-  * */
 
   @override
   void initState() {
@@ -167,6 +181,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
 
   @override
   Widget build(BuildContext context) {
+    // typeOfForm = 1;
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Dialog(
@@ -475,8 +490,11 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                               if (chosedType == "Single") {
                                 typeOfForm = 2;
                               } else if (chosedType == "Double") {
+                                typeOfForm = 1;
+                              }else if(chosedType == "Team"){
                                 typeOfForm = 0;
-                              } else {
+                              }
+                              else {
                                 typeOfForm = -1;
                               }
                               selectedSub = allCategory[chosedType];

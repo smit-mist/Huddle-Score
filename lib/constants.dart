@@ -15,6 +15,16 @@ const MaterialColor kThemeColor = const MaterialColor(
     900: const Color(0xff248232),
   },
 );
+String getShorter(String s){
+  if(s.length<=20)return s;
+  return s.substring(0,17)+'...';
+}
+List<String> teamSports = ["cricket" ,"football","basketball","volleyball", "hockey","5v5","2v2"];
+
+int getFormType(String sport){
+  if(teamSports.contains(sport))return 0;
+  return 1;
+}
 const double kScreenW = 424;
 const double kScreenH = 911;
 Map<String, FontWeight> convertMe = {

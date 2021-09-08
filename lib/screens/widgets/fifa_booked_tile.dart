@@ -6,9 +6,10 @@ import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.da
 
 import '../../constants.dart';
 
-class BookedEventTile extends StatelessWidget {
-  final BookingDetails booking;
-  BookedEventTile({this.booking});
+
+class FifaBookingTile extends StatelessWidget {
+  final FifaBookingDetails booking;
+  FifaBookingTile({this.booking});
   @override
   Widget build(BuildContext context) {
     String venue = booking.data.venue.address.join(', ');
@@ -84,9 +85,8 @@ class BookedEventTile extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => TournamentReceiptScreen(
-                              details: booking,
-                              formType: 1,
+                            builder: (_) => FifaReceiptScreen(
+                              bookingID: booking.bookingId,
                             ),
                           ),
                         );

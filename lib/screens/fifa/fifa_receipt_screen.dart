@@ -1,17 +1,71 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/fifa_booking.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 
-class FifaReceiptScreen extends StatelessWidget {
-  final FifaBookingDetails details;
-  FifaReceiptScreen({this.details});
+class FifaReceiptScreen extends StatefulWidget {
+  String bookingID;
+  FifaReceiptScreen({this.bookingID});
+
+  @override
+  _FifaReceiptScreenState createState() => _FifaReceiptScreenState();
+}
+
+class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
+  FifaBookingDetails details;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    print(details.data.title);
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    return StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>(
+      stream: FirebaseFirestore.instance.doc('users/$uid/records/fifa').snapshots(),
+      builder: (context, snapshot) {
+        if(snapshot == null){
+          return LoadingWidget();
+        }
+        if(snapshot.data == null){
+          return LoadingWidget();
+
+        }
+
+        var here =Map<String,dynamic>.from(snapshot.data.data());
+        bool fnd = false;
+
+        here.forEach((key, value) {
+          if(key.endsWith(widget.bookingID)){
+
+            fnd = true;
+            details = FifaBookingDetails.fromMap(value);
+          }
+        });
+        if(!fnd){
+          return LoadingWidget();
+        }
+        else
+          return DetailShower(details: details,);
+
+      }
+    );
+  }
+}
+class DetailShower extends StatefulWidget {
+  FifaBookingDetails details;
+  DetailShower({this.details});
+
+  @override
+  _DetailShowerState createState() => _DetailShowerState();
+}
+
+class _DetailShowerState extends State<DetailShower> {
+  @override
+  Widget build(BuildContext context) {
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -112,19 +166,19 @@ class FifaReceiptScreen extends StatelessWidget {
                           height: 1,
                         ),
                         Text(
-                          'Fifa Championship',
+                          widget.details.data.title,
                           style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
-                          '8 September 2021',
+                          getShorter(widget.details.data.gameDate),
                           style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
-                          'LD College, Ahmedabad',
+                            getShorter(widget.details.data.venue.address.join(", ")),
                           style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
-                          '4 p.m. onwards',
+                          getShorter(widget.details.data.time),
                           style: themeFont(w: 'sb', s: 14),
                         ),
                         SizedBox(
@@ -138,7 +192,7 @@ class FifaReceiptScreen extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(6),
                         child: Image.network(
-                          'https://picsum.photos/300/300',
+                          widget.details.data.poster,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -175,10 +229,10 @@ class FifaReceiptScreen extends StatelessWidget {
                     SizedBox(
                       height: 1,
                     ),
-                    DataShower(type: 'Participant Name', data: 'Person Name'),
-                    DataShower(type: 'Phone No.', data: '9934923912'),
-                    DataShower(type: 'Email Id', data: 'abc@gmail.com'),
-                    DataShower(type: 'Mode of Payment', data: 'Net Banking'),
+                    DataShower(type: 'Participant Name', data: widget.details.regDetails.name),
+                    DataShower(type: 'Phone No.', data: widget.details.regDetails.contact.toString()),
+                    DataShower(type: 'Email Id', data: widget.details.regDetails.email),
+                    DataShower(type: 'Mode of Payment', data: widget.details.paymentMethod),
                     SizedBox(
                       height: 1,
                     ),
@@ -215,7 +269,7 @@ class FifaReceiptScreen extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          '₹ 750',
+                          '₹ ${widget.details.amount/100}',
                           style: themeFont(w: 'r'),
                         )
                       ],
@@ -228,7 +282,7 @@ class FifaReceiptScreen extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          '0',
+                          widget.details.taxes.toString(),
                           style: themeFont(w: 'r'),
                         )
                       ],
@@ -244,7 +298,7 @@ class FifaReceiptScreen extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          '₹ 750',
+                          '₹ ${(widget.details.taxes+widget.details.amount/100).toString()}',
                           style: themeFont(w: 'r'),
                         )
                       ],

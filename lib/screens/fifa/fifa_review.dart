@@ -46,14 +46,10 @@ class _FifaReviewState extends State<FifaReview> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    FifaBookingDetails bookingDetails =
-        await UserRepository().getFifaBookingById(response.paymentId);
-    print(bookingDetails.data.title + 'here22');
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => FifaReceiptScreen(
-          details: bookingDetails,
+        builder: (_) => FifaReceiptScreen(bookingID: response.paymentId,
         ),
       ),
     );
