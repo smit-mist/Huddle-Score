@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/models/fifa_booking.dart';
 
 import '../../constants.dart';
 
 class FifaReceiptScreen extends StatelessWidget {
+  final FifaBookingDetails details;
+  FifaReceiptScreen({this.details});
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+    print(details.data.title);
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -48,7 +53,9 @@ class FifaReceiptScreen extends StatelessWidget {
                       ),
                       Text(
                         'Download Receipt',
-                        style: themeFont(color: Colors.white, ),
+                        style: themeFont(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -73,10 +80,7 @@ class FifaReceiptScreen extends StatelessWidget {
               ),
               Text(
                 'Receipt',
-                style: themeFont(
-                  color: kThemeColor,
-                  s: 23,w:'sb'
-                ),
+                style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
               ),
               SizedBox(
                 height: h * 0.04,
@@ -90,12 +94,10 @@ class FifaReceiptScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 7,
-                      spreadRadius: 0.1,
-                        offset: Offset(7,7)
-
-                    )
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 7,
+                        spreadRadius: 0.1,
+                        offset: Offset(7, 7))
                   ],
                 ),
                 child: Row(
@@ -111,19 +113,19 @@ class FifaReceiptScreen extends StatelessWidget {
                         ),
                         Text(
                           'Fifa Championship',
-                          style: themeFont(w: 'sb',s:14),
+                          style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
                           '8 September 2021',
-                          style: themeFont(w: 'sb',s:14),
+                          style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
                           'LD College, Ahmedabad',
-                          style: themeFont(w: 'sb',s:14),
+                          style: themeFont(w: 'sb', s: 14),
                         ),
                         Text(
                           '4 p.m. onwards',
-                          style: themeFont(w: 'sb',s:14),
+                          style: themeFont(w: 'sb', s: 14),
                         ),
                         SizedBox(
                           height: 1,
@@ -156,13 +158,10 @@ class FifaReceiptScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
-                                    spreadRadius: 0.1,
-
-                        offset: Offset(7,7)
-
-                    )
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 5,
+                        spreadRadius: 0.1,
+                        offset: Offset(7, 7))
                   ],
                 ),
                 child: Column(
@@ -171,7 +170,7 @@ class FifaReceiptScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Your participation has been confirmed.',
-                      style: themeFont(color: kThemeColor,w: 'sb',s:14),
+                      style: themeFont(color: kThemeColor, w: 'sb', s: 14),
                     ),
                     SizedBox(
                       height: 1,
@@ -198,19 +197,16 @@ class FifaReceiptScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 5,
                         spreadRadius: 0.1,
-
-                        offset: Offset(7,7)
-                    )
+                        offset: Offset(7, 7))
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-
                     Row(
                       children: [
                         Text(
@@ -283,14 +279,14 @@ class DataShower extends StatelessWidget {
         children: [
           Text(
             this.type,
-            style: themeFont(w: 'm',s:14),
+            style: themeFont(w: 'm', s: 14),
           ),
           Spacer(),
           SizedBox(
             width: w * (0.35),
             child: Text(
               this.data,
-              style: themeFont(w: 'm',s:14),
+              style: themeFont(w: 'm', s: 14),
             ),
           ),
         ],

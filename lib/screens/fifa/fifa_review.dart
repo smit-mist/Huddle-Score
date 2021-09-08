@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/models/fifa_record.dart';
 import 'package:huddle_and_score/models/user.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
+import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -43,11 +45,16 @@ class _FifaReviewState extends State<FifaReview> {
     razorpay.clear();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    FifaBookingDetails bookingDetails =
+        await UserRepository().getFifaBookingById(response.paymentId);
+    print(bookingDetails.data.title + 'here22');
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => FifaReceiptScreen(),
+        builder: (_) => FifaReceiptScreen(
+          details: bookingDetails,
+        ),
       ),
     );
     print(response.paymentId);

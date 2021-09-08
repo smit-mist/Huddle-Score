@@ -15,7 +15,6 @@ import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
-
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/home/home_event.dart';
@@ -24,7 +23,6 @@ import 'constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await UserRepository().getFifaBookingById('1630950659pay_HuGg7j4iIDWzWQ');
   runApp(MyApp());
 }
 
