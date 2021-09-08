@@ -84,9 +84,8 @@ class BookedEventTile extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => TournamentReceiptScreen(
-                              details: booking,
-                              formType: 1,
+                            builder: (_) => TournamentReceiptGenerator(
+                              bookingId: booking.bookingId,
                             ),
                           ),
                         );

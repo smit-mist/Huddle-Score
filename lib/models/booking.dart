@@ -38,6 +38,7 @@ class TourData {
   String poster = 'NOT FOUND';
   List<dynamic> timeLine = ['NOT FOUND'];
   String title;
+  String type = "2v2";
   Venue venue;
   TourData({
     this.ageRec = 'NOT FOUND',
@@ -45,6 +46,7 @@ class TourData {
     this.timeLine = const ['NOT FOUND'],
     this.title = 'NOT FOUND',
     this.venue = const Venue(),
+    this.type = "2v2",
   });
   factory TourData.fromMap(Map<String, dynamic> doc) => TourData(
         ageRec: doc['ageRec'] ?? 'NOT FOUND',
@@ -52,6 +54,7 @@ class TourData {
         timeLine: doc['timeLine'] ?? ['NOT FOUND'],
         title: doc['title'] ?? ['NOT FOUND'],
         venue: Venue.fromMap(doc['venue']),
+        type: doc['type'] ?? "2v2",
       );
 }
 
@@ -67,11 +70,10 @@ class BookingRegDetails {
         fullName: "NULL", email: "NO MAIL", contact: 1212, age: 24),
   });
 
-  factory BookingRegDetails.fromMap(Map<String, dynamic> doc) => BookingRegDetails(
+  factory BookingRegDetails.fromMap(Map<String, dynamic> doc) =>
+      BookingRegDetails(
         captain: Captain.fromMap(doc['p1']),
         teamName: doc['team'],
         viceCaptain: Captain.fromMap(doc['p2']),
       );
 }
-
-

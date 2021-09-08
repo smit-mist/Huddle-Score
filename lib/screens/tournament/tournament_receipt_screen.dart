@@ -1,11 +1,60 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 import '../home_navbar_screen.dart';
+class TournamentReceiptGenerator extends StatefulWidget {
+  String bookingId;
+  TournamentReceiptGenerator({this.bookingId});
+  @override
+  _TournamentReceiptGeneratorState createState() => _TournamentReceiptGeneratorState();
+}
+
+class _TournamentReceiptGeneratorState extends State<TournamentReceiptGenerator> {
+  BookingDetails details;
+  int type;
+  @override
+  Widget build(BuildContext context) {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance.doc('users/$uid/records/tour').snapshots(),
+      builder: (_,snap){
+        if(snap.hasData == false)return LoadingWidget();
+        bool fnd = false;
+        var here = Map<String,dynamic>.from(snap.data.data());
+        here.forEach((key, value) {
+          if(key.endsWith(widget.bookingId)){
+            fnd = true;
+            details = BookingDetails.fromMap(value);
+            if(getFormType(details.data.type.toLowerCase()) == 0){
+              type = 0;
+            }
+            else{
+              if(details.regDetails.viceCaptain == null || details.regDetails.viceCaptain.contact == 37){
+                type = 2;
+              }
+              else
+                type = 1;
+            }
+          }
+        });
+        if(fnd){
+          return TournamentReceiptScreen(details: details,formType: type,);
+        }
+        else{
+          return LoadingWidget();
+        }
+      },
+    );
+  }
+}
+
 
 class TournamentReceiptScreen extends StatefulWidget {
   BookingDetails details;
@@ -18,7 +67,7 @@ class TournamentReceiptScreen extends StatefulWidget {
   _TournamentReceiptScreenState createState() =>
       _TournamentReceiptScreenState();
 }
-
+// TODO: UPdate receipt as per form type.
 class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   double liked = 0.5;
   int firstOption = 0, secondOption = 0;
