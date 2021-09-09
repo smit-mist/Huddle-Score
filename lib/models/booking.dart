@@ -51,7 +51,7 @@ class TourData {
   factory TourData.fromMap(Map<String, dynamic> doc) => TourData(
         ageRec: doc['ageRec'] ?? 'NOT FOUND',
         poster: doc['poster'] ?? 'NOT FOUND',
-        timeLine: doc['timeLine'] ?? ['NOT FOUND'],
+        timeLine: doc['timeline'] ?? ['NOT FOUND'],
         title: doc['title'] ?? ['NOT FOUND'],
         venue: Venue.fromMap(doc['venue']),
         type: doc['type'] ?? "2v2",

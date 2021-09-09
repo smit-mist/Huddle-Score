@@ -58,7 +58,6 @@ class _TournamentReviewState extends State<TournamentReview> {
   void initState() {
     super.initState();
     precomputer();
-    print('====>===>' + room.category);
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);

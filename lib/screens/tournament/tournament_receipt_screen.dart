@@ -9,52 +9,56 @@ import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
 import '../home_navbar_screen.dart';
+
 class TournamentReceiptGenerator extends StatefulWidget {
   String bookingId;
   TournamentReceiptGenerator({this.bookingId});
   @override
-  _TournamentReceiptGeneratorState createState() => _TournamentReceiptGeneratorState();
+  _TournamentReceiptGeneratorState createState() =>
+      _TournamentReceiptGeneratorState();
 }
 
-class _TournamentReceiptGeneratorState extends State<TournamentReceiptGenerator> {
+class _TournamentReceiptGeneratorState
+    extends State<TournamentReceiptGenerator> {
   BookingDetails details;
   int type;
   @override
   Widget build(BuildContext context) {
     String uid = FirebaseAuth.instance.currentUser.uid;
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance.doc('users/$uid/records/tour').snapshots(),
-      builder: (_,snap){
-        if(snap.hasData == false)return LoadingWidget();
+      stream:
+          FirebaseFirestore.instance.doc('users/$uid/records/tour').snapshots(),
+      builder: (_, snap) {
+        if (snap.hasData == false) return LoadingWidget();
         bool fnd = false;
-        var here = Map<String,dynamic>.from(snap.data.data());
+        var here = Map<String, dynamic>.from(snap.data.data());
         here.forEach((key, value) {
-          if(key.endsWith(widget.bookingId)){
+          if (key.endsWith(widget.bookingId)) {
             fnd = true;
             details = BookingDetails.fromMap(value);
-            if(getFormType(details.data.type.toLowerCase()) == 0){
+            if (getFormType(details.data.type.toLowerCase()) == 0) {
               type = 0;
-            }
-            else{
-              if(details.regDetails.viceCaptain == null || details.regDetails.viceCaptain.contact == 37){
+            } else {
+              if (details.regDetails.viceCaptain == null ||
+                  details.regDetails.viceCaptain.contact == 37) {
                 type = 2;
-              }
-              else
+              } else
                 type = 1;
             }
           }
         });
-        if(fnd){
-          return TournamentReceiptScreen(details: details,formType: type,);
-        }
-        else{
+        if (fnd) {
+          return TournamentReceiptScreen(
+            details: details,
+            formType: type,
+          );
+        } else {
           return LoadingWidget();
         }
       },
     );
   }
 }
-
 
 class TournamentReceiptScreen extends StatefulWidget {
   BookingDetails details;
@@ -67,6 +71,7 @@ class TournamentReceiptScreen extends StatefulWidget {
   _TournamentReceiptScreenState createState() =>
       _TournamentReceiptScreenState();
 }
+
 // TODO: UPdate receipt as per form type.
 class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   double liked = 0.5;
@@ -74,16 +79,16 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   @override
   Widget build(BuildContext context) {
     print(widget.formType);
-    String timeLine = "hello";
-    // var st = WeirdDateFormat(date: widget.details.data.timeLine[0]);
-    // var en = WeirdDateFormat(date: widget.details.data.timeLine[0]);
-    // timeLine += st.getDate();
-    // timeLine += '- ';
-    // timeLine += en.getDate();
-    // timeLine += ' ';
-    // timeLine += st.getMonth();
-    // timeLine += ' ';
-    // timeLine += st.getYear();
+    String timeLine = "";
+    var st = WeirdDateFormat(date: widget.details.data.timeLine[0]);
+    var en = WeirdDateFormat(date: widget.details.data.timeLine[1]);
+    timeLine += st.getDate();
+    timeLine += '- ';
+    timeLine += en.getDate();
+    timeLine += ' ';
+    timeLine += st.getMonth();
+    timeLine += ' ';
+    timeLine += st.getYear();
     String address = widget.details.data.venue.address.join(', ');
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -467,12 +472,16 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 blurRadius: 7,
-                spreadRadius: 1)
-          ]),
+                spreadRadius: 1,
+              )
+            ],
+          ),
           child: Row(
             children: [
               Icon(
@@ -761,9 +770,17 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         DataShower(
                             type: 'Email Id',
                             data: widget.details.regDetails.captain.email),
-                        DataShower(type: 'Vice Captain', data: 'Bob'),
-                        DataShower(type: 'Contact Number', data: '9934923912'),
-                        DataShower(type: 'Email Id', data: 'xyz@gmail.com'),
+                        (widget.formType == 1)
+                            ? DataShower(type: 'Vice Captain', data: 'Bob')
+                            : Container(),
+                        (widget.formType == 1)
+                            ? DataShower(
+                                type: 'Contact Number', data: '9934923912')
+                            : Container(),
+                        (widget.formType == 1)
+                            ? DataShower(
+                                type: 'Email Id', data: 'xyz@gmail.com')
+                            : Container(),
                         DataShower(
                             type: 'Mode of Payment',
                             data: widget.details.paymentMethod),
@@ -823,7 +840,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             ),
                             Spacer(),
                             Text(
-                              '₹ 750',
+                              '₹ ${widget.details.amount / 100}',
                               style: themeFont(
                                 s: 12,
                                 w: 'm',
@@ -842,7 +859,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             ),
                             Spacer(),
                             Text(
-                              '0',
+                              widget.details.taxes.toString(),
                               style: themeFont(
                                 s: 12,
                                 w: 'm',
@@ -864,7 +881,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             ),
                             Spacer(),
                             Text(
-                              '₹ 750',
+                              '₹ ${widget.details.amount / 100 + widget.details.taxes}',
                               style: themeFont(
                                 s: 15,
                                 w: 'sb',

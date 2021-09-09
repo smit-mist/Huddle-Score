@@ -174,8 +174,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   @override
   void initState() {
     preComputer();
-
-    // TODO: implement initState
     super.initState();
   }
 
