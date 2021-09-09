@@ -140,6 +140,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             children: [
                               Text('Sad'),
                               Slider(
+                                min: 0.0,
+                                max: 100.0,
                                 value: liked,
                                 onChanged: (double nw) {
                                   setState(() {
