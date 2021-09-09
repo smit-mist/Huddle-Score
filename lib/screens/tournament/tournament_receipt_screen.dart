@@ -770,16 +770,16 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         DataShower(
                             type: 'Email Id',
                             data: widget.details.regDetails.captain.email),
-                        (widget.formType == 1)
-                            ? DataShower(type: 'Vice Captain', data: 'Bob')
+                        (widget.formType != 1)
+                            ? DataShower(type: 'Vice Captain', data: widget.details.regDetails.viceCaptain.fullName)
                             : Container(),
-                        (widget.formType == 1)
+                        (widget.formType != 1)
                             ? DataShower(
-                                type: 'Contact Number', data: '9934923912')
+                                type: 'Contact Number', data: widget.details.regDetails.viceCaptain.contact.toString())
                             : Container(),
-                        (widget.formType == 1)
+                        (widget.formType != 1)
                             ? DataShower(
-                                type: 'Email Id', data: 'xyz@gmail.com')
+                                type: 'Email Id', data: widget.details.regDetails.viceCaptain.email)
                             : Container(),
                         DataShower(
                             type: 'Mode of Payment',
