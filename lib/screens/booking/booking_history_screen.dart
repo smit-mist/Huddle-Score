@@ -16,12 +16,13 @@ class BookingHistoryScreen extends StatefulWidget {
 }
 
 class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
-  String selected = "Fifa";
+  String selected = "Tournaments";
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    print(widget.bookedTours.length);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       width: w,
