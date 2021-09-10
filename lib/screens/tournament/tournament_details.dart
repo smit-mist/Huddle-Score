@@ -855,11 +855,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      height: h * 0.5,
+                      height: h * 0.9,
                       child: SingleChildScrollView(
                         controller: ctrl,
                         child: Container(
-                          height: h * 0.5,
+                          height: h,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -872,11 +872,19 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                widget.tournament.details.term,
-                                style: themeFont()
-                                    .copyWith(decoration: TextDecoration.none),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Container(
+                                    child: Text(
+                                      widget.tournament.details.term,
+                                      style: themeFont()
+                                          .copyWith(decoration: TextDecoration.none),
+                                    ),
+                                  ),
+                                  scrollDirection: Axis.vertical,
+                                ),
                               ),
+                              SizedBox(height: 20,),
                             ],
                           ),
                         ),
@@ -884,7 +892,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                     );
                   },
                   minChildSize: 0.25,
-                  maxChildSize: 0.4,
+                  maxChildSize: 0.9,
                   initialChildSize: 0.25,
                 )
               : Container(),

@@ -83,12 +83,9 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => FifaDetails(),
-                            ),
-                            (route) => false);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+
                       },
                       child: Container(
                         height: 40,

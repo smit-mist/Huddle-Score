@@ -21,7 +21,7 @@ class TournamentReceiptGenerator extends StatefulWidget {
 class _TournamentReceiptGeneratorState
     extends State<TournamentReceiptGenerator> {
   BookingDetails details;
-  int type;
+  formType type;
   @override
   Widget build(BuildContext context) {
     String uid = FirebaseAuth.instance.currentUser.uid;
@@ -36,21 +36,21 @@ class _TournamentReceiptGeneratorState
           if (key.endsWith(widget.bookingId)) {
             fnd = true;
             details = BookingDetails.fromMap(value);
-            if (getFormType(details.data.type.toLowerCase()) == 0) {
-              type = 0;
+            if (getFormType(details.data.type.toLowerCase()) == formType.Team) {
+              type = formType.Team;
             } else {
               if (details.regDetails.viceCaptain == null ||
                   details.regDetails.viceCaptain.contact == 37) {
-                type = 2;
+                type =formType.Single;
               } else
-                type = 1;
+                type =formType.Double;
             }
           }
         });
         if (fnd) {
           return TournamentReceiptScreen(
             details: details,
-            formType: type,
+            currForm: type,
           );
         } else {
           return LoadingWidget();
@@ -62,10 +62,10 @@ class _TournamentReceiptGeneratorState
 
 class TournamentReceiptScreen extends StatefulWidget {
   BookingDetails details;
-  int formType;
+  formType currForm;
   TournamentReceiptScreen({
-    this.details,
-    this.formType,
+    @required this.details,
+    @required this.currForm,
   });
   @override
   _TournamentReceiptScreenState createState() =>
@@ -78,7 +78,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   int firstOption = 0, secondOption = 0;
   @override
   Widget build(BuildContext context) {
-    print(widget.formType);
+    print(widget.currForm);
     String timeLine = "";
     var st = WeirdDateFormat(date: widget.details.data.timeLine[0]);
     var en = WeirdDateFormat(date: widget.details.data.timeLine[1]);
@@ -538,6 +538,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ],
           ),
         ),
+
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
@@ -648,11 +649,11 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           width: double.infinity,
                           child: Text(
                             '*All players will be required to show identity proof at the time of the tournament.',
-                            style: themeFont(s: 12, w: 'm'),
+                            style: themeFont(s: 12, w: 'r'),
                           ),
                         ),
                         SizedBox(
-                          height: 1,
+                          height: 15,
                         ),
                         Column(
                           children: [
@@ -660,7 +661,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                               width: double.infinity,
                               child: Text(
                                 'Following documents for identification will be accepted:',
-                                style: themeFont(s: 13, w: 'm'),
+                                style: themeFont(s: 13, w: 'r'),
                               ),
                             ),
                             SizedBox(
@@ -672,11 +673,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 children: [
                                   Text(
                                     '• ',
-                                    style: themeFont(color: kThemeColor, s: 15),
+                                    style: themeFont(
+                                        color: kThemeColor, s: 13, w: 'r'),
                                   ),
                                   Text(
                                     'Aadhar Card',
-                                    style: themeFont(s: 13, w: 'm'),
+                                    style: themeFont(s: 13, w: 'r'),
                                   ),
                                 ],
                               ),
@@ -687,11 +689,13 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 children: [
                                   Text(
                                     '• ',
-                                    style: themeFont(color: kThemeColor, s: 15),
+                                    style: themeFont(
+                                        color: kThemeColor, s: 13, w: 'r'),
                                   ),
                                   Text(
                                     'Driver\'s License',
-                                    style: themeFont(s: 13, w: 'm'),
+                                    style: themeFont(
+                                        color: Colors.black, s: 13, w: 'r'),
                                   ),
                                 ],
                               ),
@@ -702,11 +706,13 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 children: [
                                   Text(
                                     '• ',
-                                    style: themeFont(color: kThemeColor, s: 15),
+                                    style: themeFont(
+                                        color: kThemeColor, s: 13, w: 'r'),
                                   ),
                                   Text(
                                     'Voter Id',
-                                    style: themeFont(s: 13, w: 'm'),
+                                    style: themeFont(
+                                        color: Colors.black, s: 13, w: 'r'),
                                   ),
                                 ],
                               ),
@@ -714,7 +720,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 1,
+                          height: 5,
                         ),
                       ],
                     ),
@@ -756,12 +762,19 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         SizedBox(
                           height: 5,
                         ),
-                        // DataShower(
-                        //   type: 'Team Name',
-                        //   data: widget.details.regDetails.teamName,
-                        // ),
+                        /*
+                * -1 - Means Empty Container.
+                * 0 - Means Team Form (Cap, Vice Cap)
+                * 1 - Means 2 Player Form (Player 1, Player 2)
+                * 2 - Means 1 Player Form. (PLayer 1)
+                * */
+                        (widget.currForm == formType.Team || widget.currForm == formType.Double)? DataShower(
+                          type: 'Team Name',
+                          data: widget.details.regDetails.teamName,
+                        ):Container(),
+
                         DataShower(
-                            type: 'Captain',
+                            type: (widget.currForm == formType.Team)?'Captain':'Player 1',
                             data: widget.details.regDetails.captain.fullName),
                         DataShower(
                             type: 'Contact Number',
@@ -770,16 +783,24 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         DataShower(
                             type: 'Email Id',
                             data: widget.details.regDetails.captain.email),
-                        (widget.formType != 1)
-                            ? DataShower(type: 'Vice Captain', data: widget.details.regDetails.viceCaptain.fullName)
-                            : Container(),
-                        (widget.formType != 1)
+                        (widget.currForm != formType.Single)
                             ? DataShower(
-                                type: 'Contact Number', data: widget.details.regDetails.viceCaptain.contact.toString())
+                                type: (widget.currForm == formType.Team)?'Vice Captain':'Player 2',
+                                data: widget
+                                    .details.regDetails.viceCaptain.fullName)
                             : Container(),
-                        (widget.formType != 1)
+                        (widget.currForm != formType.Single)
                             ? DataShower(
-                                type: 'Email Id', data: widget.details.regDetails.viceCaptain.email)
+                                type: 'Contact Number',
+                                data: widget
+                                    .details.regDetails.viceCaptain.contact
+                                    .toString())
+                            : Container(),
+                        (widget.currForm != formType.Single)
+                            ? DataShower(
+                                type: 'Email Id',
+                                data:
+                                    widget.details.regDetails.viceCaptain.email)
                             : Container(),
                         DataShower(
                             type: 'Mode of Payment',
@@ -933,7 +954,7 @@ class DataShower extends StatelessWidget {
           SizedBox(
             width: w * (0.35),
             child: Text(
-              this.data,
+              this.data?? "This is NULL",
               style: themeFont(
                 s: 14,
                 w: 'sb',

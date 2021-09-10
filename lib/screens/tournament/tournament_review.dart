@@ -18,12 +18,12 @@ import '../../constants.dart';
 class TournamentReview extends StatefulWidget {
   Tournament currentTour;
   RegDetails userRecord;
-  int formType;
+  formType currForm;
   String cat, subCat;
   TournamentReview({
     @required this.currentTour,
     @required this.userRecord,
-    @required this.formType,
+    @required this.currForm,
     @required this.cat,
     @required this.subCat,
   });
@@ -114,7 +114,7 @@ class _TournamentReviewState extends State<TournamentReview> {
             ? jsonEncode(
                 Captain().toMap(regDetails.viceCaptain),
               )
-            : jsonEncode(Captain().toMap(regDetails.viceCaptain)),
+            : null,
       },
     };
     try {
@@ -206,9 +206,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   height: h *
-                      ((widget.formType == 0
+                      ((widget.currForm == formType.Team
                               ? 400
-                              : (widget.formType == 1)
+                              : (widget.currForm == formType.Double)
                                   ? 370
                                   : 250) /
                           kScreenH),
@@ -234,13 +234,13 @@ class _TournamentReviewState extends State<TournamentReview> {
                       SizedBox(
                         height: 1,
                       ),
-                      (widget.formType == 0)
+                      (widget.currForm == formType.Team)
                           ? DataShower(
                               type: 'Team Name',
                               data: widget.userRecord.teamName)
                           : Container(),
                       DataShower(
-                          type: (widget.formType == 0) ? 'Captain\'s Name' : 'Player 1 Name',
+                          type: (widget.currForm == formType.Team) ? 'Captain\'s Name' : 'Player 1 Name',
                           data: widget.userRecord.captain.fullName),
                       DataShower(
                           type: 'Contact Number',
@@ -251,27 +251,27 @@ class _TournamentReviewState extends State<TournamentReview> {
                       DataShower(
                           type: 'Age',
                           data: widget.userRecord.captain.age.toString()),
-                      (widget.formType == 2)
+                      (widget.currForm == formType.Single)
                           ? Container()
-                          : (widget.formType == 1)
+                          : (widget.currForm == formType.Double)
                               ? DataShower(
                                   type: 'Player 2 Name',
                                   data: widget.userRecord.viceCaptain.fullName)
                               : DataShower(
                                   type: 'Vice Captain\'s Name',
                                   data: widget.userRecord.viceCaptain.fullName),
-                      (widget.formType == 2)
+                      (widget.currForm == formType.Single)
                           ? Container()
                           : DataShower(
                               type: 'Contact Number',
                               data: widget.userRecord.viceCaptain.contact
                                   .toString()),
-                      (widget.formType == 2)
+                      (widget.currForm == formType.Single)
                           ? Container()
                           : DataShower(
                               type: 'Email ID',
                               data: widget.userRecord.viceCaptain.email),
-                      (widget.formType == 2)
+                      (widget.currForm == formType.Single)
                           ? Container()
                           : DataShower(
                               type: 'Age',
@@ -387,7 +387,7 @@ class DataShower extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            this.type,
+            this.type ?? "This is null",
             style: themeFont(s: 14, w: 'm'),
           ),
           Spacer(),

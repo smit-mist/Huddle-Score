@@ -49,7 +49,7 @@ class TournamentRegisterForm extends StatefulWidget {
 
 class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   List<String> tourType = ['Select'];
-  int typeOfForm = -1;
+  formType currForm = formType.noForm;
   String sport = "";
 
 /*
@@ -98,8 +98,8 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   void preComputer() {
     print("Inside compu");
     sport = widget.currentTour.info.type;
-    typeOfForm = getFormType(sport);
-    if (typeOfForm == 0) {
+    currForm = getFormType(sport);
+    if (currForm == formType.Team) {
       tourType[0] = "Team";
       allCategory = {
         'Team': ['Select'],
@@ -125,8 +125,11 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
           else two = 1;
       }
       if(one + two ==2){
-        typeOfForm = 1;
+        currForm = formType.Double;
         isMultiple = true;
+      }
+      else{
+        currForm = formType.Single;
       }
       if(isMultiple){
         tourType.add('Single');
@@ -150,7 +153,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
 
       }
       else{
-        typeOfForm = 2;
+
         tourType[0] = "Single";
         allCategory = {
           'Single': ['Select'],
@@ -207,14 +210,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => TournamentDetails(
-                                tournament: widget.currentTour,
-                              ),
-                            ),
-                            (route) => false);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+
                       },
                       child: Container(
                         height: 40,
@@ -310,11 +308,11 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                 * 2 - Means 1 Player Form. (PLayer 1)
                 * */
                 onTap: () {
-                  if (typeOfForm == -1) {
+                  if (currForm == formType.noForm) {
                     print("Select a Form");
                     return;
                   }
-                  if (typeOfForm == 0) {
+                  if (currForm == formType.Team) {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
                         teamName: teamName.text,
@@ -342,16 +340,17 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
-                            formType: typeOfForm,
+                            currForm: currForm,
                             cat: chosedType,
                             subCat: chosedCat,
                           ),
                         ),
                       );
                     }
-                  } else if (typeOfForm == 1) {
+                  } else if (currForm == formType.Double) {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
+                        teamName: teamName.text,
                         captain: Captain(
                           fullName: name1.text,
                           email: email1.text,
@@ -371,14 +370,14 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
-                            formType: typeOfForm,
+                            currForm:currForm,
                             cat: chosedType,
                             subCat: chosedCat,
                           ),
                         ),
                       );
                     }
-                  } else if (typeOfForm == 2) {
+                  } else  {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
                         captain: Captain(
@@ -396,7 +395,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
-                            formType: typeOfForm,
+                            currForm:currForm,
                             cat: chosedType,
                             subCat: chosedCat,
                           ),
@@ -486,14 +485,15 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                             setState(() {
                               chosedType = ok;
                               if (chosedType == "Single") {
-                                typeOfForm = 2;
+                                currForm = formType.Single;
                               } else if (chosedType == "Double") {
-                                typeOfForm = 1;
+                                currForm = formType.Double;
                               }else if(chosedType == "Team"){
-                                typeOfForm = 0;
+                                currForm = formType.Team;
+
                               }
                               else {
-                                typeOfForm = -1;
+                                currForm = formType.noForm;
                               }
                               selectedSub = allCategory[chosedType];
                               chosedCat = selectedSub[0];
@@ -562,9 +562,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   ),
                 ),
                 // real form starts here....
-                (typeOfForm == -1)
+                (currForm == formType.noForm)
                     ? Container()
-                    : (typeOfForm == 0)
+                    : (currForm == formType.Team)
                         ? Form(
                             key: _key,
                             child: Column(
@@ -915,7 +915,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                               ],
                             ),
                           )
-                        : (typeOfForm == 1)
+                        : (currForm == formType.Double)
                             ? Form(
                                 key: _key,
                                 child: Column(

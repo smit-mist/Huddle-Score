@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+enum formType {Team, Double, Single, noForm}
 
 const MaterialColor kThemeColor = const MaterialColor(
   0xff248232,
@@ -21,9 +22,9 @@ String getShorter(String s){
 }
 List<String> teamSports = ["cricket" ,"football","basketball","volleyball", "hockey","5v5","2v2"];
 
-int getFormType(String sport){
-  if(teamSports.contains(sport))return 0;
-  return 1;
+formType getFormType(String sport){
+  if(teamSports.contains(sport))return formType.Team;
+  return formType.Single;
 }
 const double kScreenW = 424;
 const double kScreenH = 911;

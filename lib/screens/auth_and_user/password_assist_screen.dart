@@ -107,7 +107,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: h * 0.2),
+                        SizedBox(height: h * 0.02),
                         BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                           builder: (context, state) {
                             return SizedBox(
