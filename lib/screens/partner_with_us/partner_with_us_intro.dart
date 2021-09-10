@@ -58,7 +58,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                   width: w * 0.35,
                   child: Center(
                     child: Text(
-                      'Book Now',
+                      'Continue',
                       style: themeFont(color: Colors.white,s:15,w:'sb'),
                     ),
                   ),
@@ -89,7 +89,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                 ),
                 SizedBox(height: h*0.03,),
                 showText(
-                  'We, at Huddle & Score, understand the significance of quality relations with our partners. We recognize the fact that our partners bring incredible value to the business as well as the community we aim to build and foster.',
+                  'We\, at Huddle & Score, understand the significance of building quality relations with our partners. We recognize that our partners bring incredible value to the business and are an integral part of the community that we aim to build and foster.',
                 ),
                 SizedBox(height: h*0.06,),
 
@@ -187,7 +187,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                               ),
                             ),
                             Text(
-                              'Tournaments',
+                              'Tournament',
                               style: themeFont(),
                             ),
                           ],
@@ -206,16 +206,16 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                 SizedBox(height: h*0.033,),
 
                 showText(
-                  'Join us to become part of our community and reap the benefits that our platform offers.',
+                  'Join us to become part of our community to avail the benefits that our platform offers.',
                 ),
                 SizedBox(height: 15,),
                 showText(
-                  'On listing with us, you open yourself up to a much greater audience. And because of this increased visibility, your turf will always be brimming with sportspeople, and your tournaments will be a booming success.',
+                  'On listing with us, you open yourself up to a much greater audience. This increased visibility will fill your turfs up with sportspeople and ensure that your tournaments are a booming success.',
                 ),
                 SizedBox(height: 15,),
 
                 showText(
-                  'We believe that we are engaging in the creation of a platform that individuals can rely on, and be happy to be a part of.',
+                  'We are building a community that not only sports enthusiasts can count on, but one that others can also be a part of.',
                 ),
               ],
             ),

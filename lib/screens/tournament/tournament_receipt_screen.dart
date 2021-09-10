@@ -648,7 +648,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           width: double.infinity,
                           child: Text(
                             '*All players will be required to show identity proof at the time of the tournament.',
-                            style: themeFont(s: 13, w: 'm'),
+                            style: themeFont(s: 12, w: 'm'),
                           ),
                         ),
                         SizedBox(
@@ -659,7 +659,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             SizedBox(
                               width: double.infinity,
                               child: Text(
-                                'Following identity proofs will be accepted:',
+                                'Following documents for identification will be accepted:',
                                 style: themeFont(s: 13, w: 'm'),
                               ),
                             ),
@@ -792,7 +792,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           child: Text(
                             '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
                             style: themeFont(
-                              s: 12,
+                              s: 11,
                               w: 'm',
                             ),
                           ),

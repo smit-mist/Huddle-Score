@@ -193,7 +193,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                   height: h * (0.04),
                 ),
                 Text(
-                  'Review',
+                  'Registration Summary',
                   style: themeFont(
                     color: kThemeColor,
                     s: 23,
@@ -228,7 +228,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Summary',
+                        'Team Details',
                         style: themeFont(w: 'm', s: 16),
                       ),
                       SizedBox(
@@ -240,13 +240,13 @@ class _TournamentReviewState extends State<TournamentReview> {
                               data: widget.userRecord.teamName)
                           : Container(),
                       DataShower(
-                          type: (widget.formType == 0) ? 'Captain' : 'Player 1',
+                          type: (widget.formType == 0) ? 'Captain\'s Name' : 'Player 1 Name',
                           data: widget.userRecord.captain.fullName),
                       DataShower(
-                          type: 'Phone No.',
+                          type: 'Contact Number',
                           data: widget.userRecord.captain.contact.toString()),
                       DataShower(
-                          type: 'Email Id',
+                          type: 'Email ID',
                           data: widget.userRecord.captain.email),
                       DataShower(
                           type: 'Age',
@@ -255,21 +255,21 @@ class _TournamentReviewState extends State<TournamentReview> {
                           ? Container()
                           : (widget.formType == 1)
                               ? DataShower(
-                                  type: 'Player 2',
+                                  type: 'Player 2 Name',
                                   data: widget.userRecord.viceCaptain.fullName)
                               : DataShower(
-                                  type: 'Vice Captain',
+                                  type: 'Vice Captain\'s Name',
                                   data: widget.userRecord.viceCaptain.fullName),
                       (widget.formType == 2)
                           ? Container()
                           : DataShower(
-                              type: 'Phone No.',
+                              type: 'Contact Number',
                               data: widget.userRecord.viceCaptain.contact
                                   .toString()),
                       (widget.formType == 2)
                           ? Container()
                           : DataShower(
-                              type: 'Email Id',
+                              type: 'Email ID',
                               data: widget.userRecord.viceCaptain.email),
                       (widget.formType == 2)
                           ? Container()

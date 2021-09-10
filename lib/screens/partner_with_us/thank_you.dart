@@ -64,7 +64,7 @@ class ThankYou extends StatelessWidget {
               SizedBox(height: h*0.1,),
 
               Text(
-                'Thank You for your interest!',
+                'Thank you for your interest!',
                 style: themeFont(
                   s: 23,
                   color: kThemeColor,

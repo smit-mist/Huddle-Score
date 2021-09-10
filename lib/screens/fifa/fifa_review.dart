@@ -131,7 +131,7 @@ class _FifaReviewState extends State<FifaReview> {
                   width: w * 0.3,
                   child: Center(
                     child: Text(
-                      'Proceed to pay',
+                      'Proceed to Pay',
                       style: themeFont(color: Colors.white),
                     ),
                   ),
@@ -155,7 +155,7 @@ class _FifaReviewState extends State<FifaReview> {
                 height: h * (0.04),
               ),
               Text(
-                'Review',
+                'Registration Summary',
                 style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
               ),
               SizedBox(
@@ -181,7 +181,7 @@ class _FifaReviewState extends State<FifaReview> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Summary',
+                      'Player Details',
                       style: themeFont(w: 'm', s: 16),
                     ),
                     SizedBox(
@@ -189,9 +189,9 @@ class _FifaReviewState extends State<FifaReview> {
                     ),
                     DataShower(type: 'Name', data: widget.record.name),
                     DataShower(
-                        type: 'Phone No.',
+                        type: 'Contact Number',
                         data: widget.record.number.toString()),
-                    DataShower(type: 'Email Id', data: widget.record.email),
+                    DataShower(type: 'Email ID', data: widget.record.email),
                     SizedBox(
                       height: 1,
                     ),

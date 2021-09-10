@@ -32,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
               onChanged: (String x) {
                 setState(() {});
               },
-              decoration: normalTextDecoration('Search.. '),
+              decoration: normalTextDecoration('Tournaments or Locations '),
             ),
             SizedBox(
               height: 20,

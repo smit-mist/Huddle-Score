@@ -75,8 +75,8 @@ class _DetailShowerState extends State<DetailShower> {
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1)
+                blurRadius: 4,
+                spreadRadius: 0.5)
           ]),
           child: Row(
             children: [
@@ -151,7 +151,7 @@ class _DetailShowerState extends State<DetailShower> {
                         color: Colors.grey.withOpacity(0.5),
                         blurRadius: 7,
                         spreadRadius: 0.1,
-                        offset: Offset(7, 7))
+                        offset: Offset(3, 3))
                   ],
                 ),
                 child: Row(
@@ -215,7 +215,7 @@ class _DetailShowerState extends State<DetailShower> {
                         color: Colors.grey.withOpacity(0.5),
                         blurRadius: 5,
                         spreadRadius: 0.1,
-                        offset: Offset(7, 7))
+                        offset: Offset(3, 3))
                   ],
                 ),
                 child: Column(
@@ -229,9 +229,9 @@ class _DetailShowerState extends State<DetailShower> {
                     SizedBox(
                       height: 1,
                     ),
-                    DataShower(type: 'Participant Name', data: widget.details.regDetails.name),
-                    DataShower(type: 'Phone No.', data: widget.details.regDetails.contact.toString()),
-                    DataShower(type: 'Email Id', data: widget.details.regDetails.email),
+                    DataShower(type: 'Player\'s Name', data: widget.details.regDetails.name),
+                    DataShower(type: 'Contact Number', data: widget.details.regDetails.contact.toString()),
+                    DataShower(type: 'Email ID', data: widget.details.regDetails.email),
                     DataShower(type: 'Mode of Payment', data: widget.details.paymentMethod),
                     SizedBox(
                       height: 1,
@@ -254,7 +254,7 @@ class _DetailShowerState extends State<DetailShower> {
                         color: Colors.grey.withOpacity(0.5),
                         blurRadius: 5,
                         spreadRadius: 0.1,
-                        offset: Offset(7, 7))
+                        offset: Offset(3, 3))
                   ],
                 ),
                 child: Column(

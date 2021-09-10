@@ -189,7 +189,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         if (value.length != 10 ||
                             value.isEmpty ||
                             value == null)
-                          return 'Please Enter a valid contact number';
+                          return 'Please Enter a valid Contact Number';
                         return null;
                       },
                       controller: _contact,
@@ -241,7 +241,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         if (!RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value))
-                          return 'Please enter a valid email';
+                          return 'Please enter a valid Email';
                         return null;
                       },
                       controller: _emailId,
@@ -455,7 +455,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       },
                       validator: (value) {
                         if (value.isEmpty || value == null)
-                          return 'Please Enter the name of your tournament';
+                          return 'Please Enter the Name of your tournament';
                         return null;
                       },
                       controller: _nameTour,

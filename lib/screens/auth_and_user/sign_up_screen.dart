@@ -106,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 20,
                           ),
                           Text(
-                            'Create a new account',
+                            'Create New Account',
                             style: themeFont(
                               color: kThemeColor,
                               s: 20,
@@ -172,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 w: 'n',
                               ),
                               decoration:
-                                  textFieldDecoration('Email Id', typedEmail),
+                                  textFieldDecoration('Email ID', typedEmail),
                             ),
                           ),
                           SizedBox(
@@ -314,7 +314,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               obscureText: !showP2,
                               decoration: InputDecoration(
-                                //  errorText: (isFailed) ? 'Invalid pass' : null,
+                                //  errorText: (isFailed) ? 'Invalid Password' : null,
                                 hintText: 'Confirm Password',
                                 hintStyle: themeFont(
                                     color: Color(0xff626262), w: 'r', s: 14),
@@ -390,7 +390,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: Text(
-                              'Password should be at least 6 characters long and must include at least 1 number. Ex. @,\$,%,!.',
+                              'Password should be at least 6 characters long and must include a minimum of 1 number',
                               style: themeFont(
                                 color: Colors.black,
                                 s: 10,
@@ -432,7 +432,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
 
                                         TextSpan(
-                                          text: 'Conditions of Use',
+                                          text: 'Terms & Conditions',
                                           style: themeFont(
                                             s: 12.0,
                                             w: 'r',
@@ -534,7 +534,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       context, 'sign_in');
                                 },
                                 child: Text(
-                                  'Log in',
+                                  'Log In',
                                   style: themeFont(
                                     s: 12,
                                     w: 'm',
@@ -649,7 +649,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               w: 'n',
                             ),
                             decoration:
-                                textFieldDecoration('Email Id', typedEmail),
+                                textFieldDecoration('Email ID', typedEmail),
                           ),
                         ),
                         SizedBox(
@@ -862,7 +862,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            'Password should be at least 6 characters long and must include at least 1 number. Ex. @,\$,%,!.',
+                            'Password should be at least 6 characters long and must include a minimum of 1 number.',
                             style: themeFont(
                               color: Colors.black,
                               s: 10,
@@ -903,7 +903,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'Conditions of Use',
+                                        text: 'Terms & Conditions',
                                         style: themeFont(
                                           s: 12.0,
                                           w: 'r',
@@ -1002,7 +1002,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     context, 'sign_in');
                               },
                               child: Text(
-                                'Log in',
+                                'Log In',
                                 style: themeFont(
                                   s: 12,
                                   w: 'm',

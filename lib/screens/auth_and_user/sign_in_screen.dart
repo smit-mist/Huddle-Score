@@ -115,7 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             w: 'r',
                           ),
                           decoration:
-                              textFieldDecoration('Email id', emailTapped),
+                              textFieldDecoration('Email ID', emailTapped),
                         ),
                       ),
                       SizedBox(
@@ -286,7 +286,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.pushNamed(context, 'sign_up');
                             },
                             child: Text(
-                              'Sign up',
+                              'Sign Up',
                               style: themeFont(
                                 s: 12,
                                 w: 'm',

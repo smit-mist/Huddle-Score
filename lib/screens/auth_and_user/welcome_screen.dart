@@ -87,7 +87,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 ActionButton(
                   child: Text(
-                    'Login',
+                    'Log In',
                     style: themeFont(
                         color: kThemeColor, w: 'm', s: 16),
                   ),

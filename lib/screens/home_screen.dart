@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 Text(
-                  'Popular Tournaments',
+                  'Upcoming Tournaments',
                   style: themeFont(s: 18, w: 'm'),
                 ),
                 Spacer(),
@@ -290,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 Text(
-                  'Online Tournaments',
+                  'Upcoming Online Tournaments',
                   style: themeFont(
                     s: 18,
                   ),
@@ -395,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: themeFont(color: kThemeColor, s: 24, w: 'm'),
                   ),
                   Text(
-                    'Be the first one to know when the turfs go live',
+                    'Be the first one to know when the turfs go live!',
                     style: themeFont(),
                   ),
                   Container(
@@ -405,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _emailCtrl,
                       decoration:
-                          normalTextDecoration('Enter your email address')
+                          normalTextDecoration('Enter your Email ID')
                               .copyWith(
                         fillColor: Colors.white,
                         errorText: isValid
@@ -532,7 +532,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       bgColor: kThemeColor,
                       child: Text(
-                        'Contact Today!',
+                        'Contact Today',
                         style: themeFont(
                           color: Colors.white,
                         ),

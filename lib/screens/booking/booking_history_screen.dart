@@ -91,7 +91,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             Container(
               child: Text(
-                'Recent',
+                'Upcoming',
                 style: themeFont(
                   s: 16.0,
                   w: 'r',
@@ -160,7 +160,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             Container(
               child: Text(
-                'Earlier this month',
+                'Past',
                 style: themeFont(
                   s: 16.0,
                   w: 'r',

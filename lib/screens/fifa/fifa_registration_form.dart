@@ -9,14 +9,14 @@ import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
 import '../../constants.dart';
 
 String nameValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Name';
+  if (val == null || val.isEmpty) return 'Please enter Name';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
     return 'Enter Valid Name';
   return null;
 }
 
 String emailValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Email';
+  if (val == null || val.isEmpty) return 'Please enter Email ID';
   if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(val)) return 'Please enter a valid email';
@@ -24,7 +24,7 @@ String emailValidator(String val) {
 }
 
 String mobileNumValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Mobile Number';
+  if (val == null || val.isEmpty) return 'Please enter Contact Number';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
   if (val.length != 10) return 'Enter Valid Mobile Number';
@@ -259,7 +259,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Name',
+                        'Full Name',
                         style: themeFont(s: 12, w: 'm'),
                       ),
                       SizedBox(
@@ -343,7 +343,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                         height: 15,
                       ),
                       Text(
-                        'Email',
+                        'Email ID',
                         style: themeFont(s: 12, w: 'm'),
                       ),
                       SizedBox(

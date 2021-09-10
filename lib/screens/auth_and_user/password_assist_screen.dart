@@ -69,7 +69,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                           height: 30,
                         ),
                         Text(
-                          'Enter the registered Email id to receive a link',
+                          'Enter the Email ID associated with your Huddle & Score account to receive a link.',
                           style: themeFont(s: 14),
                         ),
                         SizedBox(
@@ -88,7 +88,7 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                                 style: themeFont(
                                   color: Colors.black,
                                 ),
-                                decoration: normalTextDecoration('Email id'),
+                                decoration: normalTextDecoration('Email ID'),
                               ),
                             );
                           },
@@ -201,7 +201,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                     height: 50,
                   ),
                   Text(
-                    'A link to reset your password has been sent to the following email id. ',
+                    'A link to reset your password has been sent to the following Email ID. ',
                     style: themeFont(s: 14, w: 'm'),
                   ),
                   SizedBox(
@@ -215,7 +215,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
                         color: Colors.black,
                         w: 'n',
                       ),
-                      decoration: normalTextDecoration('Email id'),
+                      decoration: normalTextDecoration('Email ID'),
                     ),
                   ),
                   SizedBox(
@@ -295,7 +295,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Text(
-                    'Enter the registered Email id to receive a link',
+                    'Enter the Email ID associated with your Huddle & Score account to receive a link.',
                     style: themeFont(s: 14, w: 'm'),
                   ),
                   SizedBox(
@@ -309,7 +309,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                         color: Colors.black,
                         w: 'n',
                       ),
-                      decoration: normalTextDecoration('Email id'),
+                      decoration: normalTextDecoration('Email ID'),
                     ),
                   ),
                   SizedBox(

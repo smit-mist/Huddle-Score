@@ -16,7 +16,7 @@ class HowItWorks extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomBar(
-          actionName: 'List Now',
+          actionName: 'Continue',
           onPressed: () {
             Navigator.push(
               context,
@@ -55,7 +55,7 @@ class HowItWorks extends StatelessWidget {
                 height: h * 0.035,
               ),
               showText(
-                  'Listing your tournament has never been easier. In just 2 short steps, set yourself up for endless opportunities.'),
+                  'Listing your tournament has never been easier. In just 2 quick steps, set yourself up for endless opportunities!'),
               SizedBox(
                 height: h * 0.05,
               ),
@@ -77,7 +77,7 @@ class HowItWorks extends StatelessWidget {
                         style: themeFont(s: 18, w: 'm'),
                       ),
                       Text(
-                        'Share your contact details with us',
+                        'Share your details with us',
                         style: themeFont(s: 14, w: 'r'),
                       ),
                     ],
@@ -101,7 +101,7 @@ class HowItWorks extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'We\'ll connect with you shortly',
+                        'We will connect with you shortly',
                         style: themeFont(s: 18, w: 'm'),
                       ),
                       Text(

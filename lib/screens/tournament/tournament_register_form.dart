@@ -10,32 +10,32 @@ import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 import '../../constants.dart';
 
 String nameValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Name';
+  if (val == null || val.isEmpty) return 'Please Enter a Name';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
     return 'Enter Valid Name';
   return null;
 }
 
 String ageValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Age';
+  if (val == null || val.isEmpty) return 'Please Enter Age';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
-    return 'Enter Valid Age';
+    return 'Please Enter valid Age';
   return null;
 }
 
 String emailValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Email';
+  if (val == null || val.isEmpty) return 'Please Enter Email ID';
   if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(val)) return 'Please enter a valid email';
+      .hasMatch(val)) return 'Please Enter a valid Email ID';
   return null;
 }
 
 String mobileNumValidator(String val) {
-  if (val == null || val.isEmpty) return 'Enter Mobile Number';
+  if (val == null || val.isEmpty) return 'Please Enter Contact Number';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
-  if (val.length != 10) return 'Enter Valid Mobile Number';
+  if (val.length != 10) return 'Please Enter Valid Contact Number';
   return null;
 }
 
@@ -609,7 +609,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                   height: 5,
                                 ),
                                 Text(
-                                  'All communication regarding the tournament will be done with the captain or vice-captain of the team.',
+                                  'All communication regarding the tournament will be done with the Captain or Vice-Captain of the team.',
                                   style: themeFont(
                                     s: 12,
                                   ),
@@ -960,7 +960,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       height: 5,
                                     ),
                                     Text(
-                                      'All communication regarding the tournament will be done with the Player 1 or Player 2',
+                                      'All communication regarding the tournament will be done with Player 1 or Player 2',
                                       style: themeFont(
                                         s: 12,
                                       ),
@@ -1079,7 +1079,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       },
                                       controller: email1,
                                       decoration: textFieldDecoration(
-                                          'Player 1\'s Email', typedEmail1),
+                                          'Player 1\'s Email ID', typedEmail1),
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -1231,7 +1231,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       },
                                       controller: email2,
                                       decoration: textFieldDecoration(
-                                          'Player 2\'s Email', typedEmail2),
+                                          'Player 2\'s Email ID', typedEmail2),
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -1281,7 +1281,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       height: 5,
                                     ),
                                     Text(
-                                      'All communication regarding the tournament will be done with the Player 1',
+                                      'All communication regarding the tournament will be done with Player 1',
                                       style: themeFont(
                                         s: 12,
                                       ),
@@ -1400,7 +1400,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       },
                                       controller: email1,
                                       decoration: textFieldDecoration(
-                                          'Player 1\'s Email', typedEmail1),
+                                          'Player 1\'s Email ID', typedEmail1),
                                     ),
                                     SizedBox(
                                       height: 15,

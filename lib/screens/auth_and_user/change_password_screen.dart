@@ -52,7 +52,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: 'Enter your current Password',
+                    hintText: 'Enter Current Password',
                     hintStyle: themeFont(
                         color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
@@ -120,7 +120,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   obscureText: true,
                   controller: passwordCtrl,
                   decoration: InputDecoration(
-                    hintText: 'Enter your new Password',
+                    hintText: 'Create New Password',
                     hintStyle: themeFont(
                         color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
@@ -156,7 +156,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 SizedBox(
                   width: w * (356 / kScreenW),
                   child: Text(
-                    'Password should be at least 6 characters long and must include at least 1 number. Ex. @,\$,%,!.',
+                    'Password should be at least 6 characters long and must include a minimum of 1 number',
                     style: themeFont(
                       color: Colors.black,
                       s: 10,
@@ -167,7 +167,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  'Confrim New Password',
+                  'Confirm New Password',
                   style: themeFont(),
                 ),
                 SizedBox(
@@ -179,7 +179,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: 'Re-enter your new Password',
+                    hintText: 'Re-enter New Password',
                     hintStyle: themeFont(
                         color: Color(0xff626262), s: 14),
                     suffixIcon: GestureDetector(
