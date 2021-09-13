@@ -184,12 +184,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             child: TextFormField(
                               validator: (value) {
-                                //   print("inside validator");
-                                //     print(value.contains(
-                                //     RegExp(
-                                //   r'[!@#$%^&*(),.?":{}|<>]',
-                                //   ),
-                                // ));
                                 if (value.isEmpty ||
                                     value == null ||
                                     value.contains(
@@ -238,7 +232,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 contentPadding:
                                     EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                                 filled: true,
-                                fillColor: Colors.transparent,
+                                fillColor: Color(0xFFF1F1F1),
                                 focusedErrorBorder: (typedP1 == false)
                                     ? OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
@@ -281,7 +275,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     width: 2,
                                     color: kThemeColor,
                                   ),
+
                                 ),
+
+
                               ),
                             ),
                           ),
@@ -337,7 +334,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 contentPadding:
                                     EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                                 filled: true,
-                                fillColor: Colors.transparent,
+                                fillColor: Color(0xFFF1F1F1),
                                 focusedErrorBorder: (typedP2 == false)
                                     ? OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
@@ -710,7 +707,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               contentPadding:
                                   EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                               filled: true,
-                              fillColor: Colors.transparent,
+                              fillColor: Color(0xFFF1F1F1),
                               focusedErrorBorder: (typedP1 == false)
                                   ? OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
@@ -809,7 +806,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               contentPadding:
                                   EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                               filled: true,
-                              fillColor: Colors.transparent,
+                              fillColor: Color(0xFFF1F1F1),
                               focusedErrorBorder: (typedP2 == false)
                                   ? OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
