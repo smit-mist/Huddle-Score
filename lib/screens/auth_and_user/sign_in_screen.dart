@@ -145,6 +145,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           obscureText: !visible,
                           decoration: InputDecoration(
+                            fillColor: Color(0xFFF1F1F1),
+
                             errorText: (isFailed) ? 'Invalid pass' : null,
                             hintText: 'Password',
                             hintStyle: themeFont(
@@ -160,25 +162,24 @@ class _SignInScreenState extends State<SignInScreen> {
                                 padding: EdgeInsets.all(12),
 
                              //   color: kThemeColor,
-                                child: SvgPicture.asset(
-                                  'assets/icons/password_eye_open.svg',
-                                  color: passTapped == true?kThemeColor:Colors.grey.withOpacity(0.7),
-                                ),
+                             //    child: SvgPicture.asset(
+                             //      'assets/icons/password_eye_open.svg',
+                             //      color: passTapped == true?kThemeColor:Colors.grey.withOpacity(0.7),
+                             //    ),
 
-                                // child: Icon(
-                                //   (visible == true
-                                //       ? Icons.visibility
-                                //       : Icons.visibility_off),
-                                //   color: (passTapped == true)
-                                //       ? kThemeColor
-                                //       : Colors.grey.withOpacity(0.4),
-                                // ),
+                                child: Icon(
+                                  (visible == true
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  color: (passTapped == true)
+                                      ? kThemeColor
+                                      : Colors.grey.withOpacity(0.4),
+                                ),
                               ),
                             ),
                             contentPadding:
                                 EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                             filled: true,
-                            fillColor: Colors.transparent,
                             focusedErrorBorder: (passTapped == false)
                                 ? OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),

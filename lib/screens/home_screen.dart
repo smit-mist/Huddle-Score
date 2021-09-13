@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
@@ -11,6 +13,7 @@ import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 import 'dart:ui';
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
+
 List<String> cities = [
   "Ahmedabad",
   "Mumbai",
@@ -23,6 +26,7 @@ List<String> cities = [
   "Agra",
   "Ajmer"
 ];
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -30,13 +34,44 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _chosenValue = "Ahmedabad";
-
-
+  PageController _ctrl = PageController(initialPage: 1);
+  int currPage = 1;
   HomeBloc _bloc;
 
   bool isValid = false;
-
+  List<String> nameOfBanner = [
+    "ad4",
+    "ad1",
+    "ad2",
+    "ad3",
+    "ad4",
+  ];
   TextEditingController _emailCtrl = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      setState(() {
+        if (currPage == 4) {
+          _ctrl.jumpToPage(0);
+          _ctrl.nextPage(
+              duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+          currPage = 1;
+        } else {
+          currPage++;
+          currPage %= 5;
+
+          _ctrl.animateToPage(
+            currPage,
+            duration: Duration(milliseconds: 350),
+            curve: Curves.easeIn,
+          );
+        }
+      });
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           childAspectRatio: (101) / (42),
                         ),
                         itemBuilder: (_, int ind) {
-
                           return GestureDetector(
                             onTap: () {
                               setState(() {
@@ -108,7 +142,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           );
-
                         }),
                   ),
                   Row(
@@ -118,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 42,
                         width: 105,
                         child: ActionButton(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -138,6 +171,43 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
     );
+    List<Widget> indicators = [
+      Indicator(
+        onPressed: (){
+          setState(() {
+            _ctrl.jumpToPage(1);
+            currPage = 1;
+          });
+        },
+        isActive: (currPage == 1),
+      ),
+      Indicator(
+        onPressed: (){
+          setState(() {
+            _ctrl.jumpToPage(2);
+            currPage = 2;
+          });
+        },
+        isActive: (currPage == 2),
+      ),Indicator(
+        onPressed: (){
+          setState(() {
+            _ctrl.jumpToPage(3);
+            currPage = 3;
+          });
+        },
+        isActive: (currPage == 3),
+      ),Indicator(
+        onPressed: (){
+          setState(() {
+            _ctrl.jumpToPage(4);
+            currPage = 4;
+          });
+        },
+        isActive: (currPage == 4),
+      ),
+    ];
+
     return Container(
       width: w,
       height: double.infinity,
@@ -204,25 +274,40 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => PartnerWithUsIntro(),
+            Container(
+              width: double.infinity,
+              height: h * (150 / kScreenH),
+              child: Stack(
+                children: [
+                  PageView(
+                    controller: _ctrl,
+                    allowImplicitScrolling: true,
+                    children: [
+                      ImageShower(name: nameOfBanner[4]),
+                      ImageShower(name: nameOfBanner[1]),
+                      ImageShower(name: nameOfBanner[2]),
+                      ImageShower(name: nameOfBanner[3]),
+                      ImageShower(name: nameOfBanner[4]),
+                    ],
                   ),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(9),
-                child: Container(
-                  width: double.infinity,
-                  height: h * (146 / kScreenH),
-                  child: Image.network(
-                    'https://picsum.photos/300/200',
-                    fit: BoxFit.cover,
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 20,
+                      width: 50,
+                      child: ListView.separated(
+                        separatorBuilder: (_,x){
+                          return SizedBox(width: 4,);
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, ind) {
+                          return indicators[ind];
+                        },
+                        itemCount: indicators.length,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             SizedBox(
@@ -405,8 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _emailCtrl,
                       decoration:
-                          normalTextDecoration('Enter your Email ID')
-                              .copyWith(
+                          normalTextDecoration('Enter your Email ID').copyWith(
                         fillColor: Colors.white,
                         errorText: isValid
                             ? 'Please enter a valid email address'
@@ -547,6 +631,55 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ImageShower extends StatelessWidget {
+  String name;
+  ImageShower({@required this.name});
+  @override
+  Widget build(BuildContext context) {
+    double h = MediaQuery.of(context).size.height;
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 7),
+      width: double.infinity,
+      height: h * (146 / kScreenH),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          'assets/images/$name.png',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Indicator extends StatefulWidget {
+  Function onPressed;
+  bool isActive;
+  Indicator({this.onPressed, this.isActive});
+  @override
+  _IndicatorState createState() => _IndicatorState();
+}
+
+class _IndicatorState extends State<Indicator> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:widget.onPressed,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 350),
+        decoration: BoxDecoration(
+          color: (widget.isActive ? Colors.white : Colors.grey),
+          shape: BoxShape.circle,
+
+        ),
+        height: (widget.isActive?7:5),
+        width:  (widget.isActive?7:5),
+
       ),
     );
   }

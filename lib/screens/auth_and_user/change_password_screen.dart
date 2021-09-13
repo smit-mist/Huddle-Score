@@ -68,7 +68,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ),
                     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                     filled: true,
-                    fillColor: Colors.grey.withOpacity(0.3),
+                    fillColor: Color(0xFFF1F1F1),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
@@ -136,7 +136,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ),
                     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                     filled: true,
-                    fillColor: Colors.grey.withOpacity(0.3),
+                    fillColor: Color(0xFFF1F1F1),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
@@ -195,7 +195,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ),
                     contentPadding: EdgeInsets.fromLTRB(13.0, 14.0, 0, 15.0),
                     filled: true,
-                    fillColor: Colors.grey.withOpacity(0.3),
+                    fillColor: Color(0xFFF1F1F1),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
