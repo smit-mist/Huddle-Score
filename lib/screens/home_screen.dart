@@ -1,16 +1,23 @@
+import 'dart:ui';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/repositories/home_repository.dart';
 import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
 import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/camera_widget.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
-import 'dart:ui';
+import 'package:permission_handler/permission_handler.dart';
+
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
+
 List<String> cities = [
   "Ahmedabad",
   "Mumbai",
@@ -23,14 +30,22 @@ List<String> cities = [
   "Agra",
   "Ajmer"
 ];
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _chosenValue = "Ahmedabad";
+  Future<PermissionStatus> getNotificationsPermission() async {
+    return await Permission.notification.request();
+  }
 
+  Future<PermissionStatus> getCameraPermission() async {
+    return await Permission.camera.request();
+  }
+
+  String _chosenValue = "Ahmedabad";
 
   HomeBloc _bloc;
 
@@ -81,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           childAspectRatio: (101) / (42),
                         ),
                         itemBuilder: (_, int ind) {
-
                           return GestureDetector(
                             onTap: () {
                               setState(() {
@@ -108,7 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           );
-
                         }),
                   ),
                   Row(
@@ -118,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 42,
                         width: 105,
                         child: ActionButton(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -183,16 +196,47 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Spacer(),
-                Icon(
-                  Icons.notifications_none,
-                  color: kThemeColor,
-                  size: 30,
+                GestureDetector(
+                  onTap: () async {
+                    final status = await getNotificationsPermission();
+                    if (status.isGranted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Container(),
+                        ),
+                      );
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Please grant permission for notifications');
+                    }
+                  },
+                  child: Icon(
+                    Icons.notifications_none,
+                    color: kThemeColor,
+                    size: 30,
+                  ),
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    final status = await getCameraPermission();
+                    if (status.isGranted) {
+                      var camera = await availableCameras();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CameraApp(
+                            cameras: camera,
+                          ),
+                        ),
+                      );
+                    } else
+                      Fluttertoast.showToast(
+                          msg: 'Please grant permission for camera');
+                  },
                   child: Icon(
                     Icons.qr_code_scanner,
                     color: kThemeColor,
@@ -405,8 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _emailCtrl,
                       decoration:
-                          normalTextDecoration('Enter your Email ID')
-                              .copyWith(
+                          normalTextDecoration('Enter your Email ID').copyWith(
                         fillColor: Colors.white,
                         errorText: isValid
                             ? 'Please enter a valid email address'
