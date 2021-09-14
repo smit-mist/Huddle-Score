@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,8 +12,6 @@ import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.da
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
-import '../home_navbar_screen.dart';
-
 class EditProfileScreen extends StatefulWidget {
   String name, email;
   EditProfileScreen({this.email, this.name});
@@ -25,6 +22,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   bool isVerified = FirebaseAuth.instance.currentUser.emailVerified;
+  bool nametap = false;
   Timer _timer;
   HomeNavBarBloc _bloc;
   @override
@@ -55,6 +53,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _nameCtrl = TextEditingController();
     _bloc = BlocProvider.of<HomeNavBarBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -93,18 +92,95 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 height: 10,
               ),
               TextField(
-                textInputAction: TextInputAction.done,
-                onSubmitted: (value) async {
-                  _bloc.add(HomeIconPressed());
-                  await UserRepository().changeUserName(value);
-                  _bloc.add(ProfileIconPressed());
+                controller: _nameCtrl,
+                onTap: () {
+                  setState(() {
+                    nametap = true;
+                  });
                 },
+                showCursor: false,
+                enableInteractiveSelection: false,
+                focusNode: FocusNode(),
                 decoration: normalTextDecoration(widget.name).copyWith(
                   suffixIcon: Icon(
                     Icons.edit,
                   ),
                 ),
               ),
+              nametap
+                  ? SizedBox(
+                      height: 10,
+                    )
+                  : SizedBox(
+                      height: 0,
+                    ),
+              nametap
+                  ? Container(
+                      width: w,
+                      height: h * 0.05,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            width: w * 0.4,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: kThemeColor,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {
+                                setState(() {
+                                  nametap = false;
+                                });
+                              },
+                              child: Text(
+                                'Cancel',
+                                style: themeFont(
+                                  color: kThemeColor,
+                                  w: 'r',
+                                  s: 16.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: w * 0.4,
+                            decoration: BoxDecoration(
+                              color: kThemeColor,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                style: BorderStyle.none,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () async {
+                                _bloc.add(HomeIconPressed());
+                                await UserRepository()
+                                    .changeUserName(_nameCtrl.text);
+                                _bloc.add(ProfileIconPressed());
+                                setState(() {
+                                  nametap = false;
+                                });
+                              },
+                              child: Text(
+                                'Save',
+                                style: themeFont(
+                                  color: Colors.white,
+                                  w: 'r',
+                                  s: 16.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(),
               SizedBox(
                 height: 10,
               ),
@@ -122,7 +198,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 decoration: normalTextDecoration(widget.email).copyWith(
                     hintStyle: themeFont(
-                  color: !isVerified? Colors.redAccent : Color(0xff626262),
+                  color: !isVerified ? Colors.redAccent : Color(0xff626262),
                 )),
               ),
               SizedBox(
