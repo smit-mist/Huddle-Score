@@ -9,7 +9,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _controller = TextEditingController();
-
+  bool typed = false;
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -29,10 +29,22 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             TextField(
               controller: _controller,
-              onChanged: (String x) {
+              onChanged: (s) {
                 setState(() {});
               },
-              decoration: normalTextDecoration('Tournaments or Locations '),
+              onTap: () {
+                setState(() {
+                  typed = true;
+                });
+              },
+              decoration:
+                  textFieldDecoration('Tournaments or Locations ', typed)
+                      .copyWith(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: (typed) ? kThemeColor : Colors.black,
+                ),
+              ),
             ),
             SizedBox(
               height: 20,

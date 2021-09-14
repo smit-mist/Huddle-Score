@@ -111,23 +111,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 if (ind == 0) current = ind;
                               });
                             },
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  cities[ind],
-                                  style: themeFont(s: 12).copyWith(
-                                    decoration: ind == 0
-                                        ? TextDecoration.none
-                                        : TextDecoration.lineThrough,
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Container(
+                                child: Center(
+                                  child: Text(
+                                    cities[ind],
+                                    style: themeFont(s: 12,w:(ind==0)?'r':'l'),
                                   ),
                                 ),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color: (current == ind)
-                                        ? kThemeColor
-                                        : Colors.transparent),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  border: Border.all(
+                                      color: (current == ind)
+                                          ? kThemeColor
+                                          : Colors.black),
+                                ),
                               ),
                             ),
                           );

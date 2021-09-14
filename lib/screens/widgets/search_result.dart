@@ -4,9 +4,11 @@ import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../../constants.dart';
+import 'dart:math';
 
 class SearchResult extends StatelessWidget {
   String currentSearch;
@@ -18,58 +20,107 @@ class SearchResult extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     _bloc = BlocProvider.of<HomeBloc>(context);
 
+    List<HomeTour> tours = [];
+    List<HomeFifa> toShow = [];
+    if (_bloc.state.allTournaments != null) {
+      for (int i = 0; i < _bloc.state.allTournaments.length; i++) {
+        if (startsWith(_bloc.state.allTournaments[i].name, currentSearch)) {
+          // toShow.add(_bloc.state.allTournaments[i]);
+          tours.add(_bloc.state.allTournaments[i]);
+        }
+      }
+    }
+    if (_bloc.state.allFifa != null) {
+      for (int i = 0; i < _bloc.state.allFifa.length; i++) {
+        if (startsWith(_bloc.state.allFifa[i].name, currentSearch)) {
+          toShow.add(_bloc.state.allFifa[i]);
+        }
+      }
+    }
 
-    List<dynamic>toShow=[];
-    List<int>typeOf = [];
-    for (int i = 0; i < _bloc.state.allTournaments.length; i++) {
-      if (startsWith(_bloc.state.allTournaments[i].name, currentSearch)) {
-        toShow.add(_bloc.state.allTournaments[i]);
-        typeOf.add(1);
-      }
-    }
-    for(int i=0;i<_bloc.state.allFifa.length;i++){
-      if(startsWith(_bloc.state.allFifa[i].name, currentSearch)){
-        toShow.add(_bloc.state.allFifa[i]);
-        typeOf.add(0);
-      }
-    }
     // 0 for fifa and 1 for tournament.
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
         if (state is Loading) {
-          return Center(child: CircularProgressIndicator());
+          return LoadingWidget();
         } else if (state is Failure) {
           return Center(
             child: Text('Failed'),
           );
         } else if (state is InitialState) {
-          return Container();
+          return LoadingWidget();
         }
-        return GridView.builder(
-
-          itemCount: toShow.length,
-          itemBuilder: (_, ind) {
-            if(typeOf[ind] == 1){
-              return TournamentTile(
-                here: toShow[ind],
-              );
-            }
-            else{
-              return FifaTile(fifa: toShow[ind],);
-            }
-
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              // width: w * (145 / kScreenW),
+        print(tours.length);
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Upcoming Tournaments',
+                style: themeFont(s: 16, w: 'sb'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: h *
+                    ((min(500, (tours.length / 2 + tours.length % 2) * 250)) /
+                        kScreenH),
+                width: w,
+                child: GridView.builder(
+                  itemCount: tours.length,
+                  itemBuilder: (_, ind) {
+                    return TournamentTile(
+                      here: tours[ind],
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      // width: w * (145 / kScreenW),
 //height: h * (212 / kScreenH)
-              childAspectRatio: (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-              mainAxisSpacing: 10),
+                      childAspectRatio:
+                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
+                      mainAxisSpacing: 10),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Upcoming Online Tournaments',
+                style: themeFont(s: 16, w: 'sb'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: h *
+                    ((min(500, (toShow.length / 2 + toShow.length % 2) * 250)) /
+                        kScreenH),
+                width: w,
+                child: GridView.builder(
+                  itemCount: toShow.length,
+                  itemBuilder: (_, ind) {
+                    return FifaTile(
+                      fifa: toShow[ind],
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio:
+                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
+                      mainAxisSpacing: 10),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
   }
 }
+
+class Math {}
 
 bool startsWith(String a, String b) {
   a = a.toLowerCase();
