@@ -661,7 +661,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
                         width: double.infinity,
-                        height: h * (170 / kScreenH),
+                        height: h * (190 / kScreenH),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

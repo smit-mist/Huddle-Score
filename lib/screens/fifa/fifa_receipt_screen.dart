@@ -925,7 +925,7 @@ class _DetailShowerState extends State<DetailShower> {
                   ],
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
@@ -1048,8 +1048,8 @@ class _DetailShowerState extends State<DetailShower> {
                         ),
                         Spacer(),
                         Text(
-                          '₹ ${widget.details.amount / 100}',
-                          style: themeFont(w: 'r'),
+                          '₹ ${widget.details.amount/100}',
+                          style: themeFont(w: 'm'),
                         )
                       ],
                     ),
@@ -1062,7 +1062,7 @@ class _DetailShowerState extends State<DetailShower> {
                         Spacer(),
                         Text(
                           widget.details.taxes.toString(),
-                          style: themeFont(w: 'r'),
+                          style: themeFont(w: 'm'),
                         )
                       ],
                     ),

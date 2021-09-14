@@ -128,7 +128,7 @@ class _FifaReviewState extends State<FifaReview> {
                 },
                 child: Container(
                   height: 40,
-                  width: w * 0.3,
+                  width: w * 0.4,
                   child: Center(
                     child: Text(
                       'Proceed to Pay',
