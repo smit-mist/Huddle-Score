@@ -6,8 +6,11 @@ import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'fifa_registration_form.dart';
+
+const double vertico = 2, horizonto = 7;
 
 class FifaDetails extends StatefulWidget {
   Fifa fifa;
@@ -26,6 +29,7 @@ class _FifaDetailsState extends State<FifaDetails> {
   WeirdDateFormat gameDate, deadLine;
   int seatsLeft;
   bool clickedOnRegister = false;
+  String mapUrl = "";
   void precomputer() {
     print('User is registered:- ${widget.isReg}');
     seatsLeft =
@@ -42,6 +46,8 @@ class _FifaDetailsState extends State<FifaDetails> {
     if (today.isAfter(given)) {
       canRegister = false;
     }
+    mapUrl =
+        'https://www.google.com/maps/place/${widget.fifa.main.venue.coordinates['latitude']},${widget.fifa.main.venue.coordinates['longitude']}';
   }
 
   @override
@@ -288,7 +294,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          widget.fifa.main.venue.address.join(' '),
+                                          widget.fifa.main.venue.address
+                                              .join(' '),
                                           style: themeFont(s: 13),
                                         ),
                                         Row(
@@ -297,13 +304,19 @@ class _FifaDetailsState extends State<FifaDetails> {
                                               'View in ',
                                               style: themeFont(s: 12),
                                             ),
-                                            Text(
-                                              'Maps',
-                                              style: themeFont(
-                                                      s: 12, color: kThemeColor)
-                                                  .copyWith(
-                                                decoration:
-                                                    TextDecoration.underline,
+                                            GestureDetector(
+                                              onTap: () async {
+                                                await launch(mapUrl);
+                                              },
+                                              child: Text(
+                                                'Maps',
+                                                style: themeFont(
+                                                        s: 12,
+                                                        color: kThemeColor)
+                                                    .copyWith(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
                                               ),
                                             )
                                           ],
@@ -369,12 +382,15 @@ class _FifaDetailsState extends State<FifaDetails> {
                                     height: 10,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
                                     width: double.infinity,
                                     height: h * 0.15,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: ListView.builder(
@@ -388,8 +404,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                     widget.fifa.prizePool[
                                                         ind.toString()][0],
                                                     //'200',
-                                                    style:
-                                                        themeFont(s: 12, w: 'sb'),
+                                                    style: themeFont(
+                                                        s: 12, w: 'sb'),
                                                   ),
                                                   Text(
                                                     widget.fifa.prizePool[
@@ -397,7 +413,9 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                     //'hello',
                                                     style: themeFont(
                                                       s: (ind == 0 ? 20 : 18),
-                                                      w: (ind == 0) ? 'b' : 'sb',
+                                                      w: (ind == 0)
+                                                          ? 'b'
+                                                          : 'sb',
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -421,7 +439,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                   ),
                                   Expanded(
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
                                       width: double.infinity,
                                       child: Row(
                                         children: [
@@ -437,15 +456,16 @@ class _FifaDetailsState extends State<FifaDetails> {
                                           Spacer(),
                                           TextButton(
                                             onPressed: () {
-                                              _bloc.add(TournamentDetailExpanded());
+                                              _bloc.add(
+                                                  TournamentDetailExpanded());
                                             },
                                             child: Text(
                                               'View all prizes',
                                               style: themeFont(
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
-                                                      decoration:
-                                                          TextDecoration.underline),
+                                                      decoration: TextDecoration
+                                                          .underline),
                                             ),
                                           ),
                                           Icon(
@@ -466,14 +486,15 @@ class _FifaDetailsState extends State<FifaDetails> {
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 200),
                             width: double.infinity,
-                            height:
-                                (0.3 + (widget.fifa.prizePool.length - 2) * 0.04) *
-                                    h,
+                            height: (0.3 +
+                                    (widget.fifa.prizePool.length - 2) * 0.04) *
+                                h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(9),
                               boxShadow: [
-                                BoxShadow(color: Colors.grey, offset: Offset(2, 2))
+                                BoxShadow(
+                                    color: Colors.grey, offset: Offset(2, 2))
                               ],
                             ),
                             child: Column(
@@ -498,7 +519,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                   height: h * 0.15,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: ListView.builder(
@@ -509,13 +531,14 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  widget.fifa
-                                                      .prizePool[ind.toString()][0],
-                                                  style: themeFont(s: 12, w: 'sb'),
+                                                  widget.fifa.prizePool[
+                                                      ind.toString()][0],
+                                                  style:
+                                                      themeFont(s: 12, w: 'sb'),
                                                 ),
                                                 Text(
-                                                  widget.fifa
-                                                      .prizePool[ind.toString()][1],
+                                                  widget.fifa.prizePool[
+                                                      ind.toString()][1],
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
                                                     w: (ind == 0) ? 'b' : 'sb',
@@ -559,13 +582,14 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                     height: 10,
                                                   );
                                                 },
-                                                itemCount:
-                                                    widget.fifa.prizePool.length -
-                                                        2,
+                                                itemCount: widget
+                                                        .fifa.prizePool.length -
+                                                    2,
                                                 itemBuilder: (_, ind) {
                                                   return Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         widget.fifa.prizePool[
@@ -590,8 +614,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 20.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 20.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
@@ -691,6 +715,126 @@ class _FifaDetailsState extends State<FifaDetails> {
                     SizedBox(
                       height: 20,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: h * (250 / kScreenH),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              child: Text(
+                                'Contact The Organiser',
+                                style: themeFont(s: 16),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "This is Dummy", //widget.fifa.contact[0].name,
+                                  style: themeFont(
+                                    w: 'sb',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      "This is Dummy", //widget.fifa.contact[0].contactNumber
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.email_outlined),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      "This is Dummy", //widget.fifa.contact[0].email
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "This is Dummy", //widget.fifa.contact[1].name,
+                                  style: themeFont(
+                                    w: 'sb',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      "This is Dummy", //widget.fifa.contact[1].contactNumber
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.email_outlined),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      "This is Dummy", //widget.fifa.contact[1].email
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9),
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -698,119 +842,119 @@ class _FifaDetailsState extends State<FifaDetails> {
           ),
           (clickedOnRegister)
               ? DraggableScrollableSheet(
-            builder: (_, ctrl) {
-              return Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 2,
-                          spreadRadius: 2,
-                          offset: Offset(-3, -5)),
-                    ]),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                height: h * 0.5,
-                child: SingleChildScrollView(
-                  controller: ctrl,
+                  builder: (_, ctrl) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 2,
+                                spreadRadius: 2,
+                                offset: Offset(-3, -5)),
+                          ]),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      height: h * 0.5,
+                      child: SingleChildScrollView(
+                        controller: ctrl,
+                        child: Container(
+                          height: h * 0.5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Terms & Conditions',
+                                style: themeFont(
+                                  w: 'sb',
+                                ).copyWith(decoration: TextDecoration.none),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                widget.fifa.details.terms,
+                                style: themeFont()
+                                    .copyWith(decoration: TextDecoration.none),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  minChildSize: 0.25,
+                  maxChildSize: 0.4,
+                  initialChildSize: 0.25,
+                )
+              : Container(),
+          (clickedOnRegister)
+              ? Positioned(
+                  bottom: 10,
                   child: Container(
-                    height: h * 0.5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    width: w,
+                    height: 65,
+                    color: Colors.white,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          'Terms & Conditions',
-                          style: themeFont(
-                            w: 'sb',
-                          ).copyWith(decoration: TextDecoration.none),
+                        GestureDetector(
+                          onTap: () {
+                            print("OK");
+                            setState(() {
+                              clickedOnRegister = false;
+                            });
+                          },
+                          child: Container(
+                            width: w * 0.4,
+                            child: ActionButton(
+                              bgColor: Colors.white,
+                              child: Text(
+                                'Cancel',
+                                style: themeFont(
+                                  color: Colors.black,
+                                ).copyWith(decoration: TextDecoration.none),
+                              ),
+                              borderColor: kThemeColor,
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          widget.fifa.details.terms,
-                          style: themeFont()
-                              .copyWith(decoration: TextDecoration.none),
+                        Container(
+                          width: w * 0.4,
+                          child: ActionButton(
+                            bgColor: kThemeColor,
+                            child: Text(
+                              'Accept',
+                              style: themeFont(
+                                color: Colors.white,
+                              ).copyWith(decoration: TextDecoration.none),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                clickedOnRegister = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => FifaRegistrationForm(
+                                    fifa: widget.fifa,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              );
-            },
-            minChildSize: 0.25,
-            maxChildSize: 0.4,
-            initialChildSize: 0.25,
-          )
-              : Container(),
-          (clickedOnRegister)
-              ? Positioned(
-            bottom: 10,
-            child: Container(
-              width: w,
-              height: 65,
-              color: Colors.white,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print("OK");
-                      setState(() {
-                        clickedOnRegister = false;
-                      });
-                    },
-                    child: Container(
-                      width: w * 0.4,
-                      child: ActionButton(
-                        bgColor: Colors.white,
-                        child: Text(
-                          'Cancel',
-                          style: themeFont(
-                            color: Colors.black,
-                          ).copyWith(decoration: TextDecoration.none),
-                        ),
-                        borderColor: kThemeColor,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: w * 0.4,
-                    child: ActionButton(
-                      bgColor: kThemeColor,
-                      child: Text(
-                        'Accept',
-                        style: themeFont(
-                          color: Colors.white,
-                        ).copyWith(decoration: TextDecoration.none),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          clickedOnRegister = false;
-                        });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => FifaRegistrationForm(
-                              fifa: widget.fifa,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
+                )
               : Container(),
         ],
       ),
