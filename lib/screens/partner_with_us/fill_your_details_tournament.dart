@@ -328,7 +328,8 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: DropdownButton<String>(
+                                  child: DropdownButtonFormField<String>(
+                                    validator: (value)=>value=='Select a State' ? 'Please Select a State' : null,
                                     isExpanded: true,
                                     focusColor: Colors.grey.withOpacity(0.14),
                                     value: statee,
@@ -338,7 +339,6 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                       color: kThemeColor,
                                       size: 12,
                                     ),
-                                    underline: Container(),
                                     items: stateCity.keys
                                         .toList()
                                         .map<DropdownMenuItem<String>>(
@@ -354,14 +354,16 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                     onChanged: (s) {
                                       setState(() {
                                         statee = s;
+                                        city = 'Select a City';
                                       });
                                     },
                                     hint: Text(
                                       "State",
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -388,8 +390,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: DropdownButton<String>(
+                                  child: DropdownButtonFormField<String>(
                                     isExpanded: true,
+                                    validator: (value) =>
+                                        value == 'Select a City'
+                                            ? 'Please Select a City'
+                                            : null,
                                     focusColor: Colors.grey.withOpacity(0.14),
                                     value: city,
                                     style: TextStyle(color: Colors.white),
@@ -398,7 +404,6 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                       color: kThemeColor,
                                       size: 12,
                                     ),
-                                    underline: Container(),
                                     items: stateCity[statee]
                                         .toList()
                                         .map<DropdownMenuItem<String>>(
@@ -419,9 +424,10 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                     hint: Text(
                                       "City",
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -447,7 +453,10 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.14),
                           borderRadius: BorderRadius.circular(10)),
-                      child: DropdownButton<String>(
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) => value == 'Select a Tournament'
+                            ? 'Please Select a Tournament Type'
+                            : null,
                         isExpanded: true,
                         focusColor: Colors.grey.withOpacity(0.14),
                         value: tournamentType,
@@ -457,7 +466,6 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                           color: kThemeColor,
                           size: 12,
                         ),
-                        underline: Container(),
                         items: <String>[
                           'Select a Tournament',
                           'Offline Tournament',
