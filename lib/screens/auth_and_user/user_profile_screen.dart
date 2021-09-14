@@ -17,15 +17,11 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
-  bool verified;
-
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    verified = FirebaseAuth.instance.currentUser.emailVerified;
-
-    print("in user profile $verified");
+    bool verified = FirebaseAuth.instance.currentUser.emailVerified;
     return Container(
       width: w,
       height: double.infinity,
@@ -63,7 +59,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Text(
                       '${widget.email}',
                       style: themeFont(
-                        color: Colors.red,
+                        color: verified ? kThemeColor : Colors.red,
                         s: 10,
                       ),
                     )
@@ -82,8 +78,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               children: [
                 ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => EditProfileScreen(email: widget.email,name: widget.name,)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => EditProfileScreen(
+                                  email: widget.email,
+                                  name: widget.name,
+                                )));
                   },
                   title: Text(
                     'Account',
@@ -97,11 +98,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        (verified)?Container():
-                        Icon(
-                          Icons.warning_amber_rounded,
-                          color: Colors.red,
-                        ),
+                        (verified)
+                            ? Container()
+                            : Icon(
+                                Icons.warning_amber_rounded,
+                                color: Colors.red,
+                              ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
                           size: 15,

@@ -60,31 +60,30 @@ class _HomeScreenState extends State<HomeScreen> {
     "ad4",
   ];
   TextEditingController _emailCtrl = TextEditingController();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      setState(() {
-        if (currPage == 4) {
-          _ctrl.jumpToPage(0);
-          _ctrl.nextPage(
-              duration: Duration(milliseconds: 350), curve: Curves.easeIn);
-          currPage = 1;
-        } else {
-          currPage++;
-          currPage %= 5;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Timer.periodic(Duration(seconds: 5), (Timer timer) {
+  //     setState(() {
+  //       if (currPage == 4) {
+  //         _ctrl.jumpToPage(0);
+  //         _ctrl.nextPage(
+  //             duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+  //         currPage = 1;
+  //       } else {
+  //         currPage++;
+  //         currPage %= 5;
 
-          _ctrl.animateToPage(
-            currPage,
-            duration: Duration(milliseconds: 350),
-            curve: Curves.easeIn,
-          );
-        }
-      });
+  //         _ctrl.animateToPage(
+  //           currPage,
+  //           duration: Duration(milliseconds: 350),
+  //           curve: Curves.easeIn,
+  //         );
+  //       }
+  //     });
 
-    });
-  }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

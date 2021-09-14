@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -12,13 +15,46 @@ import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../home_navbar_screen.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  HomeNavBarBloc _bloc;
+class EditProfileScreen extends StatefulWidget {
   String name, email;
   EditProfileScreen({this.email, this.name});
+
+  @override
+  _EditProfileScreenState createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  bool isVerified = FirebaseAuth.instance.currentUser.emailVerified;
+  Timer _timer;
+  HomeNavBarBloc _bloc;
+  @override
+  void initState() {
+    super.initState();
+    Future(() async {
+      _timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+        await FirebaseAuth.instance.currentUser
+          ..reload();
+        var user = FirebaseAuth.instance.currentUser;
+        if (user.emailVerified) {
+          setState(() {
+            isVerified = user.emailVerified;
+          });
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) {
+      _timer.cancel();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isVerified = FirebaseAuth.instance.currentUser.emailVerified;
     _bloc = BlocProvider.of<HomeNavBarBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -63,7 +99,7 @@ class EditProfileScreen extends StatelessWidget {
                   await UserRepository().changeUserName(value);
                   _bloc.add(ProfileIconPressed());
                 },
-                decoration: normalTextDecoration(name).copyWith(
+                decoration: normalTextDecoration(widget.name).copyWith(
                   suffixIcon: Icon(
                     Icons.edit,
                   ),
@@ -84,9 +120,9 @@ class EditProfileScreen extends StatelessWidget {
                 style: themeFont(
                   color: Colors.redAccent,
                 ),
-                decoration: normalTextDecoration(email).copyWith(
+                decoration: normalTextDecoration(widget.email).copyWith(
                     hintStyle: themeFont(
-                  color: Colors.redAccent,
+                  color: !isVerified? Colors.redAccent : Color(0xff626262),
                 )),
               ),
               SizedBox(
@@ -97,39 +133,31 @@ class EditProfileScreen extends StatelessWidget {
                   Spacer(),
                   GestureDetector(
                     onTap: () async {
-                      _bloc.add(HomeIconPressed());
-                      print(FirebaseAuth.instance.currentUser.emailVerified);
-
                       await FirebaseAuth.instance.currentUser
                           .sendEmailVerification();
                       Fluttertoast.showToast(msg: 'Verification email sent');
-                      print(FirebaseAuth.instance.currentUser.emailVerified);
                       print("On tap khatam");
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => HomeNavBar(),
-                        ),
-                      );
                     },
-                    child: RichText(
-                      text: TextSpan(
-                        style: themeFont(),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: isVerified
-                                ? 'Email Verified'
-                                : 'Email not verified! ',
-                            style: themeFont(color: Colors.redAccent, s: 12),
+                    child: isVerified
+                        ? Container()
+                        : RichText(
+                            text: TextSpan(
+                              style: themeFont(),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Email not verified! ',
+                                  style:
+                                      themeFont(color: Colors.redAccent, s: 12),
+                                ),
+                                TextSpan(
+                                  text: 'Verify Email',
+                                  style: themeFont(color: kThemeColor, s: 12)
+                                      .copyWith(
+                                          decoration: TextDecoration.underline),
+                                ),
+                              ],
+                            ),
                           ),
-                          TextSpan(
-                            text: 'Verify Email',
-                            style: themeFont(color: kThemeColor, s: 12)
-                                .copyWith(decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
                 ],
               ),
