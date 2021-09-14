@@ -79,12 +79,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ListTile(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => EditProfileScreen(
-                                  email: widget.email,
-                                  name: widget.name,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => EditProfileScreen(),
+                      ),
+                    );
                   },
                   title: Text(
                     'Account',

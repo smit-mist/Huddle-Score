@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
@@ -13,8 +14,6 @@ import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  String name, email;
-  EditProfileScreen({this.email, this.name});
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -53,6 +52,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String name = FirebaseAuth.instance.currentUser.displayName;
+    String email = FirebaseAuth.instance.currentUser.email;
     TextEditingController _nameCtrl = TextEditingController();
     _bloc = BlocProvider.of<HomeNavBarBloc>(context);
     double w = MediaQuery.of(context).size.width;
@@ -98,10 +99,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     nametap = true;
                   });
                 },
-                showCursor: false,
+                showCursor: nametap,
                 enableInteractiveSelection: false,
                 focusNode: FocusNode(),
-                decoration: normalTextDecoration(widget.name).copyWith(
+                decoration: normalTextDecoration(name).copyWith(
                   suffixIcon: Icon(
                     Icons.edit,
                   ),
@@ -136,6 +137,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 setState(() {
                                   nametap = false;
                                 });
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.hide');
                               },
                               child: Text(
                                 'Cancel',
@@ -166,6 +169,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 setState(() {
                                   nametap = false;
                                 });
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.hide');
                               },
                               child: Text(
                                 'Save',
@@ -196,7 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 style: themeFont(
                   color: Colors.redAccent,
                 ),
-                decoration: normalTextDecoration(widget.email).copyWith(
+                decoration: normalTextDecoration(email).copyWith(
                     hintStyle: themeFont(
                   color: !isVerified ? Colors.redAccent : Color(0xff626262),
                 )),

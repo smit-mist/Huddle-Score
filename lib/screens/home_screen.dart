@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     List<Widget> indicators = [
       Indicator(
-        onPressed: (){
+        onPressed: () {
           setState(() {
             _ctrl.jumpToPage(1);
             currPage = 1;
@@ -194,23 +194,25 @@ class _HomeScreenState extends State<HomeScreen> {
         isActive: (currPage == 1),
       ),
       Indicator(
-        onPressed: (){
+        onPressed: () {
           setState(() {
             _ctrl.jumpToPage(2);
             currPage = 2;
           });
         },
         isActive: (currPage == 2),
-      ),Indicator(
-        onPressed: (){
+      ),
+      Indicator(
+        onPressed: () {
           setState(() {
             _ctrl.jumpToPage(3);
             currPage = 3;
           });
         },
         isActive: (currPage == 3),
-      ),Indicator(
-        onPressed: (){
+      ),
+      Indicator(
+        onPressed: () {
           setState(() {
             _ctrl.jumpToPage(4);
             currPage = 4;
@@ -339,8 +341,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 20,
                       width: 50,
                       child: ListView.separated(
-                        separatorBuilder: (_,x){
-                          return SizedBox(width: 4,);
+                        separatorBuilder: (_, x) {
+                          return SizedBox(
+                            width: 4,
+                          );
                         },
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, ind) {
@@ -553,8 +557,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() {
                           isValid = false;
                         });
-                        await HomeRepository()
-                            .subscribeTurf('yyashjain2001@gmail.com');
+                        await HomeRepository().subscribeTurf(_emailCtrl.text);
+                        Fluttertoast.showToast(
+                            msg: 'You have successfully subscribed');
+                        _emailCtrl.clear();
                       }
                     },
                     child: Container(
@@ -712,17 +718,15 @@ class _IndicatorState extends State<Indicator> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:widget.onPressed,
+      onTap: widget.onPressed,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 350),
         decoration: BoxDecoration(
           color: (widget.isActive ? Colors.white : Colors.grey),
           shape: BoxShape.circle,
-
         ),
-        height: (widget.isActive?7:5),
-        width:  (widget.isActive?7:5),
-
+        height: (widget.isActive ? 7 : 5),
+        width: (widget.isActive ? 7 : 5),
       ),
     );
   }
