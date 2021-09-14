@@ -14,23 +14,73 @@ class FillYourDetailsTournament extends StatefulWidget {
 }
 
 class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
+  Map<String, List<String>> stateCity = {
+    'Select a State': [
+      'Select a City',
+    ],
+    'Gujarat': [
+      'Select a City',
+      'Ahmedabad',
+      'Surat',
+      'Baroda',
+      'Jamnagar',
+      'Rajkot',
+    ],
+    'Maharashtra': [
+      'Select a City',
+      'Mumbai',
+      'Pune',
+      'Nagpur',
+      'Nashik',
+      'Kolhapur',
+    ],
+    'Punjab': [
+      'Select a City',
+      'Amritsar',
+      'Ludhiana',
+      'Jalandhar',
+      'Patiala',
+      'Mohali',
+    ],
+    'Karnataka': [
+      'Select a City',
+      'Mysore',
+      'Hubli-Dharwad',
+      'Gulbarga',
+      'Bangalore',
+      'Bijapur',
+    ],
+    'Rajasthan': [
+      'Select a City',
+      'Jaipur',
+      'Kota',
+      'Bikaner',
+      'Ajmer',
+      'Jodhpur',
+    ],
+  };
   final _key = GlobalKey<FormState>();
   FormsBloc _bloc;
-  bool typedName = false, typedMob = false, typedTour = false,typedEmail = false;
-  String city = "Ahmd", statee = "Gujarat", tournamentType = "Blitz";
+  bool typedName = false,
+      typedMob = false,
+      typedTour = false,
+      typedEmail = false;
+  String city = "Select a City",
+      statee = "Select a State",
+      tournamentType = "Select a Tournament";
   TextEditingController _name = TextEditingController(),
       _contact = TextEditingController(),
       _emailId = TextEditingController(),
       _nameTour = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     _name.dispose();
     _contact.dispose();
     _emailId.dispose();
     _nameTour.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<FormsBloc>(context);
@@ -152,10 +202,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedName = false;
-                          else typedName = true;
+                          if (val.length == 0)
+                            typedName = false;
+                          else
+                            typedName = true;
                         });
                       },
                       validator: (value) {
@@ -164,9 +216,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         return null;
                       },
                       controller: _name,
-                      decoration: textFieldDecoration(
-                        'Full Name',typedName
-                      ),
+                      decoration: textFieldDecoration('Full Name', typedName),
                     ),
                     SizedBox(
                       height: 10,
@@ -179,10 +229,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedMob = false;
-                          else typedMob = true;
+                          if (val.length == 0)
+                            typedMob = false;
+                          else
+                            typedMob = true;
                         });
                       },
                       validator: (value) {
@@ -193,7 +245,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         return null;
                       },
                       controller: _contact,
-                      decoration: textFieldDecoration(' ',typedMob).copyWith(
+                      decoration: textFieldDecoration(' ', typedMob).copyWith(
                         prefixIcon: Container(
                           width: w * 0.15,
                           padding: EdgeInsets.only(left: 15),
@@ -231,10 +283,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedEmail = false;
-                          else typedEmail = true;
+                          if (val.length == 0)
+                            typedEmail = false;
+                          else
+                            typedEmail = true;
                         });
                       },
                       validator: (value) {
@@ -246,7 +300,8 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       },
                       controller: _emailId,
                       decoration: textFieldDecoration(
-                        '',typedEmail,
+                        '',
+                        typedEmail,
                       ),
                     ),
                     SizedBox(
@@ -256,69 +311,6 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       width: w,
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'City',
-                                  style: themeFont(),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(0.14),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: DropdownButton<String>(
-                                    isExpanded: true,
-                                    focusColor: Colors.grey.withOpacity(0.14),
-                                    value: city,
-                                    style: TextStyle(color: Colors.white),
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: kThemeColor,
-                                      size: 12,
-                                    ),
-                                    underline: Container(),
-                                    items: <String>[
-                                      'Ahmd',
-                                      'Surat',
-                                      'Rajkot',
-                                      'Mumbai',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(
-                                          value,
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (s) {
-                                      setState(() {
-                                        city = s;
-                                      });
-                                    },
-                                    hint: Text(
-                                      "City",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -347,13 +339,10 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                       size: 12,
                                     ),
                                     underline: Container(),
-                                    items: <String>[
-                                      'Gujarat',
-                                      'Maharastra',
-                                      'MP',
-                                      'Goa',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
+                                    items: stateCity.keys
+                                        .toList()
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Text(
@@ -369,6 +358,66 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                     },
                                     hint: Text(
                                       "State",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'City',
+                                  style: themeFont(),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.14),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: DropdownButton<String>(
+                                    isExpanded: true,
+                                    focusColor: Colors.grey.withOpacity(0.14),
+                                    value: city,
+                                    style: TextStyle(color: Colors.white),
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: kThemeColor,
+                                      size: 12,
+                                    ),
+                                    underline: Container(),
+                                    items: stateCity[statee]
+                                        .toList()
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (s) {
+                                      setState(() {
+                                        city = s;
+                                      });
+                                    },
+                                    hint: Text(
+                                      "City",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -410,9 +459,9 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         ),
                         underline: Container(),
                         items: <String>[
-                          'Blitz',
-                          'Round Robin',
-                          'Knock Out',
+                          'Select a Tournament',
+                          'Offline Tournament',
+                          'Online Tournament',
                         ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -428,7 +477,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                           });
                         },
                         hint: Text(
-                          "Tournament Type",
+                          "Select a Tournament",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
@@ -447,10 +496,12 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     TextFormField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedTour = false;
-                          else typedTour = true;
+                          if (val.length == 0)
+                            typedTour = false;
+                          else
+                            typedTour = true;
                         });
                       },
                       validator: (value) {
@@ -459,9 +510,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         return null;
                       },
                       controller: _nameTour,
-                      decoration: textFieldDecoration(
-                        '',typedTour
-                      ),
+                      decoration: textFieldDecoration('', typedTour),
                     ),
                     SizedBox(
                       height: h * 0.1,
