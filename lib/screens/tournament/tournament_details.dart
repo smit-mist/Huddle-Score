@@ -10,6 +10,7 @@ import 'package:huddle_and_score/screens/tournament/tournament_register_form.dar
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 import 'dart:math';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const double vertico = 2, horizonto = 7;
@@ -210,7 +211,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                           ),
                         ),
                         Spacer(),
-                        Icon(Icons.share),
+                        IconButton(
+                          icon: Icon(Icons.share),
+                          onPressed: () {
+                            Share.share(
+                              'Here is the link\n https://www.huddleandscore.com/tour/${widget.tournament.tourId}',
+                            );
+                          },
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -848,8 +856,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 style: themeFont(s: 16),
                               ),
                             ),
-                            SizedBox(height: 1,),
-
+                            SizedBox(
+                              height: 1,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -893,7 +902,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 1,),
+                            SizedBox(
+                              height: 1,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

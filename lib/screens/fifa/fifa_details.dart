@@ -6,6 +6,7 @@ import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'fifa_registration_form.dart';
@@ -173,7 +174,14 @@ class _FifaDetailsState extends State<FifaDetails> {
                           ),
                         ),
                         Spacer(),
-                        Icon(Icons.share),
+                        IconButton(
+                          icon: Icon(Icons.share),
+                          onPressed: () {
+                            Share.share(
+                              'Here is the link\n https://www.huddleandscore.com/fifa/${widget.fifa.fifaId}',
+                            );
+                          },
+                        ),
                       ],
                     ),
                     SizedBox(
