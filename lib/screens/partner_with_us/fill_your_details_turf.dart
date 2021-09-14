@@ -16,24 +16,71 @@ class FillYourDetailsTurf extends StatefulWidget {
 class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
   FormsBloc _bloc;
   final _key = GlobalKey<FormState>();
-  bool typedName = false, typedMob = false, typedEmail = false, typedTurf = false;
-  String city = "Ahmedabad";
-  String statee = "Gujarat";
+  bool typedName = false,
+      typedMob = false,
+      typedEmail = false,
+      typedTurf = false;
+  String city = "Select a City", statee = "Select a State";
   TextEditingController _name = TextEditingController(),
       _contact = TextEditingController(),
       _emailId = TextEditingController(),
       _nameTurf = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     _name.dispose();
     _contact.dispose();
     _emailId.dispose();
     _nameTurf.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
+    Map<String, List<String>> stateCity = {
+      'Select a State': [
+        'Select a City',
+      ],
+      'Gujarat': [
+        'Select a City',
+        'Ahmedabad',
+        'Surat',
+        'Baroda',
+        'Jamnagar',
+        'Rajkot',
+      ],
+      'Maharashtra': [
+        'Select a City',
+        'Mumbai',
+        'Pune',
+        'Nagpur',
+        'Nashik',
+        'Kolhapur',
+      ],
+      'Punjab': [
+        'Select a City',
+        'Amritsar',
+        'Ludhiana',
+        'Jalandhar',
+        'Patiala',
+        'Mohali',
+      ],
+      'Karnataka': [
+        'Select a City',
+        'Mysore',
+        'Hubli-Dharwad',
+        'Gulbarga',
+        'Bangalore',
+        'Bijapur',
+      ],
+      'Rajasthan': [
+        'Select a City',
+        'Jaipur',
+        'Kota',
+        'Bikaner',
+        'Ajmer',
+        'Jodhpur',
+      ],
+    };
     _bloc = BlocProvider.of<FormsBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -155,15 +202,15 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                         return null;
                       },
                       controller: _name,
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedName = false;
-                          else typedName = true;
+                          if (val.length == 0)
+                            typedName = false;
+                          else
+                            typedName = true;
                         });
                       },
-                      decoration: textFieldDecoration(
-                        'Full Name',typedName
-                      ),
+                      decoration: textFieldDecoration('Full Name', typedName),
                     ),
                     SizedBox(
                       height: 10,
@@ -184,13 +231,15 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                         return null;
                       },
                       controller: _contact,
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedMob = false;
-                          else typedMob = true;
+                          if (val.length == 0)
+                            typedMob = false;
+                          else
+                            typedMob = true;
                         });
                       },
-                      decoration: textFieldDecoration(' ',typedMob).copyWith(
+                      decoration: textFieldDecoration(' ', typedMob).copyWith(
                         prefixIcon: Container(
                           width: w * 0.15,
                           padding: EdgeInsets.only(left: 15),
@@ -235,16 +284,16 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                           return 'Please enter a valid email';
                         return null;
                       },
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          if(val.length ==0)typedEmail = false;
-                          else typedEmail = true;
+                          if (val.length == 0)
+                            typedEmail = false;
+                          else
+                            typedEmail = true;
                         });
                       },
                       controller: _emailId,
-                      decoration: textFieldDecoration(
-                        '',typedEmail
-                      ),
+                      decoration: textFieldDecoration('', typedEmail),
                     ),
                     SizedBox(
                       height: 10,
@@ -258,11 +307,11 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'City',
+                                  'State',
                                   style: themeFont(),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 Container(
                                   padding: EdgeInsets.symmetric(
@@ -270,8 +319,77 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: DropdownButton<String>(
+                                  child: DropdownButtonFormField<String>(
+                                    validator: (value) =>
+                                        value == 'Select a State'
+                                            ? 'Please Select a State'
+                                            : null,
                                     isExpanded: true,
+                                    focusColor: Colors.grey.withOpacity(0.14),
+                                    value: statee,
+                                    style: TextStyle(color: Colors.white),
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: kThemeColor,
+                                      size: 12,
+                                    ),
+                                    items: stateCity.keys
+                                        .toList()
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (s) {
+                                      setState(() {
+                                        statee = s;
+                                        city = 'Select a City';
+                                      });
+                                    },
+                                    hint: Text(
+                                      "State",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'City',
+                                  style: themeFont(),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.14),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
+                                    validator: (value) =>
+                                        value == 'Select a City'
+                                            ? 'Please Select a City'
+                                            : null,
                                     focusColor: Colors.grey.withOpacity(0.14),
                                     value: city,
                                     style: TextStyle(color: Colors.white),
@@ -280,14 +398,10 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                       color: kThemeColor,
                                       size: 12,
                                     ),
-                                    underline: Container(),
-                                    items: <String>[
-                                      'Ahmedabad',
-                                      'Surat',
-                                      'Rajkot',
-                                      'Mumbai',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
+                                    items: stateCity[statee]
+                                        .toList()
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Text(
@@ -304,72 +418,10 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                     hint: Text(
                                       "City",
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'State',
-                                  style: themeFont(),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(0.14),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: DropdownButton<String>(
-                                    isExpanded: true,
-                                    focusColor: Colors.grey.withOpacity(0.14),
-                                    value: statee,
-                                    style: TextStyle(color: Colors.white),
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: kThemeColor,
-                                      size: 12,
-                                    ),
-                                    underline: Container(),
-                                    items: <String>[
-                                      'Gujarat',
-                                      'Maharastra',
-                                      'Goa',
-                                      'Kerala ',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(
-                                          value,
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (s) {
-                                      setState(() {
-                                        statee = s;
-                                      });
-                                    },
-                                    hint: Text(
-                                      "State",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
