@@ -1078,7 +1078,7 @@ class _DetailShowerState extends State<DetailShower> {
                         Spacer(),
                         Text(
                           '₹ ${(widget.details.taxes + widget.details.amount / 100).toString()}',
-                          style: themeFont(w: 'r'),
+                          style: themeFont(w: 'sb'),
                         )
                       ],
                     ),
