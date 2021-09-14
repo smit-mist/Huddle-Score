@@ -74,6 +74,6 @@ class BookingRegDetails {
       BookingRegDetails(
         captain: Captain.fromMap(doc['p1']),
         teamName: doc['team'],
-        viceCaptain: Captain.fromMap(doc['p2']),
+        viceCaptain:(doc['p2'] == null)?Captain(): Captain.fromMap(doc['p2']),
       );
 }

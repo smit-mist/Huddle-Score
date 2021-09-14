@@ -31,6 +31,10 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
         List<BookingDetails> bookings = await UserRepository().getBookings();
         List<FifaBookingDetails> fifas =
             await UserRepository().getFifaBookings();
+        print("Qg3");
+        print(bookings == null);
+      //  print(bookings.length);
+      //  print(fifas.length);
         yield CartScreenState(bookings: bookings,fifaBookings: fifas);
       } else {
         yield GuestCartScreenState();

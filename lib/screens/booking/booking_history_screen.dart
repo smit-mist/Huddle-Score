@@ -22,7 +22,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    print(widget.bookedTours.length);
+  //  print(widget.bookedTours.length);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       width: w,

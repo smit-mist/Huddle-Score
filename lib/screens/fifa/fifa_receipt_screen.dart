@@ -412,10 +412,14 @@ class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
           if (snapshot.data == null) {
             return LoadingWidget();
           }
+          if(snapshot.data.data()==null){
+            return LoadingWidget();
+          }
 
           var here = Map<String, dynamic>.from(snapshot.data.data());
           bool fnd = false;
-
+          print("check here");
+          print(here == null);
           here.forEach((key, value) {
             if (key.endsWith(widget.bookingID)) {
               fnd = true;

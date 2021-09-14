@@ -29,7 +29,9 @@ class _TournamentReceiptGeneratorState
       stream:
           FirebaseFirestore.instance.doc('users/$uid/records/tour').snapshots(),
       builder: (_, snap) {
+        print(snap.hasData);
         if (snap.hasData == false) return LoadingWidget();
+        if(snap.data.data() == null)return LoadingWidget();
         bool fnd = false;
         var here = Map<String, dynamic>.from(snap.data.data());
         here.forEach((key, value) {
@@ -40,13 +42,14 @@ class _TournamentReceiptGeneratorState
               type = formType.Team;
             } else {
               if (details.regDetails.viceCaptain == null ||
-                  details.regDetails.viceCaptain.contact == 37) {
+                  details.regDetails.viceCaptain.contact == 373737) {
                 type =formType.Single;
               } else
                 type =formType.Double;
             }
           }
         });
+
         if (fnd) {
           return TournamentReceiptScreen(
             details: details,
@@ -93,379 +96,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     print(widget.details.regDetails.captain == null);
-    Widget feedBackFrom = StatefulBuilder(
-      builder: (context, setState) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Dialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              height: h * (550 / kScreenH),
-              width: w * (370 / kScreenW),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: h * (480 / kScreenH),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'We\'d love your feedback!',
-                            style: themeFont(
-                              color: kThemeColor,
-                              s: 20,
-                              w: 'sb',
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'How satisfied are you with the booking experience?',
-                            style: themeFont(
-                              s: 15,
-                              w: 'r',
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('Sad'),
-                              Slider(
-                                min: 0.0,
-                                max: 100.0,
-                                value: liked,
-                                onChanged: (double nw) {
-                                  setState(() {
-                                    liked = nw;
-                                  });
-                                },
-                              ),
-                              Text('Happy'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Would you recommend Huddle & Score to your friends?',
-                            style: themeFont(s: 15),
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      firstOption = 0;
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    child: Center(
-                                      child: Text(
-                                        'Definitely',
-                                        style: themeFont(
-                                          color: (firstOption == 0)
-                                              ? kThemeColor
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                        color: ((firstOption == 0)
-                                            ? kThemeColor
-                                            : Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      firstOption = 1;
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    child: Center(
-                                      child: Text(
-                                        'May be',
-                                        style: themeFont(
-                                          color: (firstOption == 1)
-                                              ? kThemeColor
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                        color: ((firstOption == 1)
-                                            ? kThemeColor
-                                            : Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      firstOption = 2;
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    child: Center(
-                                      child: Text(
-                                        'Not at all',
-                                        style: themeFont(
-                                          color: (firstOption == 2)
-                                              ? kThemeColor
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                        color: ((firstOption == 2)
-                                            ? kThemeColor
-                                            : Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'How did you hear about us?',
-                            style: themeFont(),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    secondOption = 0;
-                                  });
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: w * (120 / kScreenW),
-                                  child: Center(
-                                    child: Text(
-                                      'Social Media',
-                                      style: themeFont(
-                                        color: (secondOption == 0)
-                                            ? kThemeColor
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: ((secondOption == 0)
-                                          ? kThemeColor
-                                          : Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    secondOption = 1;
-                                  });
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: w * (120 / kScreenW),
-                                  child: Center(
-                                    child: Text(
-                                      'Search Engine',
-                                      style: themeFont(
-                                        color: (secondOption == 1)
-                                            ? kThemeColor
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: ((secondOption == 1)
-                                          ? kThemeColor
-                                          : Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    secondOption = 2;
-                                  });
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: w * (120 / kScreenW),
-                                  child: Center(
-                                    child: Text(
-                                      'Word of mouth',
-                                      style: themeFont(
-                                        color: (secondOption == 2)
-                                            ? kThemeColor
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: ((secondOption == 2)
-                                          ? kThemeColor
-                                          : Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    secondOption = 3;
-                                  });
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: w * (120 / kScreenW),
-                                  child: Center(
-                                    child: Text(
-                                      'At a turf',
-                                      style: themeFont(
-                                        color: (secondOption == 3)
-                                            ? kThemeColor
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: ((secondOption == 3)
-                                          ? kThemeColor
-                                          : Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    secondOption = 4;
-                                  });
-                                },
-                                child: TextField(
-                                  decoration: normalTextDecoration('Other'),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'How can we make your experience even better?',
-                            style: themeFont(),
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          TextField(
-                            decoration: normalTextDecoration(
-                                'Leave a suggestion to us..'),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        Container(
-                          width: 100,
-                          height: 40,
-                          child: ActionButton(
-                            child: Text(
-                              'Submit',
-                              style: themeFont(
-                                color: Colors.white,
-                              ),
-                            ),
-                            bgColor: kThemeColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -505,9 +136,9 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext _) => feedBackFrom);
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext _) => feedBackFrom);
                 },
                 child: Container(
                   height: 40,
@@ -734,7 +365,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h * (390 / kScreenH),
+                    height: h * (((widget.currForm == formType.Single)?250:390) / kScreenH),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -749,8 +380,9 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                       children: [
+                        SizedBox(height: 7,),
                         Text(
                           'Your participation has been confirmed.',
                           style: themeFont(
@@ -760,7 +392,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 20,
                         ),
                         /*
                 * -1 - Means Empty Container.
@@ -819,7 +451,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 1,
+                          height: 10,
                         ),
                       ],
                     ),
@@ -939,29 +571,32 @@ class DataShower extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            this.type,
-            style: themeFont(
-              s: 14,
-              w: 'm',
-            ),
-          ),
-          Spacer(),
-          SizedBox(
-            width: w * (0.35),
-            child: Text(
-              this.data?? "This is NULL",
+    return Padding(
+      padding: const EdgeInsets.only(bottom:8.0),
+      child: Container(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              this.type,
               style: themeFont(
                 s: 14,
-                w: 'sb',
+                w: 'm',
               ),
             ),
-          ),
-        ],
+            Spacer(),
+            SizedBox(
+              width: w * (0.35),
+              child: Text(
+                this.data?? "This is NULL",
+                style: themeFont(
+                  s: 14,
+                  w: 'sb',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

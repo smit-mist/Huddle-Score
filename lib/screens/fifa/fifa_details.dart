@@ -748,7 +748,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "This is Dummy", //widget.fifa.contact[0].name,
+                                  widget.fifa.contact[0].name,
                                   style: themeFont(
                                     w: 'sb',
                                   ),
@@ -763,7 +763,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       width: horizonto,
                                     ),
                                     Text(
-                                      "This is Dummy", //widget.fifa.contact[0].contactNumber
+                                      widget.fifa.contact[0].contactNumber.toString(),
                                       style: themeFont(),
                                     )
                                   ],
@@ -778,7 +778,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       width: horizonto,
                                     ),
                                     Text(
-                                      "This is Dummy", //widget.fifa.contact[0].email
+                                      widget.fifa.contact[0].email,
                                       style: themeFont(),
                                     )
                                   ],
@@ -792,7 +792,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "This is Dummy", //widget.fifa.contact[1].name,
+                                 widget.fifa.contact[1].name,
                                   style: themeFont(
                                     w: 'sb',
                                   ),
@@ -807,7 +807,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       width: horizonto,
                                     ),
                                     Text(
-                                      "This is Dummy", //widget.fifa.contact[1].contactNumber
+                                      widget.fifa.contact[1].contactNumber.toString(),
                                       style: themeFont(),
                                     )
                                   ],
@@ -822,7 +822,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       width: horizonto,
                                     ),
                                     Text(
-                                      "This is Dummy", //widget.fifa.contact[1].email
+                               widget.fifa.contact[1].email,
                                       style: themeFont(),
                                     )
                                   ],

@@ -11,9 +11,11 @@ class Fifa {
   Main main;
   String orderId;
   String poster;
+  List<ContactDetails> contact;
   Map<String, List<dynamic>> prizePool;
   String fifaId;
   Fifa({
+    this.contact,
     this.details,
     this.orderId = 'NULL',
     this.poster = 'NULL',
@@ -25,6 +27,7 @@ class Fifa {
   });
   factory Fifa.fromMap(Map<String, dynamic> data, String id) {
     return Fifa(
+      contact: contactToList(data['contact']),
       fifaId: id ?? 'NULL',
       email: data['email'] ?? 'NULL',
       orderId: data['orderID'] ?? 'NULL',
@@ -64,7 +67,30 @@ class Fifa {
     return await FifaRepository().getFifaById(fifa.fifaId);
   }
 }
+List<ContactDetails> contactToList(Map<String, dynamic> data) {
+  List<ContactDetails> res = [];
+  data.forEach(
+        (key, value) {
+      res.add(
+        ContactDetails(
+          name: value['name'],
+          contactNumber: value['num'],
+          email: value['email'],
+        ),
+      );
+    },
+  );
+  return res;
+}
 
+class ContactDetails {
+  String name, email;
+  int contactNumber;
+  ContactDetails(
+      {this.name = "NOTHING",
+        this.email = "NOT MAIL",
+        this.contactNumber = 373737373737});
+}
 class Main {
   String deadLine;
   String gameDate;

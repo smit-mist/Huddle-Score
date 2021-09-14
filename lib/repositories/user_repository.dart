@@ -28,10 +28,16 @@ class UserRepository {
       // ignore: missing_return
       print('in booking fetch');
       var bookingsData = await response.get();
+      print(bookingsData.data());
       List<BookingDetails> bookings = [];
+      print("check");
       bookingsData.data().forEach((key, value) {
+
+        print(key);
+
         bookings.add(BookingDetails.fromMap(value));
       });
+      print("Done");
       return bookings;
     } catch (e) {
       print("ERROR");
