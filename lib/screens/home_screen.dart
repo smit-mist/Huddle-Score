@@ -18,6 +18,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 List<String> cities = [
   "Ahmedabad",
@@ -47,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _chosenValue = "Ahmedabad";
-  PageController _ctrl = PageController(initialPage: 1);
-  int currPage = 1;
+  var _ctrl = CarouselControllerImpl();
+  int currPage = 0;
   HomeBloc _bloc;
 
   bool isValid = false;
@@ -60,30 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
     "ad4",
   ];
   TextEditingController _emailCtrl = TextEditingController();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Timer.periodic(Duration(seconds: 5), (Timer timer) {
-  //     setState(() {
-  //       if (currPage == 4) {
-  //         _ctrl.jumpToPage(0);
-  //         _ctrl.nextPage(
-  //             duration: Duration(milliseconds: 350), curve: Curves.easeIn);
-  //         currPage = 1;
-  //       } else {
-  //         currPage++;
-  //         currPage %= 5;
-
-  //         _ctrl.animateToPage(
-  //           currPage,
-  //           duration: Duration(milliseconds: 350),
-  //           curve: Curves.easeIn,
-  //         );
-  //       }
-  //     });
-
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -185,38 +162,43 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     List<Widget> indicators = [
       Indicator(
-        onPressed: (){
+        onPressed: () {
           setState(() {
-            _ctrl.jumpToPage(1);
+            _ctrl.animateToPage(0,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+            currPage = 0;
+          });
+        },
+        isActive: (currPage == 0),
+      ),
+      Indicator(
+        onPressed: () {
+          setState(() {
+            _ctrl.animateToPage(1,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+
             currPage = 1;
           });
         },
         isActive: (currPage == 1),
       ),
       Indicator(
-        onPressed: (){
+        onPressed: () {
           setState(() {
-            _ctrl.jumpToPage(2);
+            _ctrl.animateToPage(2,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+
             currPage = 2;
           });
         },
         isActive: (currPage == 2),
-      ),Indicator(
-        onPressed: (){
+      ),
+      Indicator(
+        onPressed: () {
           setState(() {
-            _ctrl.jumpToPage(3);
+            _ctrl.animateToPage(3,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+
             currPage = 3;
           });
         },
         isActive: (currPage == 3),
-      ),Indicator(
-        onPressed: (){
-          setState(() {
-            _ctrl.jumpToPage(4);
-            currPage = 4;
-          });
-        },
-        isActive: (currPage == 4),
       ),
     ];
 
@@ -322,16 +304,35 @@ class _HomeScreenState extends State<HomeScreen> {
               height: h * (150 / kScreenH),
               child: Stack(
                 children: [
-                  PageView(
-                    controller: _ctrl,
-                    allowImplicitScrolling: true,
-                    children: [
-                      ImageShower(name: nameOfBanner[4]),
+
+                  CarouselSlider(
+                    carouselController: _ctrl,
+                    items: [
                       ImageShower(name: nameOfBanner[1]),
                       ImageShower(name: nameOfBanner[2]),
                       ImageShower(name: nameOfBanner[3]),
                       ImageShower(name: nameOfBanner[4]),
                     ],
+                    options: CarouselOptions(
+                      height: h * (150 / kScreenH),
+                      pageSnapping: true,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      reverse: false,
+                      autoPlay: true,
+                      onPageChanged: (val,reason){
+                       //   print("Changed $val");
+                          setState(() {
+                            currPage = val;
+                          });
+                      },
+                      enlargeCenterPage: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      scrollDirection: Axis.horizontal,
+                    ),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -339,8 +340,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 20,
                       width: 50,
                       child: ListView.separated(
-                        separatorBuilder: (_,x){
-                          return SizedBox(width: 4,);
+                        separatorBuilder: (_, x) {
+                          return SizedBox(
+                            width: 4,
+                          );
                         },
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, ind) {
@@ -686,7 +689,6 @@ class ImageShower extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 7),
       width: double.infinity,
       height: h * (146 / kScreenH),
       child: ClipRRect(
@@ -712,17 +714,16 @@ class _IndicatorState extends State<Indicator> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:widget.onPressed,
+      onTap: widget.onPressed,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 350),
+        duration: Duration(milliseconds: 500),
+        curve: Curves.fastOutSlowIn,
         decoration: BoxDecoration(
           color: (widget.isActive ? Colors.white : Colors.grey),
           shape: BoxShape.circle,
-
         ),
-        height: (widget.isActive?7:5),
-        width:  (widget.isActive?7:5),
-
+        height: (widget.isActive ? 7 : 5),
+        width: (widget.isActive ? 7 : 5),
       ),
     );
   }

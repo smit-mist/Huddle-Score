@@ -170,6 +170,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
         selectedSub = allCategory['Single'];
         print(chosedCat.length);
       }
+      currForm = formType.noForm;
 
     }
   }
@@ -183,6 +184,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   @override
   Widget build(BuildContext context) {
     // typeOfForm = 1;
+    print(currForm);
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Dialog(
@@ -759,7 +761,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       'Captain\'s Age', typedAge1),
                                 ),
                                 SizedBox(
-                                  height: h * (0.035),
+                                  height: h * (0.045),
                                 ),
                                 Text(
                                   'Vice Captain details',
@@ -1111,7 +1113,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                           'Player 1\'s Age', typedAge1),
                                     ),
                                     SizedBox(
-                                      height: h * (0.035),
+                                      height: h * (0.055),
                                     ),
                                     Text(
                                       'Player 2 details',

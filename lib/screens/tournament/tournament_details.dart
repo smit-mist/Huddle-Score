@@ -12,6 +12,8 @@ import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 import 'dart:math';
 import 'package:url_launcher/url_launcher.dart';
 
+const double vertico = 2, horizonto = 7;
+
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
   bool isReg;
@@ -265,6 +267,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                     SizedBox(
                       height: 20,
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
@@ -343,7 +346,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                               'View in ',
                                               style: themeFont(s: 12),
                                             ),
-                                            TextButton(
+                                            GestureDetector(
                                               child: Text(
                                                 'Maps',
                                                 style: themeFont(
@@ -354,11 +357,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                       TextDecoration.underline,
                                                 ),
                                               ),
-                                              onPressed: ()async{
+                                              onTap: () async {
                                                 await launch(mapUrl);
-                                              }
-
-                                              ,
+                                              },
                                             )
                                           ],
                                         )
@@ -829,6 +830,127 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                     SizedBox(
                       height: 20,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: h * (250 / kScreenH),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              child: Text(
+                                'Contact The Organiser',
+                                style: themeFont(s: 16),
+                              ),
+                            ),
+                            SizedBox(height: 1,),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.tournament.contact[0].name,
+                                  style: themeFont(
+                                    w: 'sb',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      widget.tournament.contact[0].contactNumber
+                                          .toString(),
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.email_outlined),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      widget.tournament.contact[0].email
+                                          .toString(),
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 1,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.tournament.contact[1].name,
+                                  style: themeFont(
+                                    w: 'sb',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      widget.tournament.contact[1].contactNumber
+                                          .toString(),
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: vertico,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.email_outlined),
+                                    SizedBox(
+                                      width: horizonto,
+                                    ),
+                                    Text(
+                                      widget.tournament.contact[1].email
+                                          .toString(),
+                                      style: themeFont(),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(9),
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, offset: Offset(2, 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -877,14 +999,16 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                   child: Container(
                                     child: Text(
                                       widget.tournament.details.term,
-                                      style: themeFont()
-                                          .copyWith(decoration: TextDecoration.none),
+                                      style: themeFont().copyWith(
+                                          decoration: TextDecoration.none),
                                     ),
                                   ),
                                   scrollDirection: Axis.vertical,
                                 ),
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(
+                                height: 20,
+                              ),
                             ],
                           ),
                         ),
