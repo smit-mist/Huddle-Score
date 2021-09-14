@@ -13,8 +13,14 @@ class TournamentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    bool fullFilled = false;
+    bool fullFilled = here.room.taken.length == here.room.total;
+    double remainingPer = (here.room.total - here.room.taken.length*1.00)/here.room.total;
+//    print(here.name + " " +here.room.total.toString()+" " + here.room.taken.length.toString());
+
+  // print(fullFilled);
+ //   print(remainingPer);
     WeirdDateFormat st = WeirdDateFormat(date: here.finalsDate[0]),
+
         en = WeirdDateFormat(date: here.finalsDate[1]);
     String timeLine = "";
     timeLine += st.getDate();
@@ -130,12 +136,21 @@ class TournamentTile extends StatelessWidget {
                   child: Container(
                     width: w*(160/kScreenW),
                     child: Image.asset(
-                      'assets/images/filling_fast_banner.png',
+                      'assets/images/fully_booked_banner.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 )
-              : Container(),
+              : (remainingPer <= 0.2)?Positioned(
+            top: h * (95 / kScreenH),
+            child: Container(
+              width: w*(160/kScreenW),
+              child: Image.asset(
+                'assets/images/filling_fast_banner.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ):Container(),
         ],
       ),
     );

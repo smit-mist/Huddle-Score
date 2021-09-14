@@ -15,6 +15,11 @@ class FifaTile extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     WeirdDateFormat st = WeirdDateFormat(date: fifa.date);
     String venue = fifa.venue.join(', ');
+    bool fullFilled = fifa.room.total == fifa.room.taken.length;
+    double remainingPer =
+        (1.00 * fifa.room.total - fifa.room.taken.length) / fifa.room.total;
+  //  print(fullFilled);
+//    print(remainingPer);
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -108,22 +113,29 @@ class FifaTile extends StatelessWidget {
               ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.center,
-          //   child: Container(
-          //     height: 20,
-          //     width: w*(160/kScreenW),
-          //     color: Colors.red,
-          //     child: Center(
-          //       child: Text(
-          //         'Fully Booked!',
-          //         style: themeFont(
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          (fullFilled)
+              ? Positioned(
+                  top: h * (95 / kScreenH),
+                  child: Container(
+                    width: w * (160 / kScreenW),
+                    child: Image.asset(
+                      'assets/images/fully_booked_banner.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : (remainingPer <= 0.2)
+                  ? Positioned(
+                      top: h * (95 / kScreenH),
+                      child: Container(
+                        width: w * (160 / kScreenW),
+                        child: Image.asset(
+                          'assets/images/filling_fast_banner.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : Container(),
         ],
       ),
     );
