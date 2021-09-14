@@ -13,6 +13,10 @@ class HowItWorks extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     print("Builded");
+    String use = "turf";
+    if(!isFirst){
+      use = "tournament";
+    }
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomBar(
@@ -55,7 +59,7 @@ class HowItWorks extends StatelessWidget {
                 height: h * 0.035,
               ),
               showText(
-                  'Listing your tournament has never been easier. In just 2 quick steps, set yourself up for endless opportunities!'),
+                  'Listing your ' +use+ ' has never been easier. In just 2 quick steps, set yourself up for endless opportunities!'),
               SizedBox(
                 height: h * 0.05,
               ),
@@ -74,7 +78,7 @@ class HowItWorks extends StatelessWidget {
                     children: [
                       Text(
                         'Fill the Form',
-                        style: themeFont(s: 18, w: 'm'),
+                        style: themeFont(s: 18, w: 'r'),
                       ),
                       Text(
                         'Share your details with us',
@@ -102,7 +106,7 @@ class HowItWorks extends StatelessWidget {
                     children: [
                       Text(
                         'We will connect with you shortly',
-                        style: themeFont(s: 18, w: 'm'),
+                        style: themeFont(s: 18, w: 'r'),
                       ),
                       Text(
                         'Our team will contact you in no time!',
