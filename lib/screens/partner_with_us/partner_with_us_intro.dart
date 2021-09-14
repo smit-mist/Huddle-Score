@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/partner_with_us/how_it_works.dart';
+import 'package:huddle_and_score/static_screens/partner_tnc.dart';
 
 import '../../constants.dart';
 
@@ -46,12 +47,23 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
               GestureDetector(
                 onTap: () {
                   print("Pressed");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => HowItWorks(isFirst: isFirst,),
-                    ),
-                  );
+                  if (isFirst) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HowItWorks(
+                          isFirst: isFirst,
+                        ),
+                      ),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PartnerTnC(),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   height: 40,
@@ -59,7 +71,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                   child: Center(
                     child: Text(
                       'Continue',
-                      style: themeFont(color: Colors.white,s:15,w:'sb'),
+                      style: themeFont(color: Colors.white, s: 15, w: 'sb'),
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -79,7 +91,9 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: h*0.05,),
+                SizedBox(
+                  height: h * 0.05,
+                ),
                 Text(
                   'Partner With Us',
                   style: themeFont(
@@ -87,12 +101,15 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                     color: kThemeColor,
                   ),
                 ),
-                SizedBox(height: h*0.03,),
+                SizedBox(
+                  height: h * 0.03,
+                ),
                 showText(
                   'We\, at Huddle & Score, understand the significance of building quality relations with our partners. We recognize that our partners bring incredible value to the business and are an integral part of the community that we aim to build and foster.',
                 ),
-                SizedBox(height: h*0.06,),
-
+                SizedBox(
+                  height: h * 0.06,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -115,7 +132,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                                   ? kThemeColor
                                   : Colors.grey.withOpacity(0.3),
                               spreadRadius: 3,
-                              blurRadius:(isFirst)? 0:3,
+                              blurRadius: (isFirst) ? 0 : 3,
                             ),
                           ],
                           border: (isFirst)
@@ -164,7 +181,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                                   ? kThemeColor
                                   : Colors.grey.withOpacity(0.3),
                               spreadRadius: 3,
-                              blurRadius:(!isFirst)? 0:3,
+                              blurRadius: (!isFirst) ? 0 : 3,
                             ),
                           ],
                           border: (!isFirst)
@@ -196,24 +213,31 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Spacer(),
-                    Text('Select a card to proceed',style:themeFont(s: 12,w:'r'))
+                    Text('Select a card to proceed',
+                        style: themeFont(s: 12, w: 'r'))
                   ],
                 ),
-                SizedBox(height: h*0.033,),
-
+                SizedBox(
+                  height: h * 0.033,
+                ),
                 showText(
                   'Join us to become part of our community to avail the benefits that our platform offers.',
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 showText(
                   'On listing with us, you open yourself up to a much greater audience. This increased visibility will fill your turfs up with sportspeople and ensure that your tournaments are a booming success.',
                 ),
-                SizedBox(height: 15,),
-
+                SizedBox(
+                  height: 15,
+                ),
                 showText(
                   'We are building a community that not only sports enthusiasts can count on, but one that others can also be a part of.',
                 ),
@@ -231,7 +255,7 @@ Widget showText(String text) {
     width: double.infinity,
     child: Text(
       text,
-      style: themeFont(s:14,w:'r'),
+      style: themeFont(s: 14, w: 'r'),
     ),
   );
 }
