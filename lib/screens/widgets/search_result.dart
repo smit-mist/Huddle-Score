@@ -17,6 +17,8 @@ class SearchResult extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     _bloc = BlocProvider.of<HomeBloc>(context);
+
+
     List<dynamic>toShow=[];
     List<int>typeOf = [];
     for (int i = 0; i < _bloc.state.allTournaments.length; i++) {

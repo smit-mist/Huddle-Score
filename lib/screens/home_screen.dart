@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController _ctrl = PageController(initialPage: 1);
   int currPage = 1;
   HomeBloc _bloc;
+  bool inCurrentScreen = true;
 
   bool isValid = false;
   List<String> nameOfBanner = [
@@ -51,30 +52,35 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      setState(() {
-        if (currPage == 4) {
-          _ctrl.jumpToPage(0);
-          _ctrl.nextPage(
-              duration: Duration(milliseconds: 350), curve: Curves.easeIn);
-          currPage = 1;
-        } else {
-          currPage++;
-          currPage %= 5;
+    if(inCurrentScreen){
+      // Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      //   setState(() {
+      //     if (currPage == 4) {
+      //       _ctrl.jumpToPage(0);
+      //       _ctrl.nextPage(
+      //           duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+      //       currPage = 1;
+      //     } else {
+      //       currPage++;
+      //       currPage %= 5;
+      //
+      //       _ctrl.animateToPage(
+      //         currPage,
+      //         duration: Duration(milliseconds: 350),
+      //         curve: Curves.easeIn,
+      //       );
+      //     }
+      //   });
+      //
+      // });
 
-          _ctrl.animateToPage(
-            currPage,
-            duration: Duration(milliseconds: 350),
-            curve: Curves.easeIn,
-          );
-        }
-      });
-
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print("Builded");
+    inCurrentScreen = true;
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -469,7 +475,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Image.asset(
                         'assets/images/turf_subs.png',
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     height: h * (170 / kScreenH),
