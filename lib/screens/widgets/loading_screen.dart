@@ -8,11 +8,9 @@ class LoadingScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          height: 100,
-          width: 100,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
+            height: double.infinity,
+            width: double.infinity,
+          child: Image.asset('assets/images/loading_final.gif',fit: BoxFit.cover,)
         ),
       ),
     );
@@ -23,11 +21,9 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 100,
-        width: 100,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+        height: double.infinity,
+        width: double.infinity,
+        child: Image.asset('assets/images/loading_final.gif',fit: BoxFit.cover,),
       ),
     );
   }
