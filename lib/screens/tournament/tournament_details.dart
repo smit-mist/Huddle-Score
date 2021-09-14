@@ -746,7 +746,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
                         width: double.infinity,
-                        height: h * (320 / kScreenH),
+                        height: h * (340 / kScreenH),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
