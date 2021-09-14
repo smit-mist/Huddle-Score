@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-enum formType {Team, Double, Single, noForm}
+
+enum formType { Team, Double, Single, noForm }
 
 const MaterialColor kThemeColor = const MaterialColor(
   0xff248232,
@@ -16,16 +17,26 @@ const MaterialColor kThemeColor = const MaterialColor(
     900: const Color(0xff248232),
   },
 );
-String getShorter(String s){
-  if(s.length<=20)return s;
-  return s.substring(0,17)+'...';
+String getShorter(String s) {
+  if (s.length <= 20) return s;
+  return s.substring(0, 17) + '...';
 }
-List<String> teamSports = ["cricket" ,"football","basketball","volleyball", "hockey","5v5","2v2"];
 
-formType getFormType(String sport){
-  if(teamSports.contains(sport))return formType.Team;
+List<String> teamSports = [
+  "cricket",
+  "football",
+  "basketball",
+  "volleyball",
+  "hockey",
+  "5v5",
+  "2v2"
+];
+
+formType getFormType(String sport) {
+  if (teamSports.contains(sport)) return formType.Team;
   return formType.Single;
 }
+
 const double kScreenW = 424;
 const double kScreenH = 911;
 Map<String, FontWeight> convertMe = {
@@ -40,11 +51,12 @@ Map<String, FontWeight> convertMe = {
 };
 TextStyle themeFont({Color color, String w, double s}) {
   return TextStyle(
-      fontFamily: 'Lexend',
-      color: color ?? Colors.black,
-      fontWeight:
-          (w == null || convertMe[w] == null) ? FontWeight.w500 : convertMe[w],
-      fontSize: s ?? 14);
+    fontFamily: 'Lexend',
+    color: color ?? Colors.black,
+    fontWeight:
+        (w == null || convertMe[w] == null) ? FontWeight.w500 : convertMe[w],
+    fontSize: s ?? 14,
+  );
   // return TextStyle(color: color, fontWeight: w, fontSize: 14);
 }
 
