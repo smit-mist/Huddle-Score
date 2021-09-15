@@ -2,14 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
 
 import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
-import '../../constants.dart';
 
 class UserTermsAndConditions extends StatefulWidget {
   @override

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:huddle_and_score/screens/auth_and_user/about_app_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/about_app_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/edit_profile_screen.dart';
 
 import '../../constants.dart';
-import 'help_and_support_screen.dart';
+import '../static_screens/help_and_support_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final String name;

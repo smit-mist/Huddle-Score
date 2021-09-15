@@ -47,7 +47,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   }
 
   void preComputer() {
-    seatsLeft = 20; // TODO: UPdate it.
+    seatsLeft = widget.tournament.total -
+        widget.tournament.rooms.length; // TODO: UPdate it.
     timeLine = "";
     st = WeirdDateFormat(date: widget.tournament.main.timeLine[0]);
     en = WeirdDateFormat(date: widget.tournament.main.timeLine[1]);
@@ -77,6 +78,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     }
     combinedRegFees = "NOTHING";
     combinedRegFees = minPrice.toString() + ' - ' + maxPrice.toString();
+    if (seatsLeft < 0) seatsLeft = 0;
   }
 
   @override
@@ -124,6 +126,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         print('Already did');
                       } else if (canRegister == false) {
                         print('deadline finished');
+                      } else if (seatsLeft <= 0) {
                       } else {
                         setState(() {
                           clickedOnRegister = true;
@@ -172,20 +175,37 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 height: 40,
                                 width: w * 0.6,
                               )
-                            : Container(
-                                height: 40,
-                                width: w * 0.3,
-                                child: Center(
-                                  child: Text(
-                                    'Register',
-                                    style: themeFont(color: Colors.white),
+                            : (seatsLeft <= 0)
+                                ? Container(
+                                    width: w * 0.4,
+                                    height: 40,
+                                    child: ActionButton(
+                                      child: Center(
+                                        child: Text(
+                                          'Booking is Full',
+                                          style: themeFont(
+                                            color: kThemeColor,
+                                            s: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      bgColor: Colors.white,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 40,
+                                    width: w * 0.3,
+                                    child: Center(
+                                      child: Text(
+                                        'Register',
+                                        style: themeFont(color: Colors.white),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: kThemeColor,
+                                    ),
                                   ),
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: kThemeColor,
-                                ),
-                              ),
                   )
                 ],
               ),

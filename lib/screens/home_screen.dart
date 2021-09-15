@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                     width: w * (350 / kScreenW),
-                    height: h * (230 / kScreenH),
+                    height: h * (260 / kScreenH),
                     child: GridView.builder(
                         itemCount: cities.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

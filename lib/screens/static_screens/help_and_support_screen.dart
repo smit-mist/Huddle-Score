@@ -132,6 +132,17 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                     });
                   },
                 ),
+                Field(
+                  ans:
+                  'Huddle & Score is an unparalleled sports booking platform for turfs and tournaments. We are the bridge between the owners and organisers, and the players. With us, discover new turfs and tournaments around you, and book yourself a slot to play both casual games, as well as enter into prize-winning tournaments.',
+                  ques: 'What is Huddle & Score?',
+                  val: ok,
+                  onPressed: (bool nw) {
+                    setState(() {
+                      ok = nw;
+                    });
+                  },
+                ),
               ],
             ),
           ),
