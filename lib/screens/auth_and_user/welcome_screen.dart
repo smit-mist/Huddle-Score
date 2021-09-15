@@ -20,6 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           width: w,
           padding: EdgeInsets.all(20),
@@ -27,29 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => UserTermsAndConditions(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Skip',
-                        style: themeFont(
-                          color: kThemeColor,
-                          w: 'n',
-                          s: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(
                   height: 30,
                 ),

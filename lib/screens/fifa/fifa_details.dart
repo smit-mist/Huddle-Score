@@ -303,7 +303,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       children: [
                                         Text(
                                           widget.fifa.main.venue.address
-                                              .join(' '),
+                                              .join(', '),
                                           style: themeFont(s: 13),
                                         ),
                                         Row(

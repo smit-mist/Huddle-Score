@@ -40,6 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           padding: EdgeInsets.all(20),
           child: Center(

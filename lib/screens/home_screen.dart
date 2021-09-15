@@ -22,15 +22,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 List<String> cities = [
   "Ahmedabad",
-  "Mumbai",
-  "Kolkata",
-  "Hyderabad",
-  "Lucknow",
-  "Noida",
-  "Gurugram",
-  "Faridabad",
-  "Agra",
-  "Ajmer"
+  "Jaipur","Chennai","Indore",
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -250,12 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () async {
                     final status = await getNotificationsPermission();
                     if (status.isGranted) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Container(),
-                        ),
-                      );
+                      Fluttertoast.showToast(msg: 'Permission Successfully Granted');
                     } else {
                       Fluttertoast.showToast(
                           msg: 'Please grant permission for notifications');
