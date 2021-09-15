@@ -59,17 +59,16 @@ class BookedEventTile extends StatelessWidget {
                 style: themeFont(),
               ),
               Text(
-                venue.length > 25 ? venue.substring(0, 25) + '...' : venue,
+                //venue.split(', ').join('\n'),
+                venue.length > 25 ? venue.substring(0,25).split(', ').join(',\n') + '...' : venue,
                 style: themeFont(s: 12, w: 'r'),
               ),
               Text(
-                '4th August',
+                booking.data.timeLine.join(' - '),
                 style: themeFont(),
               ),
               Text(
-                (booking.recordedAt.length > 20)
-                    ? booking.recordedAt.substring(0, 20)
-                    : booking.recordedAt,
+                '₹ ${booking.amount/100}',
                 style: themeFont(),
               ),
               Container(
