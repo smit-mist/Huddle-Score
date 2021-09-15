@@ -57,6 +57,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bloc = BlocProvider.of<HomeNavBarBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -98,8 +99,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     nametap = true;
                   });
                 },
-                showCursor: false,
-                enableInteractiveSelection: false,
+                showCursor: nametap,
+                //       enableInteractiveSelection: ,
                 focusNode: FocusNode(),
                 decoration: normalTextDecoration(widget.name).copyWith(
                   suffixIcon: Icon(
@@ -159,9 +160,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             child: MaterialButton(
                               onPressed: () async {
-                                _bloc.add(HomeIconPressed());
+                                widget.name = _nameCtrl.text;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LoadingScreen(),
+                                  ),
+                                );
+                                 _bloc.add(HomeIconPressed());
                                 await UserRepository()
                                     .changeUserName(_nameCtrl.text);
+                                Navigator.pop(context);
                                 _bloc.add(ProfileIconPressed());
                                 setState(() {
                                   nametap = false;

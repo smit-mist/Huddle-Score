@@ -24,15 +24,38 @@ class SearchResult extends StatelessWidget {
     List<HomeFifa> toShow = [];
     if (_bloc.state.allTournaments != null) {
       for (int i = 0; i < _bloc.state.allTournaments.length; i++) {
+        bool flag = false;
+
         if (startsWith(_bloc.state.allTournaments[i].name, currentSearch)) {
           // toShow.add(_bloc.state.allTournaments[i]);
+          flag = true;
+        }
+        for(int j=0;j<_bloc.state.allTournaments[i].venue.length;j++){
+          if(startsWith(currentSearch, _bloc.state.allTournaments[i].venue[j])){
+            flag = true;
+          }
+          if(flag)break;
+        }
+        if(flag){
           tours.add(_bloc.state.allTournaments[i]);
         }
+
       }
     }
     if (_bloc.state.allFifa != null) {
       for (int i = 0; i < _bloc.state.allFifa.length; i++) {
+        bool flag = false;
         if (startsWith(_bloc.state.allFifa[i].name, currentSearch)) {
+            flag =  true;
+        }
+        for(var x in _bloc.state.allFifa[i].venue){
+          if(startsWith(x, currentSearch)){
+            print("match found:- " + x + " "+currentSearch);
+            flag = true;
+          }
+          if(flag)break;
+        }
+        if(flag){
           toShow.add(_bloc.state.allFifa[i]);
         }
       }
@@ -120,8 +143,6 @@ class SearchResult extends StatelessWidget {
   }
 }
 
-class Math {}
-
 bool startsWith(String a, String b) {
   a = a.toLowerCase();
   b = b.toLowerCase();
@@ -131,8 +152,16 @@ bool startsWith(String a, String b) {
     a = b;
     b = c;
   }
-  for (int i = 0; i < b.length; i++) {
-    if (b[i] != a[i]) return false;
+  for(int i=0;i<a.length;i++){
+    bool flag = true;
+    for(int j=0;j<b.length;j++){
+      int here = i+j;
+      if(here >=a.length)continue;
+      if(a[here] != b[j]){
+        flag = false;break;
+      }
+    }
+    if(flag)return true;
   }
-  return true;
+  return false;
 }

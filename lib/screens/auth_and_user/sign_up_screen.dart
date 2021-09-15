@@ -51,6 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           padding: EdgeInsets.all(20),
           child: Center(

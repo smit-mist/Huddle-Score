@@ -453,48 +453,9 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 20
                     ),
-                    Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            color: kThemeColor,
-                            child: SvgPicture.asset(
-                              'assets/icons/checkbox.svg',
-                              color: Colors.white,
-                            )),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Container(
-                          width: w * (320 / kScreenW),
-                          child: Wrap(
-                            children: [
-                              Text(
-                                "I agree to the ",
-                                style: themeFont(
-                                  s: 12.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text(
-                                  'Terms and Conditions',
-                                  style: themeFont(
-                                    s: 12.0,
-                                    color: Colors.black,
-                                  ).copyWith(
-                                      decoration: TextDecoration.underline),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+
                     SizedBox(
                       height: h * 0.1,
                     ),
