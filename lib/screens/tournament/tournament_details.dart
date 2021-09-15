@@ -397,13 +397,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            DataShower(
-                              type: 'Category',
-                              data: widget.tournament.main.ageRec,
-                            ),
+
                             SizedBox(
                               height: 5,
                             ),
