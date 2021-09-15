@@ -5,35 +5,27 @@ import 'package:huddle_and_score/screens/widgets/action_button.dart';
 
 import '../../constants.dart';
 
-class PasswordAssistInitialScreen extends StatelessWidget {
-  ForgotPasswordBloc _bloc;
+class PasswordAssistInitialScreen extends StatefulWidget {
+  @override
+  _PasswordAssistInitialScreenState createState() =>
+      _PasswordAssistInitialScreenState();
+}
+
+class _PasswordAssistInitialScreenState
+    extends State<PasswordAssistInitialScreen> {
   TextEditingController _controller = TextEditingController();
-  // 0 - error
-  // 1 - default
-  // 2 - success
+
+  int statee = 1;
+
   @override
   Widget build(BuildContext context) {
-    _bloc = BlocProvider.of<ForgotPasswordBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-
-    return WillPopScope(
-      onWillPop: () async {
-        await _bloc.close();
-        return true;
-      },
-      child: SafeArea(
-        child: Scaffold(
-          body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-            builder: (context, state) {
-              if (state is ForgotPasswordLoadingState) {
-                return Center(child: CircularProgressIndicator());
-              } else if (state is ForgotPasswordSuccessState) {
-                return PasswordAssistSuccessScreen();
-              } else if (state is ForgotPasswordFailureState) {
-                return PasswordAssistFailureScreen();
-              }
-              return Container(
+    return statee == 2
+        ? PasswordAssistSuccessScreen()
+        : SafeArea(
+            child: Scaffold(
+              body: Container(
                 padding: EdgeInsets.all(20),
                 child: SingleChildScrollView(
                   child: Center(
@@ -75,23 +67,16 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                          builder: (context, state) {
-                            bool isOk = state.emailTap;
-                            return Container(
-                              width: double.infinity,
-                              child: TextField(
-                                controller: _controller,
-                                onTap: () {
-                                  _bloc.add(onEmailChanged());
-                                },
-                                style: themeFont(
-                                  color: Colors.black,
-                                ),
-                                decoration: normalTextDecoration('Email ID'),
-                              ),
-                            );
-                          },
+                        Container(
+                          width: double.infinity,
+                          child: TextField(
+                            controller: _controller,
+                            onTap: () {},
+                            style: themeFont(
+                              color: Colors.black,
+                            ),
+                            decoration: normalTextDecoration('Email ID'),
+                          ),
                         ),
                         SizedBox(
                           height: 10,
@@ -108,52 +93,35 @@ class PasswordAssistInitialScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: h * 0.02),
-                        BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                          builder: (context, state) {
-                            return SizedBox(
-                              width:double.infinity,
-
-                              child: ActionButton(
-                                bgColor: state.emailTap
-                                    ? kThemeColor
-                                    : Colors.transparent,
-                                borderColor: state.emailTap
-                                    ? kThemeColor
-                                    : Colors.transparent,
-                                child: Text(
-                                  'Submit',
-                                  style: themeFont(
-                                    s: 16,
-                                    w: 'm',
-                                    color: (state.emailTap)
-                                        ? Colors.white
-                                        : Colors.grey.withOpacity(0.9),
-                                  ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ActionButton(
+                              bgColor: true ? kThemeColor : Colors.transparent,
+                              borderColor:
+                                  true ? kThemeColor : Colors.transparent,
+                              child: Text(
+                                'Submit',
+                                style: themeFont(
+                                  s: 16,
+                                  w: 'm',
+                                  color: (true)
+                                      ? Colors.white
+                                      : Colors.grey.withOpacity(0.9),
                                 ),
-                                onTap: (state.emailTap)
-                                    ? () {
-                                        _bloc.add(
-                                          ForgotPasswordInitiated(
-                                              email: _controller.text),
-                                        );
-                                      }
-                                    : () {
-                                        print("Fill Everything");
-                                      },
                               ),
-                            );
-                          },
+                              onTap: () {
+                                setState(() {
+                                  statee = 2;
+                                });
+                              }),
                         ),
                       ],
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
+              ),
+            ),
+          );
   }
 }
 
@@ -343,8 +311,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                   ),
                   SizedBox(height: h * 0.2),
                   SizedBox(
-                    width:double.infinity,
-
+                    width: double.infinity,
                     child: ActionButton(
                       bgColor: kThemeColor,
                       child: Text(
