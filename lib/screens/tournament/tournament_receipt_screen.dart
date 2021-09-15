@@ -31,7 +31,7 @@ class _TournamentReceiptGeneratorState
       builder: (_, snap) {
         print(snap.hasData);
         if (snap.hasData == false) return LoadingWidget();
-        if(snap.data.data() == null)return LoadingWidget();
+        if (snap.data.data() == null) return LoadingWidget();
         bool fnd = false;
         var here = Map<String, dynamic>.from(snap.data.data());
         here.forEach((key, value) {
@@ -43,9 +43,9 @@ class _TournamentReceiptGeneratorState
             } else {
               if (details.regDetails.viceCaptain == null ||
                   details.regDetails.viceCaptain.contact == 373737) {
-                type =formType.Single;
+                type = formType.Single;
               } else
-                type =formType.Double;
+                type = formType.Double;
             }
           }
         });
@@ -169,7 +169,6 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ],
           ),
         ),
-
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
@@ -197,7 +196,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h * (333 / kScreenH),
+                    height: h * (350 / kScreenH),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -214,63 +213,64 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              height: h * (150 / kScreenH),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 1,
-                                  ),
-                                  Text(
-                                    widget.details.data.title,
-                                    style: themeFont(
-                                      w: 'sb',
-                                      s: 14,
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                height: h * (150 / kScreenH),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      widget.details.data.title,
+                                      style: themeFont(
+                                        w: 'sb',
+                                        s: 14,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    timeLine,
-                                    style: themeFont(
-                                      w: 'sb',
-                                      s: 14,
+                                    Text(
+                                      timeLine,
+                                      style: themeFont(
+                                        w: 'sb',
+                                        s: 14,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    address.length > 20
-                                        ? address.substring(0, 17) + '...'
-                                        : address,
-                                    style: themeFont(
-                                      w: 'sb',
-                                      s: 14,
+                                    Text(
+                                      address,
+                                      style: themeFont(
+                                        w: 'sb',
+                                        s: 14,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    widget.details.data.ageRec,
-                                    style: themeFont(
-                                      w: 'sb',
-                                      s: 14,
+                                    Text(
+                                      widget.details.data.ageRec,
+                                      style: themeFont(
+                                        w: 'sb',
+                                        s: 14,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 1,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              height: h * (147 / kScreenH),
-                              width: w * (120 / kScreenW),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: Image.network(
-                                  widget.details.data.poster,
-                                  fit: BoxFit.cover,
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                height: h * (147 / kScreenH),
+                                width: w * (120 / kScreenW),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.network(
+                                    widget.details.data.poster,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             )
@@ -365,7 +365,9 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h * (((widget.currForm == formType.Single)?250:390) / kScreenH),
+                    height: h *
+                        (((widget.currForm == formType.Single) ? 250 : 390) /
+                            kScreenH),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -380,9 +382,10 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
-                        SizedBox(height: 7,),
+                        SizedBox(
+                          height: 7,
+                        ),
                         Text(
                           'Your participation has been confirmed.',
                           style: themeFont(
@@ -400,13 +403,17 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                 * 1 - Means 2 Player Form (Player 1, Player 2)
                 * 2 - Means 1 Player Form. (PLayer 1)
                 * */
-                        (widget.currForm == formType.Team || widget.currForm == formType.Double)? DataShower(
-                          type: 'Team Name',
-                          data: widget.details.regDetails.teamName,
-                        ):Container(),
-
+                        (widget.currForm == formType.Team ||
+                                widget.currForm == formType.Double)
+                            ? DataShower(
+                                type: 'Team Name',
+                                data: widget.details.regDetails.teamName,
+                              )
+                            : Container(),
                         DataShower(
-                            type: (widget.currForm == formType.Team)?'Captain':'Player 1',
+                            type: (widget.currForm == formType.Team)
+                                ? 'Captain'
+                                : 'Player 1',
                             data: widget.details.regDetails.captain.fullName),
                         DataShower(
                             type: 'Contact Number',
@@ -417,7 +424,9 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             data: widget.details.regDetails.captain.email),
                         (widget.currForm != formType.Single)
                             ? DataShower(
-                                type: (widget.currForm == formType.Team)?'Vice Captain':'Player 2',
+                                type: (widget.currForm == formType.Team)
+                                    ? 'Vice Captain'
+                                    : 'Player 2',
                                 data: widget
                                     .details.regDetails.viceCaptain.fullName)
                             : Container(),
@@ -572,7 +581,7 @@ class DataShower extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom:8.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -588,7 +597,7 @@ class DataShower extends StatelessWidget {
             SizedBox(
               width: w * (0.35),
               child: Text(
-                this.data?? "This is NULL",
+                this.data ?? "This is NULL",
                 style: themeFont(
                   s: 14,
                   w: 'sb',

@@ -916,7 +916,7 @@ class _DetailShowerState extends State<DetailShower> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                height: h * (150 / kScreenH),
+                height: h * (160 / kScreenH),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -932,43 +932,49 @@ class _DetailShowerState extends State<DetailShower> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text(
-                          widget.details.data.title,
-                          style: themeFont(w: 'sb', s: 14),
-                        ),
-                        Text(
-                          getShorter(widget.details.data.gameDate),
-                          style: themeFont(w: 'sb', s: 14),
-                        ),
-                        Text(
-                          getShorter(
-                              widget.details.data.venue.address.join(", ")),
-                          style: themeFont(w: 'sb', s: 14),
-                        ),
-                        Text(
-                          getShorter(widget.details.data.time),
-                          style: themeFont(w: 'sb', s: 14),
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                      ],
+                    Expanded(
+                      flex:2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: 1,
+                          ),
+                          Text(
+                            widget.details.data.title,
+                            style: themeFont(w: 'sb', s: 14),
+                          ),
+                          Text(
+                            widget.details.data.gameDate,
+                            style: themeFont(w: 'sb', s: 14),
+                          ),
+                          Text(
+
+                                widget.details.data.venue.address.join(", "),
+                            style: themeFont(w: 'sb', s: 14),
+                          ),
+                          Text(
+                            widget.details.data.time,
+                            style: themeFont(w: 'sb', s: 14),
+                          ),
+                          SizedBox(
+                            height: 1,
+                          ),
+                        ],
+                      ),
                     ),
-                    Container(
-                      height: h * (102 / kScreenH),
-                      width: h * (102 / kScreenH),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: Image.network(
-                          widget.details.data.poster,
-                          fit: BoxFit.cover,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: h * (102 / kScreenH),
+                        width: h * (102 / kScreenH),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.network(
+                            widget.details.data.poster,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     )
