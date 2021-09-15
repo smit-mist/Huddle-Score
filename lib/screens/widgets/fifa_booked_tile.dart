@@ -6,7 +6,6 @@ import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.da
 
 import '../../constants.dart';
 
-
 class FifaBookingTile extends StatelessWidget {
   final FifaBookingDetails booking;
   FifaBookingTile({this.booking});
@@ -60,17 +59,17 @@ class FifaBookingTile extends StatelessWidget {
                 style: themeFont(),
               ),
               Text(
-                venue.length > 25 ? venue.substring(0, 25) + '...' : venue,
+                venue.length > 25
+                    ? venue.substring(0, 25).split(', ').join(',\n') + '...'
+                    : venue,
                 style: themeFont(s: 12, w: 'r'),
               ),
               Text(
-                '4th August',
+                booking.data.gameDate,
                 style: themeFont(),
               ),
               Text(
-                (booking.recordedAt.length > 20)
-                    ? booking.recordedAt.substring(0, 20)
-                    : booking.recordedAt,
+                '₹ ${booking.amount / 100}',
                 style: themeFont(),
               ),
               Container(
