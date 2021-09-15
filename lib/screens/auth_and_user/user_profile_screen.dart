@@ -35,13 +35,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             width: w * (348 / kScreenW),
             child: Row(
               children: [
-                ClipRRect(
-                  child: Image.network(
-                    'https://picsum.photos/300/200',
-                    width: w * (74 / kScreenW),
-                    height: h * (56 / kScreenH),
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.person_sharp,
+                      size: 40,
+                      color: Colors.white,
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.6),
+                    shape: BoxShape.circle,
+                  ),
                 ),
                 SizedBox(
                   width: 20,
