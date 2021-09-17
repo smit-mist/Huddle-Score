@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/booking.dart';
-import 'package:huddle_and_score/models/fifa_booking.dart';
-import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 
 import '../../constants.dart';
@@ -22,9 +20,10 @@ class BookedEventTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 3,
-              spreadRadius: 2),
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 1,
+            spreadRadius: 1,
+          ),
         ],
       ),
       child: Row(
@@ -60,7 +59,9 @@ class BookedEventTile extends StatelessWidget {
               ),
               Text(
                 //venue.split(', ').join('\n'),
-                venue.length > 25 ? venue.substring(0,25).split(', ').join(',\n') + '...' : venue,
+                venue.length > 25
+                    ? venue.substring(0, 25).split(', ').join(',\n') + '...'
+                    : venue,
                 style: themeFont(s: 12, w: 'r'),
               ),
               Text(
@@ -68,7 +69,7 @@ class BookedEventTile extends StatelessWidget {
                 style: themeFont(),
               ),
               Text(
-                '₹ ${booking.amount/100}',
+                '₹ ${booking.amount / 100}',
                 style: themeFont(),
               ),
               Container(
