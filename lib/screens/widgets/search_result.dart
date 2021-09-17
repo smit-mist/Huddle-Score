@@ -1,14 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/models/home_event.dart';
-import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 import '../../constants.dart';
-import 'dart:math';
+import 'fifa_tile.dart';
 
 class SearchResult extends StatelessWidget {
   String currentSearch;
@@ -30,32 +31,32 @@ class SearchResult extends StatelessWidget {
           // toShow.add(_bloc.state.allTournaments[i]);
           flag = true;
         }
-        for(int j=0;j<_bloc.state.allTournaments[i].venue.length;j++){
-          if(startsWith(currentSearch, _bloc.state.allTournaments[i].venue[j])){
+        for (int j = 0; j < _bloc.state.allTournaments[i].venue.length; j++) {
+          if (startsWith(
+              currentSearch, _bloc.state.allTournaments[i].venue[j])) {
             flag = true;
           }
-          if(flag)break;
+          if (flag) break;
         }
-        if(flag){
+        if (flag) {
           tours.add(_bloc.state.allTournaments[i]);
         }
-
       }
     }
     if (_bloc.state.allFifa != null) {
       for (int i = 0; i < _bloc.state.allFifa.length; i++) {
         bool flag = false;
         if (startsWith(_bloc.state.allFifa[i].name, currentSearch)) {
-            flag =  true;
+          flag = true;
         }
-        for(var x in _bloc.state.allFifa[i].venue){
-          if(startsWith(x, currentSearch)){
-            print("match found:- " + x + " "+currentSearch);
+        for (var x in _bloc.state.allFifa[i].venue) {
+          if (startsWith(x, currentSearch)) {
+            print("match found:- " + x + " " + currentSearch);
             flag = true;
           }
-          if(flag)break;
+          if (flag) break;
         }
-        if(flag){
+        if (flag) {
           toShow.add(_bloc.state.allFifa[i]);
         }
       }
@@ -102,8 +103,8 @@ class SearchResult extends StatelessWidget {
                       // width: w * (145 / kScreenW),
 //height: h * (212 / kScreenH)
                       childAspectRatio:
-                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-                      mainAxisSpacing: 10),
+                          (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
+                      mainAxisSpacing: 0),
                 ),
               ),
               SizedBox(
@@ -118,12 +119,20 @@ class SearchResult extends StatelessWidget {
               ),
               Container(
                 height: h *
-                    ((min(500, (toShow.length / 2 + toShow.length % 2) * 250)) /
+                    ((min(
+                            500,
+                            (toShow.length / 2 + toShow.length % 2) * 250 +
+                                50)) /
                         kScreenH),
                 width: w,
                 child: GridView.builder(
                   itemCount: toShow.length,
                   itemBuilder: (_, ind) {
+                    if (ind >= toShow.length) {
+                      return SizedBox(
+                        height: 1,
+                      );
+                    }
                     return FifaTile(
                       fifa: toShow[ind],
                     );
@@ -131,8 +140,8 @@ class SearchResult extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio:
-                          (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-                      mainAxisSpacing: 10),
+                          (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
+                      mainAxisSpacing: 0),
                 ),
               ),
             ],
@@ -152,16 +161,17 @@ bool startsWith(String a, String b) {
     a = b;
     b = c;
   }
-  for(int i=0;i<a.length;i++){
+  for (int i = 0; i < a.length; i++) {
     bool flag = true;
-    for(int j=0;j<b.length;j++){
-      int here = i+j;
-      if(here >=a.length)continue;
-      if(a[here] != b[j]){
-        flag = false;break;
+    for (int j = 0; j < b.length; j++) {
+      int here = i + j;
+      if (here >= a.length) continue;
+      if (a[here] != b[j]) {
+        flag = false;
+        break;
       }
     }
-    if(flag)return true;
+    if (flag) return true;
   }
   return false;
 }

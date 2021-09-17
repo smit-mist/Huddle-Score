@@ -51,14 +51,13 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               width: w,
-              height: h * 0.9,
               child: SearchResult(
                 currentSearch: _controller.text,
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            // SizedBox(
+            //   height: 150,
+            // ),
           ],
         ),
       ),
