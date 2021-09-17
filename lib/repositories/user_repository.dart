@@ -16,7 +16,12 @@ class UserRepository {
   }
 
   Future<void> changeUserPassword(String password) async {
-    await _auth.currentUser.updatePassword(password);
+    try {
+      await _auth.currentUser.updatePassword(password);
+    } catch (e) {
+      print("Erroorr");
+      print(e.toString());
+    }
   }
 
   Future<List<BookingDetails>> getBookings() async {
