@@ -32,7 +32,6 @@ class UserRepository {
       List<BookingDetails> bookings = [];
       print("check");
       bookingsData.data().forEach((key, value) {
-
         print(key);
 
         bookings.add(BookingDetails.fromMap(value));

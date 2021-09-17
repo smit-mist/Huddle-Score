@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
@@ -13,7 +14,9 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController pass1 = TextEditingController();
+  TextEditingController pass2 = TextEditingController();
+  TextEditingController pass3 = TextEditingController();
   bool visible1 = false, visible2 = false, visible3 = false;
   bool passTapped1 = false, passTapped2 = false, passTapped3 = false;
   @override
@@ -56,6 +59,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   height: 10,
                 ),
                 TextField(
+                  controller: pass1,
                   style: themeFont(
                     color: Colors.black,
                   ),
@@ -182,7 +186,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     color: Colors.black,
                   ),
                   obscureText: !visible2,
-                  controller: passwordCtrl,
+                  controller: pass2,
                   onChanged: (x) {
                     setState(() {
                       if (x.length > 0)
@@ -293,6 +297,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   height: 10,
                 ),
                 TextField(
+                  controller: pass3,
                   style: themeFont(
                     color: Colors.black,
                   ),
@@ -391,11 +396,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   height: 42,
                   child: ActionButton(
                     onTap: () async {
-                      print(passwordCtrl.text);
+                      print(pass1.text + 'here22');
                       Navigator.push(context,
                           MaterialPageRoute(builder: (_) => LoadingScreen()));
-                      await UserRepository()
-                          .changeUserPassword(passwordCtrl.text);
+                      var credential = EmailAuthProvider.credential(
+                          email: FirebaseAuth.instance.currentUser.email,
+                          password: pass1.text);
+                      FirebaseAuth.instance.currentUser
+                          .reauthenticateWithCredential(credential);
+                      await UserRepository().changeUserPassword(pass2.text);
                       Navigator.pop(context);
                       Fluttertoast.showToast(msg: 'Password Changed');
                     },
