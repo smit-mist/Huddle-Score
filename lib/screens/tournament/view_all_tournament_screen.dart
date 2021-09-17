@@ -67,8 +67,8 @@ class ViewAllTournamentScreen extends StatelessWidget {
                           // width: w * (145 / kScreenW),
 //height: h * (212 / kScreenH)
                           childAspectRatio:
-                              (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
-                          mainAxisSpacing: 10
+                              (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
+                          mainAxisSpacing: 0,
                         ),
                       );
                     },

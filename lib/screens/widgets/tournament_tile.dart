@@ -14,13 +14,13 @@ class TournamentTile extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     bool fullFilled = here.room.taken.length == here.room.total;
-    double remainingPer = (here.room.total - here.room.taken.length*1.00)/here.room.total;
+    double remainingPer =
+        (here.room.total - here.room.taken.length * 1.00) / here.room.total;
 //    print(here.name + " " +here.room.total.toString()+" " + here.room.taken.length.toString());
 
-  // print(fullFilled);
- //   print(remainingPer);
+    // print(fullFilled);
+    //   print(remainingPer);
     WeirdDateFormat st = WeirdDateFormat(date: here.finalsDate[0]),
-
         en = WeirdDateFormat(date: here.finalsDate[1]);
     String timeLine = "";
     timeLine += st.getDate();
@@ -42,7 +42,7 @@ class TournamentTile extends StatelessWidget {
           ),
         );
         Tournament tournament = await Tournament().fromHomeTour(here);
-        bool isReg =tournament.registeredIn();
+        bool isReg = tournament.registeredIn();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -62,7 +62,7 @@ class TournamentTile extends StatelessWidget {
             ),
             child: Container(
               width: w * (155 / kScreenW),
-              // height: h * (212 / kScreenH),
+              height: h * (250 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
@@ -95,11 +95,12 @@ class TournamentTile extends StatelessWidget {
                       height: h * (112 / kScreenH),
                       width: w * (155 / kScreenW),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Expanded(
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 7),
-                        height: h * (120 / kScreenH),
                         width: double.infinity,
                         child: Center(
                           child: Column(
@@ -111,8 +112,8 @@ class TournamentTile extends StatelessWidget {
                                 style: themeFont(s: 12, w: 'm'),
                               ),
                               Text(
-                                venue.length > 25
-                                    ? venue.substring(0, 25) + '...'
+                                venue.length > 35
+                                    ? venue.substring(0, 35) + '...'
                                     : venue,
                                 style: themeFont(s: 12, w: 'r'),
                               ),
@@ -134,23 +135,26 @@ class TournamentTile extends StatelessWidget {
               ? Positioned(
                   top: h * (95 / kScreenH),
                   child: Container(
-                    width: w*(160/kScreenW),
+                    // height: h*(40/kScreenH),
+                    width: w * (160 / kScreenW),
                     child: Image.asset(
                       'assets/images/fully_booked_banner.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 )
-              : (remainingPer <= 0.2)?Positioned(
-            top: h * (95 / kScreenH),
-            child: Container(
-              width: w*(160/kScreenW),
-              child: Image.asset(
-                'assets/images/filling_fast_banner.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ):Container(),
+              : (remainingPer <= 0.2)
+                  ? Positioned(
+                      top: h * (95 / kScreenH),
+                      child: Container(
+                        width: w * (160 / kScreenW),
+                        child: Image.asset(
+                          'assets/images/filling_fast_banner.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : Container(),
         ],
       ),
     );

@@ -37,7 +37,7 @@ class ViewAllFifaScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Tournaments in Your City',
+                    'Online Tournaments',
                     style: themeFont(
                       color: kThemeColor,
                       s: 23,
@@ -67,7 +67,7 @@ class ViewAllFifaScreen extends StatelessWidget {
                         itemCount: state.allFifa.length,
                         itemBuilder: (_, ind) {
                           return SizedBox(
-                            child: FifaTile(fifa:state.allFifa[ind]),
+                            child: FifaTile(fifa: state.allFifa[ind]),
                             width: w * (145 / kScreenW),
                             height: h * (212 / kScreenH),
                           );
@@ -77,7 +77,7 @@ class ViewAllFifaScreen extends StatelessWidget {
                           // width: w * (145 / kScreenW),
                           // height: h * (212 / kScreenH)
                           childAspectRatio:
-                              (w * (160 / kScreenW)) / (h * (205 / kScreenH)),
+                              (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
                         ),
                       );
                     },

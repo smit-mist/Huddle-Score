@@ -18,7 +18,7 @@ class FifaTile extends StatelessWidget {
     bool fullFilled = fifa.room.total == fifa.room.taken.length;
     double remainingPer =
         (1.00 * fifa.room.total - fifa.room.taken.length) / fifa.room.total;
-  //  print(fullFilled);
+    //  print(fullFilled);
 //    print(remainingPer);
     return GestureDetector(
       onTap: () async {
@@ -51,7 +51,7 @@ class FifaTile extends StatelessWidget {
             ),
             child: Container(
               width: w * (155 / kScreenW),
-              height: h * (225 / kScreenH),
+              height: h * (250 / kScreenH),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
@@ -63,6 +63,7 @@ class FifaTile extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     child: ClipRRect(
@@ -82,31 +83,36 @@ class FifaTile extends StatelessWidget {
                     height: h * (112 / kScreenH),
                     width: w * (155 / kScreenW),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(left: 7, right: 7),
-                    height: h * (99 / kScreenH),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          fifa.name,
-                          style: themeFont(s: 12, w: 'm'),
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text(
-                          venue.length > 25
-                              ? venue.substring(0, 25) + '...'
-                              : venue,
-                          style: themeFont(s: 12, w: 'r'),
-                        ),
-                        Text(
-                          st.printNormal(),
-                          style: themeFont(s: 12, w: 'r'),
-                        ),
-                      ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 7, right: 7),
+                      height: h * (99 / kScreenH),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            fifa.name,
+                            style: themeFont(s: 12, w: 'm'),
+                          ),
+                          Text(
+                            venue.length > 45
+                                ? venue.substring(0, 45) + '...'
+                                : venue,
+                            style: themeFont(s: 12, w: 'r'),
+                          ),
+                          Text(
+                            st.printNormal(),
+                            style: themeFont(s: 12, w: 'r'),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -115,7 +121,7 @@ class FifaTile extends StatelessWidget {
           ),
           (fullFilled)
               ? Positioned(
-                  top: h * (95 / kScreenH),
+                  top: h * (105 / kScreenH),
                   child: Container(
                     width: w * (160 / kScreenW),
                     child: Image.asset(
@@ -126,7 +132,7 @@ class FifaTile extends StatelessWidget {
                 )
               : (remainingPer <= 0.2)
                   ? Positioned(
-                      top: h * (95 / kScreenH),
+                      top: h * (105 / kScreenH),
                       child: Container(
                         width: w * (160 / kScreenW),
                         child: Image.asset(

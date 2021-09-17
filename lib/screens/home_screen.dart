@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
-import 'dart:async';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,11 +19,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 List<String> cities = [
   "Ahmedabad",
-  "Jaipur","Chennai","Indore",
+  "Jaipur",
+  "Chennai",
+  "Indore",
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -109,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: Text(
                                     cities[ind],
-                                    style: themeFont(s: 12,w:(ind==0)?'r':'l'),
+                                    style: themeFont(
+                                        s: 12, w: (ind == 0) ? 'r' : 'l'),
                                   ),
                                 ),
                                 decoration: BoxDecoration(
@@ -155,7 +158,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Indicator(
         onPressed: () {
           setState(() {
-            _ctrl.animateToPage(0,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+            _ctrl.animateToPage(0,
+                duration: Duration(milliseconds: 800),
+                curve: Curves.fastOutSlowIn);
             currPage = 0;
           });
         },
@@ -164,7 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Indicator(
         onPressed: () {
           setState(() {
-            _ctrl.animateToPage(1,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+            _ctrl.animateToPage(1,
+                duration: Duration(milliseconds: 800),
+                curve: Curves.fastOutSlowIn);
 
             currPage = 1;
           });
@@ -174,7 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Indicator(
         onPressed: () {
           setState(() {
-            _ctrl.animateToPage(2,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+            _ctrl.animateToPage(2,
+                duration: Duration(milliseconds: 800),
+                curve: Curves.fastOutSlowIn);
 
             currPage = 2;
           });
@@ -184,7 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Indicator(
         onPressed: () {
           setState(() {
-            _ctrl.animateToPage(3,duration: Duration(milliseconds: 800),curve: Curves.fastOutSlowIn);
+            _ctrl.animateToPage(3,
+                duration: Duration(milliseconds: 800),
+                curve: Curves.fastOutSlowIn);
 
             currPage = 3;
           });
@@ -242,7 +253,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () async {
                     final status = await getNotificationsPermission();
                     if (status.isGranted) {
-                      Fluttertoast.showToast(msg: 'Permission Successfully Granted');
+                      Fluttertoast.showToast(
+                          msg: 'Permission Successfully Granted');
                     } else {
                       Fluttertoast.showToast(
                           msg: 'Please grant permission for notifications');
@@ -290,7 +302,6 @@ class _HomeScreenState extends State<HomeScreen> {
               height: h * (150 / kScreenH),
               child: Stack(
                 children: [
-
                   CarouselSlider(
                     carouselController: _ctrl,
                     items: [
@@ -307,11 +318,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       initialPage: 0,
                       reverse: false,
                       autoPlay: true,
-                      onPageChanged: (val,reason){
-                       //   print("Changed $val");
-                          setState(() {
-                            currPage = val;
-                          });
+                      onPageChanged: (val, reason) {
+                        //   print("Changed $val");
+                        setState(() {
+                          currPage = val;
+                        });
                       },
                       enlargeCenterPage: true,
                       autoPlayInterval: Duration(seconds: 3),
@@ -435,7 +446,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 2),
-              height: h * (225 / kScreenH),
+              height: h * (250 / kScreenH),
               child: BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   if (state is Loading) {
