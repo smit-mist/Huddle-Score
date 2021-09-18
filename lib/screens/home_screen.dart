@@ -82,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Select Your City',
+                    'Ready for the game?',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
                   Text(
-                    'so we can look for best turfs and tournaments around you',
+                    'Look for best turfs and tournaments in your city!',
                     style: themeFont(s: 12, w: 'm'),
                   ),
                   Container(

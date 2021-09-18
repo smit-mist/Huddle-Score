@@ -68,7 +68,7 @@ class _PasswordAssistInitialScreenState
                     (currState != screen.Pass)
                         ? 'Enter the Email ID associated with your Huddle & Score account to receive a link.'
                         : 'A link to reset your password has been sent to the following Email ID.',
-                    style: themeFont(s: 14),
+                    style: themeFont(s: 14, w: 'r'),
                   ),
                   SizedBox(
                     height: 10,
@@ -334,7 +334,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter the Email ID associated with your Huddle & Score account to receive a link.',
-                    style: themeFont(s: 14, w: 'm'),
+                    style: themeFont(s: 14),
                   ),
                   SizedBox(
                     height: 10,

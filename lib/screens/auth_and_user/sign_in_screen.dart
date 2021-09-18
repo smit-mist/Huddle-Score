@@ -148,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           decoration: InputDecoration(
                             fillColor: Color(0xFFF1F1F1),
 
-                            errorText: (isFailed) ? 'Invalid pass' : null,
+                            errorText: (isFailed) ? 'Password is incorrect.' : null,
                             hintText: 'Password',
                             hintStyle: themeFont(
                                 color: Color(0xff626262), w: 'r', s: 14),

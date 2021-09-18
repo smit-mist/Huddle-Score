@@ -52,7 +52,7 @@ class HowItWorks extends StatelessWidget {
                 style: themeFont(
                   s: 23,
                   color: kThemeColor,
-                  w: 'sb',
+                  w: 'm',
                 ),
               ),
               SizedBox(
@@ -81,7 +81,7 @@ class HowItWorks extends StatelessWidget {
                         style: themeFont(s: 18, w: 'r'),
                       ),
                       Text(
-                        'Share your details with us',
+                        'Share your details with us.',
                         style: themeFont(s: 14, w: 'r'),
                       ),
                     ],

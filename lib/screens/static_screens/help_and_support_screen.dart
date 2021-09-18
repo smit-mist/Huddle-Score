@@ -35,14 +35,14 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                 ),
                 Text(
                   'Find answers from our support team or get in touch with us via support@huddleandscore.com',
-                  style: themeFont(),
+                  style: themeFont(color: kThemeColor),
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Text(
                   'About Huddle & Score',
-                  style: themeFont(),
+                  style: themeFont(s: 15),
                 ),
                 Field(
                   ans:

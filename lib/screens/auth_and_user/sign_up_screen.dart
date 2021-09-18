@@ -388,7 +388,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: Text(
-                              'Password should be at least 6 characters long and must include a minimum of 1 number',
+                              'Password should be at least 6 characters long and must include atleast 1 number.',
                               style: themeFont(
                                 color: Colors.black,
                                 s: 10,
@@ -582,7 +582,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 20,
                         ),
                         Text(
-                          'Create a new account',
+                          'Create New Account',
                           style: themeFont(
                             color: kThemeColor,
                             s: 20,
@@ -860,7 +860,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            'Password should be at least 6 characters long and must include a minimum of 1 number.',
+                            'Password should be at least 6 characters long and must include atleast 1 number.',
                             style: themeFont(
                               color: Colors.black,
                               s: 10,
