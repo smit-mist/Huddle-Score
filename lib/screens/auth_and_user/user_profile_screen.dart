@@ -66,7 +66,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       '${widget.email}',
                       style: themeFont(
                         color: verified ? kThemeColor : Colors.red,
-                        s: 10,
+                        s: 12,
                       ),
                     )
                   ],
