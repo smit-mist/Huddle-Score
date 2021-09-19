@@ -7,8 +7,7 @@ class AboutAppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 25),
           width: w,
@@ -59,7 +58,7 @@ class AboutAppScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

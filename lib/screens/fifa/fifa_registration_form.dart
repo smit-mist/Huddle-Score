@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/fifa_record.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -135,9 +136,8 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
         ),
       ),
     );
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -202,7 +202,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           width: w,
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: double.infinity,
@@ -374,7 +374,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

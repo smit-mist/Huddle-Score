@@ -5,6 +5,7 @@ import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -262,9 +263,8 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
     double h = MediaQuery.of(context).size.height;
 
     print(chosedType);
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -417,7 +417,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           width: w,
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: double.infinity,
@@ -1434,7 +1434,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

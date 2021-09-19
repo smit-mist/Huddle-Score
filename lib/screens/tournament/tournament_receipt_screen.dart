@@ -8,6 +8,7 @@ import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/feedback.dart';
 import 'package:huddle_and_score/repositories/feedback_repository.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -510,9 +511,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
       },
     );
 
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -582,7 +582,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
           height: double.infinity,
@@ -976,7 +976,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

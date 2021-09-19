@@ -71,107 +71,107 @@ class _FifaDetailsState extends State<FifaDetails> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     precomputer();
-    return SafeArea(
-      child: Stack(
-        children: [
-          Scaffold(
-            bottomNavigationBar: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              width: w,
-              height: h * 0.08,
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 7,
-                  spreadRadius: 1,
-                )
-              ]),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
+    return Stack(
+      children: [
+        Scaffold(
+          bottomNavigationBar: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            width: w,
+            height: h * 0.08,
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 7,
+                spreadRadius: 1,
+              )
+            ]),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Back',
-                      style: themeFont(),
-                    ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Back',
+                    style: themeFont(),
                   ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      if (widget.isReg) {
-                        return;
-                      } else if (canRegister == false) {
-                        print('deadline finished');
-                      } else {
-                        setState(() {
-                          clickedOnRegister = true;
-                        });
-                      }
-                    },
-                    child: (widget.isReg)
-                        ? Container(
-                            child: ActionButton(
-                              child: Center(
-                                child: Text(
-                                  'You\'ve already registered!',
-                                  style: themeFont(
-                                    color: kThemeColor,
-                                    s: 15,
-                                  ),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    if (widget.isReg) {
+                      return;
+                    } else if (canRegister == false) {
+                      print('deadline finished');
+                    } else {
+                      setState(() {
+                        clickedOnRegister = true;
+                      });
+                    }
+                  },
+                  child: (widget.isReg)
+                      ? Container(
+                          child: ActionButton(
+                            child: Center(
+                              child: Text(
+                                'You\'ve already registered!',
+                                style: themeFont(
+                                  color: kThemeColor,
+                                  s: 15,
                                 ),
                               ),
-                              bgColor: Colors.white,
                             ),
-                            height: 40,
-                            width: w * 0.5,
-                          )
-                        : (canRegister == false)
-                            ? Container(
-                                child: ActionButton(
-                                  child: Center(
-                                    child: Text(
-                                      'Booking deadline has passed!',
-                                      style: themeFont(
-                                        color: kThemeColor,
-                                        s: 15,
-                                      ),
-                                    ),
-                                  ),
-                                  bgColor: Colors.white,
-                                ),
-                                height: 40,
-                                width: w * 0.6,
-                              )
-                            : Container(
-                                height: 40,
-                                width: w * 0.3,
+                            bgColor: Colors.white,
+                          ),
+                          height: 40,
+                          width: w * 0.5,
+                        )
+                      : (canRegister == false)
+                          ? Container(
+                              child: ActionButton(
                                 child: Center(
                                   child: Text(
-                                    'Register',
-                                    style: themeFont(color: Colors.white),
+                                    'Booking deadline has passed!',
+                                    style: themeFont(
+                                      color: kThemeColor,
+                                      s: 15,
+                                    ),
                                   ),
                                 ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: kThemeColor,
+                                bgColor: Colors.white,
+                              ),
+                              height: 40,
+                              width: w * 0.6,
+                            )
+                          : Container(
+                              height: 40,
+                              width: w * 0.3,
+                              child: Center(
+                                child: Text(
+                                  'Register',
+                                  style: themeFont(color: Colors.white),
                                 ),
                               ),
-                  )
-                ],
-              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: kThemeColor,
+                              ),
+                            ),
+                )
+              ],
             ),
-            body: Container(
+          ),
+          body: SafeArea(
+            child: Container(
               padding: EdgeInsets.symmetric(horizontal: 30),
               width: w,
               height: h,
@@ -885,142 +885,142 @@ class _FifaDetailsState extends State<FifaDetails> {
               ),
             ),
           ),
-          (clickedOnRegister)
-              ? DraggableScrollableSheet(
-                  builder: (_, ctrl) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            topLeft: Radius.circular(20),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                blurRadius: 2,
-                                spreadRadius: 2,
-                                offset: Offset(-3, -5)),
-                          ]),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                    //  height: h * 0.5,
-                      child:SingleChildScrollView(
-                        controller: ctrl,
-                        child: Container(
-                          height: h,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Terms & Conditions',
-                                style: themeFont(
-                                  w: 'sb',
-                                ).copyWith(decoration: TextDecoration.none),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(
+        ),
+        (clickedOnRegister)
+            ? DraggableScrollableSheet(
+                builder: (_, ctrl) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              blurRadius: 2,
+                              spreadRadius: 2,
+                              offset: Offset(-3, -5)),
+                        ]),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                  //  height: h * 0.5,
+                    child:SingleChildScrollView(
+                      controller: ctrl,
+                      child: Container(
+                        height: h,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Terms & Conditions',
+                              style: themeFont(
+                                w: 'sb',
+                              ).copyWith(decoration: TextDecoration.none),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Column(
 
-                                    children: [
-                                      Text(
-                                        tnc,
-                                        style: themeFont().copyWith(
-                                            decoration: TextDecoration.none),
-                                      ),
-                                      Container(
-                                        //  color: Colors.red,
-                                        height: 500,
-                                        width: 500,
-                                      )
-                                    ],
-                                  ),
-                                  scrollDirection: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      tnc,
+                                      style: themeFont().copyWith(
+                                          decoration: TextDecoration.none),
+                                    ),
+                                    Container(
+                                      //  color: Colors.red,
+                                      height: 500,
+                                      width: 500,
+                                    )
+                                  ],
                                 ),
+                                scrollDirection: Axis.vertical,
                               ),
-                              SizedBox(
-                                height: 65,
-                              ),
-                            ],
+                            ),
+                            SizedBox(
+                              height: 65,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                minChildSize: 0.5,
+                maxChildSize: 1,
+                initialChildSize: 0.5,
+              )
+            : Container(),
+        (clickedOnRegister)
+            ? Positioned(
+                bottom: 10,
+                child: Container(
+                  width: w,
+                  height: 65,
+                  color: Colors.white,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          print("OK");
+                          setState(() {
+                            clickedOnRegister = false;
+                          });
+                        },
+                        child: Container(
+                          width: w * 0.4,
+                          child: ActionButton(
+                            bgColor: Colors.white,
+                            child: Text(
+                              'Cancel',
+                              style: themeFont(
+                                color: Colors.black,
+                              ).copyWith(decoration: TextDecoration.none),
+                            ),
+                            borderColor: kThemeColor,
                           ),
                         ),
                       ),
-                    );
-                  },
-                  minChildSize: 0.5,
-                  maxChildSize: 1,
-                  initialChildSize: 0.5,
-                )
-              : Container(),
-          (clickedOnRegister)
-              ? Positioned(
-                  bottom: 10,
-                  child: Container(
-                    width: w,
-                    height: 65,
-                    color: Colors.white,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
+                      Container(
+                        width: w * 0.4,
+                        child: ActionButton(
+                          bgColor: kThemeColor,
+                          child: Text(
+                            'Accept',
+                            style: themeFont(
+                              color: Colors.white,
+                            ).copyWith(decoration: TextDecoration.none),
+                          ),
                           onTap: () {
-                            print("OK");
                             setState(() {
                               clickedOnRegister = false;
                             });
-                          },
-                          child: Container(
-                            width: w * 0.4,
-                            child: ActionButton(
-                              bgColor: Colors.white,
-                              child: Text(
-                                'Cancel',
-                                style: themeFont(
-                                  color: Colors.black,
-                                ).copyWith(decoration: TextDecoration.none),
-                              ),
-                              borderColor: kThemeColor,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: w * 0.4,
-                          child: ActionButton(
-                            bgColor: kThemeColor,
-                            child: Text(
-                              'Accept',
-                              style: themeFont(
-                                color: Colors.white,
-                              ).copyWith(decoration: TextDecoration.none),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                clickedOnRegister = false;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => FifaRegistrationForm(
-                                    fifa: widget.fifa,
-                                  ),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => FifaRegistrationForm(
+                                  fifa: widget.fifa,
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                )
-              : Container(),
-        ],
-      ),
+                ),
+              )
+            : Container(),
+      ],
     );
   }
 }

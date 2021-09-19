@@ -10,6 +10,7 @@ import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/auth_and_user/change_password_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -58,9 +59,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child:  Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: double.infinity,
@@ -298,7 +298,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

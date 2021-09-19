@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/partner_with_us/how_it_works.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -12,10 +13,8 @@ class UserPrivacyPolicy extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-
-        body: Container(
+    return CommonScaffold(
+      child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
@@ -31,7 +30,7 @@ class UserPrivacyPolicy extends StatelessWidget {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

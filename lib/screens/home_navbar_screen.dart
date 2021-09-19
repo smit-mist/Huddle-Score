@@ -6,6 +6,7 @@ import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
 import 'package:huddle_and_score/screens/booking/booking_history_screen.dart';
 import 'package:huddle_and_score/screens/search_screen.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import 'auth_and_user/anonymous_profile_screen.dart';
 import 'auth_and_user/user_profile_screen.dart';
@@ -29,35 +30,32 @@ class _HomeNavBarState extends State<HomeNavBar> {
     _homeNavBarBloc = BlocProvider.of<HomeNavBarBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
-          builder: (context, state) {
-            if (state is UserProfileScreenState) {
-              return UserProfileScreen(
-                email: state.email,
-                name: state.name,
-              );
-            } else if (state is SearchScreenState) {
-              return SearchScreen();
-            } else if (state is CartScreenState) {
-      //        print(state.fifaBookings == null);
-              return BookingHistoryScreen(
-                bookedTours: state.bookings,
-                bookedFifa: state.fifaBookings,
-              );
-            } else if (state is AnonymousProfileScreenState) {
-              return AnonymousProfileScreen();
-            } else if (state is GuestCartScreenState) {
-              return BookingNotSignIn();
-            }
-            if (widget.showMe != null) return widget.showMe;
-            return HomeScreen();
-          },
-        ),
-
+    return CommonScaffold(
+      child:BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
+        builder: (context, state) {
+          if (state is UserProfileScreenState) {
+            return UserProfileScreen(
+              email: state.email,
+              name: state.name,
+            );
+          } else if (state is SearchScreenState) {
+            return SearchScreen();
+          } else if (state is CartScreenState) {
+            //        print(state.fifaBookings == null);
+            return BookingHistoryScreen(
+              bookedTours: state.bookings,
+              bookedFifa: state.fifaBookings,
+            );
+          } else if (state is AnonymousProfileScreenState) {
+            return AnonymousProfileScreen();
+          } else if (state is GuestCartScreenState) {
+            return BookingNotSignIn();
+          }
+          if (widget.showMe != null) return widget.showMe;
+          return HomeScreen();
+        },
       ),
-      bottomNavigationBar: Container(
+      bottomBar: Container(
         width: w,
         height: h * 0.1,
         decoration: BoxDecoration(

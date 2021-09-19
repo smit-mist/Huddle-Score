@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/forms/forms_bloc.dart';
 import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/screens/partner_with_us/thank_you.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -87,9 +88,8 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -156,7 +156,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
             ],
           ),
         ),
-        body: BlocListener<FormsBloc, FormsState>(
+        child: BlocListener<FormsBloc, FormsState>(
           listener: (context, state) {
             if (state is FormsLoading) {
               Navigator.push(
@@ -532,7 +532,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

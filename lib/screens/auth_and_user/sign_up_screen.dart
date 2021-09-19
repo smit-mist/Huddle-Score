@@ -7,6 +7,7 @@ import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/static_screens/user_tnc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -47,10 +48,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
+    return CommonScaffold(
+      child: Container(
           padding: EdgeInsets.all(20),
           child: Center(
             child: BlocConsumer<SignupBloc, SignupState>(
@@ -990,7 +989,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../home_navbar_screen.dart';
 import '../static_screens/user_tnc.dart';
@@ -18,10 +19,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
+    return CommonScaffold(
+        child: Container(
           width: w,
           padding: EdgeInsets.all(20),
           child: Center(
@@ -96,7 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }
