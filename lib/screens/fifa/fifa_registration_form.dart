@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/fifa_record.dart';
-import 'package:huddle_and_score/screens/fifa/fifa_details.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_review.dart';
 
 import '../../constants.dart';
@@ -51,6 +50,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
     email.dispose();
     super.dispose();
   }
+
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,6 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pop(context);
-
                       },
                       child: Container(
                         height: 40,
@@ -176,9 +175,9 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                         builder: (_) => FifaReview(
                           currFifa: widget.fifa,
                           record: FifaRecord(
-                            email: email.text,
-                            name: name.text,
-                            number: int.parse(contact.text),
+                            email: email.text.trim(),
+                            name: name.text.trim(),
+                            number: int.parse(contact.text.trim()),
                           ),
                         ),
                       ),

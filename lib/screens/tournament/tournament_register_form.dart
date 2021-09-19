@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
-import 'package:huddle_and_score/screens/tournament/tournament_details.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_review.dart';
 
 import '../../constants.dart';
@@ -114,24 +113,22 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
       chosedType = tourType[0];
       chosedCat = allCategory['Team'][0];
       selectedSub = allCategory['Team'];
-
-
-    }
-    else {
+    } else {
       bool isMultiple = false;
-      int one = 0,two = 0;
-      for(var x in widget.currentTour.rooms){
-          if(x.category == "1")one = 1;
-          else two = 1;
+      int one = 0, two = 0;
+      for (var x in widget.currentTour.rooms) {
+        if (x.category == "1")
+          one = 1;
+        else
+          two = 1;
       }
-      if(one + two ==2){
+      if (one + two == 2) {
         currForm = formType.Double;
         isMultiple = true;
-      }
-      else{
+      } else {
         currForm = formType.Single;
       }
-      if(isMultiple){
+      if (isMultiple) {
         tourType.add('Single');
         tourType.add('Double');
         allCategory = {
@@ -150,10 +147,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
             allCategory['Double'].add(here);
         }
         chosedCat = allCategory['Single'][0];
-
-      }
-      else{
-
+      } else {
         tourType[0] = "Single";
         allCategory = {
           'Single': ['Select'],
@@ -171,7 +165,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
         print(chosedCat.length);
       }
       currForm = formType.noForm;
-
     }
   }
 
@@ -214,7 +207,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pop(context);
-
                       },
                       child: Container(
                         height: 40,
@@ -317,21 +309,21 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   if (currForm == formType.Team) {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
-                        teamName: teamName.text,
+                        teamName: teamName.text.trim(),
                         captain: Captain(
-                          fullName: name1.text,
-                          email: email1.text,
-                          contact: int.parse(mob1.text),
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          contact: int.parse(mob1.text.trim()),
                           age: int.parse(
-                            age1.text,
+                            age1.text.trim(),
                           ),
                         ),
                         viceCaptain: Captain(
-                          fullName: name2.text,
-                          email: email2.text,
-                          contact: int.parse(mob2.text),
+                          fullName: name2.text.trim(),
+                          email: email2.text.trim(),
+                          contact: int.parse(mob2.text.trim()),
                           age: int.parse(
-                            age2.text,
+                            age2.text.trim(),
                           ),
                         ),
                       );
@@ -352,18 +344,18 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                   } else if (currForm == formType.Double) {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
-                        teamName: teamName.text,
+                        teamName: teamName.text.trim(),
                         captain: Captain(
-                          fullName: name1.text,
-                          email: email1.text,
-                          age: int.parse(age1.text),
-                          contact: int.parse(mob1.text),
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          age: int.parse(age1.text.trim()),
+                          contact: int.parse(mob1.text.trim()),
                         ),
                         viceCaptain: Captain(
-                          fullName: name2.text,
-                          email: email2.text,
-                          age: int.parse(age2.text),
-                          contact: int.parse(mob2.text),
+                          fullName: name2.text.trim(),
+                          email: email2.text.trim(),
+                          age: int.parse(age2.text.trim()),
+                          contact: int.parse(mob2.text.trim()),
                         ),
                       );
                       Navigator.push(
@@ -372,21 +364,21 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
-                            currForm:currForm,
+                            currForm: currForm,
                             cat: chosedType,
                             subCat: chosedCat,
                           ),
                         ),
                       );
                     }
-                  } else  {
+                  } else {
                     if (_key.currentState.validate()) {
                       RegDetails temp = RegDetails(
                         captain: Captain(
-                          fullName: name1.text,
-                          email: email1.text,
-                          age: int.parse(age1.text),
-                          contact: int.parse(mob1.text),
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          age: int.parse(age1.text.trim()),
+                          contact: int.parse(mob1.text.trim()),
                         ),
                         viceCaptain: Captain(),
                         teamName: "ok",
@@ -397,7 +389,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           builder: (_) => TournamentReview(
                             currentTour: widget.currentTour,
                             userRecord: temp,
-                            currForm:currForm,
+                            currForm: currForm,
                             cat: chosedType,
                             subCat: chosedCat,
                           ),
@@ -490,11 +482,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 currForm = formType.Single;
                               } else if (chosedType == "Double") {
                                 currForm = formType.Double;
-                              }else if(chosedType == "Team"){
+                              } else if (chosedType == "Team") {
                                 currForm = formType.Team;
-
-                              }
-                              else {
+                              } else {
                                 currForm = formType.noForm;
                               }
                               selectedSub = allCategory[chosedType];

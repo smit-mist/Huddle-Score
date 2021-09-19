@@ -1,17 +1,13 @@
 import 'dart:convert';
-import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
-import 'package:huddle_and_score/repositories/tournaments_repository.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
-import 'package:huddle_and_score/screens/widgets/action_button.dart';
-import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../constants.dart';
@@ -38,7 +34,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   Razorpay razorpay;
   User user = AuthRepository().getCurrentUser();
   double liked = 0.5;
-  int firstOption = 0,secondOption = 0;
+  int firstOption = 0, secondOption = 0;
   void precomputer() {
     String cur = '';
     for (int i = 0; i < widget.subCat.length; i++) {
@@ -46,7 +42,7 @@ class _TournamentReviewState extends State<TournamentReview> {
       cur += widget.subCat[i];
     }
     cur = cur.trim();
-    String flag = widget.cat == 'Single' ? '1' : '2';
+    String flag = (widget.cat == 'Single' || widget.cat == 'Team') ? '1' : '2';
     for (var x in widget.currentTour.rooms) {
       bool ok = x.category == flag && x.subCategory == cur;
       if (ok) {
@@ -242,7 +238,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                               data: widget.userRecord.teamName)
                           : Container(),
                       DataShower(
-                          type: (widget.currForm == formType.Team) ? 'Captain\'s Name' : 'Player 1 Name',
+                          type: (widget.currForm == formType.Team)
+                              ? 'Captain\'s Name'
+                              : 'Player 1 Name',
                           data: widget.userRecord.captain.fullName),
                       DataShower(
                           type: 'Contact Number',

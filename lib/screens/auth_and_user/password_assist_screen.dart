@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huddle_and_score/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
@@ -28,7 +26,6 @@ class _PasswordAssistInitialScreenState
     print(currState);
     return SafeArea(
       child: Scaffold(
-
         body: Container(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -101,7 +98,7 @@ class _PasswordAssistInitialScreenState
                                     style: themeFont(s: 13),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       setState(() {
                                         currState = screen.Normal;
                                       });
@@ -172,7 +169,8 @@ class _PasswordAssistInitialScreenState
                                   ),
                                 );
                                 AuthRepository()
-                                    .sendPasswordResetEmail(_controller.text)
+                                    .sendPasswordResetEmail(
+                                        _controller.text.trim())
                                     .then((value) {
                                   setState(() {
                                     currState = screen.Pass;

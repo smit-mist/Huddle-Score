@@ -160,16 +160,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             child: MaterialButton(
                               onPressed: () async {
-                                widget.name = _nameCtrl.text;
+                                widget.name = _nameCtrl.text.trim();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (_) => LoadingScreen(),
                                   ),
                                 );
-                                 _bloc.add(HomeIconPressed());
+                                _bloc.add(HomeIconPressed());
                                 await UserRepository()
-                                    .changeUserName(_nameCtrl.text);
+                                    .changeUserName(_nameCtrl.text.trim());
                                 Navigator.pop(context);
                                 _bloc.add(ProfileIconPressed());
                                 setState(() {

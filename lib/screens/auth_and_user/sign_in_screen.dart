@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
@@ -147,8 +146,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           obscureText: !visible,
                           decoration: InputDecoration(
                             fillColor: Color(0xFFF1F1F1),
-
-                            errorText: (isFailed) ? 'Password is incorrect.' : null,
+                            errorText:
+                                (isFailed) ? 'Password is incorrect.' : null,
                             hintText: 'Password',
                             hintStyle: themeFont(
                                 color: Color(0xff626262), w: 'r', s: 14),
@@ -162,11 +161,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: Container(
                                 padding: EdgeInsets.all(12),
 
-                             //   color: kThemeColor,
-                             //    child: SvgPicture.asset(
-                             //      'assets/icons/password_eye_open.svg',
-                             //      color: passTapped == true?kThemeColor:Colors.grey.withOpacity(0.7),
-                             //    ),
+                                //   color: kThemeColor,
+                                //    child: SvgPicture.asset(
+                                //      'assets/icons/password_eye_open.svg',
+                                //      color: passTapped == true?kThemeColor:Colors.grey.withOpacity(0.7),
+                                //    ),
 
                                 child: Icon(
                                   (visible == true
@@ -264,7 +263,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             if (_key.currentState.validate()) {
                               _loginBloc.add(
                                 LoginButtonPressed(
-                                  email: emailCtrl.text,
+                                  email: emailCtrl.text.trim(),
                                   password: passwordCtrl.text,
                                 ),
                               );

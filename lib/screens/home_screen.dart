@@ -554,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           isValid = false;
                         });
                         await HomeRepository()
-                            .subscribeTurf('yyashjain2001@gmail.com');
+                            .subscribeTurf(_emailCtrl.text.trim());
                       }
                     },
                     child: Container(

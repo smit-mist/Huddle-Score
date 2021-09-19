@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/blocs/forms/forms_bloc.dart';
 import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/screens/partner_with_us/thank_you.dart';
@@ -118,13 +117,13 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                   if (_key.currentState.validate()) {
                     _bloc.add(PartnerTurfSubmit(
                       detailsTurf: PartnerDetailsTurf(
-                        email: _emailId.text,
+                        email: _emailId.text.trim(),
                         city: city,
                         state: statee,
-                        name: _name.text,
+                        name: _name.text.trim(),
                         type: 'turf',
-                        contactNumber: int.parse(_contact.text),
-                        turfName: _nameTurf.text,
+                        contactNumber: int.parse(_contact.text.trim()),
+                        turfName: _nameTurf.text.trim(),
                       ),
                     ));
                   }
@@ -452,10 +451,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                         '',
                       ),
                     ),
-                    SizedBox(
-                      height: 20
-                    ),
-
+                    SizedBox(height: 20),
                     SizedBox(
                       height: h * 0.1,
                     ),

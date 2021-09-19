@@ -1,11 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
-import 'package:huddle_and_score/screens/static_screens/user_tnc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
@@ -43,8 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -276,10 +272,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     width: 2,
                                     color: kThemeColor,
                                   ),
-
                                 ),
-
-
                               ),
                             ),
                           ),
@@ -428,7 +421,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.black,
                                           ),
                                         ),
-
                                         TextSpan(
                                           text: 'Terms & Conditions',
                                           style: themeFont(
@@ -499,9 +491,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             if (_key.currentState.validate()) {
                                               _signupBloc.add(
                                                 SignUpButtonPressed(
-                                                  email: emailCtrl.text,
+                                                  email: emailCtrl.text.trim(),
                                                   password: passwordCtrl.text,
-                                                  name: nameCtrl.text,
+                                                  name: nameCtrl.text.trim(),
                                                 ),
                                               );
                                             }

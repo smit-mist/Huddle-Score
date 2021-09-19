@@ -125,14 +125,14 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                     _bloc.add(
                       PartnerTourSubmit(
                         detailsTour: PartnerDetailsTour(
-                          email: _emailId.text,
+                          email: _emailId.text.trim(),
                           city: city,
                           tourType: tournamentType,
                           state: statee,
-                          name: _name.text,
+                          name: _name.text.trim(),
                           type: 'tour',
-                          contactNumber: int.parse(_contact.text),
-                          tourName: _nameTour.text,
+                          contactNumber: int.parse(_contact.text.trim()),
+                          tourName: _nameTour.text.trim(),
                         ),
                       ),
                     );
@@ -329,7 +329,10 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: DropdownButtonFormField<String>(
-                                    validator: (value)=>value=='Select a State' ? 'Please Select a State' : null,
+                                    validator: (value) =>
+                                        value == 'Select a State'
+                                            ? 'Please Select a State'
+                                            : null,
                                     isExpanded: true,
                                     focusColor: Colors.grey.withOpacity(0.14),
                                     value: statee,
