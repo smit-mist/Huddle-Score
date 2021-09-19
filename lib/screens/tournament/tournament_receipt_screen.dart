@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/feedback.dart';
 import 'package:huddle_and_score/repositories/feedback_repository.dart';
@@ -470,6 +471,11 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             child: ActionButton(
                               onTap: () async {
                                 print(suggestion.text + 'here22');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => LoadingScreen(),
+                                    ));
                                 await FeedBackRepository().sendFeedbackData(
                                   FeedBack(
                                     satisfied: liked.toInt(),
@@ -480,6 +486,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   ),
                                 );
                                 Navigator.pop(context);
+                                Navigator.pop(context);
+                                Fluttertoast.showToast(msg: 'Thanks for your FeedBack');
                               },
                               child: Text(
                                 'Submit',

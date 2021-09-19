@@ -88,9 +88,14 @@ class _FifaDetailsState extends State<FifaDetails> {
               ]),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios_rounded,
-                    size: 18,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {

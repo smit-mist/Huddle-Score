@@ -72,9 +72,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    ),
                   ),
                   Text(
                     'Account',

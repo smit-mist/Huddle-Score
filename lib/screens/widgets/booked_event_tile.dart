@@ -57,12 +57,15 @@ class BookedEventTile extends StatelessWidget {
                 booking.data.title,
                 style: themeFont(),
               ),
-              Text(
-                //venue.split(', ').join('\n'),
-                venue.length > 25
-                    ? venue.substring(0, 25).split(', ').join(',\n') + '...'
-                    : venue,
-                style: themeFont(s: 12, w: 'r'),
+              SizedBox(
+                width: w*0.4,
+                child: Text(
+                  //venue.split(', ').join('\n'),
+                  venue.length > 45
+                      ? venue.substring(0, 45) + '...'
+                      : venue,
+                  style: themeFont(s: 12, w: 'r'),
+                ),
               ),
               Text(
                 booking.data.timeLine.join(' - '),
