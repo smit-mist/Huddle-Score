@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
@@ -260,14 +261,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           msg: 'Please grant permission for notifications');
                     }
                   },
-                  child: Icon(
-                    Icons.notifications_none,
-                    color: kThemeColor,
-                    size: 30,
+                  child:  SvgPicture.asset(
+                    'assets/icons/Bellicon_Home.svg',
+                    height: 25,
+                    width: 25,
                   ),
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 10,
                 ),
                 GestureDetector(
                   onTap: () async {
@@ -286,10 +287,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       Fluttertoast.showToast(
                           msg: 'Please grant permission for camera');
                   },
-                  child: Icon(
-                    Icons.qr_code_scanner,
-                    color: kThemeColor,
-                    size: 30,
+                  child: SvgPicture.asset(
+                    'assets/icons/QRScanner_Home.svg',
+                    height: 25,
+                    width: 25,
                   ),
                 )
               ],

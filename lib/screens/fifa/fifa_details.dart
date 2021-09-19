@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/fifa.dart';
@@ -11,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'fifa_registration_form.dart';
 
-const double vertico = 2, horizonto = 7;
+const double vertico = 4, horizonto = 9;
 
 class FifaDetails extends StatefulWidget {
   Fifa fifa;
@@ -758,12 +759,17 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.phone),
+                                    SvgPicture.asset(
+                                      'assets/icons/Call_ContactTheOrganizer.svg',
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
                                     Text(
-                                      widget.fifa.contact[0].contactNumber.toString(),
+                                      widget.fifa.contact[0].contactNumber
+                                          .toString(),
                                       style: themeFont(),
                                     )
                                   ],
@@ -773,7 +779,11 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.email_outlined),
+                                    SvgPicture.asset(
+                                      'assets/icons/Email_ContactTheOrganizer.svg',
+                                      height: 15,
+                                      width: 15,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
@@ -792,7 +802,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 widget.fifa.contact[1].name,
+                                  widget.fifa.contact[1].name,
                                   style: themeFont(
                                     w: 'sb',
                                   ),
@@ -802,12 +812,17 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.phone),
+                                    SvgPicture.asset(
+                                      'assets/icons/Call_ContactTheOrganizer.svg',
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
                                     Text(
-                                      widget.fifa.contact[1].contactNumber.toString(),
+                                      widget.fifa.contact[1].contactNumber
+                                          .toString(),
                                       style: themeFont(),
                                     )
                                   ],
@@ -817,12 +832,16 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.email_outlined),
+                                    SvgPicture.asset(
+                                      'assets/icons/Email_ContactTheOrganizer.svg',
+                                      height: 15,
+                                      width: 15,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
                                     Text(
-                               widget.fifa.contact[1].email,
+                                      widget.fifa.contact[1].email,
                                       style: themeFont(),
                                     )
                                   ],
