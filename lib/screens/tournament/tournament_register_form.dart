@@ -95,9 +95,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   }
 
   void preComputer() {
-    print("Inside compu");
+  //  print("Inside compu");
     sport = widget.currentTour.info.type;
-    currForm = getFormType(sport);
+    currForm = getFormType(sport.toLowerCase());
+    print("$sport ---> $currForm");
     if (currForm == formType.Team) {
       tourType[0] = "Team";
       allCategory = {
