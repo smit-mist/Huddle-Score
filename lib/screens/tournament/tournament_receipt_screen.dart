@@ -692,7 +692,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            '*All players will be required to show identity proof at the time of the tournament.',
+                            '*All players will be required to show proof of identity at the time of the tournament.',
                             style: themeFont(s: 12, w: 'r'),
                           ),
                         ),
@@ -754,7 +754,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                         color: kThemeColor, s: 13, w: 'r'),
                                   ),
                                   Text(
-                                    'Voter Id',
+                                    'Pan Card',
                                     style: themeFont(
                                         color: Colors.black, s: 13, w: 'r'),
                                   ),
@@ -825,20 +825,20 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             : Container(),
                         DataShower(
                             type: (widget.currForm == formType.Team)
-                                ? 'Captain'
-                                : 'Player 1',
+                                ? 'Captain\'s Name'
+                                : 'Player 1 Name',
                             data: widget.details.regDetails.captain.fullName),
                         DataShower(
                             type: 'Contact Number',
                             data: widget.details.regDetails.captain.contact
                                 .toString()),
                         DataShower(
-                            type: 'Email Id',
+                            type: 'Email ID',
                             data: widget.details.regDetails.captain.email),
                         (widget.currForm != formType.Single)
                             ? DataShower(
                                 type: (widget.currForm == formType.Team)
-                                    ? 'Vice Captain'
+                                    ? 'Vice Captain\'s Name'
                                     : 'Player 2',
                                 data: widget
                                     .details.regDetails.viceCaptain.fullName)
@@ -852,7 +852,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             : Container(),
                         (widget.currForm != formType.Single)
                             ? DataShower(
-                                type: 'Email Id',
+                                type: 'Email ID',
                                 data:
                                     widget.details.regDetails.viceCaptain.email)
                             : Container(),
