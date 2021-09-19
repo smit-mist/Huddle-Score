@@ -45,7 +45,6 @@ class Fifa {
   bool registeredIn() {
     User value = AuthRepository().getCurrentUser();
     if (value == null) {
-      print("Not Found");
       return false;
     }
     String id = value.uid;
@@ -57,13 +56,12 @@ class Fifa {
         return true;
       }
     }
-    //print("Not Found");
 
     return false;
   }
 
   Future<Fifa> fromHomeFifa({HomeFifa fifa}) async {
-    print("here converting to fifa");
+ //   print("here converting to fifa");
     return await FifaRepository().getFifaById(fifa.fifaId);
   }
 }

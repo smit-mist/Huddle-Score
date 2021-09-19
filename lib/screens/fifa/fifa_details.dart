@@ -32,7 +32,20 @@ class _FifaDetailsState extends State<FifaDetails> {
   int seatsLeft;
   bool clickedOnRegister = false;
   String mapUrl = "";
+  String tnc;
   void precomputer() {
+    tnc = "";
+    String temp = "";
+    for(int i=0;i<widget.fifa.details.terms.length;i++){
+      if(widget.fifa.details.terms[i] != '|'){
+        temp += widget.fifa.details.terms[i];
+      }
+      else{
+        tnc += temp;tnc += '\n';
+        temp = "";
+      }
+    }
+    tnc += temp;
     print('User is registered:- ${widget.isReg}');
     seatsLeft =
         widget.fifa.main.rooms.total - widget.fifa.main.rooms.taken.length;
@@ -888,11 +901,11 @@ class _FifaDetailsState extends State<FifaDetails> {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      height: h * 0.5,
-                      child: SingleChildScrollView(
+                    //  height: h * 0.5,
+                      child:SingleChildScrollView(
                         controller: ctrl,
                         child: Container(
-                          height: h * 0.5,
+                          height: h,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -905,10 +918,28 @@ class _FifaDetailsState extends State<FifaDetails> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                widget.fifa.details.terms,
-                                style: themeFont()
-                                    .copyWith(decoration: TextDecoration.none),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+
+                                    children: [
+                                      Text(
+                                        tnc,
+                                        style: themeFont().copyWith(
+                                            decoration: TextDecoration.none),
+                                      ),
+                                      Container(
+                                        //  color: Colors.red,
+                                        height: 100,
+                                        width: 100,
+                                      )
+                                    ],
+                                  ),
+                                  scrollDirection: Axis.vertical,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                             ],
                           ),
@@ -916,9 +947,9 @@ class _FifaDetailsState extends State<FifaDetails> {
                       ),
                     );
                   },
-                  minChildSize: 0.25,
-                  maxChildSize: 0.4,
-                  initialChildSize: 0.25,
+                  minChildSize: 0.35,
+                  maxChildSize: 1,
+                  initialChildSize: 0.35,
                 )
               : Container(),
           (clickedOnRegister)

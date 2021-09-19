@@ -22,9 +22,9 @@ class PartnerRepository {
           'state': details.state,
         }),
       );
-      print(response.statusCode);
-      print(response.body);
-      if (response.statusCode == 200) print('Success=====>>>>');
+ //     print(response.statusCode);
+  //    print(response.body);
+    //  if (response.statusCode == 200) print('Success=====>>>>');
     } catch (e) {
       print(e.toString());
     }

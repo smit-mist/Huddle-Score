@@ -33,12 +33,9 @@ class HomeRepository {
     var response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       Map<String, dynamic> docs = jsonDecode(response.body)['fifa'];
-      print(docs.runtimeType);
       docs.forEach((key, value) {
-        //print(value);
         HomeFifa temp = HomeFifa.fromJson(key, value, "fifa");
         fifas.add(temp);
-        // print(temp.name);
       });
       return fifas;
     } else {
@@ -62,6 +59,5 @@ class HomeRepository {
     );
     print(response.statusCode);
     print(response.body);
-    if (response.statusCode == 200) print('successssssssssssssssssss');
   }
 }

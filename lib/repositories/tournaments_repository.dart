@@ -9,7 +9,6 @@ import 'package:huddle_and_score/repositories/auth_repository.dart';
 class TournamentRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<Tournament> getTournamentById(String iD) async {
-    print('fetching started');
     try {
       var response = _firestore.doc('tournaments/$iD');
       Tournament tournament = await response.get().then(

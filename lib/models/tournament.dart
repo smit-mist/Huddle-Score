@@ -39,17 +39,16 @@ class Tournament {
     String id = value.uid;
     for (int i = 0; i < this.totalReg.length; i++) {
       if (this.totalReg[i] == id) {
-        print("Found");
+   //     print("Found");
         return true;
       }
     }
-    print("Not Registered");
+  //  print("Not Registered");
     return false;
   }
 
   factory Tournament.fromMap(Map<String, dynamic> data, String id) {
-    //print(data['rooms'].toString());
-    print(id);
+
     var ok = Tournament(
       tourId: id,
       contact: contactToList(data['contact']),

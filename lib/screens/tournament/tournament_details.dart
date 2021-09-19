@@ -27,6 +27,7 @@ class TournamentDetails extends StatefulWidget {
 class _TournamentDetailsState extends State<TournamentDetails> {
   ButtonClickBloc _bloc;
   int seatsLeft;
+  String tnc;
   String timeLine;
   String combinedRegFees;
   int minPrice, maxPrice;
@@ -48,8 +49,23 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   }
 
   void preComputer() {
+    tnc = "";
+    String temp = "";
+    for(int i=0;i<widget.tournament.details.term.length;i++){
+      if(widget.tournament.details.term[i] != '|'){
+        temp += widget.tournament.details.term[i];
+      }
+      else{
+        tnc += temp;tnc += '\n';
+        temp = "";
+      }
+    }
+    tnc += temp;
+    //print("This is terms:- $tnc");
     seatsLeft = widget.tournament.total -
-        widget.tournament.rooms.length; // TODO: UPdate it.
+        widget.tournament.totalReg.length;
+    print(widget.tournament.total);
+    print(widget.tournament.totalReg.length);
     timeLine = "";
     st = WeirdDateFormat(date: widget.tournament.main.timeLine[0]);
     en = WeirdDateFormat(date: widget.tournament.main.timeLine[1]);
@@ -80,6 +96,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     combinedRegFees = "NOTHING";
     combinedRegFees = minPrice.toString() + ' - ' + maxPrice.toString();
     if (seatsLeft < 0) seatsLeft = 0;
+   // print("Seats Left:- $seatsLeft");
   }
 
   @override
@@ -1019,7 +1036,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      height: h * 0.9,
+                    //  height: h * 0.9,
                       child: SingleChildScrollView(
                         controller: ctrl,
                         child: Container(
@@ -1038,12 +1055,20 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               ),
                               Expanded(
                                 child: SingleChildScrollView(
-                                  child: Container(
-                                    child: Text(
-                                      widget.tournament.details.term,
-                                      style: themeFont().copyWith(
-                                          decoration: TextDecoration.none),
-                                    ),
+                                  child: Column(
+
+                                    children: [
+                                      Text(
+                                        tnc,
+                                        style: themeFont().copyWith(
+                                            decoration: TextDecoration.none),
+                                      ),
+                                      Container(
+                                      //  color: Colors.red,
+                                        height: 100,
+                                        width: 100,
+                                      )
+                                    ],
                                   ),
                                   scrollDirection: Axis.vertical,
                                 ),
@@ -1057,9 +1082,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       ),
                     );
                   },
-                  minChildSize: 0.25,
-                  maxChildSize: 0.9,
-                  initialChildSize: 0.25,
+                  minChildSize: 0.35,
+                  maxChildSize: 1,
+                  initialChildSize: 0.35,
                 )
               : Container(),
           (clickedOnRegister)

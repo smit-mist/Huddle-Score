@@ -40,7 +40,6 @@ class FifaTile extends StatelessWidget {
             ),
           ),
         );
-        //print('====>>>>${here.fifaId}');
       },
       child: Stack(
         alignment: Alignment.center,

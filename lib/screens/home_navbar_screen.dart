@@ -41,7 +41,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
             } else if (state is SearchScreenState) {
               return SearchScreen();
             } else if (state is CartScreenState) {
-              print(state.fifaBookings == null);
+      //        print(state.fifaBookings == null);
               return BookingHistoryScreen(
                 bookedTours: state.bookings,
                 bookedFifa: state.fifaBookings,
