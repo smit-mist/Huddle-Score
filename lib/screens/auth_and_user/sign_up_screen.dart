@@ -422,6 +422,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ),
                                         ),
                                         TextSpan(
+
                                           text: 'Terms & Conditions',
                                           style: themeFont(
                                             s: 12.0,

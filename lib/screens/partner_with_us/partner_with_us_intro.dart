@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/partner_with_us/how_it_works.dart';
-import 'package:huddle_and_score/static_screens/partner_tnc.dart';
+import 'package:huddle_and_score/screens/static_screens/partner_tnc.dart';
 
 import '../../constants.dart';
 

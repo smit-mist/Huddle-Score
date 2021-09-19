@@ -27,9 +27,23 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                 SizedBox(
                   height: 40,
                 ),
-                Text(
-                  'Help & Support',
-                  style: themeFont(color: kThemeColor, s: 23),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    Text(
+                      'Help & Support',
+                      style: themeFont(color: kThemeColor, s: 23),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10,
