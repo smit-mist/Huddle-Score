@@ -630,7 +630,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              flex: 2,
+
                               child: Container(
                                 height: h * (150 / kScreenH),
                                 child: Column(
@@ -673,17 +673,14 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: h * (147 / kScreenH),
-                                width: w * (120 / kScreenW),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(6),
-                                  child: Image.network(
-                                    widget.details.data.poster,
-                                    fit: BoxFit.cover,
-                                  ),
+                            Container(
+                              height: h * (147 / kScreenH),
+                              width: w * (130 / kScreenW),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  widget.details.data.poster,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             )
@@ -774,12 +771,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(horizontal:5.0),
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     height: h *
-                        (((widget.currForm == formType.Single) ? 250 : 390) /
+                        (((widget.currForm == formType.Single) ? 250 : 370) /
                             kScreenH),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -872,9 +869,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+
                       ],
                     ),
                   ),
