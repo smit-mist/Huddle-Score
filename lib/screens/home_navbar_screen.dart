@@ -121,7 +121,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
                   _homeNavBarBloc.add(CartIconPressed());
                 },
                 child: SvgPicture.asset(
-                  (curr == screen.Book)? 'assets/icons/Booking_Filled.svg':'assets/icons/Booking_Filled.svg',
+                  (curr == screen.Book)? 'assets/icons/Booking_Filled.svg':'assets/icons/Booking_NotFilled.svg',
                   height: 30,
                   width: 30,
                 ),

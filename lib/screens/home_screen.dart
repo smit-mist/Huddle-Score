@@ -513,8 +513,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: Image.asset(
-                        'assets/images/turf_subs.png',
+                        'assets/icons/Turfaroundyou.png',
                         fit: BoxFit.fill,
+                        // TODO: We can unstreach but will shrink image a bit.
                       ),
                     ),
                     height: h * (170 / kScreenH),
