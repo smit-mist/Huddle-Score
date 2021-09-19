@@ -16,8 +16,48 @@ class BookingHistoryScreen extends StatefulWidget {
 }
 
 class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
+  List<BookingDetails>upTour = [],downTour = [];
+  List<FifaBookingDetails>upFifa = [],downFifa = [];
   String selected = "Tournaments";
+  @override
+  void initState() {
+    // TODO: implement initState
+    DateTime today = DateTime.now();
 
+    if(widget.bookedTours != null){
+      for(int i=0;i<widget.bookedTours.length;i++){
+        bool notDone = true;
+        for(int j=0;j<widget.bookedTours[i].data.timeLine.length;j++){
+          var given = DateTime.parse(widget.bookedTours[i].data.timeLine[j].toString());
+          if (today.isAfter(given)) {
+            notDone = false;
+            break;
+          }
+        }
+        if(notDone){
+          print("upcoming ${widget.bookedTours[i].data.title}");
+          upTour.add(widget.bookedTours[i]);
+        }
+        else{
+          print("gone ${widget.bookedTours[i].data.title}");
+
+          downTour.add(widget.bookedTours[i]);
+        }
+
+      }
+    }
+    if(widget.bookedFifa != null){
+      for(var x in widget.bookedFifa){
+        DateTime here = DateTime.parse(x.data.gameDate);
+        if(today.isAfter(here)){
+          downFifa.add(x);
+        }
+        else
+          upFifa.add(x);
+      }
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -112,7 +152,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
               height: 10.0,
             ),
             (selected == 'Fifa')
-                ? (widget.bookedFifa == null)
+                ? (upFifa == null||upFifa.length ==0)
                     ? Center(child: Text('No bookings'))
                     : Container(
                         width: w,
@@ -128,14 +168,14 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                             return Padding(
                               padding: EdgeInsets.only(bottom: 5),
                               child: FifaBookingTile(
-                                booking: widget.bookedFifa[ind],
+                                booking: upFifa[ind],
                               ),
                             );
                           },
-                          itemCount: widget.bookedFifa.length,
+                          itemCount: upFifa.length,
                         ),
                       )
-                : (widget.bookedTours == null)
+                : (upTour == null||upTour.length ==0)
                     ? Center(child: Text('No bookings'))
                     : Container(
                         child: ListView.separated(
@@ -150,11 +190,11 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: BookedEventTile(
-                                booking: widget.bookedTours[ind],
+                                booking: upTour[ind],
                               ),
                             );
                           },
-                          itemCount: widget.bookedTours.length,
+                          itemCount: upTour.length,
                         ),
                       ),
             SizedBox(
@@ -181,12 +221,50 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              'No Bookings',
-              style: themeFont(
-                color: Colors.red,
-                s: 18.0,
-                w: 'sb',
+            (selected == 'Fifa')
+                ? (downFifa == null||downFifa.length ==0)
+                ? Center(child: Text('No bookings'))
+                : Container(
+              width: w,
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                separatorBuilder: (_, i) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                itemBuilder: (_, ind) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: FifaBookingTile(
+                      booking: downFifa[ind],
+                    ),
+                  );
+                },
+                itemCount: downFifa.length,
+              ),
+            )
+                : (downTour == null||downTour.length ==0)
+                ? Center(child: Text('No bookings'))
+                : Container(
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                separatorBuilder: (_, i) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                itemBuilder: (_, ind) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: BookedEventTile(
+                      booking: downTour[ind],
+                    ),
+                  );
+                },
+                itemCount: downTour.length,
               ),
             ),
           ],
