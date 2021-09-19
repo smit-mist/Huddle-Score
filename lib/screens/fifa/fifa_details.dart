@@ -930,8 +930,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       ),
                                       Container(
                                         //  color: Colors.red,
-                                        height: 100,
-                                        width: 100,
+                                        height: 500,
+                                        width: 500,
                                       )
                                     ],
                                   ),
@@ -939,7 +939,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 65,
                               ),
                             ],
                           ),
@@ -947,9 +947,9 @@ class _FifaDetailsState extends State<FifaDetails> {
                       ),
                     );
                   },
-                  minChildSize: 0.35,
+                  minChildSize: 0.5,
                   maxChildSize: 1,
-                  initialChildSize: 0.35,
+                  initialChildSize: 0.5,
                 )
               : Container(),
           (clickedOnRegister)

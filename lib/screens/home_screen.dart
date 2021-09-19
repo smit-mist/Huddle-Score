@@ -15,6 +15,7 @@ import 'package:huddle_and_score/screens/tournament/view_all_tournament_screen.d
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/camera_widget.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
+import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "ad4",
   ];
   TextEditingController _emailCtrl = TextEditingController();
-
+  bool emailTapped = false;
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<HomeBloc>(context);
@@ -92,11 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                     width: w * (350 / kScreenW),
-                    height: h * (260 / kScreenH),
+                    height: h * (200 / kScreenH),
                     child: GridView.builder(
                         itemCount: cities.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
+                          crossAxisCount: 2,
                           childAspectRatio: (101) / (42),
                         ),
                         itemBuilder: (_, int ind) {
@@ -113,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     cities[ind],
                                     style: themeFont(
-                                        s: 12, w: (ind == 0) ? 'r' : 'l'),
+                                        s: 12, w: (ind == 0) ? 'm' : 'r'),
                                   ),
                                 ),
                                 decoration: BoxDecoration(
@@ -261,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           msg: 'Please grant permission for notifications');
                     }
                   },
-                  child:  SvgPicture.asset(
+                  child: SvgPicture.asset(
                     'assets/icons/Bellicon_Home.svg',
                     height: 25,
                     width: 25,
@@ -532,10 +533,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      // TODO: Fill color is white only in design.
                       controller: _emailCtrl,
                       decoration:
                           normalTextDecoration('Enter your Email ID').copyWith(
-                        fillColor: Colors.white,
                         errorText: isValid
                             ? 'Please enter a valid email address'
                             : null,
@@ -554,8 +555,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() {
                           isValid = false;
                         });
-                        await HomeRepository()
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => LoadingScreen()));
+                       await HomeRepository()
                             .subscribeTurf(_emailCtrl.text.trim());
+                       _emailCtrl.clear();
+                       //TODO: Add try catch block in the function..
+                        Navigator.pop(context);
+                        Fluttertoast.showToast(msg: 'Subscribed Successfully');
                       }
                     },
                     child: Container(

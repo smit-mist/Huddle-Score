@@ -1065,8 +1065,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                       ),
                                       Container(
                                       //  color: Colors.red,
-                                        height: 100,
-                                        width: 100,
+                                        height: 500,
+                                        width: 500,
                                       )
                                     ],
                                   ),
@@ -1082,9 +1082,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       ),
                     );
                   },
-                  minChildSize: 0.35,
+                  minChildSize: 0.5,
                   maxChildSize: 1,
-                  initialChildSize: 0.35,
+                  initialChildSize: 0.5,
                 )
               : Container(),
           (clickedOnRegister)
