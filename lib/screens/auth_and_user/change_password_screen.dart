@@ -45,7 +45,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pop(context);
                         },
                         child: Icon(
@@ -197,9 +197,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     validator: (value) {
                       if (value.isEmpty ||
                           value == null ||
+                          value.length < 6 ||
                           value.contains(
                                 RegExp(
-                                  r'[!@#$%^&*(),.?":{}|<>]',
+                                  r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$',
                                 ),
                               ) ==
                               false)
@@ -440,13 +441,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           FirebaseAuth.instance.currentUser
                               .reauthenticateWithCredential(credential)
                               .then((value) async {
-                            print('reauthenticated');
+                            print('re-authenticated');
                             await UserRepository()
                                 .changeUserPassword(pass2.text);
                             Navigator.pop(context);
                             Fluttertoast.showToast(msg: 'Password Changed');
                           }, onError: (error, stackTrace) {
-                            print("Error while reauthenticating");
+                            print("Error while re-authenticating");
                             print(error.toString());
                             print(stackTrace.toString());
                             setState(() {

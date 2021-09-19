@@ -421,41 +421,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.black,
                                           ),
                                         ),
-                                        TextSpan(
-
-                                          text: 'Terms & Conditions',
-                                          style: themeFont(
-                                            s: 12.0,
-                                            w: 'r',
-                                            color: Colors.blue,
-                                          ).copyWith(
-                                              decoration:
-                                                  TextDecoration.underline),
-                                        ),
-                                        TextSpan(
-                                          text: ' and ',
-                                          style: themeFont(
-                                            s: 12.0,
-                                            w: 'r',
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: 'Privacy Policy',
-                                          style: themeFont(
-                                            s: 12.0,
-                                            w: 'r',
-                                            color: Colors.blue,
-                                          ).copyWith(
-                                              decoration:
-                                                  TextDecoration.underline),
-                                        ),
                                       ],
                                     ),
-
-                                    // children: [
-
-                                    // ],
                                   ),
                                 ),
                               ],
@@ -654,14 +621,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             validator: (value) {
                               if (value.isEmpty ||
                                   value == null ||
-                                  value.length < 8 ||
+                                  value.length < 6 ||
                                   value.contains(
                                         RegExp(
-                                          r'[!@#$%^&*(),.?":{}|<>]',
+                                          r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$',
                                         ),
                                       ) ==
                                       false)
-                                return 'Please Enter the password in the given mannner';
+                                return 'Please Enter the password in the given manner';
                               return null;
                             },
                             onChanged: (ok) {
