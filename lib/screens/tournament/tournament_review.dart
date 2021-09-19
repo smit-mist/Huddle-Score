@@ -7,6 +7,7 @@ import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
+import 'package:huddle_and_score/screens/static_screens/booking_failed.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_receipt_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -86,6 +87,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print("${response.message} hereherehere");
     Fluttertoast.showToast(msg: "Error");
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>BookingFailed()));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {

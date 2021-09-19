@@ -22,7 +22,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-  //  print(widget.bookedTours.length);
+    //  print(widget.bookedTours.length);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       width: w,
@@ -53,7 +53,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 value: selected,
                 style: themeFont(color: kThemeColor),
                 icon: Padding(
-                  padding: const EdgeInsets.only(left:5.0),
+                  padding: const EdgeInsets.only(left: 5.0),
                   child: Icon(
                     Icons.keyboard_arrow_down,
                     color: kThemeColor,
@@ -116,8 +116,9 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                     ? Center(child: Text('No bookings'))
                     : Container(
                         width: w,
-                        height: h * 0.4,
                         child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           separatorBuilder: (_, i) {
                             return SizedBox(
                               height: 10,
@@ -137,9 +138,9 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 : (widget.bookedTours == null)
                     ? Center(child: Text('No bookings'))
                     : Container(
-                        height: h * 0.4,
-                        width: w,
                         child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           separatorBuilder: (_, i) {
                             return SizedBox(
                               height: 10,
@@ -147,7 +148,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                           },
                           itemBuilder: (_, ind) {
                             return Padding(
-                              padding: const EdgeInsets.only(bottom:5.0),
+                              padding: const EdgeInsets.only(bottom: 5.0),
                               child: BookedEventTile(
                                 booking: widget.bookedTours[ind],
                               ),

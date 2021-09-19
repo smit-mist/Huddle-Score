@@ -11,6 +11,7 @@ import 'package:huddle_and_score/models/user.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/booking_failed.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../constants.dart';
@@ -60,6 +61,7 @@ class _FifaReviewState extends State<FifaReview> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print("${response.message} hereherehere");
     Fluttertoast.showToast(msg: "Error");
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>BookingFailed()));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {

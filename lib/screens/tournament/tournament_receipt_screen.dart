@@ -776,7 +776,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     height: h *
-                        (((widget.currForm == formType.Single) ? 250 : 370) /
+                        (((widget.currForm == formType.Single) ? 240 : 370) /
                             kScreenH),
                     decoration: BoxDecoration(
                       color: Colors.white,
