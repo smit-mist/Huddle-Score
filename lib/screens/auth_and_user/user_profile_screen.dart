@@ -63,6 +63,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         s: 20,
                       ),
                     ),
+                    SizedBox(height: 7,),
                     Text(
                       '${widget.email}',
                       style: themeFont(

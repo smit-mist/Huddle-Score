@@ -8,7 +8,8 @@ class HelpAndSupportScreen extends StatefulWidget {
 }
 
 class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
-  bool ok = false;
+  List<bool>ok = List<bool>(20);
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -48,10 +49,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Huddle & Score is a digital connectivity platform wherein we facilitate a sports booking platform for turfs and tournaments amongst other services. We are the bridge between the owners/organizers and the players. With us, discover new turfs and tournaments around you, and book yourself a slot to play both casual games, and prize-winning tournaments.',
                   ques: 'What is Huddle & Score?',
-                  val: ok,
+                  val: ok[0],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[0] = nw;
                     });
                   },
                 ),
@@ -59,10 +60,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Huddle & Score is based out of Ahmedabad, India. However, our services are rendered pan India.',
                   ques: 'Where are we from?',
-                  val: ok,
+                  val: ok[1],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[1] = nw;
                     });
                   },
                 ),
@@ -70,10 +71,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Huddle & Score is not for just professionals, but for anyone who wishes to enjoy a game of… well, any sport at all.',
                   ques: 'Who is Huddle & Score for?',
-                  val: ok,
+                  val: ok[2],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[2] = nw;
                     });
                   },
                 ),
@@ -81,10 +82,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'We bridge the gap between players and the game with an easy booking destination with multiple options, to ensure your convenience.',
                   ques: 'What do we do?',
-                  val: ok,
+                  val: ok[3],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[3] = nw;
                     });
                   },
                 ),
@@ -92,10 +93,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'We are a hassle-free platform providing seamless and safe booking services. Huddle & Score offers authenticity and transparency that ensures trust.',
                   ques: 'Are there any benefits to registering with Huddle & Score?',
-                  val: ok,
+                  val: ok[4],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[4] = nw;
                     });
                   },
                 ),
@@ -110,10 +111,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Apart from your photograph, any details like your name can be altered.',
                   ques: 'Can i edit my profile details?',
-                  val: ok,
+                  val: ok[5],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[5] = nw;
                     });
                   },
                 ),
@@ -121,10 +122,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'No, you cannot link 1 Huddle & Score account with 2 email addresses.',
                   ques: 'Can I register with a different email address?',
-                  val: ok,
+                  val: ok[6],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[6] = nw;
                     });
                   },
                 ),
@@ -132,10 +133,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'It is always a good idea to carry your ID when going to a booked turf/tournament. However, the compulsory requirements change as per every turf/tournament. Please check “Download Terms & Conditions” for specific requirements of each tournament/turf before your match.',
                   ques: 'Do I need to carry identification for playing?',
-                  val: ok,
+                  val: ok[7],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[7] = nw;
                     });
                   },
                 ),
@@ -143,10 +144,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                   'Once registered for the tournament, you will be unable to change your personal details. We suggest that you thoroughly review your details before submitting.',
                   ques: 'Can I change my details once I have registered for a tournament?',
-                  val: ok,
+                  val: ok[8],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[8] = nw;
                     });
                   },
                 ),
@@ -162,10 +163,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                       'Currently, Huddle & Score offers services in Ahmedabad. We will soon be coming to other cities of India.'
                       '\nIf you are a turf owner or a tournament organizer, we welcome you to list your turf/tournament with us.',
                   ques: 'In what cities are your services available?',
-                  val: ok,
+                  val: ok[9],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[9] = nw;
                     });
                   },
                 ),
@@ -173,10 +174,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'No, cancellation of bookings/registrations is not permissible.',
                   ques: 'Can I cancel my booking/registration?',
-                  val: ok,
+                  val: ok[10],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[10] = nw;
                     });
                   },
                 ),
@@ -184,10 +185,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'No, it is not possible for you to register in the same tournament twice.',
                   ques: 'Can I register more than once in the same tournament?',
-                  val: ok,
+                  val: ok[11],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[11] = nw;
                     });
                   },
                 ),
@@ -195,10 +196,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'No, registration for a tournament cannot be transferred to another person or user of Huddle & Score.',
                   ques: 'Can my registration be transferred to someone else?',
-                  val: ok,
+                  val: ok[12],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[12] = nw;
                     });
                   },
                 ),
@@ -206,10 +207,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'The “My Bookings”  section on the app and the website will reflect all your bookings. Huddle & Score also sends confirmation through Email.',
                   ques: 'Where can I find my booking receipt/confirmation?',
-                  val: ok,
+                  val: ok[13],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[13] = nw;
                     });
                   },
                 ),
@@ -217,10 +218,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'In the event of cancellation of a tournament, all refund related formalities of that specific tournament will be taken care of by the organizer of the tournament. For further clarification, it is advised to contact the organizer directly.',
                   ques: 'What if the tournament gets cancelled?',
-                  val: ok,
+                  val: ok[14],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[14] = nw;
                     });
                   },
                 ),
@@ -235,10 +236,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'We offer payment options like Credit/Debit Cards, UPI, and Net Banking. To ensure a secure and seamless payment system, we do not accept cash payments.',
                   ques: 'Can I make a payment through cash?',
-                  val: ok,
+                  val: ok[15],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[15] = nw;
                     });
                   },
                 ),
@@ -246,10 +247,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Razorpay is the secure payment gateway that Huddle & Score employs. Yes, it is completely safe.',
                   ques: 'What is Razorpay? Is it safe?',
-                  val: ok,
+                  val: ok[16],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[16] = nw;
                     });
                   },
                 ),
@@ -257,10 +258,10 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ans:
                       'Well, that’s not great. Try cross-referencing your card details or your UPI details. You may have entered incorrect information. If that does not work, then we suggest that you use another payment method.',
                   ques: 'Why is my payment not going through?',
-                  val: ok,
+                  val: ok[17],
                   onPressed: (bool nw) {
                     setState(() {
-                      ok = nw;
+                      ok[17] = nw;
                     });
                   },
                 ),
