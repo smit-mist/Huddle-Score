@@ -29,9 +29,9 @@ class _HomeNavBarState extends State<HomeNavBar> {
     _homeNavBarBloc = BlocProvider.of<HomeNavBarBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
+    return Scaffold(
+      body: SafeArea(
+        child: BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
           builder: (context, state) {
             if (state is UserProfileScreenState) {
               return UserProfileScreen(
@@ -55,96 +55,97 @@ class _HomeNavBarState extends State<HomeNavBar> {
             return HomeScreen();
           },
         ),
-        bottomNavigationBar: Container(
-          width: w,
-          height: h * 0.1,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, -0.5), // changes position of shadow
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //    SizedBox(width: 1,),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    curr = screen.Home;
-                  });
-                  _homeNavBarBloc.add(HomeIconPressed());
-                },
-                child: SvgPicture.asset(
-                  (curr == screen.Home)? 'assets/icons/Home_Filled.svg':'assets/icons/Homeicon_NotFilled.svg',
-                  height: 30,
-                  width: 30,
-                ),
-                // child: Icon(
-                //   Icons.home,
-                //   color: kThemeColor,
-                //   size: 35,
-                // ),
-              ),
-              SizedBox(
-                width: 1,
-              ),
 
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    curr = screen.Search;
-                  });
-                  _homeNavBarBloc.add(SearchIconPressed());
-                },
-                child: SvgPicture.asset(
-                  (curr == screen.Search)? 'assets/icons/Search_NotFilled.svg':'assets/icons/Search_NotFilled.svg',
-                  height: 30,
-                  width: 30,
-                ),
+      ),
+      bottomNavigationBar: Container(
+        width: w,
+        height: h * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: Offset(0, -0.5), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            //    SizedBox(width: 1,),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  curr = screen.Home;
+                });
+                _homeNavBarBloc.add(HomeIconPressed());
+              },
+              child: SvgPicture.asset(
+                (curr == screen.Home)? 'assets/icons/Home_Filled.svg':'assets/icons/Homeicon_NotFilled.svg',
+                height: 30,
+                width: 30,
               ),
-              SizedBox(
-                width: 1,
-              ),
+              // child: Icon(
+              //   Icons.home,
+              //   color: kThemeColor,
+              //   size: 35,
+              // ),
+            ),
+            SizedBox(
+              width: 1,
+            ),
 
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    curr = screen.Book;
-                  });
-                  _homeNavBarBloc.add(CartIconPressed());
-                },
-                child: SvgPicture.asset(
-                  (curr == screen.Book)? 'assets/icons/Booking_Filled.svg':'assets/icons/Booking_NotFilled.svg',
-                  height: 30,
-                  width: 30,
-                ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  curr = screen.Search;
+                });
+                _homeNavBarBloc.add(SearchIconPressed());
+              },
+              child: SvgPicture.asset(
+                (curr == screen.Search)? 'assets/icons/Search_NotFilled.svg':'assets/icons/Search_NotFilled.svg',
+                height: 30,
+                width: 30,
               ),
-              SizedBox(
-                width: 1,
-              ),
+            ),
+            SizedBox(
+              width: 1,
+            ),
 
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    curr = screen.Profile;
-                  });
-                  _homeNavBarBloc.add(ProfileIconPressed());
-                },
-                child:SvgPicture.asset(
-                  (curr == screen.Profile)? 'assets/icons/Profile_Filled.svg':'assets/icons/Profile_NotFilled.svg',
-                  height: 30,
-                  width: 30,
-                ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  curr = screen.Book;
+                });
+                _homeNavBarBloc.add(CartIconPressed());
+              },
+              child: SvgPicture.asset(
+                (curr == screen.Book)? 'assets/icons/Booking_Filled.svg':'assets/icons/Booking_NotFilled.svg',
+                height: 30,
+                width: 30,
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              width: 1,
+            ),
+
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  curr = screen.Profile;
+                });
+                _homeNavBarBloc.add(ProfileIconPressed());
+              },
+              child:SvgPicture.asset(
+                (curr == screen.Profile)? 'assets/icons/Profile_Filled.svg':'assets/icons/Profile_NotFilled.svg',
+                height: 30,
+                width: 30,
+              ),
+            ),
+          ],
         ),
       ),
     );
