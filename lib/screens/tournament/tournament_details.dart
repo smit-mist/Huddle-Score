@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/tournament.dart';
@@ -13,7 +14,7 @@ import 'dart:math';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const double vertico = 2, horizonto = 7;
+const double vertico = 4, horizonto = 9;
 
 class TournamentDetails extends StatefulWidget {
   Tournament tournament;
@@ -887,7 +888,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.phone),
+                                    SvgPicture.asset(
+                                      'assets/icons/Call_ContactTheOrganizer.svg',
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
@@ -903,7 +908,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.email_outlined),
+                                    SvgPicture.asset(
+                                      'assets/icons/Email_ContactTheOrganizer.svg',
+                                      height: 15,
+                                      width: 15,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
@@ -933,7 +942,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.phone),
+                                    SvgPicture.asset(
+                                      'assets/icons/Call_ContactTheOrganizer.svg',
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),
@@ -949,7 +962,11 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.email_outlined),
+                                    SvgPicture.asset(
+                                      'assets/icons/Email_ContactTheOrganizer.svg',
+                                      height: 15,
+                                      width: 15,
+                                    ),
                                     SizedBox(
                                       width: horizonto,
                                     ),

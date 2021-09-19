@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/screens/static_screens/about_app_screen.dart';
 import 'package:huddle_and_score/screens/auth_and_user/edit_profile_screen.dart';
@@ -96,8 +97,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     'Account',
                     style: themeFont(),
                   ),
-                  leading: Icon(
-                    Icons.exit_to_app_sharp,
+                  leading: SvgPicture.asset(
+                    'assets/icons/Account_Profile.svg',
+                    height: 15,
+                    width: 15,
                   ),
                   trailing: Container(
                     width: 50,
@@ -132,8 +135,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     'Help & Support',
                     style: themeFont(),
                   ),
-                  leading: Icon(
-                    Icons.notifications_none,
+                  leading: SvgPicture.asset(
+                    'assets/icons/Help&Support_Account.svg',
+                    height: 17,
+                    width: 17,
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,
@@ -154,8 +159,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     'About',
                     style: themeFont(),
                   ),
-                  leading: Icon(
-                    Icons.add_circle_outline,
+                  leading: SvgPicture.asset(
+                    'assets/icons/About_Profile.svg',
+                    height: 17,
+                    width: 17,
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,

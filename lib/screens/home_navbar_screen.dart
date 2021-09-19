@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/booking/booking_for_not_login.dart';
@@ -9,11 +10,20 @@ import 'package:huddle_and_score/screens/search_screen.dart';
 import 'auth_and_user/anonymous_profile_screen.dart';
 import 'auth_and_user/user_profile_screen.dart';
 import 'home_screen.dart';
+enum screen{Home,Search,Book,Profile}
 
-class HomeNavBar extends StatelessWidget {
+class HomeNavBar extends StatefulWidget {
   Widget showMe;
+
   HomeNavBar({this.showMe});
+
+  @override
+  _HomeNavBarState createState() => _HomeNavBarState();
+}
+
+class _HomeNavBarState extends State<HomeNavBar> {
   HomeNavBarBloc _homeNavBarBloc;
+  screen curr = screen.Home;
   @override
   Widget build(BuildContext context) {
     _homeNavBarBloc = BlocProvider.of<HomeNavBarBloc>(context);
@@ -41,7 +51,7 @@ class HomeNavBar extends StatelessWidget {
             } else if (state is GuestCartScreenState) {
               return BookingNotSignIn();
             }
-            if (showMe != null) return showMe;
+            if (widget.showMe != null) return widget.showMe;
             return HomeScreen();
           },
         ),
@@ -66,13 +76,21 @@ class HomeNavBar extends StatelessWidget {
               //    SizedBox(width: 1,),
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    curr = screen.Home;
+                  });
                   _homeNavBarBloc.add(HomeIconPressed());
                 },
-                child: Icon(
-                  Icons.home,
-                  color: kThemeColor,
-                  size: 35,
+                child: SvgPicture.asset(
+                  (curr == screen.Home)? 'assets/icons/Home_Filled.svg':'assets/icons/Homeicon_NotFilled.svg',
+                  height: 30,
+                  width: 30,
                 ),
+                // child: Icon(
+                //   Icons.home,
+                //   color: kThemeColor,
+                //   size: 35,
+                // ),
               ),
               SizedBox(
                 width: 1,
@@ -80,12 +98,15 @@ class HomeNavBar extends StatelessWidget {
 
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    curr = screen.Search;
+                  });
                   _homeNavBarBloc.add(SearchIconPressed());
                 },
-                child: Icon(
-                  Icons.search,
-                  color: kThemeColor,
-                  size: 35,
+                child: SvgPicture.asset(
+                  (curr == screen.Search)? 'assets/icons/Search_NotFilled.svg':'assets/icons/Search_NotFilled.svg',
+                  height: 30,
+                  width: 30,
                 ),
               ),
               SizedBox(
@@ -94,12 +115,15 @@ class HomeNavBar extends StatelessWidget {
 
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    curr = screen.Book;
+                  });
                   _homeNavBarBloc.add(CartIconPressed());
                 },
-                child: Icon(
-                  Icons.shopping_bag,
-                  color: kThemeColor,
-                  size: 35,
+                child: SvgPicture.asset(
+                  (curr == screen.Book)? 'assets/icons/Booking_Filled.svg':'assets/icons/Booking_Filled.svg',
+                  height: 30,
+                  width: 30,
                 ),
               ),
               SizedBox(
@@ -108,12 +132,15 @@ class HomeNavBar extends StatelessWidget {
 
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    curr = screen.Profile;
+                  });
                   _homeNavBarBloc.add(ProfileIconPressed());
                 },
-                child: Icon(
-                  Icons.account_circle,
-                  color: kThemeColor,
-                  size: 35,
+                child:SvgPicture.asset(
+                  (curr == screen.Profile)? 'assets/icons/Profile_Filled.svg':'assets/icons/Profile_NotFilled.svg',
+                  height: 30,
+                  width: 30,
                 ),
               ),
             ],

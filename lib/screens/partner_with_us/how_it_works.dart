@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/screens/partner_with_us/fill_your_details_tournament.dart';
 import 'package:huddle_and_score/screens/widgets/bottom_bar_widget.dart';
 
@@ -14,7 +15,7 @@ class HowItWorks extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     print("Builded");
     String use = "turf";
-    if(!isFirst){
+    if (!isFirst) {
       use = "tournament";
     }
     return SafeArea(
@@ -58,17 +59,21 @@ class HowItWorks extends StatelessWidget {
               SizedBox(
                 height: h * 0.035,
               ),
-              showText(
-                  'Listing your ' +use+ ' has never been easier. In just 2 quick steps, set yourself up for endless opportunities!'),
+              showText('Listing your ' +
+                  use +
+                  ' has never been easier. In just 2 quick steps, set yourself up for endless opportunities!'),
               SizedBox(
                 height: h * 0.05,
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.text_snippet,
-                    size: 40,
-                    color: Colors.black,
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SvgPicture.asset(
+                    'assets/icons/FillTheForm_PWU.svg',
+                    height: 30,
+                    width: 30,
                   ),
                   SizedBox(
                     width: 15,
@@ -93,10 +98,13 @@ class HowItWorks extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.phone_forwarded,
-                    size: 40,
-                    color: Colors.black,
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SvgPicture.asset(
+                    'assets/icons/WeWillConnect_PWU.svg',
+                    height: 30,
+                    width: 30,
                   ),
                   SizedBox(
                     width: 15,
