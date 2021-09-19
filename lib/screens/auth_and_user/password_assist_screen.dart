@@ -37,6 +37,23 @@ class _PasswordAssistInitialScreenState
                   SizedBox(
                     height: 50,
                   ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.black,
+                        ),
+                        Text(
+                          'Back',
+                          style: themeFont(color: kThemeColor, s: 23),
+                        ),
+                      ],
+                    ),
+                  ),
                   Image.asset(
                     'assets/images/huddle_logo.png',
                     height: h * 0.1,

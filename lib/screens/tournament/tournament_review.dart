@@ -108,7 +108,10 @@ class _TournamentReviewState extends State<TournamentReview> {
         'payload': jsonEncode(
           Captain().toMap(regDetails.captain),
         ),
-        'payload2': room.category == '2'
+        'team': (widget.currForm != formType.Single)
+            ? widget.userRecord.teamName
+            : null,
+        'payload2': widget.currForm != formType.Single
             ? jsonEncode(
                 Captain().toMap(regDetails.viceCaptain),
               )

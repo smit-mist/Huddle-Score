@@ -55,8 +55,8 @@ class FifaTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 4,
                   ),
                 ],
                 color: Colors.white,
