@@ -16,7 +16,7 @@ class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
-
+// TODO: Two screens are there take care..
 class _SignUpScreenState extends State<SignUpScreen> {
   bool typedName = false,
       typedEmail = false,
@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       typedP2 = false,
       showP1 = false,
       showP2 = false;
+  bool termsAgreed = false;
   SignupBloc _signupBloc;
 
   final _key = GlobalKey<FormState>();
@@ -47,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-
+    print("Terms $termsAgreed");
     return CommonScaffold(
       child: Container(
           padding: EdgeInsets.all(20),
@@ -62,7 +63,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     (route) => false,
                   );
-                } else if (state is SignUpLoading) {
+                }
+                else if (state is SignUpLoading) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -399,12 +401,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               //mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                    color: kThemeColor,
-                                    child: SvgPicture.asset(
-                                      'assets/icons/checkbox.svg',
-                                      color: Colors.white,
-                                    )),
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      termsAgreed = !termsAgreed;
+                                    });
+                                  },
+                                  child:Container(
+                                      color: (termsAgreed)? kThemeColor:Colors.white,
+                                      child: SvgPicture.asset(
+                                        'assets/icons/checkbox.svg',
+                                        color: Colors.white,
+                                      )),
+                                ),
                                 SizedBox(
                                   width: 10.0,
                                 ),
@@ -435,7 +444,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           BlocBuilder<SignupBloc, SignupState>(
                             builder: (context, state) {
                               bool isOk =
-                                  (typedEmail & typedName & typedP1 & typedP2);
+                                  (typedEmail & typedName & typedP1 & typedP2 & termsAgreed);
                               //  print(isOk);
                               return SizedBox(
                                 width: double.infinity,
@@ -468,6 +477,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             }
                                           }
                                         : () {
+
                                             print("Fill Everything");
                                           }),
                               );
@@ -507,7 +517,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   );
-                } else if (state is SignUpSuccess) {
+                }
+                else if (state is SignUpSuccess) {
                   emailCtrl.text = '';
                   nameCtrl.text = '';
                   passwordCtrl.text = '';
