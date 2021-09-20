@@ -40,9 +40,25 @@ class _UserPrivacyPolicyState extends State<UserPrivacyPolicy> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Privacy Policy',
-                style: bigText,
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'Privacy Policy',
+                    style: bigText,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 5,
