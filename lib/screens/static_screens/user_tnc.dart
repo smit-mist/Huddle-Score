@@ -4,126 +4,465 @@ import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
-class UserTermsAndConditions extends StatefulWidget {
-  @override
-  _UserTermsAndConditionsState createState() => _UserTermsAndConditionsState();
-}
+TextStyle smallText = themeFont(s: 14, w: 'r');
+TextStyle bigText = themeFont(s: 20, w: 'sb', color: kThemeColor);
 
-class _UserTermsAndConditionsState extends State<UserTermsAndConditions> {
+class UserTermsAndConditions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return CommonScaffold(
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
-          height: h * 0.95,
-          width: w,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'USER TERMS AND CONDITIONS- Huddle & Score',
-                  style: themeFont(),
-                ),
-                Text(
-                  'As updated on (Launching Date)',
-                  style: themeFont(),
-                ),
-                RichText(
-                  text: TextSpan(
-                    text: 'You have accessed our app (',
-                    style: themeFont(),
-                    children: [
-                      TextSpan(
-                        text: 'App',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ') and/or our Website www.huddleandscore.com (',
-                      ),
-                      TextSpan(
-                        text: 'Website',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ').',
-                      ),
-                    ],
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        height: h * 0.95,
+        width: w,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: kThemeColor,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                ),
-                RichText(
-                  text: TextSpan(
-                    text: 'The domain name ',
-                    style: themeFont(),
-                    children: [
-                      TextSpan(
-                        text: 'Huddle And Score',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ' is owned by ',
-                      ),
-                      TextSpan(
-                        text: 'Grownited Private Limited',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text:
-                            ', a private company incorporated under the (Indian) Companies Act, 2013 bearing CIN U74999GJ2021PTC123718 and having its registered office at 301-305, 3rd Floor, Surbhi Complex, Nr. Municipal Market C.G. Road, Navrangpura, Ahmedabad 380009, Gujarat, India (',
-                      ),
-                      TextSpan(
-                        text: 'Huddle And Score',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ' or ',
-                      ),
-                      TextSpan(
-                        text: 'us',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ' or ',
-                      ),
-                      TextSpan(
-                        text: 'we',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ' or ',
-                      ),
-                      TextSpan(
-                        text: 'our',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text: ' or ',
-                      ),
-                      TextSpan(
-                        text: 'Company',
-                        style: themeFont(w: 'b'),
-                      ),
-                      TextSpan(
-                        text:
-                            '). The Website and/or App are internet based portals owned and operated by Huddle And Score.',
-                      ),
-                    ],
+                  Text(
+                    'Terms & Conditions',
+                    style: bigText,
                   ),
-                ),
-                RichText(
-                  text: TextSpan(
-                    text: 'These Terms and Conditions of use (',
-                    style: themeFont(),
-                  ),
+                ],
+              ),
+              Text(
+                'As updated on (Launching Date)',
+                style: smallText,
+              ),
+              Text(
+                '\nYou have accessed our app (App) and/or our Website www.huddleandscore.com (Website).',
+                style: smallText,
+              ),
+              Text(
+                '''\nThe domain name Huddle And Score is owned by Grownited Private Limited, a private company incorporated under the (Indian) Companies Act, 2013 bearing CIN U74999GJ2021PTC123718 and having its registered office at 301-305, 3rd Floor, Surbhi Complex, Nr. Municipal Market C.G. Road, Navrangpura, Ahmedabad 380009, Gujarat, India (Huddle And Score or us or we or our or Company). The Website and/or App are internet based portals owned and operated by Huddle And Score.
 
-                ),
-              ],
-            ),
+''',
+                style: smallText,
+              ),
+              Text(
+                '''These Terms and Conditions of use (Terms of Use) are between Huddle And Score and the users who visit us and/or are registered with us, by following our registration process and the users that use our Services (as defined hereinafter) or any part thereof on and from our Website and/or App (You or Your or Users). It is hereby clarified that the term User shall deem to include all users of the Website, including without limitation users who are browsing, individuals or the family members of the individuals who obtain and/or intend to obtain our services, coaches, academies, service providers, merchants, and/or are in any manner connected with and/or contribute to the use of the Website and/or App and/or the Services provided through it.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nPlease read these Terms of Use carefully before using or registering or accessing any information or Services through the Website and/or App. By using the Website and/or App or any facility or Services provided by the Website and/or App in any manner whatsoever or by merely browsing the Website and/or App, You signify Your acceptance and shall be legally bound by these Terms of Use, along with any amendments made by Huddle And Score, at its sole discretion and posted and/or updated on the Website and/or App, and the applicable policies which are incorporated herein by way of reference and as amended from time to time. If these Terms of Use conflict with any other document, these Terms of Use will prevail for the purposes of usage of the Website and/or App. If You do not agree to all or any of the Terms of Use, we recommend You to cease Your access to the Website and/or App or use any Services.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nThese Terms of Use are published in accordance with the provisions of Rule 3 (1) of the Information Technology (Intermediaries guidelines) Rules, 2011 that require publishing the privacy policy and terms of use for access or usage of the Website and/or App and is an electronic record in terms of Information Technology Act, 2000 and rules thereunder, as applicable, and the amended provisions pertaining to electronic records in various statutes as amended by the Information Technology Act, 2000. This electronic record is generated by a computer system and does not require any physical or digital signatures.''',
+                style: smallText,
+              ),
+              Text('\nAMENDMENT', style: bigText),
+              Text(
+                '''\nHuddle And Score reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms of Use, at any time without any prior written notice to You. The revised Terms of Use shall be made available on the Website and/or App. Your use of the Website and/or App and the Services is subject to the most current version of the Terms of Use made available on the Website and/or App at the time of such use. It is Your responsibility to review these Terms of Use periodically for updates / changes. Your continued use of the Website and/or App following the posting of changes will mean that You accept and agree to the revisions. Any new features or tools which are added to the Website and/or App shall also be subject to the Terms of Use.''',
+                style: smallText,
+              ),
+              Text(
+                '\nELIGIBILITY TO USE',
+                style: bigText,
+              ),
+              Text(
+                '''\nUse of the Website and/or App is available only to persons who can form legally binding contracts under Indian Contract Act, 1872. Persons who are incompetent to contract within the meaning of the Indian Contract Act, 1872 including minors, un-discharged insolvents etc. are not eligible to use the Website and/or App. As a minor if You wish to use the Website and/or App, such use may be made through Your legal guardian or parents who will be deemed to have given their consent to allow any of their minor dependents to use this Website and/or App at the risks and consequences of the legal guardian or parents, as the case may be.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nHuddle And Score reserves the right to terminate Your registration and / or refuse to provide You with access to the Website and/or App if it is brought to Huddle And Score ’s notice or if it is discovered or if Huddle And Score has reason to believe that You are incompetent to contract within the meaning of the Indian Contract Act, 1872. Further, Huddle And Score reserves the right to refuse access to use the Services offered at the Website and/or App to new Users or to suspend and/or terminate access granted to existing and/or registered Users at any time without according any reasons for doing so.''',
+                style: smallText,
+              ),
+              Text(
+                '\nSERVICES',
+                style: bigText,
+              ),
+              Text(
+                '''\nThe Website and/or App is an online platform that supports and facilitates its registered Users to gain access to coaches, online tournament organisers, physical tournament organisers,''',
+                style: smallText,
+              ),
+              Text(
+                '''\nacademies and expert knowledge related to various sports and related facilities, as are enlisted on this Website and/or App and provide services thereto including but not limited to making online bookings and/or registrations with expert coaches and/or academies and/or turfs and/or tournaments that the User is interested in, as per the requirements of the User and availability of the coaches and/or academies and/or turfs and/or tournaments and/or any other third-party associated with us in providing the services (Service Providers), through our Website and/App (Services). In case You have any queries with respect to our Services, we encourage You to write to us at support@huddleandscore.com and we shall be glad to assist You.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nTo use the Services, the registered Users would be required to select the sports, coach/academy/turf/tournament etc., day, time, area and such other information as may be required on our Website and/or App (Original Booking). Thereafter, the User would be required to pay the fees for such Services (Fees), as per the fees schedule stated therein, through the payment options and/or gateways enlisted on our Website and/or App. On receipt of payments, we shall immediately provide You with a system-generated provisional confirmation of the Original Booking (Provisional Confirmation). Within 48 (Forty-Eight) working hours from the issue of the Provisional Confirmation, we shall either provide you a final confirmation of the booking or shall contact You for revising the Original Booking in the event we are unable to get You the desired parameters stated in your Original Booking. In such an event where we are unable to get You confirmation on Original Booking, we shall on best efforts basis, try to provide You with alternate time/day/area etc. slots, similar to your Original Booking, which may or may not be with the same Service Providers. In case you confirm the proposed alternate options, you would be required to revise the details on the Website and/or App (Revised Booking). It is hereby clarified that incase the Fees for the Original Booking is lower than the Revised Booking, you would be required to pay the differential amount through the payment link available on our Website and/or App to generate final confirmation; and incase the Fees for the Original Booking is higher than the Revised Booking, we would refund the differential as per our refund policy. Once the Fees for the Original Booking or the revised Fees for the Revised Booking is paid to Us, we shall provide You with the final confirmation (ÒFinal ConfirmationÓ) within 48 (forty-eight) working hours from the time of receipt of full Fees. Please refer to our detailed Pricing and Refund terms as stated hereunder for clarity on any queries with respect to the same.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nIn case you are dissatisfied by the alternate options provided by Us, you shall have the right to cancel the Provisional Confirmation and we shall refund the Fees paid by you as per our terms of Refund as stated herein.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nIn the event You are a Service Provider associated with Huddle And Score, You shall be expected to confirm such bookings and/or registrations as per the terms of our engagement with You. If You accept any bookings and/or registrations, You shall not be allowed to cancel and/or re-schedule the same, unless permitted in Your terms of engagement or approved in advance in writing by Us. You may, before accepting such bookings and/or registrations, put the same under review, and we shall contact you to identify the reasons for non-acceptance. You hereby agree that you would give preference to all booking requests received through Huddle And Score's Website and/or App.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nIt is hereby clarified that merely a Provisional Confirmation shall in no way be construed as a confirmation of the Original Booking, unless Final Confirmation is generated by Us.Notwithstanding anything to the contrary stated elsewhere in the Terms of Use, it is hereby stated that Huddle And Score is not liable to provide Final Confirmation post receipt of Fees because the final booking is subject to other factors, including but not limited to availability of the Service Providers. Further, it is understood that Huddle And Score is only a platform to register and/or book for Services and is in no way responsible for any execution and/or performance and/or non-performance of services by any Service Provider associated herewith.''',
+                style: smallText,
+              ),
+              Text(
+                '''\nIt is hereby clarified that the Provisional Confirmation and/or the Final Confirmation is personal and non-transferable.
+
+Any error or omission of any information that we publish about the Services shall be subject to correction.''',
+                style: smallText,
+              ),
+              Text(
+                '\nINTERRUPTION OF SERVICES',
+                style: bigText,
+              ),
+              Text(
+                '''\nSubject to compliance with these Terms of Use, Huddle And Score grants You a personal, non-transferable, non-exclusive, limited privilege to use this Website and/or App. The User acknowledges that, although the internet is often a secure environment, sometimes there are interruptions in service or events that are beyond the control of Huddle And Score and Huddle And Score shall not be responsible for any data lost while transmitting information on the internet. While it is the Company's objective to make the Website and/or App accessible 24 (twenty-four) hours per day, 7 (seven) days per week, the Website and/or App may be unavailable from time to time for any reason including, without limitation, routine maintenance. You understand and acknowledge that due to circumstances both within and outside of the control of Huddle And Score, access to the Website and/or App may be interrupted, suspended or terminated from time to time. The Company shall have the right at any time to change or discontinue any aspect or feature of the Website and/or App, including, but not limited to, content, hours of availability and equipment needed for access or use. Further, the Company may discontinue disseminating any portion of information or category of information or may change or eliminate any transmission method and transmission speeds or other signal characteristics. Huddle And Score reserves the right to refuse access to the Website and/or App, terminate Accounts, remove or edit contents without any notice to You.
+
+We reserve the right, but are not obligated, to limit the provision of our Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. All descriptions of Services or pricing are subject to change at any time without notice, at Our sole discretion. We reserve the right to discontinue any Service at any time. Any Provisional Confirmation and/or Final Confirmation for any Service made on this site is void, if prohibited under any applicable law.
+
+''',
+                style: smallText,
+              ),
+              Text(
+                '\nPRICING AND REFUND',
+                style: bigText,
+              ),
+              Text(
+                '''\nAt Huddle And Score, we have customized pricing according to the Services rendered by us. The prices of the Services stated are in Indian Rupees and are inclusive of service tax, the details of which are provided to You beforehand according to the effort, efficiency and the output of the Service.
+
+The registered User shall be able to book and/or register for a Service with any particular Service Provider only on advance payment of the Fees associated with the Services selected by You. The payment shall be made only through the payment gateways and modes enlisted on our Website and/or App.
+
+On receipt of Final Confirmation from Huddle And Score, the User shall not be expected to pay any extra charges, unless the nature of transaction so requires. However, in the event of Revised Booking, You may be required to pay the differential in the Fees of the Original Booking and the Revised Booking.
+
+Incase you decline the alternate options proposed by Us or incase the fees paid for the original booking is higher than the fees payable for the Revised Booking, we shall refund the full fees or the differential fees, as the case be, within 7 (seven) working days from the date of Your decision of cancellation of the Provisional Confirmation or selection of the Revised Booking, as the case be.
+
+We work hard to ensure the accuracy of pricing. Despite our efforts, pricing errors may still occur.
+
+By providing a credit card or other payment method that we accept, You represent and warrant that You are authorized to use the designated payment method and that You authorize us (or our third-party payment processor) to charge Your payment for the total amount towards the Services as stated in the Final Confirmation (including any applicable taxes and other charges). If the payment method cannot be verified, is invalid or is otherwise not acceptable, Your service request may be suspended or cancelled. You must resolve any problem we encounter in order to proceed with Your service request. In the event You want to change or update payment information associated with Your Huddle And Score account, You can do so at any time by logging into Your account and editing Your payment information. You acknowledge that the amount billed may vary due to promotional offers, change in Your preferred sessions or changes in applicable taxes or other charges, and You authorize us (or our third-party payment processor) to charge Your payment method for the corresponding amount.
+
+Prices may be adjusted at any time and for any reason (or no reason) and without providing You prior notice. Services booked and paid for, are subject to availability, and we reserve the right to cancel all or part of Services and to discontinue making certain Services available through Huddle And Score without prior notice.
+
+It is hereby clarified that the User shall not be permitted to cancel the Provisional Confirmation and obtain any refund against it under any circumstances, except as stated below:
+
+a. the event Huddle And Score is unable to confirm the Services for which Provisional Confirmation is generated; OR
+
+b. if the User is not willing to opt for any alternate Services suggested by Huddle And Score.
+
+Please note, except agreed to in these Terms of Use, We DO NOT ISSUE REFUNDS and any credits or corrective activity are issued at our sole discretion.''',
+                style: smallText,
+              ),
+              Text(
+                '\nUSER ACCOUNT',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou shall have to apply for registration as a User to use our Website and/or App. Huddle And Score shall provide the Services to You through the Website and/or App only, if You have created an account and are registered with us. We shall be entitled to ask You to submit certain information (Account Information) that shall qualify the eligibility criterias laid down for registration by Huddle And Score from time to time. Each registered User will be given a unique registration id/Your name and password. You can only apply for registration through email ID and password (Account). Huddle And Score reserves the right to ask the applicant for more information, if necessary. Huddle And Score may, for reasons it deems necessary, refuse registration of any User and it is clarified that the decision of Huddle And Score, in this case, shall be final and conclusive. You shall ensure that the Account Information provided by You is complete, true and accurate. If You provide any information that is untrue, inaccurate, not current or incomplete (or becomes untrue, inaccurate, not current or incomplete), or Huddle And Score has reasonable grounds to suspect that such information is untrue, inaccurate, not current or incomplete, Huddle And Score has the right to suspend and/or terminate Your Account and refuse any and all current or future use of the Website and/or App (or any portion thereof). However, Huddle And Score reserves the right to allow restricted access to the Services for unregistered users but in such a case, only few functionalities of the Website and/or App and/or Services may be available for Your use.
+
+You shall be responsible for maintaining the confidentiality of the Account Information and restricting access to Your computer/phone/tablet/any other device to prevent unauthorised access to Your Account. You shall be fully responsible for all activities that occur through Your Account. You shall:
+
+a) not pass yourself off as someone else or create multiple and/or false Accounts;
+
+b) register in Your own name only and all Account Information provided by You will be accurate and
+
+up-to-date;
+
+c) not transfer Your membership/registration to another person;
+
+d) promptly update any of Your Account Information in case of any change in the same and also update any new Account Information as required by Huddle And Score to do so;
+
+e) inform Huddle And Score immediately if You have reason to believe that Your password is known to someone else or if Your Account is being, or is likely to be, used in an unauthorized manner;
+
+f) immediately notify Huddle And Score of any unauthorized use of Your Account or any breach of security;
+
+g) log out of Your Account at the end of each session.
+
+Huddle And Score shall not be responsible for Your failure to comply with the above. You may be held liable for any loss incurred by Huddle And Score or any other third party due to any authorized or unauthorized use of Your Account and You shall be responsible to indemnify Huddle And Score for the same.
+
+You can access and administer Your Account by entering the username and password. You can also update Your personal details (including Your Account Information and preferences) by accessing Your Account and making any necessary changes; this will update Your details across all Services of Huddle And Score. Huddle And Score would use this information to provide Your recommendations and options related to the Services requested by You. To deactivate Your account, You may follow the instructions given on our Website and/or App or You may contact our customer support team. Incomplete cancellation requests will be deemed invalid and will not be processed. You will be responsible for any payments that arise from Your failure to deactivate Your account.''',
+                style: smallText,
+              ),
+              Text(
+                '\nTERMINATION/SUSPENSION OF ACCOUNT',
+                style: bigText,
+              ),
+              Text(
+                '''\nWe reserve the right to terminate or suspend Your Account and/or suspend Your access to the Services under the following circumstances (non-exclusive list):
+
+i. You are in breach of any term or condition of this Terms of Use;
+
+ii. You are in breach of any laws that are applicable to You;
+
+iii. Your use of the Service disrupts our business operations or affects any other party; or
+
+iv. You have behaved in a way, which objectively could be regarded as inappropriate or is unlawful or illegal or which would bring us and/or Company into disrepute.
+
+We may suspend access to the Services or require You to change Your password if we reasonably believe that the Services have been or are likely to be misused, and we will notify You accordingly. Huddle And Score may constantly monitor the User's Account in order to avoid fraudulent accounts. Users with more than one account or availing our Services fraudulently shall be liable for legal actions under applicable law. We reserve the right to initiate legal proceedings against such persons for fraudulent use of the Website and/or App and any other unlawful acts or omissions in breach of these Terms of Use. In the event of detection of any fraudulent action, prior to initiation of legal actions, we reserve the right to immediately delete such Account. Any termination of Your registration and/or Account or the Services will not affect liability previously incurred by You.
+
+If at any time, we notify You that Your access to and/or use of the Website and/or App or Your Account is suspended and/or terminated, You must cease and desist from all such access and/or use immediately.''',
+                style: smallText,
+              ),
+              Text(
+                '\nUSER OBLIGATIONS',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou agree to use the Services, Website and/or App and the content provided therein only for purposes that are permitted by: (a) the Terms of Use; and (b) any applicable law, regulation or generally accepted practices or guidelines in India and under any applicable law of other jurisdictions.
+
+You agree to adhere to all limitations on dissemination, use and reproduction of any materials that You access on the Website and/or App. We grant You a limited license to access and make use of our Website and/or App, however the following usages are not permitted:
+
+1. any resale or commercial use, except as provided hereunder and agreed between Huddle And Score and You;
+
+2. downloading (other than page caching) or modifying content or any portion of it, on our App and/or Website, except with our express written consent;
+
+3. any collection and use of any content, descriptions; any derivative use of Website and/or App or its contents;
+
+4. downloading or using other User's content without Huddle And Score’s prior written consent;
+
+5. any downloading or copying of Account information for the benefit of another person.
+
+You shall not download any content from our Website and/or App, unless expressly permitted by Huddle And Score to do so.
+
+You shall solely be responsible for maintaining the necessary computer equipment and/or mobile phone and the necessary hardware and software associated thereto and internet connections that may be required to access and use our Website and/or App.
+
+You agree not to access (or attempt to access) the Website and/or App and the materials or Services by any means other than through the interface that is provided by Huddle And Score. You shall not use any deep-link, robot, spider or other automatic device, program, algorithm or methodology, or any similar or equivalent manual process, to access, acquire, download, copy or monitor any portion of the Website and/or App, or in any way reproduce or circumvent the navigational structure or presentation of the Website and/or App, materials or any content, to obtain or attempt to obtain any materials, documents or information through any means not specifically made available through the Website and/or App.
+
+If Website and/or App allows You to post and upload any material on the Website and/or App, You hereby undertake to ensure that such material is not offensive and in accordance with Applicable Laws. Further, You undertake not to:
+
+a) Defame, abuse, harass, threaten or otherwise violate the legal rights of others;
+
+b) Impersonate any person or entity, or falsely state or otherwise misrepresent Your affiliation with a person or entity;
+
+c) Publish, post, submit to upload, distribute or disseminate any inappropriate, profane, defamatory, infringing, obscene, indecent or unlawful topic, name, material or information through any bookmark, tag or keyword;
+
+d) Submit to upload files that contain software or other material protected by applicable intellectual property laws unless You own or control the rights thereto or have received all necessary consents;
+
+e) Submit to upload or distribute files that contain viruses, corrupted files, or any other similar software or programs that may damage the operation of the Website and/or App or another's computer;
+
+f) Engage in any activity that interferes with or disrupts access to the Website and/or App or the Services (or the servers and networks which are connected to the Website and/or App);
+
+g) Attempt to indicate in any manner that You have a relationship with Huddle And Score or that Huddle And Score has endorsed You or any services for any purpose unless Huddle And Score has provided written permission to do so;
+
+h) Send any unsolicited or unauthorized advertising, solicitations, promotional materials, spam, junk mail, chain letters or pyramid schemes, or harvest or collect the email addresses or other contact information of other users for the purpose of sending spam or other commercial messages;
+
+i) Develop any third-party application that interacts with User Content or our Services without Huddle And Score prior written consent;
+
+j) Attempt to gain unauthorized access to any portion or feature of the Website and/or App, any other systems or networks connected to the Website and/or App, to any Huddle And Score server, or to any of the Services offered on or through the Website and/or App, by hacking, password mining or any other illegitimate means;
+
+k) Probe, scan or test the vulnerability of the Website and/or App or any network connected to the Website and/or App, nor breach the security or authentication measures on the Website and/or App or any network connected to the Website and/or App;
+
+l) You may not reverse look-up, trace or seek to trace any information on any other User, of or visitor to, the Website and/or App, or any other customer of Huddle And Score, including any Account not owned by You, to its source, or exploit the Website and/or App or Service or information made available or offered by or through the Website and/or App, in any way whether or not the purpose is to reveal any information, including but not limited to personal identification information, other than Your own information, as provided for by the Website and/or App;
+
+m) Disrupt or interfere with the security of, or otherwise cause harm to, the Website and/or App, systems resources, accounts, passwords, servers or networks connected to or accessible through the Website and/or App or any affiliated or linked sites;
+
+n) Collect or store data about other users in connection with the prohibited conduct and activities set forth in this Section;
+
+o) Use any device or software to interfere or attempt to interfere with the proper working of the Website and/or App or any transaction being conducted on the Website and/or App, or with any other person's use of the Website and/or App;
+
+p) Use the Website and/or App or any material or content for any purpose that is unlawful or prohibited by these Terms of Use, or to solicit the performance of any illegal activity or other activity which infringes the rights of Huddle And Score or any other third parties;
+
+q) Conduct or forward surveys, contests, pyramid schemes or chain letters;
+
+r) Download any file posted by another User of a Service that You know, or reasonably should know, cannot be legally distributed in such manner;
+
+s) Falsify or delete any author attributions, legal or other proper notices or proprietary designations or labels of the origin or source of software or other material contained in a file that is submit for uploading or is uploaded;
+
+t) Violate any code of conduct or other guidelines, which may be applicable for or to any particular Service;
+
+u) Violate or breach any Applicable Laws or regulations for the time being in force within or outside India;
+
+v) Violate the Terms of Use including but not limited to any applicable additional terms of the Website and/or App contained herein or elsewhere;
+
+w) Reverse engineer, modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information or software obtained from the Website and/or App;
+
+x) Download or copy account information for the benefit of another User or any other third party; caching, unauthorized hypertext links to the Website and/or App and the framing of any other content available through the Website and/or App submitting for uploading, posting, or transmitting any content that You do not have a right to make available (such as the intellectual property of another party);
+
+y) any action that imposes or may impose (in our sole discretion) an unreasonable or disproportionately large load on our infrastructure; or any use of data mining, robots, or similar data gathering and extraction tools;
+
+z) any unauthorized copying, reproduction, republishing, submit for uploading, downloading, posting, transmitting or duplicating of any of the material and/or content is expressly prohibited;
+
+aa) Post and/or submit for uploading obscene or vulgar materials or use of obscene or vulgar language, or use of abusive, defamatory, profane, or threatening language of any kind;
+
+bb) Undertake any activity which is not in compliance with applicable Indian and international laws; and
+
+cc) You may not bypass any measures used by us to prevent or restrict access to the Website and/or App.
+
+Any unauthorized use by You shall terminate the permission/consent granted to You and Huddle And Score shall, in its sole discretion, suspend/terminate Your registration and the decision of Huddle And Score shall be final and binding.
+
+You acknowledge and agree that by accessing or using the Website and/or App or Services, You be exposed to content from other Users that You may consider offensive, indecent or otherwise objectionable. Huddle And Score disclaims all liabilities arising in relation to such offensive content on the Website and/or App. Further, You may report such offensive content in the manner prescribed under herein. Huddle And Score shall, in its sole discretion, reserve the right to remove any content uploaded by any User whatsoever reasons. It is hereby clarified that the liability of the material of the any content posted by the User and views expressed therein shall at all times be that of the User contributing such content and Huddle And Score expressly disclaims all liabilities associated thereto and the User shall be responsible for infringement of any third-party rights.
+
+You agree that Huddle And Score may, at any time, alter, modify, suspend or discontinue all or part of the Website and/or App, charge, charge fees for use of the Website and/or App, or offer opportunities to some or all Website and/or App Users and for any reason, without notice or cost.''',
+                style: smallText,
+              ),
+              Text(
+                '\nINTELLECTUAL PROPERTY RIGHTS (IPR)',
+                style: bigText,
+              ),
+              Text(
+                '''\nThe Website and/or App and the processes, and their selection and arrangement, including but not limited to Software used to access the Services, all text, graphics, User interfaces, visual interfaces, sounds (if any), artwork and computer code on the Website and/or App are protected by rights, including copyright, design rights, database rights and trademarks. All these rights are either owned by us or licensed to us by the rights owner(s) for use with the Services or otherwise used by us as permitted by applicable law and various other national and international IPR laws and regulations.
+
+The Services are intended for the individual, personal and non-commercial use by the User only. Accordingly, You may print and download extracts from the Website and/or App for Your own personal, non-commercial use, provided that any material copied remains intact and includes the following notice: Copyright © (2021),Grownited Private Limited. All rights reserved. Any other copying, distribution, storing, framing or transmission of any kind or any sort of commercial use of the material used in the Services or available on Huddle And Score is strictly prohibited without our express written consent. Unless otherwise indicated or anything contained to the contrary or any proprietary material owned by a third party and so expressly mentioned, Huddle And Score owns and or has the right to use all IPR to and into the trademark "HUDDLE AND SCORE", and the Website and/or App, including, without limitation, compilation of all content, software, any and all rights, title and interest in and to copyright, related rights, patents, utility models, designs, know-how, trade secrets and inventions (patent pending), goodwill,images, audio clips, digital downloads, data compilations, and software, source code, meta tags, databases, text, content, graphics, icons, logos, digital downloads, data compilations, software and the compilation of all contents and hyperlinks.
+
+You may not systematically extract/ or re-utilize parts of the contents of Huddle And Score without the Company's and / or its affiliate's (as may be applicable) express written consent. In particular, You may not utilize any data mining, robots, or similar data gathering and extraction tools to extract (whether once or many times) for re-utilization of any substantial parts of Huddle And Score.
+
+Huddle And Score expressly reserves all IPR in all text, programs, products, processes, technology, content, software and other materials, which appear on this Website and/or App. The compilation (meaning the collection, arrangement and assembly) of the content on the Website and/or App is the exclusive property of Huddle And Score. The mark "Huddle And Score" and the contents of the Website and/or App are the sole property of Huddle And Score. Reproduction in whole or in part of the same is strictly prohibited without the express written permission of Huddle And Score. All names, logos, and images on Huddle And Score constitute trademarks and/or copyrights of Huddle And Score or the respective content owners. Content shall not be reproduced in any form. Any reproduction or editing by any means mechanical or electronic without the explicit written permission of the respective author/owner of the content and Huddle And Score is expressly prohibited. You acknowledge and agree that the content, software, materials and other components (including but not limited to our logos, graphics, videos, music, button icons, and page headers) available on the Website and/or App are the property of Huddle And Score and/or its affiliates, subsidiaries, or licensors and are protected by copyrights, trademarks, service marks, or other proprietary rights and laws. You agree not to sell, license, rent, modify, distribute, copy, reproduce, transmit, publicly display, publicly perform, publish, adapt, edit, cut, copy, modify, recreate, reverse engineer, disseminate, post or create derivative works from, transfer, or sell any information or content or software obtained from Huddle And Score without our express consent or create derivative works from content or materials on the Website and/or App. Use of the content and materials for any purpose not expressly permitted in these Terms of Use, is prohibited. We are not liable for any infringement of copyrights, trademarks, or other proprietary or IPR arising out of content posted on or transmitted through the Website and/or App, or items advertised on the Website and/or App, by our other users. Further, You agree not to download any material/Content/User Content (including the User Content submitted by You) from the Website and/or App.
+
+Except as expressly provided herein, You acknowledge and agree that You shall not copy, republish, post, download, display, translate, transmit, reproduce or distribute any Content through any medium without obtaining the necessary authorization from Huddle And Score or thirty party owner of such Content.
+
+The User undertakes that any and all content submitted and/or posted by the User, shall be the User's original work and/or the Users shall ensure that they have the legal right to use such work and have the requisite approvals for using and/or permit the uploading such works by us and any such content posted and/or submitted by the to Huddle And Score, shall be the property of Huddle And Score and any IPR authorship rights and all other rights of whatsoever nature, in such content, in whatever form or medium, shall vest and remain vested in perpetuity and worldwide with Huddle And Score and that the User grants Huddle And Score all existing and future IPR including all copyrights, moral rights, language rights, and any other intellectual rights, of whatsoever nature, in the User Content, worldwide, in perpetuity, without limitation exclusive, royalty-free, transferable without any material, financial or territorial limitation and without any payment and/or consideration due from Huddle And Score, the right to use, reproduce, distribute, prepare derivative works of, display, publish, adapt, make available online or electronically transmit, and perform the content in connection with Huddle And Score's services and Huddle And Score's business, including without limitation for promoting and redistributing part or all of the content (and derivative works thereof) in any media formats and through any media channels, commercially or otherwise. The Users hereby understand that Huddle And Score does not guarantee any confidentiality with respect to any content that the Users may post or submit for uploading to Huddle And Score.
+
+Notwithstanding anything contained elsewhere in this Terms of Use, it is hereby agreed that the IPR in Huddle And Score's Confidential Information and the content contributed by Huddle And Score towards creation of the Website and/or App shall at all times remain the property of Huddle And Score. Huddle And Score does not extend any rights of any nature to the User, unless so granted in writing by Huddle And Score. The User shall not acquire any rights in respect of Huddle And Score or its group companies names, trademarks, designs, patents, patent applications, copyrights or other IPR, including those obtained from third parties under license or otherwise, for inclusion on its Website and/or App.
+
+Intellectual Property or IPR for the purpose of the Terms of Use, shall mean all copyrights (including without limitation the exclusive right to reproduce, distribute copies of, display and perform the copyrighted work and to prepare derivative works), copyright registrations and applications, trademark rights (including, without limitation, registrations and applications), patent rights (whether registered or unregistered), trade names or business names, registered and unregistered design rights, mask-work rights, trade secrets, moral rights, author's rights, rights in packaging, goodwill and other intellectual property rights, and all renewals and extension thereof and all rights or forms of protection of a similar nature or having an equivalent or similar effect to any of the above, which may subsist anywhere in the world, regardless of whether any of such rights arise under the laws of India or any other state, country or jurisdiction.''',
+                style: smallText,
+              ),
+              Text(
+                '\nTHIRD PARTY CONTENT',
+                style: bigText,
+              ),
+              Text(
+                '''\nThe Website and/or App may contain links to other Website and/or App (Linked Sites). The Linked Sites are not under the control of Huddle And Score or the Website and/or App and Huddle And Score is not responsible for the contents of any Linked Site, including without limitation any link contained in a Linked Site, or any changes or updates to a Linked Site. Huddle And Score is not responsible for any form of transmission, whatsoever, received by You from any Linked Site. Huddle And Score is providing these links to You only as a convenience, and the inclusion of any link does not imply endorsement by Huddle And Score or the Website and/or App of the Linked Sites or any association with its operators or owners including the legal heirs or assigns thereof. The Users are requested to verify the accuracy of all information on their own before undertaking any reliance on such information.''',
+                style: smallText,
+              ),
+              Text(
+                '\nPRIVACY POLICY',
+                style: bigText,
+              ),
+              Text(
+                '''\nWe view protection of Your privacy as a very important principle. We understand clearly that You and Your personal information is one of our most important assets. We store and process Your information including any sensitive financial information collected (as defined under the Information Technology Act, 2000), if any, on computers and/or mobile device that may be protected by physical as well as reasonable technological security measures and procedures in accordance with Information Technology Act 2000 and Rules there under. Please read our Privacy Policy to understand more about using, collecting and sharing of information shared by You with Huddle And Score.''',
+                style: smallText,
+              ),
+              Text(
+                '\nINDEMNIFICATION',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou agree to indemnify, defend and hold harmless Huddle And Score from and against any and all losses, liabilities, claims, damages, costs and expenses (including legal fees and disbursements in connection therewith and interest chargeable thereon) asserted against or incurred by Huddle And Score that arise out of, result from, or may be payable by virtue of, any breach or non-performance of any representation, warranty, covenant or agreement made or obligation to be performed by You pursuant to these Terms of Use.
+
+The User shall be solely responsible for its own content and the consequences of submitting for uploading and publishing its content on our Website and/or App. To the extent permitted by applicable law including without limitation the Information Technology Act, 2000, Telecom Commercial Communications Customer Preference Regulations, 2010 and other applicable regulations of TRAI, the User agrees to defend, indemnify and hold harmless Huddle And Score, its holding, subsidiary, affiliates, officers, directors, employees and agents, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees) arising from: (i) the User's use of and access to the Service; (ii) the User's violation of any term of these Terms of Use; (iii) the User's violation of any third party right, including without limitation any copyright, property, or privacy right; or (iv) any claim that the content posted by the User caused damage to a third party or (v) or arising out of non-compliance with any applicable law and rules or regulations by the User or arising from any suit, action or proceeding by any third party against any of the indemnified persons, as a result of or in consequence of any act or omission of whatsoever nature of the User, including without prejudice to the generality of the foregoing, any complaint or loss or damage or claim for compensation arising out of the infringement of third party IPR.''',
+                style: smallText,
+              ),
+              Text(
+                '\nWARRANTIES AND LIMITATION OF LIABILITY',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou remain solely responsible for the content of the materials You post on Huddle And Score and in Your private messages. Please be advised that such content posted does not reflect our views nor do we endorse any such content. In no event shall we assume or have any responsibility or liability for any content posted or for any claims, damages or losses resulting from use of content and/or appearance of content on Huddle And Score.
+
+Huddle And Score (including its agents, affiliates and employees) makes no representations or warranties about the accuracy, reliability, completeness, and/or timeliness of any content, information, software, text, graphics, links or communications provided on or through the use of the Website and/or App or that the operation of the Website and/or App will be error free and/or uninterrupted. Consequently, Huddle And Score assumes no liability whatsoever for any monetary or other damage suffered by You on account of the delay, failure, interruption, or corruption of any data or other information transmitted in connection with use of the Website and/or App; and/or any interruption or errors in the operation of the Website and/or App.
+
+You shall accept sole responsibility for, and Huddle And Score shall not be liable for, any use of the Services by You or any other third party and the User shall hold Huddle And Score harmless and fully indemnified against any claims, costs, damages, loss and liabilities arising out of such use.
+
+Huddle And Score therefore, provides no warranties, whatsoever, so as to the material of the content or the User's right to post or upload and/or submit to us for uploading the content or the authenticity of the content or any opinion, recommendation, or advice expressed in such content submitted to be uploaded by the User.
+
+The Services provided by Huddle And Score on an "as is" and "as available" basis. Use of the service and is at Your own risk. The Service is provided without warranties of any kind, whether express or implied or statutory or otherwise including, but not limited to, implied warranties of merchantability or fitness for a particular purpose. Without limiting the foregoing, Huddle And Scoreand/or Grownited Private Limited, its subsidiaries, affiliates, and its licensors do not warrant that Huddle And Score content is accurate, reliable or correct; that the Service will meet Your requirements; that the Service will be available at any particular time or location, uninterrupted or secure; that any defects or errors will be corrected. Huddle And Score is not liable for the privacy of email addresses, registration and identification information, disk space, communications, confidential or trade-secret information, or any other User content stored on our equipment, transmitted over networks accessed by or through Huddle And Score, or otherwise connected with Your use of the Service.
+
+Huddle And Score does not and cannot verify that the Services rendered by the Service Providers associated with us and shall be error free and/or such Services will be to Your satisfaction and/or shall guarantee a desired result. Huddle And Score shall not be responsible for any execution and/or performance and/or non-performance of services by any Service Providers associated herewith.Our Services may be used to help obtain or offer Services provided by Service Providers affiliated to us and to facilitate payment for such Services. However, the services are rendered to the Users directly by such Service Providers. Post Final Confirmation, the User shall transact directly with such Service Providers and Huddle And Score shall not be a party to any such transactions.Huddle And Score hereby expressly disclaims, and You hereby expressly release Huddle And Score from, any and all liability whatsoever for any controversies, claims, suits, injuries, loss, harm or damages arising from or related to disputes, dealings, or interactions between You and any other users or third parties and any and all disputes concerning the service provider shall be dealt with the service provider alone and Huddle And Score shall in no way be constituted as a party to such dispute.
+
+Huddle And Score shall not be responsible for any physical injury or loss of life or for any accident that may occur to the User or to any other person while playing or availing services reserved through Huddle And Score. We will not be held responsible and expressly disclaim any liability whatsoever for any claims, demands or damages, direct or indirect, of every kind and nature, known and unknown, suspected and unsuspected, disclosed and undisclosed, arising out of or in any way connected with Services, including payment for Services provided by a third party even if such Services are the result of the User and the third-party meeting through Huddle And Score. By using this Website and/or App and/or our Services, Users represent, understand, and expressly agree to hold us harmless for any claim, controversy or damages that may arise from any dispute between You and any other User(s) of the Website and/or App including with any other User, Service Provider or any third party.
+
+We make no representations or warranties, either expressed or implied, with respect to the Service or any service or information provided through the Service and are not liable for any losses/damages that may arise due to the use of such Services by You. We are not responsible for any damages, injury or economic loss arising from the use of Services provided by us.
+
+Huddle And Score will not be liable to You under any theory of liabilityÑwhether based in contract, tort, negligence, strict liability, warranty, or otherwiseÑfor any indirect, consequential, exemplary, incidental, special or punitive damages or lost profits, to the fullest extent permitted by the applicable law, even if Huddle And Score has been advised of the possibility of such damages. The limitations of liability set for in this section will apply even if the remedies otherwise provided under these Terms, at law or in equity, fail of their essential purpose. The total liability of Huddle And Score, for any claim arising out of or relating to these Terms or our Services, regardless of the form of the action, is limited to the amount received from You. The limitations set forth in this section will not limit or exclude liability for the gross negligence, fraud or intentional misconduct of Huddle And Score.
+
+Our Services offers tools, resources and a venue to connect Users with the various Service Providers. Huddle And Score: (a) does not employ, recommend or endorse any Users and has no control over the acts or omissions of any Users; (b) is not responsible or liable in any manner for the performance or conduct of any Users or other third parties associated through it, online or offline; (c) makes no representations or warranties about the quality of the services provided by any User or about Your interactions or dealings with other Users except as expressly stated on our Services; and (d) does not screen Users or conduct any kind of identity or background checks except as otherwise expressly stated in these Terms of Use or on or in our Services. Huddle And Score hereby expressly disclaims, and You hereby expressly release Huddle And Score from, any and all liability whatsoever for any controversies, claims, suits, injuries, loss, harm or damages arising from or related to our Services or Your interactions or dealings with other Users, including any acts or omissions of users online or offline. All use of our Services is at Your sole and exclusive risk.
+
+This is a comprehensive limitation of liability that applies to all damages of any kind, including but not limited to direct, indirect, incidental, punitive, special, incidental, consequential or exemplary damages, damages for loss of profits, goodwill, use, data or other intangible losses, whether in tort or contract or under any applicable law and shall apply to the maximum extent permitted by applicable law.''',
+                style: smallText,
+              ),
+              Text(
+                '\nCOMPLIANCE WITH LAWS',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou shall be solely responsible for compliance of all statutes, enactments, acts of legislature or parliament, ordinances, rules, bye-laws, regulations, notifications, guidelines, policies, directions, directives and orders of any Governmental Authority, statutory authority, tribunal, board or court in India or outside India (Applicable Laws) for:
+
+a) Use of the Website and/or App;
+
+b) Use of Services available on the Website and/or App;
+
+c) Posting and/or uploading any content on the Website and/or App.''',
+                style: smallText,
+              ),
+              Text(
+                '\nEMAILS, NEWSLETTERS AND NOTIFICATIONS',
+                style: bigText,
+              ),
+              Text(
+                '''\nBy registering with us, You are agreeing to subscribe to Our newsletter(s) or receive notifications or e-mails from us. We will use Your name and e-mail address provided by You in this regard. However, You may choose to stop receiving Our newsletters by following the instructions to unsubscribe as mentioned in our e-mails addressed to You or You can contact us atsupport@huddleandscore.com.''',
+                style: smallText,
+              ),
+              Text(
+                '\nREPORT ABUSE',
+                style: bigText,
+              ),
+              Text(
+                '''\nAs per these Terms of Use, Users are solely responsible for every material or content submitted for uploading on to the Website and/or App. Huddle And Score has the right to review the contents before they appear on the Website and/or App. However, Huddle And Score does not verify, endorse or otherwise vouch for the contents of any User or any content generally submitted for uploading on to the Website and/or App. Users can be held legally liable for their contents and may be held legally accountable if their contents or material include, for example, defamatory comments or material protected by copyright, trademark, etc. If You come across any abuse or violation of these Terms of Use, please report to support@huddleandscore.com. We shall process all infringement claims, which may result in removing the reported content from our Website and/or App. If the User that posted the content believes that the content shouldn't have been removed, the Users will be encouraged to reach out to us.''',
+                style: smallText,
+              ),
+              Text(
+                '\nDISCLAIMER',
+                style: bigText,
+              ),
+              Text(
+                '''\nHuddle And Score makes all endeavors to ensure that all the information on the Website and/or App is correct, but Huddle And Score neither warrants nor makes any representations regarding the quality, accuracy or completeness of any data, information, Service or any content available on the Website and/or App. The material on Huddle And Score is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at Your own risk. In no event shall Huddle And Score be liable for any direct, indirect, punitive, incidental, special, consequential damages or any other damages resulting from: (a) the use or the inability to use the Services; (b) unauthorized access to or alteration of the User's transmissions or data; (c) any other matter relating to the Services; including, without limitation, damages for loss of use, data or profits, arising out of or in any way connected with the use or performance of the Website and/or App or Service. Neither shall Huddle And Score be responsible for the delay or inability to use the Website and/or App or related services, the provision of or failure to provide Services, or for any information, software, products, services and related graphics obtained through the Website and/or App, or otherwise arising out of the use of the Website and/or App, whether based on contract, tort, negligence, strict liability or otherwise. Further, Huddle And Score shall not be held responsible for non-availability of the Website and/or App during periodic maintenance operations or any unplanned suspension of access to the Website and/or App that may occur due to technical reasons or for any reason beyond Huddle And Score's control. The internet is not a secure environment and we cannot guarantee that the Website and/or App and its servers are free of viruses or other harmful applications. Moreover, the Website and/or App may contain certain historical information. Historical information, necessarily, is not current and is provided for Your reference only. We reserve the right to modify the contents of this Website and/or App at any time, but we have no obligation to update any information on our Website and/or App. You agree that it is Your responsibility to monitor changes to our Website and/or App.''',
+                style: smallText,
+              ),
+              Text(
+                '\nNOTICES',
+                style: bigText,
+              ),
+              Text(
+                '''\nYou agree that, unless other instructions are posted on Website and/or App, any notices required to be given under this Terms of Use will be deemed to have been given if delivered by email or fax, or sent by registered mail or by courier to each of the Users in accordance with the most current contact information You have provided to us, and the contact information for You to reach us is posted on Website and/or App. All notices shall be effective upon receipt, except that email and fax notices shall be effective upon transmission. You give Your express consent to Huddle And Score to send to notices, updates, alerts and other promotional materials.''',
+                style: smallText,
+              ),
+              Text(
+                '\nCONTACT US',
+                style: bigText,
+              ),
+              Text(
+                '''\nPlease contact us for any questions or comments (including all inquiries unrelated to copyright infringement) regarding this Website and/or App. We only provide email support as a part of our customer support during all working days i.e. from Monday to Friday,at any time during 8 .30 a.m. to 7 .30 p.m.''',
+                style: smallText,
+              ),
+              Text(
+                '\nGRIEVANCE OFFICER',
+                style: bigText,
+              ),
+              Text(
+                '''\nIn accordance with Information Technology Act 2000 and rules made there under, the contact details of the Grievance Officer at support@huddleandscore.com''',
+                style: smallText,
+              ),
+              Text(
+                '\nDISPUTES AND GOVERNING LAW',
+                style: bigText,
+              ),
+              Text(
+                '''\nWe will try to solve any disagreements quickly and efficiently. If You are not happy with the way we deal with any disagreement, the same shall be first taken to Arbitration Proceeding through Sole Arbitrator as appointed under the provision of the Arbitration and Conciliation Act, 1996, having venue and seat at Ahmedabad, Gujarat, if the Arbitration proceeding fail, You may wish to take court proceedings. The rights and obligations of the parties pursuant to this Terms of Use are governed by, and shall be construed in accordance with, the laws of India and the place of jurisdiction shall be exclusively in Ahmedabad. You may be subject to other local, provincial or state and national laws. You hereby irrevocably submit to the exclusive jurisdiction of the Courts of India, Ahmedabad for any dispute arising under or relating to this Agreement and waive Your right to institute legal proceedings in any other jurisdiction. We shall be entitled to institute legal proceedings in connection with any matter arising under this Agreement in any jurisdiction where You reside, do business or have assets.''',
+                style: smallText,
+              ),
+              Text(
+                '\nMISCELLANEOUS:',
+                style: bigText,
+              ),
+              Text(
+                '''\nNo waiver by us of any breach of these terms shall constitute a waiver of any other prior or subsequent breach and we shall not be affected by any delay, failure or omission to enforce or express forbearance granted in respect of any of Your obligations.
+
+The rights and remedies under these terms are independent, cumulative and without prejudice to our rights under the law.
+
+These terms are not intended to create and shall not create any rights, entitlements, claims or benefits enforceable by any third party.
+
+If any provision of this Terms of Use is determined to be invalid or unenforceable in whole or in part, such invalidity or unenforceability shall attach only to such provision or part of such provision and the remaining part of such provision and all other provisions of this Terms of Use shall continue to be in full force and effect.
+
+This Terms of Use, as may be updated from time to time and represents the complete agreement and understanding with respect to the Service and supersedes any other written or oral agreement.''',
+                style: smallText,
+              ),
+            ],
           ),
         ),
-
+      ),
     );
   }
 }
