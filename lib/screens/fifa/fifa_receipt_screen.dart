@@ -9,6 +9,7 @@ import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/repositories/feedback_repository.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -863,9 +864,8 @@ class _DetailShowerState extends State<DetailShower> {
         );
       },
     );
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -935,7 +935,7 @@ class _DetailShowerState extends State<DetailShower> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
           height: double.infinity,
@@ -1143,7 +1143,7 @@ class _DetailShowerState extends State<DetailShower> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

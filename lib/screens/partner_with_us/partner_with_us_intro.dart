@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/screens/partner_with_us/how_it_works.dart';
 import 'package:huddle_and_score/screens/static_screens/partner_tnc.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -16,9 +17,8 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -83,7 +83,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           width: w,
           height: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -251,7 +251,7 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

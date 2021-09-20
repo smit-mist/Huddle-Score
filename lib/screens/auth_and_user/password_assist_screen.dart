@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -24,9 +25,8 @@ class _PasswordAssistInitialScreenState
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     print(currState);
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child:Container(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Center(
@@ -205,7 +205,7 @@ class _PasswordAssistInitialScreenState
             ),
           ),
         ),
-      ),
+
     );
   }
 }
@@ -219,9 +219,8 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child:  Container(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Center(
@@ -299,7 +298,7 @@ class PasswordAssistSuccessScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
+
     );
   }
 }
@@ -310,9 +309,8 @@ class PasswordAssistFailureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child:  Container(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Center(
@@ -414,7 +412,7 @@ class PasswordAssistFailureScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

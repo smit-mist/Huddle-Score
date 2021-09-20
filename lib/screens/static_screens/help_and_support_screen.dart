@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -14,9 +15,8 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child:Container(
           padding: EdgeInsets.symmetric(horizontal: 25),
           width: w,
           height: double.infinity,
@@ -286,7 +286,7 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

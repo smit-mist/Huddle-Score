@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/login/login_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -37,10 +38,8 @@ class _SignInScreenState extends State<SignInScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
+    return CommonScaffold(
+        child: Container(
           padding: EdgeInsets.all(20),
           child: Center(
             child: BlocListener<LoginBloc, LoginState>(
@@ -304,7 +303,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

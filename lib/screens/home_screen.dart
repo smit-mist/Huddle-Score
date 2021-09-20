@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 50,
+              height: 30,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

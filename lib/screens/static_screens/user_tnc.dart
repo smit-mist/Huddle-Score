@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
 
@@ -13,9 +14,8 @@ class _UserTermsAndConditionsState extends State<UserTermsAndConditions> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child: Container(
           padding: EdgeInsets.symmetric(horizontal: 5),
           height: h * 0.95,
           width: w,
@@ -123,7 +123,7 @@ class _UserTermsAndConditionsState extends State<UserTermsAndConditions> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

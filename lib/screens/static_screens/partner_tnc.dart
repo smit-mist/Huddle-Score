@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/partner_with_us/how_it_works.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 TextStyle smallText = themeFont(s: 12, w: 'r');
 TextStyle bigText = themeFont(s: 16, w: 'sb');
@@ -16,9 +17,8 @@ class _PartnerTnCState extends State<PartnerTnC> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -75,7 +75,7 @@ class _PartnerTnCState extends State<PartnerTnC> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
@@ -91,7 +91,7 @@ class _PartnerTnCState extends State<PartnerTnC> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

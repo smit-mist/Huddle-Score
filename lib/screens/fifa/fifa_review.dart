@@ -12,6 +12,7 @@ import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
 import 'package:huddle_and_score/screens/static_screens/booking_failed.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../constants.dart';
@@ -96,9 +97,8 @@ class _FifaReviewState extends State<FifaReview> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
+    return CommonScaffold(
+        bottomBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           width: w,
           height: h * 0.08,
@@ -146,7 +146,7 @@ class _FifaReviewState extends State<FifaReview> {
             ],
           ),
         ),
-        body: Container(
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
           height: double.infinity,
@@ -295,7 +295,7 @@ class _FifaReviewState extends State<FifaReview> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

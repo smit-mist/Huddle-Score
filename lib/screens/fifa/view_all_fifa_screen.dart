@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
+import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 
 import '../../constants.dart';
@@ -13,9 +14,8 @@ class ViewAllFifaScreen extends StatelessWidget {
     _bloc = BlocProvider.of<HomeBloc>(context);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return CommonScaffold(
+      child: Container(
           height: h,
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -87,7 +87,7 @@ class ViewAllFifaScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+
     );
   }
 }
