@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:huddle_and_score/models/home_event.dart';
 
 abstract class HomeState extends Equatable {
-  List<HomeTour> allTournaments;
-  List<HomeFifa> allFifa;
+  Map<String,List<HomeTour>> allTournaments;
+  Map<String,List<HomeFifa>> allFifa;
   HomeState({this.allTournaments, this.allFifa});
 
   @override
@@ -15,7 +15,7 @@ class InitialState extends HomeState {}
 class Loading extends HomeState {}
 
 class Success extends HomeState {
-  Success(List<HomeTour> allTouranments, List<HomeFifa> allFifa)
+  Success(var allTouranments,var allFifa)
       : super(allTournaments: allTouranments, allFifa: allFifa);
 }
 

@@ -370,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ViewAllTournamentScreen(),
+                        builder: (_) => ViewAllTournamentScreen(city: _chosenValue,),
                       ),
                     );
                   },
@@ -406,10 +406,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                       scrollDirection: Axis.horizontal,
-                      itemCount: state.allTournaments.length,
+                      itemCount: state.allTournaments[_chosenValue].length,
                       itemBuilder: (_, int index) {
                         return TournamentTile(
-                            here: state.allTournaments[index]);
+                            here: state.allTournaments[_chosenValue][index]);
                       });
                 },
               ),
@@ -431,7 +431,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ViewAllFifaScreen(),
+                        builder: (_) => ViewAllFifaScreen(city: _chosenValue,),
                       ),
                     );
                   },
@@ -467,10 +467,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                     scrollDirection: Axis.horizontal,
-                    itemCount: state.allFifa.length,
+                    itemCount: state.allFifa[_chosenValue].length,
                     itemBuilder: (_, int index) {
                       return FifaTile(
-                        fifa: state.allFifa[index],
+                        fifa: state.allFifa[_chosenValue][index],
                       );
                     },
                   );

@@ -13,7 +13,8 @@ import 'fifa_tile.dart';
 
 class SearchResult extends StatelessWidget {
   String currentSearch;
-  SearchResult({this.currentSearch});
+  String city;
+  SearchResult({this.city = "Ahmedabad",this.currentSearch});
   HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
@@ -23,33 +24,33 @@ class SearchResult extends StatelessWidget {
 
     List<HomeTour> tours = [];
     List<HomeFifa> toShow = [];
-    if (_bloc.state.allTournaments != null) {
-      for (int i = 0; i < _bloc.state.allTournaments.length; i++) {
+    if (_bloc.state != null && _bloc.state.allTournaments != null &&_bloc.state.allTournaments[city] != null) {
+      for (int i = 0; i < _bloc.state.allTournaments[city].length; i++) {
         bool flag = false;
 
-        if (startsWith(_bloc.state.allTournaments[i].name, currentSearch)) {
+        if (startsWith(_bloc.state.allTournaments[city][i].name, currentSearch)) {
           // toShow.add(_bloc.state.allTournaments[i]);
           flag = true;
         }
-        for (int j = 0; j < _bloc.state.allTournaments[i].venue.length; j++) {
+        for (int j = 0; j < _bloc.state.allTournaments[city][i].venue.length; j++) {
           if (startsWith(
-              currentSearch, _bloc.state.allTournaments[i].venue[j])) {
+              currentSearch, _bloc.state.allTournaments[city][i].venue[j])) {
             flag = true;
           }
           if (flag) break;
         }
         if (flag) {
-          tours.add(_bloc.state.allTournaments[i]);
+          tours.add(_bloc.state.allTournaments[city][i]);
         }
       }
     }
     if (_bloc.state.allFifa != null) {
-      for (int i = 0; i < _bloc.state.allFifa.length; i++) {
+      for (int i = 0; i < _bloc.state.allFifa[city].length; i++) {
         bool flag = false;
-        if (startsWith(_bloc.state.allFifa[i].name, currentSearch)) {
+        if (startsWith(_bloc.state.allFifa[city][i].name, currentSearch)) {
           flag = true;
         }
-        for (var x in _bloc.state.allFifa[i].venue) {
+        for (var x in _bloc.state.allFifa[city][i].venue) {
           if (startsWith(x, currentSearch)) {
             print("match found:- " + x + " " + currentSearch);
             flag = true;
@@ -57,7 +58,7 @@ class SearchResult extends StatelessWidget {
           if (flag) break;
         }
         if (flag) {
-          toShow.add(_bloc.state.allFifa[i]);
+          toShow.add(_bloc.state.allFifa[city][i]);
         }
       }
     }

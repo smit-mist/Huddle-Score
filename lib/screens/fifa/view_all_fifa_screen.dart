@@ -9,6 +9,8 @@ import '../../constants.dart';
 
 class ViewAllFifaScreen extends StatelessWidget {
   HomeBloc _bloc;
+  String city;
+  ViewAllFifaScreen({this.city});
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<HomeBloc>(context);
@@ -64,10 +66,10 @@ class ViewAllFifaScreen extends StatelessWidget {
                         return Container();
                       }
                       return GridView.builder(
-                        itemCount: state.allFifa.length,
+                        itemCount: state.allFifa[city].length,
                         itemBuilder: (_, ind) {
                           return SizedBox(
-                            child: FifaTile(fifa: state.allFifa[ind]),
+                            child: FifaTile(fifa: state.allFifa[city][ind]),
                             width: w * (145 / kScreenW),
                             height: h * (212 / kScreenH),
                           );

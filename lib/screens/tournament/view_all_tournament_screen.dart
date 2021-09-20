@@ -8,6 +8,8 @@ import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 
 class ViewAllTournamentScreen extends StatelessWidget {
   HomeBloc _bloc;
+  String city;
+  ViewAllTournamentScreen({this.city});
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<HomeBloc>(context);
@@ -58,10 +60,10 @@ class ViewAllTournamentScreen extends StatelessWidget {
                         return Container();
                       }
                       return GridView.builder(
-                        itemCount: state.allTournaments.length,
+                        itemCount: state.allTournaments[city].length,
                         itemBuilder: (_, ind) {
                           return TournamentTile(
-                            here: state.allTournaments[ind],
+                            here: state.allTournaments[city][ind],
                           );
                         },
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

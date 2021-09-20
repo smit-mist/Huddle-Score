@@ -20,10 +20,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if(event is AppStart){
       try{
         yield Loading();
-        List<HomeTour> tour= await _repository.fetchTours();
-        List<HomeFifa> fifa= await _repository.fetchFifas();
+        var tour= await _repository.fetchTours();
+        var fifa= await _repository.fetchFifas();
         yield Success(tour,fifa);
       }catch(e){
+        print("Error");
+        print(e.toString());
         yield Failure();
       }
     }
