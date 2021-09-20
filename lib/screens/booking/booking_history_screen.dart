@@ -102,7 +102,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 ),
                 underline: Container(),
                 items: <String>[
-                  'Fifa',
+                  'Online Tournaments',
                   'Tournaments',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -151,7 +151,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             SizedBox(
               height: 10.0,
             ),
-            (selected == 'Fifa')
+            (selected != 'Tournaments')
                 ? (upFifa == null||upFifa.length ==0)
                     ? Center(child: Text('No bookings'))
                     : Container(
@@ -221,7 +221,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             SizedBox(
               height: 10.0,
             ),
-            (selected == 'Fifa')
+            (selected != 'Tournaments')
                 ? (downFifa == null||downFifa.length ==0)
                 ? Center(child: Text('No bookings'))
                 : Container(

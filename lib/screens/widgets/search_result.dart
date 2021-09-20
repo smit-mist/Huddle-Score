@@ -87,11 +87,10 @@ class SearchResult extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: h *
-                    ((min(500, (tours.length / 2 + tours.length % 2) * 250)) /
-                        kScreenH),
                 width: w,
-                child: GridView.builder(
+                child:(tours.length>0)? GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: tours.length,
                   itemBuilder: (_, ind) {
                     return TournamentTile(
@@ -105,6 +104,8 @@ class SearchResult extends StatelessWidget {
                       childAspectRatio:
                           (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
                       mainAxisSpacing: 0),
+                ):Container(
+                  child: Text('No Tournament for current filter',style: themeFont(),),
                 ),
               ),
               SizedBox(
@@ -118,21 +119,14 @@ class SearchResult extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: h *
-                    ((min(
-                            500,
-                            (toShow.length / 2 + toShow.length % 2) * 250 +
-                                50)) /
-                        kScreenH),
+
                 width: w,
-                child: GridView.builder(
+                child:(toShow.length>0)? GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: toShow.length,
                   itemBuilder: (_, ind) {
-                    if (ind >= toShow.length) {
-                      return SizedBox(
-                        height: 1,
-                      );
-                    }
+
                     return FifaTile(
                       fifa: toShow[ind],
                     );
@@ -142,6 +136,8 @@ class SearchResult extends StatelessWidget {
                       childAspectRatio:
                           (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
                       mainAxisSpacing: 0),
+                ):Container(
+                  child: Text('No Online Tournament for current filter',style: themeFont(),),
                 ),
               ),
             ],

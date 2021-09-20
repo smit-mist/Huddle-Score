@@ -24,7 +24,9 @@ class ViewAllTournamentScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(Icons.arrow_back_ios),
+                  GestureDetector(onTap:(){
+                    Navigator.pop(context);
+                  },child: Icon(Icons.arrow_back_ios)),
                   SizedBox(
                     width: 10,
                   ),
