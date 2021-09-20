@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/user_privacy_policy.dart';
 import 'package:huddle_and_score/screens/static_screens/user_tnc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
@@ -49,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    print("Terms $termsAgreed");
+    //print("Terms $termsAgreed");
     return CommonScaffold(
       child: Container(
         padding: EdgeInsets.all(20),
@@ -407,14 +408,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     termsAgreed = !termsAgreed;
                                   });
                                 },
-                                child: Container(
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 200),
+                                  curve: Curves.easeInOut,
+                                  decoration: BoxDecoration(
                                     color: (termsAgreed)
                                         ? kThemeColor
                                         : Colors.white,
-                                    child: SvgPicture.asset(
-                                      'assets/icons/checkbox.svg',
-                                      color: Colors.white,
-                                    )),
+                                    border: Border.all(),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    'assets/icons/checkbox.svg',
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 10.0,
@@ -462,6 +469,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ),
                                       TextSpan(
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) =>
+                                                    UserPrivacyPolicy(),
+                                              ),
+                                            );
+                                          },
                                         text: 'Privacy Policy',
                                         style: themeFont(
                                           s: 12.0,
@@ -896,10 +913,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   termsAgreed = !termsAgreed;
                                 });
                               },
-                              child: Container(
-                                  color: (termsAgreed)
-                                      ? kThemeColor
-                                      : Colors.white,
+                              child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 200),
+                                  curve: Curves.easeInOut,
+                                  decoration: BoxDecoration(
+                                    color: (termsAgreed)
+                                        ? kThemeColor
+                                        : Colors.white,
+                                    border: Border.all(),
+                                  ),
                                   child: SvgPicture.asset(
                                     'assets/icons/checkbox.svg',
                                     color: Colors.white,
@@ -950,6 +972,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                     TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  UserPrivacyPolicy(),
+                                            ),
+                                          );
+                                        },
                                       text: 'Privacy Policy',
                                       style: themeFont(
                                         s: 12.0,
@@ -974,7 +1006,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       BlocBuilder<SignupBloc, SignupState>(
                         builder: (context, state) {
                           bool isOk =
-                              (typedEmail & typedName & typedP1 & typedP2);
+                              (typedEmail & typedName & typedP1 & typedP2 &termsAgreed);
                           //     print(isOk);
                           return SizedBox(
                             width: double.infinity,
