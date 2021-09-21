@@ -18,6 +18,7 @@ import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 import 'fifa/view_all_fifa_screen.dart';
@@ -56,6 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
     "ad3",
     "ad4",
   ];
+  List<String> urlToLaunch = [
+    "http://royaltechnosoft.com/",
+    "http://grownited.com/internship",
+    "http://grownited.com/services",
+    "http://grownited.com/idea",
+    "http://royaltechnosoft.com/",
+  ];
   TextEditingController _emailCtrl = TextEditingController();
   bool emailTapped = false;
   @override
@@ -77,28 +85,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               padding: EdgeInsets.symmetric(horizontal: 20),
-              height: h * (450 / kScreenH),
+              height: h * (350 / kScreenH),
               width: w * (370 / kScreenW),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(height: 20,),
                   Text(
                     'Ready for the game?',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
+                  SizedBox(height: 15,),
+
                   Text(
                     'Look for best turfs and tournaments in your city!',
                     style: themeFont(s: 12, w: 'm'),
                   ),
+                  SizedBox(height: 10,),
+
                   Container(
                     width: w * (350 / kScreenW),
-                    height: h * (200 / kScreenH),
+                    height: h * (150 / kScreenH),
                     child: GridView.builder(
                         itemCount: cities.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: (101) / (42),
+                          childAspectRatio: (90) / (30),
+                          crossAxisSpacing:5,
+                              mainAxisSpacing: 5,
                         ),
                         itemBuilder: (_, int ind) {
                           return GestureDetector(
@@ -110,14 +125,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: Container(
-                                child: Center(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
-                                    cities[ind],
+                                    '   '+cities[ind],
                                     style: themeFont(
-                                        s: 12, w: (ind == 0) ? 'm' : 'r'),
+                                      s: 12,
+                                      w: (ind == 0) ? 'm' : 'r',
+                                      color: (ind == 0)
+                                          ? kThemeColor
+                                          : Colors.black,
+                                    ),
                                   ),
                                 ),
                                 decoration: BoxDecoration(
+                                  color: (ind ==0)?Colors.white:Colors.grey.withOpacity(0.2),
+
                                   borderRadius: BorderRadius.circular(7),
                                   border: Border.all(
                                       color: (current == ind)
@@ -129,6 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
+                  SizedBox(height: 10,),
+
                   Row(
                     children: [
                       Spacer(),
@@ -149,6 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
+                  SizedBox(height: 10,),
+
                 ],
               ),
             ),
@@ -307,10 +334,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   CarouselSlider(
                     carouselController: _ctrl,
                     items: [
-                      ImageShower(name: nameOfBanner[1]),
-                      ImageShower(name: nameOfBanner[2]),
-                      ImageShower(name: nameOfBanner[3]),
-                      ImageShower(name: nameOfBanner[4]),
+                      ImageShower(
+                        name: nameOfBanner[1],
+                        url: urlToLaunch[1],
+                      ),
+                      ImageShower(
+                        name: nameOfBanner[2],
+                        url: urlToLaunch[2],
+                      ),
+                      ImageShower(
+                        name: nameOfBanner[3],
+                        url: urlToLaunch[3],
+                      ),
+                      ImageShower(
+                        name: nameOfBanner[4],
+                        url: urlToLaunch[4],
+                      ),
                     ],
                     options: CarouselOptions(
                       height: h * (150 / kScreenH),
@@ -370,7 +409,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ViewAllTournamentScreen(city: _chosenValue,),
+                        builder: (_) => ViewAllTournamentScreen(
+                          city: _chosenValue,
+                        ),
                       ),
                     );
                   },
@@ -431,7 +472,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ViewAllFifaScreen(city: _chosenValue,),
+                        builder: (_) => ViewAllFifaScreen(
+                          city: _chosenValue,
+                        ),
                       ),
                     );
                   },
@@ -558,10 +601,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => LoadingScreen()));
-                       await HomeRepository()
+                        await HomeRepository()
                             .subscribeTurf(_emailCtrl.text.trim());
-                       _emailCtrl.clear();
-                       //TODO: Add try catch block in the function..
+                        _emailCtrl.clear();
+                        //TODO: Add try catch block in the function..
                         Navigator.pop(context);
                         Fluttertoast.showToast(msg: 'Subscribed Successfully');
                       }
@@ -688,20 +731,33 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+_launchURL(String url) async {
+  await launch(url);
+}
+
 class ImageShower extends StatelessWidget {
   String name;
-  ImageShower({@required this.name});
+  String url;
+  ImageShower({
+    @required this.name,
+    @required this.url,
+  });
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    return Container(
-      width: double.infinity,
-      height: h * (146 / kScreenH),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.asset(
-          'assets/images/$name.png',
-          fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () async {
+        await _launchURL(url);
+      },
+      child: Container(
+        width: double.infinity,
+        height: h * (146 / kScreenH),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            'assets/images/$name.png',
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
