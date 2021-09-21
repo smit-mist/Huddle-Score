@@ -488,7 +488,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 );
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-                                Fluttertoast.showToast(msg: 'Thanks for your FeedBack');
+                                Fluttertoast.showToast(
+                                    msg: 'Thanks for your FeedBack');
                               },
                               child: Text(
                                 'Submit',
@@ -512,471 +513,469 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
     );
 
     return CommonScaffold(
-        bottomBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1,
-              )
-            ],
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => HomeNavBar(),
-                      ),
-                      (route) => false);
-                },
-                child: Text(
-                  'Back',
-                  style: themeFont(),
-                ),
-              ),
-              Spacer(),
-              // GestureDetector(
-              //   onTap: () {
-              //     showDialog(
-              //         context: context,
-              //         builder: (BuildContext _) => feedBackFrom);
-              //   },
-              //   child: Container(
-              //     height: 40,
-              //     width: w * 0.45,
-              //     child: Center(
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           Icon(
-              //             Icons.download_rounded,
-              //             color: Colors.white,
-              //           ),
-              //           Text(
-              //             'Download Receipt',
-              //             style: themeFont(
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8),
-              //       color: kThemeColor,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
+      bottomBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: w,
+        height: h * 0.08,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 7,
+              spreadRadius: 1,
+            )
+          ],
         ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: h * (0.04),
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 18,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => HomeNavBar(
+                        curr: screen.Book,
+                      ),
+                    ),
+                    (route) => false);
+              },
+              child: Text(
+                'Back',
+                style: themeFont(),
+              ),
+            ),
+            Spacer(),
+            // GestureDetector(
+            //   onTap: () {
+            //     showDialog(
+            //         context: context,
+            //         builder: (BuildContext _) => feedBackFrom);
+            //   },
+            //   child: Container(
+            //     height: 40,
+            //     width: w * 0.45,
+            //     child: Center(
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Icon(
+            //             Icons.download_rounded,
+            //             color: Colors.white,
+            //           ),
+            //           Text(
+            //             'Download Receipt',
+            //             style: themeFont(
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(8),
+            //       color: kThemeColor,
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: h * (0.04),
+              ),
+              Text(
+                'Receipt',
+                style: themeFont(
+                  color: kThemeColor,
+                  s: 23,
+                  w: 'sb',
                 ),
-                Text(
-                  'Receipt',
-                  style: themeFont(
-                    color: kThemeColor,
-                    s: 23,
-                    w: 'sb',
+              ),
+              SizedBox(
+                height: h * 0.04,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  height: h * (350 / kScreenH),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(5, 5),
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: h * (150 / kScreenH),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    widget.details.data.title,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    timeLine,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    address,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.details.data.ageRec,
+                                    style: themeFont(
+                                      w: 'sb',
+                                      s: 14,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: h * (147 / kScreenH),
+                            width: w * (130 / kScreenW),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(
+                                widget.details.data.poster,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          '*All players will be required to show proof of identity at the time of the tournament.',
+                          style: themeFont(s: 12, w: 'r'),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              'Following documents for identification will be accepted:',
+                              style: themeFont(s: 13, w: 'r'),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(
+                                      color: kThemeColor, s: 13, w: 'r'),
+                                ),
+                                Text(
+                                  'Aadhar Card',
+                                  style: themeFont(s: 13, w: 'r'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(
+                                      color: kThemeColor, s: 13, w: 'r'),
+                                ),
+                                Text(
+                                  'Driver\'s License',
+                                  style: themeFont(
+                                      color: Colors.black, s: 13, w: 'r'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  '• ',
+                                  style: themeFont(
+                                      color: kThemeColor, s: 13, w: 'r'),
+                                ),
+                                Text(
+                                  'Pan Card',
+                                  style: themeFont(
+                                      color: Colors.black, s: 13, w: 'r'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: h * 0.04,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h * (350 / kScreenH),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(5, 5),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-
-                              child: Container(
-                                height: h * (150 / kScreenH),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      widget.details.data.title,
-                                      style: themeFont(
-                                        w: 'sb',
-                                        s: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      timeLine,
-                                      style: themeFont(
-                                        w: 'sb',
-                                        s: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      address,
-                                      style: themeFont(
-                                        w: 'sb',
-                                        s: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      widget.details.data.ageRec,
-                                      style: themeFont(
-                                        w: 'sb',
-                                        s: 14,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 1,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: h * (147 / kScreenH),
-                              width: w * (130 / kScreenW),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: Image.network(
-                                  widget.details.data.poster,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            '*All players will be required to show proof of identity at the time of the tournament.',
-                            style: themeFont(s: 12, w: 'r'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                'Following documents for identification will be accepted:',
-                                style: themeFont(s: 13, w: 'r'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 2,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '• ',
-                                    style: themeFont(
-                                        color: kThemeColor, s: 13, w: 'r'),
-                                  ),
-                                  Text(
-                                    'Aadhar Card',
-                                    style: themeFont(s: 13, w: 'r'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '• ',
-                                    style: themeFont(
-                                        color: kThemeColor, s: 13, w: 'r'),
-                                  ),
-                                  Text(
-                                    'Driver\'s License',
-                                    style: themeFont(
-                                        color: Colors.black, s: 13, w: 'r'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '• ',
-                                    style: themeFont(
-                                        color: kThemeColor, s: 13, w: 'r'),
-                                  ),
-                                  Text(
-                                    'Pan Card',
-                                    style: themeFont(
-                                        color: Colors.black, s: 13, w: 'r'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                      ],
-                    ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  height: h *
+                      (((widget.currForm == formType.Single) ? 240 : 370) /
+                          kScreenH),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(5, 5),
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:5.0),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h *
-                        (((widget.currForm == formType.Single) ? 240 : 370) /
-                            kScreenH),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(5, 5),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 7,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Text(
+                        'Your participation has been confirmed.',
+                        style: themeFont(
+                          color: kThemeColor,
+                          s: 14,
+                          w: 'm',
                         ),
-                        Text(
-                          'Your participation has been confirmed.',
-                          style: themeFont(
-                            color: kThemeColor,
-                            s: 14,
-                            w: 'm',
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        /*
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      /*
                 * -1 - Means Empty Container.
                 * 0 - Means Team Form (Cap, Vice Cap)
                 * 1 - Means 2 Player Form (Player 1, Player 2)
                 * 2 - Means 1 Player Form. (PLayer 1)
                 * */
-                        (widget.currForm == formType.Team ||
-                                widget.currForm == formType.Double)
-                            ? DataShower(
-                                type: 'Team Name',
-                                data: widget.details.regDetails.teamName,
-                              )
-                            : Container(),
-                        DataShower(
-                            type: (widget.currForm == formType.Team)
-                                ? 'Captain\'s Name'
-                                : 'Player 1 Name',
-                            data: widget.details.regDetails.captain.fullName),
-                        DataShower(
-                            type: 'Contact Number',
-                            data: widget.details.regDetails.captain.contact
-                                .toString()),
-                        DataShower(
-                            type: 'Email ID',
-                            data: widget.details.regDetails.captain.email),
-                        (widget.currForm != formType.Single)
-                            ? DataShower(
-                                type: (widget.currForm == formType.Team)
-                                    ? 'Vice Captain\'s Name'
-                                    : 'Player 2',
-                                data: widget
-                                    .details.regDetails.viceCaptain.fullName)
-                            : Container(),
-                        (widget.currForm != formType.Single)
-                            ? DataShower(
-                                type: 'Contact Number',
-                                data: widget
-                                    .details.regDetails.viceCaptain.contact
-                                    .toString())
-                            : Container(),
-                        (widget.currForm != formType.Single)
-                            ? DataShower(
-                                type: 'Email ID',
-                                data:
-                                    widget.details.regDetails.viceCaptain.email)
-                            : Container(),
-                        DataShower(
-                            type: 'Mode of Payment',
-                            data: widget.details.paymentMethod),
-                        SizedBox(
-                          height: 1,
+                      (widget.currForm == formType.Team ||
+                              widget.currForm == formType.Double)
+                          ? DataShower(
+                              type: 'Team Name',
+                              data: widget.details.regDetails.teamName,
+                            )
+                          : Container(),
+                      DataShower(
+                          type: (widget.currForm == formType.Team)
+                              ? 'Captain\'s Name'
+                              : 'Player 1 Name',
+                          data: widget.details.regDetails.captain.fullName),
+                      DataShower(
+                          type: 'Contact Number',
+                          data: widget.details.regDetails.captain.contact
+                              .toString()),
+                      DataShower(
+                          type: 'Email ID',
+                          data: widget.details.regDetails.captain.email),
+                      (widget.currForm != formType.Single)
+                          ? DataShower(
+                              type: (widget.currForm == formType.Team)
+                                  ? 'Vice Captain\'s Name'
+                                  : 'Player 2',
+                              data: widget
+                                  .details.regDetails.viceCaptain.fullName)
+                          : Container(),
+                      (widget.currForm != formType.Single)
+                          ? DataShower(
+                              type: 'Contact Number',
+                              data: widget
+                                  .details.regDetails.viceCaptain.contact
+                                  .toString())
+                          : Container(),
+                      (widget.currForm != formType.Single)
+                          ? DataShower(
+                              type: 'Email ID',
+                              data: widget.details.regDetails.viceCaptain.email)
+                          : Container(),
+                      DataShower(
+                          type: 'Mode of Payment',
+                          data: widget.details.paymentMethod),
+                      SizedBox(
+                        height: 1,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
+                          style: themeFont(
+                            s: 11,
+                            w: 'm',
+                          ),
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  height: h * (130 / kScreenH),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(5, 5),
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Charges',
                             style: themeFont(
-                              s: 11,
+                              s: 12,
                               w: 'm',
                             ),
                           ),
-                        ),
-
-                      ],
-                    ),
+                          Spacer(),
+                          Text(
+                            '₹ ${widget.details.amount / 100}',
+                            style: themeFont(
+                              s: 12,
+                              w: 'm',
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Taxes',
+                            style: themeFont(
+                              s: 12,
+                              w: 'm',
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            widget.details.taxes.toString(),
+                            style: themeFont(
+                              s: 12,
+                              w: 'm',
+                            ),
+                          )
+                        ],
+                      ),
+                      Divider(
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Total Amount',
+                            style: themeFont(
+                              s: 15,
+                              w: 'm',
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            '₹ ${widget.details.amount / 100 + widget.details.taxes}',
+                            style: themeFont(
+                              s: 15,
+                              w: 'sb',
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1,
+                      ),
+                      SizedBox(
+                        height: 1,
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: h * (130 / kScreenH),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(5, 5),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Charges',
-                              style: themeFont(
-                                s: 12,
-                                w: 'm',
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '₹ ${widget.details.amount / 100}',
-                              style: themeFont(
-                                s: 12,
-                                w: 'm',
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Taxes',
-                              style: themeFont(
-                                s: 12,
-                                w: 'm',
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              widget.details.taxes.toString(),
-                              style: themeFont(
-                                s: 12,
-                                w: 'm',
-                              ),
-                            )
-                          ],
-                        ),
-                        Divider(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Total Amount',
-                              style: themeFont(
-                                s: 15,
-                                w: 'm',
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '₹ ${widget.details.amount / 100 + widget.details.taxes}',
-                              style: themeFont(
-                                s: 15,
-                                w: 'sb',
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
         ),
-
+      ),
     );
   }
 }

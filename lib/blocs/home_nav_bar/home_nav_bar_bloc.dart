@@ -28,11 +28,12 @@ class HomeNavBarBloc extends Bloc<HomeNavBarEvent, HomeNavBarState> {
       yield SearchScreenState();
     } else if (event is CartIconPressed) {
       if (isSignedIn) {
+        yield HomeNavBarLoading();
         List<BookingDetails> bookings = await UserRepository().getBookings();
         List<FifaBookingDetails> fifas =
             await UserRepository().getFifaBookings();
 
-        yield CartScreenState(bookings: bookings,fifaBookings: fifas);
+        yield CartScreenState(bookings: bookings, fifaBookings: fifas);
       } else {
         yield GuestCartScreenState();
       }

@@ -8,6 +8,8 @@ abstract class HomeNavBarState extends Equatable {
 
 class HomeNavBarInitial extends HomeNavBarState {}
 
+class HomeNavBarLoading extends HomeNavBarState {}
+
 class HomeScreenState extends HomeNavBarState {}
 
 class SearchScreenState extends HomeNavBarState {}
