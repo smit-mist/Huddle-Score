@@ -547,38 +547,38 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                 ),
               ),
               Spacer(),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext _) => feedBackFrom);
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.45,
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          Icons.download_rounded,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Download Receipt',
-                          style: themeFont(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     showDialog(
+              //         context: context,
+              //         builder: (BuildContext _) => feedBackFrom);
+              //   },
+              //   child: Container(
+              //     height: 40,
+              //     width: w * 0.45,
+              //     child: Center(
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //         children: [
+              //           Icon(
+              //             Icons.download_rounded,
+              //             color: Colors.white,
+              //           ),
+              //           Text(
+              //             'Download Receipt',
+              //             style: themeFont(
+              //               color: Colors.white,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(8),
+              //       color: kThemeColor,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
