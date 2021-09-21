@@ -169,17 +169,48 @@ While we will endeavor to take all reasonable and appropriate steps to keep secu
                 '\nGrievance Officer\n',
                 style: bigText,
               ),
-              Text(
-                '''If you find any discrepancies or have any grievances in relation to the processing of information under this Policy, please contact D, Patel at: support@huddleandscore.com We will endeavor to respond within an appropriate time frame.''',
-                style: smallText,
+              RichText(
+                text: TextSpan(
+                  text:
+                      '''If you find any discrepancies or have any grievances in relation to the processing of information under this Policy, please contact D, Patel at: ''',
+                  style: smallText,
+                  children: [
+                    TextSpan(
+                      text: 'support@huddleandscore.com',
+                      style: smallText.copyWith(color: kThemeColor),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          _launchURL();
+                        },
+                    ),
+                    TextSpan(
+                      text:
+                          ''' We will endeavor to respond within an appropriate time frame.''',
+                      style: smallText,
+                    ),
+                  ],
+                ),
               ),
               Text(
                 '\nContacting Us\n',
                 style: bigText,
               ),
-              Text(
-                '''We can address any questions, comments and concerns about our online privacy practices and policy. Please write to D. Patel at: support@huddleandscore.com''',
-                style: smallText,
+              RichText(
+                text: TextSpan(
+                  text:
+                      '''We can address any questions, comments and concerns about our online privacy practices and policy. Please write to D. Patel at: ''',
+                  style: smallText,
+                  children: [
+                    TextSpan(
+                      text: 'support@huddleandscore.com',
+                      style: smallText.copyWith(color: kThemeColor),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          _launchURL();
+                        },
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,
