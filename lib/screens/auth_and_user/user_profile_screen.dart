@@ -178,12 +178,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           Text(
             'from',
             style: GoogleFonts.syne(
-                color: Colors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                color: Colors.black, fontWeight: FontWeight.w400, fontSize: 15),
           ),
           Text(
             'GROWNITED',
             style: GoogleFonts.syne(
-                color: Colors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                color: Colors.black, fontWeight: FontWeight.w400, fontSize: 15),
           ),
           SizedBox(
             height: 20,

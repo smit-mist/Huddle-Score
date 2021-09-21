@@ -82,14 +82,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   style: GoogleFonts.syne(
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
-                      fontSize: 13),
+                      fontSize: 15),
                 ),
                 Text(
                   'GROWNITED',
                   style: GoogleFonts.syne(
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
-                      fontSize: 13),
+                      fontSize: 15),
                 ),
               ],
             ),
