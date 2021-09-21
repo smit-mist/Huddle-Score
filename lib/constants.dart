@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum formType { Team, Double, Single, noForm }
 
+enum screen { Home, Search, Book, Profile }
 const MaterialColor kThemeColor = const MaterialColor(
   0xff248232,
   const <int, Color>{

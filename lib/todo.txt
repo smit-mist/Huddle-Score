@@ -1,8 +1,3 @@
 bug of my bookings (shows home icon highlighted)
-Change how select city dropdown looks
-changing color of hyperlinks to green in signup page
-from grownited message font size
 In tournament details too much extra spacing between all the things in iOS
-Download rulebook button not working
-set banner urls
 Apna feedback nai ja raha..
