@@ -23,21 +23,22 @@ class UserTermsAndConditions extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  IconButton(
-                    icon: Icon(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
                       Icons.arrow_back_ios,
                       color: kThemeColor,
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
                   ),
                   Text(
                     'Terms & Conditions',
-                    style: bigText,
+                    style: bigText.copyWith(fontSize: 22.0),
                   ),
                 ],
               ),
+              SizedBox(height: 15.0,),
               Text(
                 'As updated on (Launching Date)',
                 style: smallText,

@@ -959,7 +959,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       style: themeFont(
                                         s: 12.0,
                                         w: 'r',
-                                        color: Colors.blue,
+                                        color: kThemeColor,
                                       ).copyWith(
                                           decoration: TextDecoration.underline),
                                     ),
@@ -986,7 +986,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       style: themeFont(
                                         s: 12.0,
                                         w: 'r',
-                                        color: Colors.blue,
+                                        color: kThemeColor,
                                       ).copyWith(
                                           decoration: TextDecoration.underline),
                                     ),
