@@ -10,6 +10,7 @@ import 'package:huddle_and_score/screens/static_screens/user_tnc.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:huddle_and_score/screens/widgets/logo_widget.dart';
 
 import '../../constants.dart';
 
@@ -85,22 +86,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Row(
                           children: [
-                            Image.asset(
-                              'assets/images/huddle_logo.png',
-                              height: h * 0.1,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              'Huddle & Score',
-                              style: GoogleFonts.poppins(
-                                color: Colors.black,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
+                            LogoWidget(),
+                            Spacer(),
                           ],
                         ),
                         SizedBox(
@@ -591,22 +578,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       Row(
                         children: [
-                          Image.asset(
-                            'assets/images/huddle_logo.png',
-                            height: h * 0.1,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Huddle & Score',
-                            style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
+                          LogoWidget(),
+                          Spacer(),
                         ],
                       ),
                       SizedBox(
@@ -1005,8 +978,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       BlocBuilder<SignupBloc, SignupState>(
                         builder: (context, state) {
-                          bool isOk =
-                              (typedEmail & typedName & typedP1 & typedP2 &termsAgreed);
+                          bool isOk = (typedEmail &
+                              typedName &
+                              typedP1 &
+                              typedP2 &
+                              termsAgreed);
                           //     print(isOk);
                           return SizedBox(
                             width: double.infinity,

@@ -3,6 +3,7 @@ import 'package:huddle_and_score/repositories/auth_repository.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:huddle_and_score/screens/widgets/logo_widget.dart';
 
 import '../../constants.dart';
 
@@ -58,9 +59,11 @@ class _PasswordAssistInitialScreenState
                 SizedBox(
                   height: h * 0.05,
                 ),
-                Image.asset(
-                  'assets/images/huddle_logo.png',
-                  height: h * 0.1,
+                Row(
+                  children: [
+                    LogoWidget(),
+                    Spacer(),
+                  ],
                 ),
                 SizedBox(
                   height: 20,

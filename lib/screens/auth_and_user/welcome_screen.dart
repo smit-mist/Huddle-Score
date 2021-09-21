@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
@@ -20,82 +21,83 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     double w = MediaQuery.of(context).size.width;
 
     return CommonScaffold(
-        child: Container(
-          width: w,
-          padding: EdgeInsets.all(20),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                SizedBox(
-                  height: 30,
+      child: Container(
+        width: w,
+        padding: EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: h*(232/kScreenH),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/huddle_logo.png',
+                    height: h * 0.13,
+                    width: w*0.17,
+                    //height: h * 0.3,
+                  ),
+                  Text(
+                    'Huddle & Score',
+                    style: themeFont(
+                      s: 26,
+                      color: kThemeColor,
+                      w: 'b',
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Spacer(),
+              ActionButton(
+                child: Text(
+                  'Sign Up',
+                  style: themeFont(color: Colors.white, w: 'm', s: 16),
                 ),
-                Image.asset(
-                  'assets/images/huddle_logo.png',
-                  height: h * 0.3,
+                bgColor: kThemeColor,
+                onTap: () {
+                  Navigator.pushNamed(context, 'sign_up');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ActionButton(
+                child: Text(
+                  'Log In',
+                  style: themeFont(color: kThemeColor, w: 'm', s: 16),
                 ),
-                SizedBox(height: 5,),
-                Text(
-                  'Huddle & Score',
-                  style: GoogleFonts.poppins(
+                bgColor: Colors.white,
+                onTap: () {
+                  Navigator.pushNamed(context, 'sign_in');
+                },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                'from',
+                style: GoogleFonts.syne(
                     color: Colors.black,
-                    fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Spacer(),
-                ActionButton(
-                  child: Text(
-                    'Sign Up',
-                    style: themeFont(
-                        color: Colors.white, w: 'm', s: 16),
-                  ),
-                  bgColor: kThemeColor,
-                  onTap: () {
-                    Navigator.pushNamed(context, 'sign_up');
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ActionButton(
-                  child: Text(
-                    'Log In',
-                    style: themeFont(
-                        color: kThemeColor, w: 'm', s: 16),
-                  ),
-                  bgColor: Colors.white,
-                  onTap: () {
-                    Navigator.pushNamed(context, 'sign_in');
-                  },
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'from',
-                  style: GoogleFonts.syne(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15),
-                ),
-                Text(
-                  'GROWNITED',
-                  style: GoogleFonts.syne(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15),
-                ),
-              ],
-            ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15),
+              ),
+              Text(
+                'GROWNITED',
+                style: GoogleFonts.syne(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15),
+              ),
+            ],
           ),
         ),
-
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:huddle_and_score/screens/widgets/logo_widget.dart';
 
 import '../../constants.dart';
 
@@ -73,24 +74,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   key: _key,
                   child: Column(
                     children: [
-                      Image.asset(
-                        'assets/images/huddle_logo.png',
-                        height: h * 0.2,
-                      ),
+                      //SizedBox(height: h*(100/kScreenH),),
+                      LogoWidget(),
+
                       SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Huddle & Score',
-                        style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
+                        height: h*(80/kScreenH),
                       ),
                       Container(
                         width: double.infinity,
