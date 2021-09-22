@@ -421,6 +421,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ],
                               ),
                             ),
+
                             SizedBox(
                               height: 5,
                             ),
@@ -1062,6 +1063,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       tnc,
