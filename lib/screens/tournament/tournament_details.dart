@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,6 @@ import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
-import 'dart:math';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,19 +50,18 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   void preComputer() {
     tnc = "";
     String temp = "";
-    for(int i=0;i<widget.tournament.details.term.length;i++){
-      if(widget.tournament.details.term[i] != '|'){
+    for (int i = 0; i < widget.tournament.details.term.length; i++) {
+      if (widget.tournament.details.term[i] != '|') {
         temp += widget.tournament.details.term[i];
-      }
-      else{
-        tnc += temp;tnc += '\n';
+      } else {
+        tnc += temp;
+        tnc += '\n';
         temp = "";
       }
     }
     tnc += temp;
     //print("This is terms:- $tnc");
-    seatsLeft = widget.tournament.total -
-        widget.tournament.totalReg.length;
+    seatsLeft = widget.tournament.total - widget.tournament.totalReg.length;
     print(widget.tournament.total);
     print(widget.tournament.totalReg.length);
     timeLine = "";
@@ -96,8 +94,12 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     combinedRegFees = "NOTHING";
     combinedRegFees = minPrice.toString() + ' - ' + maxPrice.toString();
     if (seatsLeft < 0) seatsLeft = 0;
-   // print("Seats Left:- $seatsLeft");
+    // print("Seats Left:- $seatsLeft");
   }
+
+  void launchPdfUrl(String link) async => await canLaunch(link)
+      ? await launch(link)
+      : throw 'Could not launch $link';
 
   @override
   Widget build(BuildContext context) {
@@ -299,13 +301,17 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                     (widget.tournament.details.pdf != null)
                         ? SizedBox(
                             width: double.infinity,
-                            child: Text(
-                              //TODO: Add download link here. on tap.
-                              'Download Rulebook',
-                              style:
-                                  themeFont(s: 11, color: kThemeColor, w: 'm')
-                                      .copyWith(
-                                decoration: TextDecoration.underline,
+                            child: GestureDetector(
+                              onTap: () {
+                                launchPdfUrl(widget.tournament.details.pdf[1]);
+                              },
+                              child: Text(
+                                'Download Rulebook',
+                                style:
+                                    themeFont(s: 11, color: kThemeColor, w: 'm')
+                                        .copyWith(
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                           )
@@ -415,7 +421,6 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ],
                               ),
                             ),
-
                             SizedBox(
                               height: 5,
                             ),
@@ -1037,7 +1042,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       horizontal: 20,
                       vertical: 10,
                     ),
-                  //  height: h * 0.9,
+                    //  height: h * 0.9,
                     child: SingleChildScrollView(
                       controller: ctrl,
                       child: Container(
@@ -1057,7 +1062,6 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
-
                                   children: [
                                     Text(
                                       tnc,
@@ -1065,7 +1069,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                           decoration: TextDecoration.none),
                                     ),
                                     Container(
-                                    //  color: Colors.red,
+                                      //  color: Colors.red,
                                       height: 500,
                                       width: 500,
                                     )
