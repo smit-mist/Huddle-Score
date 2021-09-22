@@ -323,12 +323,14 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                   height: 5,
                                 ),
                                 Container(
+                                  height: 50,
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: DropdownButtonFormField<String>(
+                                    decoration: InputDecoration.collapsed(hintText: ''),
                                     validator: (value) =>
                                         value == 'Select a State'
                                             ? 'Please Select a State'
@@ -388,12 +390,14 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                   height: 5,
                                 ),
                                 Container(
+                                  height: 50,
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.14),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: DropdownButtonFormField<String>(
+                                    decoration: InputDecoration.collapsed(hintText: ''),
                                     isExpanded: true,
                                     validator: (value) =>
                                         value == 'Select a City'
@@ -451,12 +455,14 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       height: 10,
                     ),
                     Container(
+                      height: 50,
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.14),
                           borderRadius: BorderRadius.circular(10)),
                       child: DropdownButtonFormField<String>(
+                        decoration: InputDecoration.collapsed(hintText: ''),
                         validator: (value) => value == 'Select a Tournament'
                             ? 'Please Select a Tournament Type'
                             : null,

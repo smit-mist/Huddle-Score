@@ -4,6 +4,7 @@ import 'package:huddle_and_score/blocs/forms/forms_bloc.dart';
 import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:huddle_and_score/screens/partner_with_us/thank_you.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
+import 'package:huddle_and_score/screens/widgets/drop_down_ui.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
 
 import '../../constants.dart';
@@ -191,6 +192,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     'Your Full Name',
                     style: themeFont(),
                   ),
+           //      CustomDropDown(fields: ["Smit", "OK", "FINE"]),
                   SizedBox(
                     height: 10,
                   ),
@@ -310,12 +312,14 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                 height: 5,
                               ),
                               Container(
+                                height: 50,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 decoration: BoxDecoration(
                                     color: Colors.grey.withOpacity(0.14),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: DropdownButtonFormField<String>(
+                                  decoration: InputDecoration.collapsed(hintText: ''),
                                   validator: (value) =>
                                       value == 'Select a State'
                                           ? 'Please Select a State'
@@ -375,12 +379,14 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                 height: 5,
                               ),
                               Container(
+                                height: 50,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 decoration: BoxDecoration(
                                     color: Colors.grey.withOpacity(0.14),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: DropdownButtonFormField<String>(
+                                  decoration: InputDecoration.collapsed(hintText: ''),
                                   isExpanded: true,
                                   validator: (value) => value == 'Select a City'
                                       ? 'Please Select a City'

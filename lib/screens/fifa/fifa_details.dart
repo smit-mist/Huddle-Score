@@ -65,6 +65,10 @@ class _FifaDetailsState extends State<FifaDetails> {
         'https://www.google.com/maps/place/${widget.fifa.main.venue.coordinates['latitude']},${widget.fifa.main.venue.coordinates['longitude']}';
   }
 
+  void launchPdfUrl(String link) async => await canLaunch(link)
+      ? await launch(link)
+      : throw 'Could not launch $link';
+
   @override
   Widget build(BuildContext context) {
     _bloc = BlocProvider.of<ButtonClickBloc>(context);
@@ -241,15 +245,24 @@ class _FifaDetailsState extends State<FifaDetails> {
                     SizedBox(
                       height: 10,
                     ),
-                    SizedBox(
+                    (widget.fifa.details.pdf != null)
+                        ? SizedBox(
                       width: double.infinity,
-                      child: Text(
-                        'Download Rulebook',
-                        style: themeFont(s: 12, color: kThemeColor).copyWith(
-                          decoration: TextDecoration.underline,
+                      child: GestureDetector(
+                        onTap: () {
+                          launchPdfUrl(widget.fifa.details.pdf[1]);
+                        },
+                        child: Text(
+                          'Download Rulebook',
+                          style:
+                          themeFont(s: 11, color: kThemeColor, w: 'm')
+                              .copyWith(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
-                    ),
+                    )
+                        : Container(),
                     SizedBox(
                       height: 20,
                     ),
