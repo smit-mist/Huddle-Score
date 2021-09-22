@@ -223,6 +223,9 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                         style: themeFont(s: 12, w: 'r'))
                   ],
                 ),
+                SizedBox(
+                  height : 15
+                ),
                 Text(
                   'Why Huddle & Score?',
                   style: themeFont(

@@ -9,6 +9,7 @@ import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 TextStyle smallText = themeFont(s: 14, w: 'r');
 TextStyle bigText = themeFont(s: 20, w: 'sb', color: kThemeColor);
 TextStyle boldText = themeFont(
+  color : kThemeColor,
   s: 16,
   w: 'sb',
 );
@@ -98,7 +99,7 @@ class PartnerTnC extends StatefulWidget {
 }
 
 class _PartnerTnCState extends State<PartnerTnC> {
-  bool checked = false;
+  bool checked = true;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -208,7 +209,7 @@ class _PartnerTnCState extends State<PartnerTnC> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 20,),
               Row(
                 children: [
                   GestureDetector(

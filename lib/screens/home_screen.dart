@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               padding: EdgeInsets.symmetric(horizontal: 20),
-              height: h * (350 / kScreenH),
+              height: h * (320 / kScreenH),
               width: w * (370 / kScreenW),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Container(
                     width: w * (350 / kScreenW),
-                    height: h * (150 / kScreenH),
+                    height: h * (140 / kScreenH),
                     child: GridView.builder(
                         itemCount: cities.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -153,14 +153,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
-                  SizedBox(height: 10,),
+                  //SizedBox(height: 10,),
 
                   Row(
                     children: [
                       Spacer(),
                       Container(
-                        height: 42,
-                        width: 105,
+                        height: 50,
+                        width: 115,
                         child: ActionButton(
                           onTap: () {
                             Navigator.pop(context);
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             'Proceed',
                             style:
-                                themeFont(color: Colors.white, s: 12, w: 'm'),
+                                themeFont(color: Colors.white, s: 14, w: 'm'),
                           ),
                           bgColor: kThemeColor,
                         ),

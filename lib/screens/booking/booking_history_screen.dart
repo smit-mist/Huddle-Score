@@ -134,6 +134,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 'Upcoming',
                 style: themeFont(
                   s: 16.0,
+                  color : kThemeColor,
                   w: 'r',
                 ),
               ),
@@ -142,7 +143,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 border: Border(
                   left: BorderSide(
                     width: 5.0,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: kThemeColor,
                   ),
                 ),
               ),
@@ -152,7 +153,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             (selected != 'Tournaments')
                 ? (upFifa == null || upFifa.length == 0)
-                    ? Center(child: Text('No bookings'))
+                    ? Center(child: Text('No bookings', style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         width: w,
                         child: ListView.separated(
@@ -175,7 +176,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                         ),
                       )
                 : (upTour == null || upTour.length == 0)
-                    ? Center(child: Text('No bookings'))
+                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         child: ListView.separated(
                           shrinkWrap: true,
@@ -204,6 +205,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 'Past',
                 style: themeFont(
                   s: 16.0,
+                  color : kThemeColor,
                   w: 'r',
                 ),
               ),
@@ -212,7 +214,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                 border: Border(
                   left: BorderSide(
                     width: 5.0,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: kThemeColor,
                   ),
                 ),
               ),
@@ -222,7 +224,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             (selected != 'Tournaments')
                 ? (downFifa == null || downFifa.length == 0)
-                    ? Center(child: Text('No bookings'))
+                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         width: w,
                         child: ListView.separated(
@@ -245,7 +247,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                         ),
                       )
                 : (downTour == null || downTour.length == 0)
-                    ? Center(child: Text('No bookings'))
+                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         child: ListView.separated(
                           shrinkWrap: true,
