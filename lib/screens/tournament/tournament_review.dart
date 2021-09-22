@@ -78,6 +78,7 @@ class _TournamentReviewState extends State<TournamentReview> {
       MaterialPageRoute(
         builder: (_) => TournamentReceiptGenerator(
           bookingId: response.paymentId,
+          freshBooking: true,
         ),
       ),
     );

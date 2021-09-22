@@ -100,7 +100,7 @@ class App extends StatelessWidget {
         if (state is AuthInitial) {
           return WelcomeScreen();
         } else if (state is Authenticated) {
-          return HomeNavBar();
+          return HomeNavBar(curr: screen.Home,);
         } else if (state is UnAuthenticated) {
           return WelcomeScreen();
         }

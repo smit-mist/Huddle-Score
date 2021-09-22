@@ -1,3 +1,1 @@
-bug of my bookings (shows home icon highlighted)
 In tournament details too much extra spacing between all the things in iOS
-Apna feedback nai ja raha..

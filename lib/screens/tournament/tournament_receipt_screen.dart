@@ -16,7 +16,8 @@ import '../home_navbar_screen.dart';
 
 class TournamentReceiptGenerator extends StatefulWidget {
   String bookingId;
-  TournamentReceiptGenerator({this.bookingId});
+  bool freshBooking;
+  TournamentReceiptGenerator({this.bookingId, this.freshBooking});
   @override
   _TournamentReceiptGeneratorState createState() =>
       _TournamentReceiptGeneratorState();
@@ -58,6 +59,7 @@ class _TournamentReceiptGeneratorState
           return TournamentReceiptScreen(
             details: details,
             currForm: type,
+            freshBooking: widget.freshBooking,
           );
         } else {
           return LoadingWidget();
@@ -70,9 +72,11 @@ class _TournamentReceiptGeneratorState
 class TournamentReceiptScreen extends StatefulWidget {
   BookingDetails details;
   formType currForm;
+  bool freshBooking;
   TournamentReceiptScreen({
     @required this.details,
     @required this.currForm,
+    this.freshBooking,
   });
   @override
   _TournamentReceiptScreenState createState() =>
@@ -89,12 +93,14 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
     'Word of mouth',
     'Other'
   ];
-
+  TextEditingController suggestion = TextEditingController(),
+      otherText = TextEditingController();
+  double liked = 0.0;
+  int firstOption = 0, secondOption = 0;
   @override
   Widget build(BuildContext context) {
     print(widget.currForm);
     String timeLine = "";
-    TextEditingController suggestion = TextEditingController();
     var st = WeirdDateFormat(date: widget.details.data.timeLine[0]);
     var en = WeirdDateFormat(date: widget.details.data.timeLine[1]);
     timeLine += st.getDate();
@@ -108,8 +114,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     print(widget.details.regDetails.captain == null);
-    double liked = 0.0;
-    int firstOption = 0, secondOption = 0;
+
     Widget feedBackFrom = StatefulBuilder(
       builder: (context, setState) {
         return BackdropFilter(
@@ -309,6 +314,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 0;
                                     });
@@ -338,6 +345,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 1;
                                     });
@@ -367,6 +376,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 2;
                                     });
@@ -396,6 +407,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
                                     setState(() {
                                       secondOption = 3;
                                     });
@@ -423,15 +435,14 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
+                                TextField(
                                   onTap: () {
                                     setState(() {
                                       secondOption = 4;
                                     });
                                   },
-                                  child: TextField(
-                                    decoration: normalTextDecoration('Other'),
-                                  ),
+                                  controller: otherText,
+                                  decoration: normalTextDecoration('Other'),
                                 )
                               ],
                             ),
@@ -482,12 +493,23 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                     satisfied: liked.toInt(),
                                     chooseUs: '',
                                     recommendOthers: first[firstOption],
-                                    comeToKnowUs: second[secondOption],
+                                    comeToKnowUs: (secondOption < 4)
+                                        ? second[secondOption]
+                                        : otherText.text,
                                     suggestion: suggestion.text,
                                   ),
                                 );
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => HomeNavBar(
+                                        curr: (widget.freshBooking == null ||
+                                                widget.freshBooking == false)
+                                            ? screen.Book
+                                            : screen.Home,
+                                      ),
+                                    ),
+                                    (route) => false);
                                 Fluttertoast.showToast(
                                     msg: 'Thanks for your FeedBack');
                               },
@@ -535,17 +557,28 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => HomeNavBar(
-                        curr: screen.Book,
-                      ),
-                    ),
-                    (route) => false);
+                // if(widget.freshBooking == null || widget.freshBooking == false){
+                //   Navigator.pushAndRemoveUntil(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (_) => HomeNavBar(
+                //           curr: (widget.freshBooking == null ||
+                //               widget.freshBooking == false)
+                //               ? screen.Book
+                //               : screen.Home,
+                //         ),
+                //       ),
+                //           (route) => false);
+                //   return;
+                // }
+                showDialog(
+                    context: context,
+                    builder: (BuildContext _) => feedBackFrom);
               },
               child: Text(
-                'Back',
+                (widget.freshBooking == null || widget.freshBooking == false)
+                    ? 'Back'
+                    : 'Back to Home',
                 style: themeFont(),
               ),
             ),

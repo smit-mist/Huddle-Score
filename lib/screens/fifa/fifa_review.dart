@@ -51,7 +51,7 @@ class _FifaReviewState extends State<FifaReview> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => FifaReceiptScreen(bookingID: response.paymentId,
+        builder: (_) => FifaReceiptScreen(bookingID: response.paymentId,freshBook: true,
         ),
       ),
     );
