@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/feedback.dart';
 import 'package:huddle_and_score/models/fifa_booking.dart';
@@ -17,20 +18,18 @@ import '../../constants.dart';
 class FifaReceiptScreen extends StatefulWidget {
   String bookingID;
   bool freshBook;
-  FifaReceiptScreen({this.bookingID,this.freshBook});
+  FifaReceiptScreen({this.bookingID, this.freshBook});
 
   @override
   _FifaReceiptScreenState createState() => _FifaReceiptScreenState();
 }
 
 class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
-
   FifaBookingDetails details;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-
 
     String uid = FirebaseAuth.instance.currentUser.uid;
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -44,7 +43,7 @@ class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
           if (snapshot.data == null) {
             return LoadingWidget();
           }
-          if(snapshot.data.data()==null){
+          if (snapshot.data.data() == null) {
             return LoadingWidget();
           }
 
@@ -62,7 +61,8 @@ class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
             return LoadingWidget();
           } else
             return DetailShower(
-              details: details,freshBook: widget.freshBook,
+              details: details,
+              freshBook: widget.freshBook,
             );
         });
   }
@@ -71,7 +71,7 @@ class _FifaReceiptScreenState extends State<FifaReceiptScreen> {
 class DetailShower extends StatefulWidget {
   FifaBookingDetails details;
   bool freshBook;
-  DetailShower({this.freshBook,this.details});
+  DetailShower({this.freshBook, this.details});
 
   @override
   _DetailShowerState createState() => _DetailShowerState();
@@ -86,7 +86,8 @@ class _DetailShowerState extends State<DetailShower> {
     'Word of mouth',
     'Other'
   ];
-  TextEditingController suggestion = TextEditingController();
+  TextEditingController suggestion = TextEditingController(),
+      otherText = TextEditingController();
 
   double liked = 0.5;
   int firstOption = 0, secondOption = 0;
@@ -101,7 +102,7 @@ class _DetailShowerState extends State<DetailShower> {
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Dialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -146,7 +147,7 @@ class _DetailShowerState extends State<DetailShower> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text('Sad'),
+                                SvgPicture.asset('assets/icons/sad.svg'),
                                 Slider(
                                   min: 0.0,
                                   max: 100.0,
@@ -157,7 +158,7 @@ class _DetailShowerState extends State<DetailShower> {
                                     });
                                   },
                                 ),
-                                Text('Happy'),
+                                SvgPicture.asset('assets/icons/happy.svg'),
                               ],
                             ),
                             SizedBox(
@@ -197,11 +198,12 @@ class _DetailShowerState extends State<DetailShower> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 0)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -231,11 +233,12 @@ class _DetailShowerState extends State<DetailShower> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 1)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -265,11 +268,12 @@ class _DetailShowerState extends State<DetailShower> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 2)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -289,18 +293,20 @@ class _DetailShowerState extends State<DetailShower> {
                             ),
                             Wrap(
                               alignment: WrapAlignment.center,
-                              spacing: 10,
+                              spacing: 20,
                               runSpacing: 10,
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 0;
                                     });
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Social Media',
@@ -312,24 +318,27 @@ class _DetailShowerState extends State<DetailShower> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 0)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 1;
                                     });
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Search Engine',
@@ -341,24 +350,27 @@ class _DetailShowerState extends State<DetailShower> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 1)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
+
                                     setState(() {
                                       secondOption = 2;
                                     });
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Word of mouth',
@@ -370,24 +382,26 @@ class _DetailShowerState extends State<DetailShower> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 2)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    if (otherText.text.length > 0) return;
                                     setState(() {
                                       secondOption = 3;
                                     });
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'At a turf',
@@ -399,24 +413,24 @@ class _DetailShowerState extends State<DetailShower> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 3)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
+                                TextField(
                                   onTap: () {
                                     setState(() {
                                       secondOption = 4;
                                     });
                                   },
-                                  child: TextField(
-                                    decoration: normalTextDecoration('Other'),
-                                  ),
+                                  controller: otherText,
+                                  decoration: normalTextDecoration('Other'),
                                 )
                               ],
                             ),
@@ -467,7 +481,9 @@ class _DetailShowerState extends State<DetailShower> {
                                     satisfied: liked.toInt(),
                                     chooseUs: '',
                                     recommendOthers: first[firstOption],
-                                    comeToKnowUs: second[secondOption],
+                                    comeToKnowUs: (secondOption < 4)
+                                        ? second[secondOption]
+                                        : otherText.text,
                                     suggestion: suggestion.text,
                                   ),
                                 );
@@ -476,13 +492,14 @@ class _DetailShowerState extends State<DetailShower> {
                                     MaterialPageRoute(
                                       builder: (_) => HomeNavBar(
                                         curr: (widget.freshBook == null ||
-                                            widget.freshBook == false)
+                                                widget.freshBook == false)
                                             ? screen.Book
                                             : screen.Home,
                                       ),
                                     ),
-                                        (route) => false);
-                                Fluttertoast.showToast(msg: 'Thanks for your FeedBack');
+                                    (route) => false);
+                                Fluttertoast.showToast(
+                                    msg: 'Thanks for your FeedBack');
                               },
                               child: Text(
                                 'Submit',
@@ -505,298 +522,295 @@ class _DetailShowerState extends State<DetailShower> {
       },
     );
     return CommonScaffold(
-        bottomBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1,
-              )
-            ],
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
-              ),
-              TextButton(
-                onPressed: () {
-                  if(widget.freshBook == null || widget.freshBook == false){
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => HomeNavBar(
-                            curr: (widget.freshBook == null ||
-                                widget.freshBook == false)
-                                ? screen.Book
-                                : screen.Home,
-                          ),
-                        ),
-                            (route) => false);
-                    return;
-                  }
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext _) => feedBackFrom);
-                },
-                child: Text(
-                  (widget.freshBook == null || widget.freshBook == false)
-                      ? 'Back'
-                      : 'Back to Home',
-                  style: themeFont(),
-                ),
-              ),
-              Spacer(),
-              // GestureDetector(
-              //   onTap: () {
-              //     showDialog(
-              //         context: context,
-              //         builder: (BuildContext _) => feedBackFrom);
-              //   },
-              //   child: Container(
-              //     height: 40,
-              //     width: w * 0.45,
-              //     child: Center(
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           Icon(
-              //             Icons.download_rounded,
-              //             color: Colors.white,
-              //           ),
-              //           Text(
-              //             'Download Receipt',
-              //             style: themeFont(
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8),
-              //       color: kThemeColor,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
+      bottomBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: w,
+        height: h * 0.08,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 7,
+              spreadRadius: 1,
+            )
+          ],
         ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
-          height: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: h * (0.04),
-              ),
-              Text(
-                'Receipt',
-                style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
-              ),
-              SizedBox(
-                height: h * 0.04,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                height: h * (160 / kScreenH),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 7,
-                        spreadRadius: 0.1,
-                        offset: Offset(3, 3))
-                  ],
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex:2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            height: 1,
-                          ),
-                          Text(
-                            widget.details.data.title,
-                            style: themeFont(w: 'sb', s: 14),
-                          ),
-                          Text(
-                            widget.details.data.gameDate,
-                            style: themeFont(w: 'sb', s: 14),
-                          ),
-                          Text(
-
-                                widget.details.data.venue.address.join(", "),
-                            style: themeFont(w: 'sb', s: 14),
-                          ),
-                          Text(
-                            widget.details.data.time,
-                            style: themeFont(w: 'sb', s: 14),
-                          ),
-                          SizedBox(
-                            height: 1,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: h * (102 / kScreenH),
-                        width: h * (102 / kScreenH),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: Image.network(
-                            widget.details.data.poster,
-                            fit: BoxFit.cover,
-                          ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 18,
+            ),
+            TextButton(
+              onPressed: () {
+                if (widget.freshBook == null || widget.freshBook == false) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HomeNavBar(
+                          curr: (widget.freshBook == null ||
+                                  widget.freshBook == false)
+                              ? screen.Book
+                              : screen.Home,
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      (route) => false);
+                  return;
+                }
+                showDialog(
+                    context: context,
+                    builder: (BuildContext _) => feedBackFrom);
+              },
+              child: Text(
+                (widget.freshBook == null || widget.freshBook == false)
+                    ? 'Back'
+                    : 'Back to Home',
+                style: themeFont(),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                height: h * (220 / kScreenH),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 0.1,
-                        offset: Offset(3, 3))
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Your participation has been confirmed.',
-                      style: themeFont(color: kThemeColor, w: 'sb', s: 14),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    DataShower(
-                        type: 'Player\'s Name',
-                        data: widget.details.regDetails.name),
-                    DataShower(
-                        type: 'Contact Number',
-                        data: widget.details.regDetails.contact.toString()),
-                    DataShower(
-                        type: 'Email ID',
-                        data: widget.details.regDetails.email),
-                    DataShower(
-                        type: 'Mode of Payment',
-                        data: widget.details.paymentMethod),
-                    SizedBox(
-                      height: 1,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (120 / kScreenH),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 0.1,
-                        offset: Offset(3, 3))
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Charges',
-                          style: themeFont(),
-                        ),
-                        Spacer(),
-                        Text(
-                          '₹ ${widget.details.amount/100}',
-                          style: themeFont(w: 'm'),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Taxes',
-                          style: themeFont(),
-                        ),
-                        Spacer(),
-                        Text(
-                          widget.details.taxes.toString(),
-                          style: themeFont(w: 'm'),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Total Amount',
-                          style: themeFont(),
-                        ),
-                        Spacer(),
-                        Text(
-                          '₹ ${(widget.details.taxes + widget.details.amount / 100).toString()}',
-                          style: themeFont(w: 'sb'),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            Spacer(),
+            // GestureDetector(
+            //   onTap: () {
+            //     showDialog(
+            //         context: context,
+            //         builder: (BuildContext _) => feedBackFrom);
+            //   },
+            //   child: Container(
+            //     height: 40,
+            //     width: w * 0.45,
+            //     child: Center(
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Icon(
+            //             Icons.download_rounded,
+            //             color: Colors.white,
+            //           ),
+            //           Text(
+            //             'Download Receipt',
+            //             style: themeFont(
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(8),
+            //       color: kThemeColor,
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
-
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: h * (0.04),
+            ),
+            Text(
+              'Receipt',
+              style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
+            ),
+            SizedBox(
+              height: h * 0.04,
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              height: h * (160 / kScreenH),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 7,
+                      spreadRadius: 0.1,
+                      offset: Offset(3, 3))
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 1,
+                        ),
+                        Text(
+                          widget.details.data.title,
+                          style: themeFont(w: 'sb', s: 14),
+                        ),
+                        Text(
+                          widget.details.data.gameDate,
+                          style: themeFont(w: 'sb', s: 14),
+                        ),
+                        Text(
+                          widget.details.data.venue.address.join(", "),
+                          style: themeFont(w: 'sb', s: 14),
+                        ),
+                        Text(
+                          widget.details.data.time,
+                          style: themeFont(w: 'sb', s: 14),
+                        ),
+                        SizedBox(
+                          height: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: h * (102 / kScreenH),
+                      width: h * (102 / kScreenH),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.network(
+                          widget.details.data.poster,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              height: h * (220 / kScreenH),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      spreadRadius: 0.1,
+                      offset: Offset(3, 3))
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Your participation has been confirmed.',
+                    style: themeFont(color: kThemeColor, w: 'sb', s: 14),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  DataShower(
+                      type: 'Player\'s Name',
+                      data: widget.details.regDetails.name),
+                  DataShower(
+                      type: 'Contact Number',
+                      data: widget.details.regDetails.contact.toString()),
+                  DataShower(
+                      type: 'Email ID', data: widget.details.regDetails.email),
+                  DataShower(
+                      type: 'Mode of Payment',
+                      data: widget.details.paymentMethod),
+                  SizedBox(
+                    height: 1,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: h * (120 / kScreenH),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      spreadRadius: 0.1,
+                      offset: Offset(3, 3))
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Charges',
+                        style: themeFont(),
+                      ),
+                      Spacer(),
+                      Text(
+                        '₹ ${widget.details.amount / 100}',
+                        style: themeFont(w: 'm'),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Taxes',
+                        style: themeFont(),
+                      ),
+                      Spacer(),
+                      Text(
+                        widget.details.taxes.toString(),
+                        style: themeFont(w: 'm'),
+                      )
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Total Amount',
+                        style: themeFont(),
+                      ),
+                      Spacer(),
+                      Text(
+                        '₹ ${(widget.details.taxes + widget.details.amount / 100).toString()}',
+                        style: themeFont(w: 'sb'),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

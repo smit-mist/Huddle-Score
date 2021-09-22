@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/feedback.dart';
@@ -166,7 +167,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text('Sad'),
+                                SvgPicture.asset('assets/icons/sad.svg'),
                                 Slider(
                                   min: 0.0,
                                   max: 100.0,
@@ -177,7 +178,8 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                     });
                                   },
                                 ),
-                                Text('Happy'),
+                                SvgPicture.asset('assets/icons/happy.svg'),
+
                               ],
                             ),
                             SizedBox(
@@ -312,7 +314,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                             ),
                             Wrap(
                               alignment: WrapAlignment.center,
-                              spacing: 10,
+                              spacing: 20,
                               runSpacing: 10,
                               children: [
                                 GestureDetector(
@@ -325,7 +327,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Social Media',
@@ -357,7 +359,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Search Engine',
@@ -389,7 +391,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'Word of mouth',
@@ -420,7 +422,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   },
                                   child: Container(
                                     height: 40,
-                                    width: w * (120 / kScreenW),
+                                    width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
                                         'At a turf',
@@ -564,20 +566,20 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ),
             TextButton(
               onPressed: () {
-                // if(widget.freshBooking == null || widget.freshBooking == false){
-                //   Navigator.pushAndRemoveUntil(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (_) => HomeNavBar(
-                //           curr: (widget.freshBooking == null ||
-                //               widget.freshBooking == false)
-                //               ? screen.Book
-                //               : screen.Home,
-                //         ),
-                //       ),
-                //           (route) => false);
-                //   return;
-                // }
+                if(widget.freshBooking == null || widget.freshBooking == false){
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HomeNavBar(
+                          curr: (widget.freshBooking == null ||
+                              widget.freshBooking == false)
+                              ? screen.Book
+                              : screen.Home,
+                        ),
+                      ),
+                          (route) => false);
+                  return;
+                }
                 showDialog(
                     context: context,
                     builder: (BuildContext _) => feedBackFrom);
