@@ -51,19 +51,18 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   void preComputer() {
     tnc = "";
     String temp = "";
-    for(int i=0;i<widget.tournament.details.term.length;i++){
-      if(widget.tournament.details.term[i] != '|'){
+    for (int i = 0; i < widget.tournament.details.term.length; i++) {
+      if (widget.tournament.details.term[i] != '|') {
         temp += widget.tournament.details.term[i];
-      }
-      else{
-        tnc += temp;tnc += '\n';
+      } else {
+        tnc += temp;
+        tnc += '\n';
         temp = "";
       }
     }
     tnc += temp;
     //print("This is terms:- $tnc");
-    seatsLeft = widget.tournament.total -
-        widget.tournament.totalReg.length;
+    seatsLeft = widget.tournament.total - widget.tournament.totalReg.length;
     print(widget.tournament.total);
     print(widget.tournament.totalReg.length);
     timeLine = "";
@@ -96,7 +95,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
     combinedRegFees = "NOTHING";
     combinedRegFees = minPrice.toString() + ' - ' + maxPrice.toString();
     if (seatsLeft < 0) seatsLeft = 0;
-   // print("Seats Left:- $seatsLeft");
+    // print("Seats Left:- $seatsLeft");
   }
 
   @override
@@ -415,7 +414,6 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ],
                               ),
                             ),
-
                             SizedBox(
                               height: 5,
                             ),
@@ -1037,7 +1035,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       horizontal: 20,
                       vertical: 10,
                     ),
-                  //  height: h * 0.9,
+                    //  height: h * 0.9,
                     child: SingleChildScrollView(
                       controller: ctrl,
                       child: Container(
@@ -1057,7 +1055,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
-
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       tnc,
@@ -1065,7 +1063,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                           decoration: TextDecoration.none),
                                     ),
                                     Container(
-                                    //  color: Colors.red,
+                                      //  color: Colors.red,
                                       height: 500,
                                       width: 500,
                                     )

@@ -217,11 +217,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 0)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -251,11 +252,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 1)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -285,11 +287,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ((firstOption == 2)
                                               ? kThemeColor
-                                              : Colors.black),
+                                              : Colors.transparent),
                                         ),
                                       ),
                                     ),
@@ -334,11 +337,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 0)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
@@ -365,11 +369,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 1)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
@@ -396,11 +401,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 2)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),
@@ -426,11 +432,12 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: ((secondOption == 3)
                                             ? kThemeColor
-                                            : Colors.black),
+                                            : Colors.transparent),
                                       ),
                                     ),
                                   ),

@@ -36,12 +36,12 @@ class _FifaDetailsState extends State<FifaDetails> {
   void precomputer() {
     tnc = "";
     String temp = "";
-    for(int i=0;i<widget.fifa.details.terms.length;i++){
-      if(widget.fifa.details.terms[i] != '|'){
+    for (int i = 0; i < widget.fifa.details.terms.length; i++) {
+      if (widget.fifa.details.terms[i] != '|') {
         temp += widget.fifa.details.terms[i];
-      }
-      else{
-        tnc += temp;tnc += '\n';
+      } else {
+        tnc += temp;
+        tnc += '\n';
         temp = "";
       }
     }
@@ -88,7 +88,7 @@ class _FifaDetailsState extends State<FifaDetails> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context);
                   },
                   child: Icon(
@@ -907,8 +907,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                       horizontal: 20,
                       vertical: 10,
                     ),
-                  //  height: h * 0.5,
-                    child:SingleChildScrollView(
+                    //  height: h * 0.5,
+                    child: SingleChildScrollView(
                       controller: ctrl,
                       child: Container(
                         height: h,
@@ -927,7 +927,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
-
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       tnc,
