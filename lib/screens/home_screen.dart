@@ -58,11 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
     "ad4",
   ];
   List<String> urlToLaunch = [
-    "http://royaltechnosoft.com/",
-    "http://grownited.com/internship",
     "http://grownited.com/services",
+    "http://grownited.com/internship",
     "http://grownited.com/idea",
     "http://royaltechnosoft.com/",
+    "http://grownited.com/services",
+    
   ];
   TextEditingController _emailCtrl = TextEditingController();
   bool emailTapped = false;
