@@ -291,7 +291,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                     SizedBox(
                       width: double.infinity,
                       child: Text(
-                        'Kindly go through rules and regulations of the tournament before registering.',
+                        'Kindly go through the Terms & Conditions of this tournament before registering.',
                         style: themeFont(s: 12, w: 'm'),
                       ),
                     ),
@@ -306,7 +306,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 launchPdfUrl(widget.tournament.details.pdf[1]);
                               },
                               child: Text(
-                                'Download Rulebook',
+                                'Download Terms & Conditions',
                                 style:
                                     themeFont(s: 11, color: kThemeColor, w: 'm')
                                         .copyWith(
@@ -509,7 +509,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      'Prize pool',
+                                      'Prize Pool',
                                       style: themeFont(s: 13, w: 'm'),
                                     ),
                                   ),
@@ -592,7 +592,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                   TournamentDetailExpanded());
                                             },
                                             child: Text(
-                                              'View all',
+                                              'View All Prizes',
                                               style: themeFont(
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
@@ -636,7 +636,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
-                                    'Prize pool',
+                                    'Prize Pool',
                                     style: themeFont(
                                       s: 13,
                                       w: 'm',
@@ -757,7 +757,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                         TournamentDetailExpanded());
                                                   },
                                                   child: Text(
-                                                    'View less',
+                                                    'View Less',
                                                     style: themeFont(
                                                             color: kThemeColor,
                                                             s: 10)
@@ -890,7 +890,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                             Container(
                               width: double.infinity,
                               child: Text(
-                                'Contact The Organiser',
+                                'Contact the Organizer',
                                 style: themeFont(s: 16),
                               ),
                             ),
@@ -1052,9 +1052,10 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Terms & Conditions',
+                              'Terms & Conditions of This Tournament',
                               style: themeFont(
-                                w: 'sb',
+                                w: 'sb'
+                  
                               ).copyWith(decoration: TextDecoration.none),
                             ),
                             SizedBox(

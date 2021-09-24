@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   SizedBox(height: 20,),
                   Text(
-                    'Ready for the game?',
+                    'Select your City',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
                   SizedBox(height: 15,),
@@ -417,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: Text(
-                    'View all',
+                    'View All',
                     style: themeFont(s: 13, color: kThemeColor, w: 'm')
                         .copyWith(decoration: TextDecoration.underline),
                   ),
@@ -480,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: Text(
-                    'View all',
+                    'View All',
                     style: themeFont(s: 13, color: kThemeColor)
                         .copyWith(decoration: TextDecoration.underline),
                   ),
@@ -653,7 +653,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      'Partner with us!',
+                      'Partner With Us!',
                       style: themeFont(s: 18),
                     ),
                   ),

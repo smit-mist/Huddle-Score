@@ -238,7 +238,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                     SizedBox(
                       width: double.infinity,
                       child: Text(
-                        'Kindly go through rules and regulations of the tournament before registering.',
+                        'Kindly go through the Terms & Conditions of this tournament before registering.',
                         style: themeFont(s: 12),
                       ),
                     ),
@@ -253,7 +253,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                           launchPdfUrl(widget.fifa.details.pdf[1]);
                         },
                         child: Text(
-                          'Download Rulebook',
+                          'Download Terms & Conditions',
                           style:
                           themeFont(s: 11, color: kThemeColor, w: 'm')
                               .copyWith(
@@ -414,7 +414,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      'Prize pool',
+                                      'Prize Pool',
                                       style: themeFont(s: 13, w: 'm'),
                                     ),
                                   ),
@@ -448,9 +448,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                         s: 12, w: 'sb'),
                                                   ),
                                                   Text(
-                                                    widget.fifa.prizePool[
-                                                        ind.toString()][1],
-                                                    //'hello',
+                                                    '₹ ${widget.fifa.prizePool[
+                                                        ind.toString()][1]}',
                                                     style: themeFont(
                                                       s: (ind == 0 ? 20 : 18),
                                                       w: (ind == 0)
@@ -500,7 +499,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                   TournamentDetailExpanded());
                                             },
                                             child: Text(
-                                              'View all prizes',
+                                              'View All Prizes',
                                               style: themeFont(
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
@@ -543,7 +542,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
-                                    'Prize pool',
+                                    'Prize Pool',
                                     style: themeFont(
                                       s: 13,
                                       w: 'm',
@@ -577,8 +576,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                       themeFont(s: 12, w: 'sb'),
                                                 ),
                                                 Text(
-                                                  widget.fifa.prizePool[
-                                                      ind.toString()][1],
+                                                  '₹ ${widget.fifa.prizePool[
+                                                      ind.toString()][1]}',
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
                                                     w: (ind == 0) ? 'b' : 'sb',
@@ -666,7 +665,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                         TournamentDetailExpanded());
                                                   },
                                                   child: Text(
-                                                    'View less',
+                                                    'View Less',
                                                     style: themeFont(
                                                             color: kThemeColor,
                                                             s: 10)
@@ -769,7 +768,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                             Container(
                               width: double.infinity,
                               child: Text(
-                                'Contact The Organiser',
+                                'Contact the Organizer',
                                 style: themeFont(s: 16),
                               ),
                             ),

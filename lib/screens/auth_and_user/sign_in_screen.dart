@@ -226,7 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 Navigator.pushNamed(context, 'password_assist');
                               },
                               child: Text(
-                                'Forgot Password?',
+                                'Forgot password?',
                                 style: themeFont(
                                     color: kThemeColor, w: 'n', s: 11),
                               ),

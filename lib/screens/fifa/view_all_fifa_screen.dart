@@ -39,7 +39,7 @@ class ViewAllFifaScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Online Tournaments',
+                    'Upcoming Online Tournaments',
                     style: themeFont(
                       color: kThemeColor,
                       s: 23,

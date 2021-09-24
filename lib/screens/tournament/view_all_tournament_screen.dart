@@ -33,7 +33,7 @@ class ViewAllTournamentScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Tournaments in Your City',
+                    'Upcoming Tournaments',
                     style: themeFont(
                       color: kThemeColor,
                       s: 23,

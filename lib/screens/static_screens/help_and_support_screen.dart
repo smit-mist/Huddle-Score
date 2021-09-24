@@ -100,7 +100,7 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                   ),
                   Field(
                     ans:
-                        'Huddle & Score is not for just professionals, but for anyone who wishes to enjoy a game of… well, any sport at all.',
+                        'Huddle & Score is not only for professionals, but it is also for anyone who wishes to enjoy a game of…well, any sport at all.',
                     ques: 'Who is Huddle & Score for?',
                     val: ok[2],
                     onPressed: (bool nw) {

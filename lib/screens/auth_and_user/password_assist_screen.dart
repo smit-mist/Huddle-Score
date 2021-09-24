@@ -88,7 +88,7 @@ class _PasswordAssistInitialScreenState
                 Text(
                   (currState != screen.Pass)
                       ? 'Enter the Email ID associated with your Huddle & Score account to receive a link.'
-                      : 'A link to reset your password has been sent to the following Email ID.',
+                      : 'We have sent a link to the following Email ID to get you back into your account.',
                   style: themeFont(s: 14, w: 'r'),
                 ),
                 SizedBox(
@@ -143,7 +143,7 @@ class _PasswordAssistInitialScreenState
                             child: Row(
                               children: [
                                 Text(
-                                  'Invalid Email-id!',
+                                  'Invalid Email ID',
                                   style: themeFont(
                                       color: Colors.red, s: 12, w: 'r'),
                                 ),

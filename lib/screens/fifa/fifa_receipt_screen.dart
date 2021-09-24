@@ -438,7 +438,7 @@ class _DetailShowerState extends State<DetailShower> {
                               height: 10,
                             ),
                             Text(
-                              'How can we make your experience even better?',
+                              'How can we make your experience better?',
                               style: themeFont(),
                             ),
                             SizedBox(
@@ -447,7 +447,7 @@ class _DetailShowerState extends State<DetailShower> {
                             TextField(
                               controller: suggestion,
                               decoration: normalTextDecoration(
-                                'Leave a suggestion to us..',
+                                'Leave a suggestion for us.',
                               ),
                             ),
                             SizedBox(

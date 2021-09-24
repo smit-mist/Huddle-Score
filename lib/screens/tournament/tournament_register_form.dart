@@ -946,7 +946,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       height: h * 0.035,
                                     ),
                                     Text(
-                                      'Player 1 details',
+                                      'Player 1 Details',
                                       style: themeFont(s: 15),
                                     ),
                                     SizedBox(
@@ -1107,7 +1107,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                       height: h * (0.055),
                                     ),
                                     Text(
-                                      'Player 2 details',
+                                      'Player 2 Details',
                                       style: themeFont(s: 15),
                                     ),
                                     SizedBox(
@@ -1267,7 +1267,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Player 1 details',
+                                      'Player 1 Details',
                                       style: themeFont(s: 15),
                                     ),
                                     SizedBox(

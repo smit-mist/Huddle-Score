@@ -172,7 +172,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                   width: w * 0.35,
                   child: Center(
                     child: Text(
-                      'Proceed to pay',
+                      'Proceed to Pay',
                       style: themeFont(color: Colors.white, s: 15, w: 'sb'),
                     ),
                   ),
