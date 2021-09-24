@@ -279,23 +279,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    final status = await getNotificationsPermission();
-                    if (status.isGranted) {
-                      Fluttertoast.showToast(
-                          msg: 'Permission Successfully Granted');
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: 'Please grant permission for notifications');
-                    }
-                  },
-                  child: SvgPicture.asset(
-                    'assets/icons/Bellicon_Home.svg',
-                    height: 25,
-                    width: 25,
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () async {
+                //     final status = await getNotificationsPermission();
+                //     if (status.isGranted) {
+                //       Fluttertoast.showToast(
+                //           msg: 'Permission Successfully Granted');
+                //     } else {
+                //       Fluttertoast.showToast(
+                //           msg: 'Please grant permission for notifications');
+                //     }
+                //   },
+                //   child: SvgPicture.asset(
+                //     'assets/icons/Bellicon_Home.svg',
+                //     height: 25,
+                //     width: 25,
+                //   ),
+                // ),
                 SizedBox(
                   width: 10,
                 ),

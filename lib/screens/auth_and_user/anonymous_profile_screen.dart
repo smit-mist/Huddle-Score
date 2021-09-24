@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:huddle_and_score/screens/auth_and_user/sign_in_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/about_app_screen.dart';
+import 'package:huddle_and_score/screens/static_screens/help_and_support_screen.dart';
 
 import '../../constants.dart';
 
@@ -98,7 +100,15 @@ class AnonymousProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Divider(),
-                ExpansionTile(
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HelpAndSupportScreen(),
+                      ),
+                    );
+                  },
                   title: Text(
                     'Help & Support',
                     style: themeFont(),
@@ -112,7 +122,15 @@ class AnonymousProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Divider(),
-                ExpansionTile(
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AboutAppScreen(),
+                      ),
+                    );
+                  },
                   title: Text(
                     'About',
                     style: themeFont(),

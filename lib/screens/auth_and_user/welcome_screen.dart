@@ -29,7 +29,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: h*(232/kScreenH),
+                height: h * (10 / kScreenH),
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => HomeNavBar(
+                            curr: screen.Home,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Skip',
+                      style: themeFont(color: kThemeColor),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: h * (220 / kScreenH),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Image.asset(
                     'assets/images/huddle_logo.png',
                     height: h * 0.13,
-                    width: w*0.17,
+                    width: w * 0.17,
                     //height: h * 0.3,
                   ),
                   Text(

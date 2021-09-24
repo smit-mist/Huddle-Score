@@ -1,5 +1,6 @@
 import 'dart:ui';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -570,38 +571,48 @@ class _DetailShowerState extends State<DetailShower> {
               ),
             ),
             Spacer(),
-            // GestureDetector(
-            //   onTap: () {
-            //     showDialog(
-            //         context: context,
-            //         builder: (BuildContext _) => feedBackFrom);
-            //   },
-            //   child: Container(
-            //     height: 40,
-            //     width: w * 0.45,
-            //     child: Center(
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //         children: [
-            //           Icon(
-            //             Icons.download_rounded,
-            //             color: Colors.white,
-            //           ),
-            //           Text(
-            //             'Download Receipt',
-            //             style: themeFont(
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(8),
-            //       color: kThemeColor,
-            //     ),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () async{
+                final doc = pw.Document();
+                doc.addPage(pw.Page(
+                    pageFormat: PdfPageFormat.a4,
+                    build: (pw.Context context) {
+                      return pw.Center(
+                        child: pw.Text(
+                          "Hello World",
+                        ),
+                      );
+                    }));
+                await doc.save();
+                print("Saved");
+
+              },
+              child: Container(
+                height: 40,
+                width: w * 0.45,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.download_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Download Receipt',
+                        style: themeFont(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),

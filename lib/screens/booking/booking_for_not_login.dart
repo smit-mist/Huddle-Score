@@ -1,5 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:huddle_and_score/constants.dart';
+import 'package:huddle_and_score/screens/auth_and_user/sign_in_screen.dart';
 import 'package:huddle_and_score/screens/widgets/booked_event_tile.dart';
 
 class BookingNotSignIn extends StatelessWidget {
@@ -28,10 +31,10 @@ class BookingNotSignIn extends StatelessWidget {
           SizedBox(
             height: h * 0.1,
           ),
-          Icon(
-            Icons.shopping_bag,
+          SvgPicture.asset(
+            'assets/icons/Booking_Filled.svg',
             color: kThemeColor,
-            size: 250,
+            height: h*0.2,
           ),
           SizedBox(
             height: h * 0.1,
@@ -44,6 +47,16 @@ class BookingNotSignIn extends StatelessWidget {
                 style: themeFont(),
                 children: <TextSpan>[
                   TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  SignInScreen(),
+                            ),
+                          );
+                        },
                       text: 'Sign In ',
                       style: themeFont(color: kThemeColor, s: 16)),
                   TextSpan(
@@ -65,7 +78,7 @@ class BookingNotSignIn extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          BookedEventTile(),
+          //BookedEventTile(),
         ],
       ),
     );

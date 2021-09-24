@@ -317,9 +317,6 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                                 Text(
                                   '+91',
                                   style: themeFont(
-                                    color: Colors.grey.withOpacity(
-                                      0.7,
-                                    ),
                                   ),
                                 ),
                                 SizedBox(

@@ -96,7 +96,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   }
 
   void preComputer() {
-  //  print("Inside compu");
+    //  print("Inside compu");
     sport = widget.currentTour.info.type;
     currForm = getFormType(sport.toLowerCase());
     print("$sport ---> $currForm");
@@ -179,7 +179,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   @override
   Widget build(BuildContext context) {
     // typeOfForm = 1;
-    print(currForm);
+    // print(currForm);
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Dialog(
@@ -262,1179 +262,1159 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
-    print(chosedType);
+    // print(chosedType);
     return CommonScaffold(
-        bottomBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 7,
-                  spreadRadius: 1)
-            ],
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
+      bottomBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: w,
+        height: h * 0.08,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 7,
+                spreadRadius: 1)
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 18,
+            ),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext _) => onBackDialog);
+              },
+              child: Text(
+                'Back',
+                style: themeFont(),
               ),
-              TextButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext _) => onBackDialog);
-                },
-                child: Text(
-                  'Back',
-                  style: themeFont(),
-                ),
-              ),
-              Spacer(),
-              GestureDetector(
-                /*
+            ),
+            Spacer(),
+            GestureDetector(
+              /*
                 * -1 - Means Empty Container.
                 * 0 - Means Team Form (Cap, Vice Cap)
                 * 1 - Means 2 Player Form (Player 1, Player 2)
                 * 2 - Means 1 Player Form. (PLayer 1)
                 * */
-                onTap: () {
-                  if (currForm == formType.noForm) {
-                    print("Select a Form");
-                    return;
-                  }
-                  if (currForm == formType.Team) {
-                    if (_key.currentState.validate()) {
-                      RegDetails temp = RegDetails(
-                        teamName: teamName.text.trim(),
-                        captain: Captain(
-                          fullName: name1.text.trim(),
-                          email: email1.text.trim(),
-                          contact: int.parse(mob1.text.trim()),
-                          age: int.parse(
-                            age1.text.trim(),
-                          ),
-                        ),
-                        viceCaptain: Captain(
-                          fullName: name2.text.trim(),
-                          email: email2.text.trim(),
-                          contact: int.parse(mob2.text.trim()),
-                          age: int.parse(
-                            age2.text.trim(),
-                          ),
-                        ),
-                      );
+              onTap: () {
+                print("jassy starts");
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => TournamentReview(
-                            currentTour: widget.currentTour,
-                            userRecord: temp,
-                            currForm: currForm,
-                            cat: chosedType,
-                            subCat: chosedCat,
-                          ),
+                if (currForm == formType.noForm) {
+                  print("Select a Form");
+                  return;
+                }
+                if (currForm == formType.Team) {
+                  if (_key.currentState.validate()) {
+                    print("Inside validator");
+                    RegDetails temp = RegDetails(
+                      teamName: teamName.text.trim(),
+                      captain: Captain(
+                        fullName: name1.text.trim(),
+                        email: email1.text.trim(),
+                        contact: int.parse(mob1.text.trim()),
+                        age: int.parse(
+                          age1.text.trim(),
                         ),
-                      );
-                    }
-                  } else if (currForm == formType.Double) {
-                    if (_key.currentState.validate()) {
-                      RegDetails temp = RegDetails(
-                        teamName: teamName.text.trim(),
-                        captain: Captain(
-                          fullName: name1.text.trim(),
-                          email: email1.text.trim(),
-                          age: int.parse(age1.text.trim()),
-                          contact: int.parse(mob1.text.trim()),
+                      ),
+                      viceCaptain: Captain(
+                        fullName: name2.text.trim(),
+                        email: email2.text.trim(),
+                        contact: int.parse(mob2.text.trim()),
+                        age: int.parse(
+                          age2.text.trim(),
                         ),
-                        viceCaptain: Captain(
-                          fullName: name2.text.trim(),
-                          email: email2.text.trim(),
-                          age: int.parse(age2.text.trim()),
-                          contact: int.parse(mob2.text.trim()),
+                      ),
+                    );
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TournamentReview(
+                          currentTour: widget.currentTour,
+                          userRecord: temp,
+                          currForm: currForm,
+                          cat: chosedType,
+                          subCat: chosedCat,
                         ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => TournamentReview(
-                            currentTour: widget.currentTour,
-                            userRecord: temp,
-                            currForm: currForm,
-                            cat: chosedType,
-                            subCat: chosedCat,
-                          ),
-                        ),
-                      );
-                    }
-                  } else {
-                    if (_key.currentState.validate()) {
-                      RegDetails temp = RegDetails(
-                        captain: Captain(
-                          fullName: name1.text.trim(),
-                          email: email1.text.trim(),
-                          age: int.parse(age1.text.trim()),
-                          contact: int.parse(mob1.text.trim()),
-                        ),
-                        viceCaptain: Captain(),
-                        teamName: "ok",
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => TournamentReview(
-                            currentTour: widget.currentTour,
-                            userRecord: temp,
-                            currForm: currForm,
-                            cat: chosedType,
-                            subCat: chosedCat,
-                          ),
-                        ),
-                      );
-                    }
+                      ),
+                    );
                   }
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.3,
-                  child: Center(
-                    child: Text(
-                      'Submit',
-                      style: themeFont(color: Colors.white),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
+                } else if (currForm == formType.Double) {
+                  if (_key.currentState.validate()) {
+                    RegDetails temp = RegDetails(
+                      teamName: teamName.text.trim(),
+                      captain: Captain(
+                        fullName: name1.text.trim(),
+                        email: email1.text.trim(),
+                        age: int.parse(age1.text.trim()),
+                        contact: int.parse(mob1.text.trim()),
+                      ),
+                      viceCaptain: Captain(
+                        fullName: name2.text.trim(),
+                        email: email2.text.trim(),
+                        age: int.parse(age2.text.trim()),
+                        contact: int.parse(mob2.text.trim()),
+                      ),
+                    );
+                    print("Inside navigator");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TournamentReview(
+                          currentTour: widget.currentTour,
+                          userRecord: temp,
+                          currForm: currForm,
+                          cat: chosedType,
+                          subCat: chosedCat,
+                        ),
+                      ),
+                    );
+                  }
+                } else {
+                  if (_key.currentState.validate()) {
+                    RegDetails temp = RegDetails(
+                      captain: Captain(
+                        fullName: name1.text.trim(),
+                        email: email1.text.trim(),
+                        age: int.parse(age1.text.trim()),
+                        contact: int.parse(mob1.text.trim()),
+                      ),
+                      viceCaptain: Captain(),
+                      teamName: "ok",
+                    );
+                    print("Navigator in the game");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TournamentReview(
+                          currentTour: widget.currentTour,
+                          userRecord: temp,
+                          currForm: currForm,
+                          cat: chosedType,
+                          subCat: chosedCat,
+                        ),
+                      ),
+                    );
+                  }
+                }
+              },
+              child: Container(
+                height: 40,
+                width: w * 0.3,
+                child: Center(
+                  child: Text(
+                    'Submit',
+                    style: themeFont(color: Colors.white),
                   ),
                 ),
-              )
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      child: Container(
+        width: w,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: h * 0.025,
+              ),
+              Text(
+                'Registration',
+                style: themeFont(
+                  color: kThemeColor,
+                  s: 23,
+                ),
+              ),
+              SizedBox(
+                height: h * 0.03,
+              ),
+              RichText(
+                text: TextSpan(
+                  style: themeFont(),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text:
+                          'Kindly fill in the following details to register your team in ',
+                    ),
+                    TextSpan(
+                      text: widget.currentTour.details.title,
+                      style: themeFont(
+                        w: 'b',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: h * 0.027,
+              ),
+              Container(
+                height: h * 0.1,
+                width: w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: w * 0.3,
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        focusColor: Colors.white,
+                        value: chosedType,
+                        style: TextStyle(color: Colors.white),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: kThemeColor,
+                          size: 20,
+                        ),
+                        onChanged: (ok) {
+                          setState(() {
+                            chosedType = ok;
+                            if (chosedType == "Single") {
+                              currForm = formType.Single;
+                            } else if (chosedType == "Double") {
+                              currForm = formType.Double;
+                            } else if (chosedType == "Team") {
+                              currForm = formType.Team;
+                            } else {
+                              currForm = formType.noForm;
+                            }
+                            selectedSub = allCategory[chosedType];
+                            chosedCat = selectedSub[0];
+                          });
+                        },
+                        underline: Container(),
+                        items: tourType
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        hint: Text(
+                          "Type",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: w * 0.4,
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        focusColor: Colors.white,
+                        value: chosedCat,
+                        style: TextStyle(color: Colors.white),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: kThemeColor,
+                          size: 20,
+                        ),
+                        onChanged: (ok) {
+                          setState(() {
+                            chosedCat = ok;
+                          });
+                        },
+                        underline: Container(),
+                        items: selectedSub
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        hint: Text(
+                          "Type",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // real form starts here....
+              (currForm == formType.noForm)
+                  ? Container()
+                  : (currForm == formType.Team)
+                      ? Form(
+                          key: _key,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Name of your team',
+                                style: themeFont(
+                                  s: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedTeamName = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedTeamName = false;
+                                    });
+                                  }
+                                },
+                                controller: teamName,
+                                validator: (val) {
+                                  return nameValidator(val);
+                                },
+                                decoration: textFieldDecoration(
+                                    'Team Name', typedTeamName),
+                              ),
+                              SizedBox(
+                                height: h * 0.035,
+                              ),
+                              Text(
+                                'Captain details',
+                                style: themeFont(s: 15),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'All communication regarding the tournament will be done with the Captain or Vice-Captain of the team.',
+                                style: themeFont(
+                                  s: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: h * 0.02,
+                              ),
+                              Text(
+                                'Full Name',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedName1 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedName1 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return nameValidator(val);
+                                },
+                                controller: name1,
+                                decoration: textFieldDecoration(
+                                    'Captain\'s Name', typedName1),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Contact Number',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedMob1 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedMob1 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return mobileNumValidator(val);
+                                },
+                                keyboardType: TextInputType.phone,
+                                controller: mob1,
+                                decoration: textFieldDecoration(
+                                        'Captain\'s Contact Number', typedMob1)
+                                    .copyWith(
+                                  prefixIcon: Container(
+                                    width: w * 0.15,
+                                    padding: EdgeInsets.only(left: 15),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '+91',
+                                          style: themeFont(),
+                                        ),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Container(
+                                          height: 25,
+                                          width: 1,
+                                          color: Color(0xFFAFAFAF),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Email ID',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedEmail1 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedEmail1 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return emailValidator(val);
+                                },
+                                controller: email1,
+                                decoration: textFieldDecoration(
+                                    'Captain\'s Email', typedEmail1),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Age',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedAge1 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedAge1 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return ageValidator(val);
+                                },
+                                controller: age1,
+                                decoration: textFieldDecoration(
+                                    'Captain\'s Age', typedAge1),
+                              ),
+                              SizedBox(
+                                height: h * (0.045),
+                              ),
+                              Text(
+                                'Vice Captain details',
+                                style: themeFont(s: 15),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Full Name',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedName2 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedName2 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return nameValidator(val);
+                                },
+                                controller: name2,
+                                decoration: textFieldDecoration(
+                                    'Vice Captain\'s Name', typedName2),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Contact Number',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedMob2 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedMob2 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return mobileNumValidator(val);
+                                },
+                                keyboardType: TextInputType.phone,
+                                controller: mob2,
+                                decoration: textFieldDecoration(
+                                        'Vice Captain\'s Contact Number',
+                                        typedMob2)
+                                    .copyWith(
+                                  prefixIcon: Container(
+                                    width: w * 0.15,
+                                    padding: EdgeInsets.only(left: 15),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '+91',
+                                          style: themeFont(),
+                                        ),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Container(
+                                          height: 25,
+                                          width: 1,
+                                          color: Color(0xFFAFAFAF),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Email ID',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedEmail2 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedEmail2 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return emailValidator(val);
+                                },
+                                controller: email2,
+                                decoration: textFieldDecoration(
+                                    'Vice Captain\'s Email', typedEmail2),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Age',
+                                style: themeFont(s: 12),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              TextFormField(
+                                onChanged: (val) {
+                                  if (val.length > 0) {
+                                    setState(() {
+                                      typedAge2 = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      typedAge2 = false;
+                                    });
+                                  }
+                                },
+                                validator: (val) {
+                                  return ageValidator(val);
+                                },
+                                controller: age2,
+                                decoration: textFieldDecoration(
+                                    'Vice Captain\'s Age', typedAge2),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                            ],
+                          ),
+                        )
+                      : (currForm == formType.Double)
+                          ? Form(
+                              key: _key,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Name of your team',
+                                    style: themeFont(
+                                      s: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedTeamName = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedTeamName = false;
+                                        });
+                                      }
+                                    },
+                                    controller: teamName,
+                                    validator: (val) {
+                                      return nameValidator(val);
+                                    },
+                                    decoration: textFieldDecoration(
+                                        'Team Name', typedTeamName),
+                                  ),
+                                  SizedBox(
+                                    height: h * 0.035,
+                                  ),
+                                  Text(
+                                    'Player 1 Details',
+                                    style: themeFont(s: 15),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'For further communication regarding the tournament will be done with Player 1 or Player 2',
+                                    style: themeFont(
+                                      s: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: h * 0.02,
+                                  ),
+                                  Text(
+                                    'Full Name',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    validator: (val) {
+                                      return nameValidator(val);
+                                    },
+                                    controller: name1,
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedName1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedName1 = false;
+                                        });
+                                      }
+                                    },
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Name', typedName1),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Contact Number',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedMob1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedMob1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return mobileNumValidator(val);
+                                    },
+                                    keyboardType: TextInputType.phone,
+                                    controller: mob1,
+                                    decoration: textFieldDecoration(
+                                            'Player 1\'s Contact Number',
+                                            typedMob1)
+                                        .copyWith(
+                                      prefixIcon: Container(
+                                        width: w * 0.15,
+                                        padding: EdgeInsets.only(left: 15),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '+91',
+                                              style: themeFont(),
+                                            ),
+                                            SizedBox(
+                                              width: 7,
+                                            ),
+                                            Container(
+                                              height: 25,
+                                              width: 1,
+                                              color: Color(0xFFAFAFAF),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Email ID',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedEmail1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedEmail1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return emailValidator(val);
+                                    },
+                                    controller: email1,
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Email ID', typedEmail1),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Age',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedAge1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedAge1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return ageValidator(val);
+                                    },
+                                    controller: age1,
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Age', typedAge1),
+                                  ),
+                                  SizedBox(
+                                    height: h * (0.055),
+                                  ),
+                                  Text(
+                                    'Player 2 Details',
+                                    style: themeFont(s: 15),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Full Name',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedName2 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedName2 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return nameValidator(val);
+                                    },
+                                    controller: name2,
+                                    decoration: textFieldDecoration(
+                                        'Player 2\'s Name', typedName2),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Contact Number',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedMob2 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedMob2 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return mobileNumValidator(val);
+                                    },
+                                    keyboardType: TextInputType.phone,
+                                    controller: mob2,
+                                    decoration: textFieldDecoration(
+                                            'Player 2\'s Contact Number',
+                                            typedMob2)
+                                        .copyWith(
+                                      prefixIcon: Container(
+                                        width: w * 0.15,
+                                        padding: EdgeInsets.only(left: 15),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '+91',
+                                              style: themeFont(),
+                                            ),
+                                            SizedBox(
+                                              width: 7,
+                                            ),
+                                            Container(
+                                              height: 25,
+                                              width: 1,
+                                              color: Color(0xFFAFAFAF),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Email ID',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedEmail2 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedEmail2 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return emailValidator(val);
+                                    },
+                                    controller: email2,
+                                    decoration: textFieldDecoration(
+                                        'Player 2\'s Email ID', typedEmail2),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Age',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedAge2 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedAge2 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return ageValidator(val);
+                                    },
+                                    controller: age2,
+                                    decoration: textFieldDecoration(
+                                        'Player 2\'s Age', typedAge2),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Form(
+                              key: _key,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Player 1 Details',
+                                    style: themeFont(s: 15),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'For further communication regarding the tournament will be done with Player 1',
+                                    style: themeFont(
+                                      s: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: h * 0.02,
+                                  ),
+                                  Text(
+                                    'Full Name',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedName1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedName1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return nameValidator(val);
+                                    },
+                                    controller: name1,
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Name', typedName1),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Contact Number',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedMob1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedMob1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return mobileNumValidator(val);
+                                    },
+                                    keyboardType: TextInputType.phone,
+                                    controller: mob1,
+                                    decoration: textFieldDecoration(
+                                            'Player 1\'s Contact Number',
+                                            typedMob1)
+                                        .copyWith(
+                                      prefixIcon: Container(
+                                        width: w * 0.15,
+                                        padding: EdgeInsets.only(left: 15),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '+91',
+                                              style: themeFont(),
+                                            ),
+                                            SizedBox(
+                                              width: 7,
+                                            ),
+                                            Container(
+                                              height: 25,
+                                              width: 1,
+                                              color: Color(0xFFAFAFAF),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Email ID',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedEmail1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedEmail1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return emailValidator(val);
+                                    },
+                                    controller: email1,
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Email ID', typedEmail1),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Age',
+                                    style: themeFont(s: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  TextFormField(
+                                    onChanged: (val) {
+                                      if (val.length > 0) {
+                                        setState(() {
+                                          typedAge1 = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          typedAge1 = false;
+                                        });
+                                      }
+                                    },
+                                    validator: (val) {
+                                      return ageValidator(val);
+                                    },
+                                    controller: age1,
+                                    decoration: textFieldDecoration(
+                                        'Player 1\'s Age', typedAge1),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
             ],
           ),
         ),
-        child: Container(
-          width: w,
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          height: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: h * 0.025,
-                ),
-                Text(
-                  'Registration',
-                  style: themeFont(
-                    color: kThemeColor,
-                    s: 23,
-                  ),
-                ),
-                SizedBox(
-                  height: h * 0.03,
-                ),
-                RichText(
-                  text: TextSpan(
-                    style: themeFont(),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text:
-                            'Kindly fill in the following details to register your team in ',
-                      ),
-                      TextSpan(
-                        text: widget.currentTour.details.title,
-                        style: themeFont(
-                          w: 'b',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: h * 0.027,
-                ),
-                Container(
-                  height: h * 0.1,
-                  width: w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: w * 0.3,
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          focusColor: Colors.white,
-                          value: chosedType,
-                          style: TextStyle(color: Colors.white),
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: kThemeColor,
-                            size: 20,
-                          ),
-                          onChanged: (ok) {
-                            setState(() {
-                              chosedType = ok;
-                              if (chosedType == "Single") {
-                                currForm = formType.Single;
-                              } else if (chosedType == "Double") {
-                                currForm = formType.Double;
-                              } else if (chosedType == "Team") {
-                                currForm = formType.Team;
-                              } else {
-                                currForm = formType.noForm;
-                              }
-                              selectedSub = allCategory[chosedType];
-                              chosedCat = selectedSub[0];
-                            });
-                          },
-                          underline: Container(),
-                          items: tourType
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            );
-                          }).toList(),
-                          hint: Text(
-                            "Type",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: w * 0.4,
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          focusColor: Colors.white,
-                          value: chosedCat,
-                          style: TextStyle(color: Colors.white),
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: kThemeColor,
-                            size: 20,
-                          ),
-                          onChanged: (ok) {
-                            setState(() {
-                              chosedCat = ok;
-                            });
-                          },
-                          underline: Container(),
-                          items: selectedSub
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            );
-                          }).toList(),
-                          hint: Text(
-                            "Type",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // real form starts here....
-                (currForm == formType.noForm)
-                    ? Container()
-                    : (currForm == formType.Team)
-                        ? Form(
-                            key: _key,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Name of your team',
-                                  style: themeFont(
-                                    s: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedTeamName = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedTeamName = false;
-                                      });
-                                    }
-                                  },
-                                  controller: teamName,
-                                  validator: (val) {
-                                    return nameValidator(val);
-                                  },
-                                  decoration: textFieldDecoration(
-                                      'Team Name', typedTeamName),
-                                ),
-                                SizedBox(
-                                  height: h * 0.035,
-                                ),
-                                Text(
-                                  'Captain details',
-                                  style: themeFont(s: 15),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  'All communication regarding the tournament will be done with the Captain or Vice-Captain of the team.',
-                                  style: themeFont(
-                                    s: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: h * 0.02,
-                                ),
-                                Text(
-                                  'Full Name',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedName1 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedName1 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return nameValidator(val);
-                                  },
-                                  controller: name1,
-                                  decoration: textFieldDecoration(
-                                      'Captain\'s Name', typedName1),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Contact Number',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedMob1 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedMob1 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return mobileNumValidator(val);
-                                  },
-                                  keyboardType: TextInputType.phone,
-                                  controller: mob1,
-                                  decoration: textFieldDecoration(
-                                          'Captain\'s Contact Number',
-                                          typedMob1)
-                                      .copyWith(
-                                    prefixIcon: Container(
-                                      width: w * 0.15,
-                                      padding: EdgeInsets.only(left: 15),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            '+91',
-                                            style: themeFont(
-                                              color: Colors.grey.withOpacity(
-                                                0.7,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 7,
-                                          ),
-                                          Container(
-                                            height: 25,
-                                            width: 1,
-                                            color: Color(0xFFAFAFAF),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Email ID',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedEmail1 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedEmail1 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return emailValidator(val);
-                                  },
-                                  controller: email1,
-                                  decoration: textFieldDecoration(
-                                      'Captain\'s Email', typedEmail1),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Age',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedAge1 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedAge1 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return ageValidator(val);
-                                  },
-                                  controller: age1,
-                                  decoration: textFieldDecoration(
-                                      'Captain\'s Age', typedAge1),
-                                ),
-                                SizedBox(
-                                  height: h * (0.045),
-                                ),
-                                Text(
-                                  'Vice Captain details',
-                                  style: themeFont(s: 15),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Full Name',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedName2 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedName2 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return nameValidator(val);
-                                  },
-                                  controller: name2,
-                                  decoration: textFieldDecoration(
-                                      'Vice Captain\'s Name', typedName2),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Contact Number',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedMob2 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedMob2 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return mobileNumValidator(val);
-                                  },
-                                  keyboardType: TextInputType.phone,
-                                  controller: mob2,
-                                  decoration: textFieldDecoration(
-                                          'Vice Captain\'s Contact Number',
-                                          typedMob2)
-                                      .copyWith(
-                                    prefixIcon: Container(
-                                      width: w * 0.15,
-                                      padding: EdgeInsets.only(left: 15),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            '+91',
-                                            style: themeFont(
-                                              color: Colors.grey.withOpacity(
-                                                0.7,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 7,
-                                          ),
-                                          Container(
-                                            height: 25,
-                                            width: 1,
-                                            color: Color(0xFFAFAFAF),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Email ID',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedEmail2 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedEmail2 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return emailValidator(val);
-                                  },
-                                  controller: email2,
-                                  decoration: textFieldDecoration(
-                                      'Vice Captain\'s Email', typedEmail2),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Age',
-                                  style: themeFont(s: 12),
-                                ),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                TextFormField(
-                                  onChanged: (val) {
-                                    if (val.length > 0) {
-                                      setState(() {
-                                        typedAge2 = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        typedAge2 = false;
-                                      });
-                                    }
-                                  },
-                                  validator: (val) {
-                                    return ageValidator(val);
-                                  },
-                                  controller: age2,
-                                  decoration: textFieldDecoration(
-                                      'Vice Captain\'s Age', typedAge2),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          )
-                        : (currForm == formType.Double)
-                            ? Form(
-                                key: _key,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Name of your team',
-                                      style: themeFont(
-                                        s: 12,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedTeamName = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedTeamName = false;
-                                          });
-                                        }
-                                      },
-                                      controller: teamName,
-                                      validator: (val) {
-                                        return nameValidator(val);
-                                      },
-                                      decoration: textFieldDecoration(
-                                          'Team Name', typedTeamName),
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.035,
-                                    ),
-                                    Text(
-                                      'Player 1 Details',
-                                      style: themeFont(s: 15),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'All communication regarding the tournament will be done with Player 1 or Player 2',
-                                      style: themeFont(
-                                        s: 12,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.02,
-                                    ),
-                                    Text(
-                                      'Full Name',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      validator: (val) {
-                                        return nameValidator(val);
-                                      },
-                                      controller: name1,
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedName1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedName1 = false;
-                                          });
-                                        }
-                                      },
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Name', typedName1),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Contact Number',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedMob1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedMob1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return mobileNumValidator(val);
-                                      },
-                                      keyboardType: TextInputType.phone,
-                                      controller: mob1,
-                                      decoration: textFieldDecoration(
-                                              'Player 1\'s Contact Number',
-                                              typedMob1)
-                                          .copyWith(
-                                        prefixIcon: Container(
-                                          width: w * 0.15,
-                                          padding: EdgeInsets.only(left: 15),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                '+91',
-                                                style: themeFont(
-                                                  color:
-                                                      Colors.grey.withOpacity(
-                                                    0.7,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 7,
-                                              ),
-                                              Container(
-                                                height: 25,
-                                                width: 1,
-                                                color: Color(0xFFAFAFAF),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Email ID',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedEmail1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedEmail1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return emailValidator(val);
-                                      },
-                                      controller: email1,
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Email ID', typedEmail1),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Age',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedAge1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedAge1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return ageValidator(val);
-                                      },
-                                      controller: age1,
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Age', typedAge1),
-                                    ),
-                                    SizedBox(
-                                      height: h * (0.055),
-                                    ),
-                                    Text(
-                                      'Player 2 Details',
-                                      style: themeFont(s: 15),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Full Name',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedName2 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedName2 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return nameValidator(val);
-                                      },
-                                      controller: name2,
-                                      decoration: textFieldDecoration(
-                                          'Player 2\'s Name', typedName2),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Contact Number',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedMob2 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedMob2 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return mobileNumValidator(val);
-                                      },
-                                      keyboardType: TextInputType.phone,
-                                      controller: mob2,
-                                      decoration: textFieldDecoration(
-                                              'Player 2\'s Contact Number',
-                                              typedMob2)
-                                          .copyWith(
-                                        prefixIcon: Container(
-                                          width: w * 0.15,
-                                          padding: EdgeInsets.only(left: 15),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                '+91',
-                                                style: themeFont(
-                                                  color:
-                                                      Colors.grey.withOpacity(
-                                                    0.7,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 7,
-                                              ),
-                                              Container(
-                                                height: 25,
-                                                width: 1,
-                                                color: Color(0xFFAFAFAF),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Email ID',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedEmail2 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedEmail2 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return emailValidator(val);
-                                      },
-                                      controller: email2,
-                                      decoration: textFieldDecoration(
-                                          'Player 2\'s Email ID', typedEmail2),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Age',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedAge2 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedAge2 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return ageValidator(val);
-                                      },
-                                      controller: age2,
-                                      decoration: textFieldDecoration(
-                                          'Player 2\'s Age', typedAge2),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Form(
-                                key: _key,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Player 1 Details',
-                                      style: themeFont(s: 15),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'All communication regarding the tournament will be done with Player 1',
-                                      style: themeFont(
-                                        s: 12,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: h * 0.02,
-                                    ),
-                                    Text(
-                                      'Full Name',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedName1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedName1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return nameValidator(val);
-                                      },
-                                      controller: name1,
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Name', typedName1),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Contact Number',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedMob1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedMob1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return mobileNumValidator(val);
-                                      },
-                                      keyboardType: TextInputType.phone,
-                                      controller: mob1,
-                                      decoration: textFieldDecoration(
-                                              'Player 1\'s Contact Number',
-                                              typedMob1)
-                                          .copyWith(
-                                        prefixIcon: Container(
-                                          width: w * 0.15,
-                                          padding: EdgeInsets.only(left: 15),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                '+91',
-                                                style: themeFont(
-                                                  color:
-                                                      Colors.grey.withOpacity(
-                                                    0.7,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 7,
-                                              ),
-                                              Container(
-                                                height: 25,
-                                                width: 1,
-                                                color: Color(0xFFAFAFAF),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Email ID',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedEmail1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedEmail1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return emailValidator(val);
-                                      },
-                                      controller: email1,
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Email ID', typedEmail1),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Age',
-                                      style: themeFont(s: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 7,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        if (val.length > 0) {
-                                          setState(() {
-                                            typedAge1 = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            typedAge1 = false;
-                                          });
-                                        }
-                                      },
-                                      validator: (val) {
-                                        return ageValidator(val);
-                                      },
-                                      controller: age1,
-                                      decoration: textFieldDecoration(
-                                          'Player 1\'s Age', typedAge1),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
-              ],
-            ),
-          ),
-        ),
-
+      ),
     );
   }
 }

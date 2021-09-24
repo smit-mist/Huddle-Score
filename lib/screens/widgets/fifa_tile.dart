@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:huddle_and_score/models/fifa.dart';
 import 'package:huddle_and_score/models/home_event.dart';

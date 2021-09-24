@@ -820,7 +820,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   height: h *
-                      (((widget.currForm == formType.Single) ? 240 : 370) /
+                      (((widget.currForm == formType.Single) ? 200 : 300) /
                           kScreenH),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -902,16 +902,16 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       SizedBox(
                         height: 1,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
-                          style: themeFont(
-                            s: 11,
-                            w: 'm',
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   child: Text(
+                      //     '*All communication regarding the tournament will be done with the captain or vice-captain of the team.',
+                      //     style: themeFont(
+                      //       s: 11,
+                      //       w: 'm',
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/tournament.dart';
+import 'package:huddle_and_score/screens/auth_and_user/sign_in_screen.dart';
 import 'package:huddle_and_score/screens/tournament/tournament_register_form.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
@@ -34,6 +36,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   bool canRegister;
   ScrollController ctrl;
   bool clickedOnRegister = false;
+  bool userLoggedIn;
   @override
   void initState() {
     _bloc = ButtonClickBloc();
@@ -48,6 +51,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
   }
 
   void preComputer() {
+    userLoggedIn = FirebaseAuth.instance.currentUser != null;
+
     tnc = "";
     String temp = "";
     for (int i = 0; i < widget.tournament.details.term.length; i++) {
@@ -141,6 +146,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
+                    if (!userLoggedIn) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SignInScreen(),
+                        ),
+                      );
+                    }
                     if (widget.isReg) {
                       print('Already did');
                     } else if (canRegister == false) {
@@ -160,29 +173,27 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                       // );
                     }
                   },
-                  child: (widget.isReg)
+                  child: (!userLoggedIn)
                       ? Container(
-                          child: ActionButton(
-                            child: Center(
-                              child: Text(
-                                'You\'ve already registered!',
-                                style: themeFont(
-                                  color: kThemeColor,
-                                  s: 15,
-                                ),
-                              ),
-                            ),
-                            bgColor: Colors.white,
-                          ),
                           height: 40,
-                          width: w * 0.5,
+                          width: w * 0.3,
+                          child: Center(
+                            child: Text(
+                              'Sign In',
+                              style: themeFont(color: Colors.white),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: kThemeColor,
+                          ),
                         )
-                      : (canRegister == false)
+                      : (widget.isReg)
                           ? Container(
                               child: ActionButton(
                                 child: Center(
                                   child: Text(
-                                    'Booking deadline has passed!',
+                                    'You\'ve already registered!',
                                     style: themeFont(
                                       color: kThemeColor,
                                       s: 15,
@@ -192,16 +203,14 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 bgColor: Colors.white,
                               ),
                               height: 40,
-                              width: w * 0.6,
+                              width: w * 0.5,
                             )
-                          : (seatsLeft <= 0)
+                          : (canRegister == false)
                               ? Container(
-                                  width: w * 0.4,
-                                  height: 40,
                                   child: ActionButton(
                                     child: Center(
                                       child: Text(
-                                        'Booking is Full',
+                                        'Booking deadline has passed!',
                                         style: themeFont(
                                           color: kThemeColor,
                                           s: 15,
@@ -210,21 +219,40 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                     ),
                                     bgColor: Colors.white,
                                   ),
-                                )
-                              : Container(
                                   height: 40,
-                                  width: w * 0.3,
-                                  child: Center(
-                                    child: Text(
-                                      'Register',
-                                      style: themeFont(color: Colors.white),
+                                  width: w * 0.6,
+                                )
+                              : (seatsLeft <= 0)
+                                  ? Container(
+                                      width: w * 0.4,
+                                      height: 40,
+                                      child: ActionButton(
+                                        child: Center(
+                                          child: Text(
+                                            'Booking is Full',
+                                            style: themeFont(
+                                              color: kThemeColor,
+                                              s: 15,
+                                            ),
+                                          ),
+                                        ),
+                                        bgColor: Colors.white,
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 40,
+                                      width: w * 0.3,
+                                      child: Center(
+                                        child: Text(
+                                          'Register',
+                                          style: themeFont(color: Colors.white),
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: kThemeColor,
+                                      ),
                                     ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: kThemeColor,
-                                  ),
-                                ),
                 )
               ],
             ),
@@ -421,7 +449,6 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                 ],
                               ),
                             ),
-
                             SizedBox(
                               height: 5,
                             ),
@@ -1053,10 +1080,8 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                           children: [
                             Text(
                               'Terms & Conditions of This Tournament',
-                              style: themeFont(
-                                w: 'sb'
-                  
-                              ).copyWith(decoration: TextDecoration.none),
+                              style: themeFont(w: 'sb')
+                                  .copyWith(decoration: TextDecoration.none),
                             ),
                             SizedBox(
                               height: 10,

@@ -26,6 +26,7 @@ dependencies:
   custom_dropdown: ^0.0.2
   url_launcher: ^6.0.10
   carousel_slider: ^4.0.0
+  pdf: ^3.6.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

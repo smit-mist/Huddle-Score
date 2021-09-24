@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:huddle_and_score/blocs/button_click/button_click_bloc.dart';
 import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/fifa.dart';
+import 'package:huddle_and_score/screens/auth_and_user/sign_up_screen.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/data_shower.dart';
 import 'package:share/share.dart';
@@ -33,7 +35,10 @@ class _FifaDetailsState extends State<FifaDetails> {
   bool clickedOnRegister = false;
   String mapUrl = "";
   String tnc;
+  bool userLoggedIn;
   void precomputer() {
+    userLoggedIn = FirebaseAuth.instance.currentUser != null;
+
     tnc = "";
     String temp = "";
     for (int i = 0; i < widget.fifa.details.terms.length; i++) {
@@ -112,6 +117,15 @@ class _FifaDetailsState extends State<FifaDetails> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
+                    if (!userLoggedIn) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SignUpScreen(),
+                        ),
+                      );
+                      return;
+                    }
                     if (widget.isReg) {
                       return;
                     } else if (canRegister == false) {
@@ -122,29 +136,29 @@ class _FifaDetailsState extends State<FifaDetails> {
                       });
                     }
                   },
-                  child: (widget.isReg)
+                  child: (!userLoggedIn)
                       ? Container(
                           child: ActionButton(
                             child: Center(
                               child: Text(
-                                'You\'ve already registered!',
+                                'Sign In',
                                 style: themeFont(
-                                  color: kThemeColor,
+                                  color: Colors.white,
                                   s: 15,
                                 ),
                               ),
                             ),
-                            bgColor: Colors.white,
+                            bgColor: kThemeColor,
                           ),
                           height: 40,
                           width: w * 0.5,
                         )
-                      : (canRegister == false)
+                      : (widget.isReg)
                           ? Container(
                               child: ActionButton(
                                 child: Center(
                                   child: Text(
-                                    'Booking deadline has passed!',
+                                    'You\'ve already registered!',
                                     style: themeFont(
                                       color: kThemeColor,
                                       s: 15,
@@ -154,22 +168,39 @@ class _FifaDetailsState extends State<FifaDetails> {
                                 bgColor: Colors.white,
                               ),
                               height: 40,
-                              width: w * 0.6,
+                              width: w * 0.5,
                             )
-                          : Container(
-                              height: 40,
-                              width: w * 0.3,
-                              child: Center(
-                                child: Text(
-                                  'Register',
-                                  style: themeFont(color: Colors.white),
+                          : (canRegister == false)
+                              ? Container(
+                                  child: ActionButton(
+                                    child: Center(
+                                      child: Text(
+                                        'Booking deadline has passed!',
+                                        style: themeFont(
+                                          color: kThemeColor,
+                                          s: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    bgColor: Colors.white,
+                                  ),
+                                  height: 40,
+                                  width: w * 0.6,
+                                )
+                              : Container(
+                                  height: 40,
+                                  width: w * 0.3,
+                                  child: Center(
+                                    child: Text(
+                                      'Register',
+                                      style: themeFont(color: Colors.white),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: kThemeColor,
+                                  ),
                                 ),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: kThemeColor,
-                              ),
-                            ),
                 )
               ],
             ),
@@ -247,21 +278,21 @@ class _FifaDetailsState extends State<FifaDetails> {
                     ),
                     (widget.fifa.details.pdf != null)
                         ? SizedBox(
-                      width: double.infinity,
-                      child: GestureDetector(
-                        onTap: () {
-                          launchPdfUrl(widget.fifa.details.pdf[1]);
-                        },
-                        child: Text(
-                          'Download Terms & Conditions',
-                          style:
-                          themeFont(s: 11, color: kThemeColor, w: 'm')
-                              .copyWith(
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    )
+                            width: double.infinity,
+                            child: GestureDetector(
+                              onTap: () {
+                                launchPdfUrl(widget.fifa.details.pdf[1]);
+                              },
+                              child: Text(
+                                'Download Terms & Conditions',
+                                style:
+                                    themeFont(s: 11, color: kThemeColor, w: 'm')
+                                        .copyWith(
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          )
                         : Container(),
                     SizedBox(
                       height: 20,
@@ -448,8 +479,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                         s: 12, w: 'sb'),
                                                   ),
                                                   Text(
-                                                    '₹ ${widget.fifa.prizePool[
-                                                        ind.toString()][1]}',
+                                                    '₹ ${widget.fifa.prizePool[ind.toString()][1]}',
                                                     style: themeFont(
                                                       s: (ind == 0 ? 20 : 18),
                                                       w: (ind == 0)
@@ -576,8 +606,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                       themeFont(s: 12, w: 'sb'),
                                                 ),
                                                 Text(
-                                                  '₹ ${widget.fifa.prizePool[
-                                                      ind.toString()][1]}',
+                                                  '₹ ${widget.fifa.prizePool[ind.toString()][1]}',
                                                   style: themeFont(
                                                     s: (ind == 0 ? 20 : 18),
                                                     w: (ind == 0) ? 'b' : 'sb',

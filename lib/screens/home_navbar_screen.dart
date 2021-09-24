@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +25,7 @@ class HomeNavBar extends StatefulWidget {
 
 class _HomeNavBarState extends State<HomeNavBar> {
   HomeNavBarBloc _homeNavBarBloc;
+  bool userLoggedIn = FirebaseAuth.instance.currentUser != null;
   @override
   Widget build(BuildContext context) {
     _homeNavBarBloc = BlocProvider.of<HomeNavBarBloc>(context);
@@ -33,7 +35,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
       child: BlocBuilder<HomeNavBarBloc, HomeNavBarState>(
         builder: (context, state) {
           if (state is UserProfileScreenState) {
-            return UserProfileScreen(
+            return (!userLoggedIn)?AnonymousProfileScreen(): UserProfileScreen(
               email: state.email,
               name: state.name,
             );
@@ -41,7 +43,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
             return SearchScreen();
           } else if (state is CartScreenState) {
             //        print(state.fifaBookings == null);
-            return BookingHistoryScreen(
+            return (!userLoggedIn)?BookingNotSignIn(): BookingHistoryScreen(
               bookedTours: state.bookings,
               bookedFifa: state.fifaBookings,
             );
