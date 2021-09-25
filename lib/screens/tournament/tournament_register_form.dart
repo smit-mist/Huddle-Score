@@ -83,7 +83,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
       email2 = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     teamName.dispose();
     name1.dispose();
     mob1.dispose();

@@ -49,7 +49,7 @@ class _TournamentReviewState extends State<TournamentReview> {
     print(cur);
     String flag;
     print(widget.cat);
-    if (widget.cat == formType.Single)
+    if (widget.cat.toString() == 'Single')
       flag = '1';
     else
       flag = '2';
