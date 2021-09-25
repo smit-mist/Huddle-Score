@@ -245,7 +245,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       height: 40,
                                       child: Center(
                                         child: Text(
-                                          'May be',
+                                          'Maybe',
                                           style: themeFont(
                                             color: (firstOption == 1)
                                                 ? kThemeColor
@@ -394,7 +394,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                     width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
-                                        'Word of mouth',
+                                        'Word of Mouth',
                                         style: themeFont(
                                           color: (secondOption == 2)
                                               ? kThemeColor
@@ -425,7 +425,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                     width: w * (130 / kScreenW),
                                     child: Center(
                                       child: Text(
-                                        'At a turf',
+                                        'At a Turf',
                                         style: themeFont(
                                           color: (secondOption == 3)
                                               ? kThemeColor
