@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:huddle_and_score/constants.dart';
 import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
@@ -32,23 +33,33 @@ class TournamentReview extends StatefulWidget {
 }
 
 class _TournamentReviewState extends State<TournamentReview> {
-  Room room;
+  Room room = Room();
   Razorpay razorpay;
   User user = AuthRepository().getCurrentUser();
   double liked = 0.5;
   int firstOption = 0, secondOption = 0;
   void precomputer() {
     String cur = '';
+    print(widget.subCat);
     for (int i = 0; i < widget.subCat.length; i++) {
       if (widget.subCat[i] == '-') break;
       cur += widget.subCat[i];
     }
     cur = cur.trim();
-    String flag = (widget.cat == 'Single' || widget.cat == 'Team') ? '1' : '2';
+    print(cur);
+    String flag;
+    print(widget.cat);
+    if (widget.cat == formType.Single)
+      flag = '1';
+    else
+      flag = '2';
+    print(flag);
     for (var x in widget.currentTour.rooms) {
       bool ok = x.category == flag && x.subCategory == cur;
       if (ok) {
-        room = x;
+        setState(() {
+          room = x;
+        });
         break;
       }
     }
@@ -58,6 +69,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   void initState() {
     super.initState();
     precomputer();
+    //print(room.fees);
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -89,7 +101,7 @@ class _TournamentReviewState extends State<TournamentReview> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print("${response.message} hereherehere");
     Fluttertoast.showToast(msg: "Error");
-    Navigator.push(context, MaterialPageRoute(builder: (_)=>BookingFailed()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => BookingFailed()));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -133,250 +145,247 @@ class _TournamentReviewState extends State<TournamentReview> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    print(widget.userRecord.captain.fullName);
-    print(widget.userRecord.viceCaptain.fullName);
     return CommonScaffold(
-        bottomBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              blurRadius: 7,
-              spreadRadius: 1,
-            )
-          ]),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
+      bottomBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: w,
+        height: h * 0.08,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            blurRadius: 7,
+            spreadRadius: 1,
+          )
+        ]),
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 18,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Back',
+                style: themeFont(),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Back',
-                  style: themeFont(),
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                checkoutOptions(widget.userRecord);
+              },
+              child: Container(
+                height: 40,
+                width: w * 0.35,
+                child: Center(
+                  child: Text(
+                    'Proceed to Pay',
+                    style: themeFont(color: Colors.white, s: 15, w: 'sb'),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
                 ),
               ),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  checkoutOptions(widget.userRecord);
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.35,
-                  child: Center(
-                    child: Text(
-                      'Proceed to Pay',
-                      style: themeFont(color: Colors.white, s: 15, w: 'sb'),
+            ),
+          ],
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: h * (0.04),
+              ),
+              Text(
+                'Registration Summary',
+                style: themeFont(
+                  color: kThemeColor,
+                  s: 23,
+                ),
+              ),
+              SizedBox(
+                height: h * (0.04),
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: h *
+                    ((widget.currForm == formType.Team
+                            ? 400
+                            : (widget.currForm == formType.Double)
+                                ? 370
+                                : 250) /
+                        kScreenH),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      blurRadius: 15,
+                      spreadRadius: 2,
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Team Details',
+                      style: themeFont(w: 'm', s: 16),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
-                  ),
+                    SizedBox(
+                      height: 1,
+                    ),
+                    (widget.currForm == formType.Team)
+                        ? DataShower(
+                            type: 'Team Name', data: widget.userRecord.teamName)
+                        : Container(),
+                    DataShower(
+                        type: (widget.currForm == formType.Team)
+                            ? 'Captain\'s Name'
+                            : 'Player 1 Name',
+                        data: widget.userRecord.captain.fullName),
+                    DataShower(
+                        type: 'Contact Number',
+                        data: widget.userRecord.captain.contact.toString()),
+                    DataShower(
+                        type: 'Email ID',
+                        data: widget.userRecord.captain.email),
+                    DataShower(
+                        type: 'Age',
+                        data: widget.userRecord.captain.age.toString()),
+                    (widget.currForm == formType.Single)
+                        ? Container()
+                        : (widget.currForm == formType.Double)
+                            ? DataShower(
+                                type: 'Player 2 Name',
+                                data: widget.userRecord.viceCaptain.fullName)
+                            : DataShower(
+                                type: 'Vice Captain\'s Name',
+                                data: widget.userRecord.viceCaptain.fullName),
+                    (widget.currForm == formType.Single)
+                        ? Container()
+                        : DataShower(
+                            type: 'Contact Number',
+                            data: widget.userRecord.viceCaptain.contact
+                                .toString()),
+                    (widget.currForm == formType.Single)
+                        ? Container()
+                        : DataShower(
+                            type: 'Email ID',
+                            data: widget.userRecord.viceCaptain.email),
+                    (widget.currForm == formType.Single)
+                        ? Container()
+                        : DataShower(
+                            type: 'Age',
+                            data: widget.userRecord.viceCaptain.age.toString()),
+                    SizedBox(
+                      height: 1,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: h * (175 / kScreenH),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      blurRadius: 15,
+                      spreadRadius: 2,
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Amount Payable',
+                      style: themeFont(s: 16, w: 'b'),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Charges',
+                          style: themeFont(s: 12, w: 'm'),
+                        ),
+                        Spacer(),
+                        Text(
+                          //'300',
+                          '₹ ${room.fees}',
+                          style: themeFont(s: 12, w: 'm'),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Taxes',
+                          style: themeFont(s: 12, w: 'm'),
+                        ),
+                        Spacer(),
+                        Text(
+                          '0',
+                          style: themeFont(s: 12, w: 'm'),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                    SizedBox(
+                      height: 1,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Total Amount',
+                          style: themeFont(s: 15, w: 'm'),
+                        ),
+                        Spacer(),
+                        Text(
+                          //'300',
+                          '₹ ${room.fees}',
+                          style: themeFont(s: 15, w: 'sb'),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: h * (0.04),
-                ),
-                Text(
-                  'Registration Summary',
-                  style: themeFont(
-                    color: kThemeColor,
-                    s: 23,
-                  ),
-                ),
-                SizedBox(
-                  height: h * (0.04),
-                ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h *
-                      ((widget.currForm == formType.Team
-                              ? 400
-                              : (widget.currForm == formType.Double)
-                                  ? 370
-                                  : 250) /
-                          kScreenH),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        blurRadius: 15,
-                        spreadRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Team Details',
-                        style: themeFont(w: 'm', s: 16),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      (widget.currForm == formType.Team)
-                          ? DataShower(
-                              type: 'Team Name',
-                              data: widget.userRecord.teamName)
-                          : Container(),
-                      DataShower(
-                          type: (widget.currForm == formType.Team)
-                              ? 'Captain\'s Name'
-                              : 'Player 1 Name',
-                          data: widget.userRecord.captain.fullName),
-                      DataShower(
-                          type: 'Contact Number',
-                          data: widget.userRecord.captain.contact.toString()),
-                      DataShower(
-                          type: 'Email ID',
-                          data: widget.userRecord.captain.email),
-                      DataShower(
-                          type: 'Age',
-                          data: widget.userRecord.captain.age.toString()),
-                      (widget.currForm == formType.Single)
-                          ? Container()
-                          : (widget.currForm == formType.Double)
-                              ? DataShower(
-                                  type: 'Player 2 Name',
-                                  data: widget.userRecord.viceCaptain.fullName)
-                              : DataShower(
-                                  type: 'Vice Captain\'s Name',
-                                  data: widget.userRecord.viceCaptain.fullName),
-                      (widget.currForm == formType.Single)
-                          ? Container()
-                          : DataShower(
-                              type: 'Contact Number',
-                              data: widget.userRecord.viceCaptain.contact
-                                  .toString()),
-                      (widget.currForm == formType.Single)
-                          ? Container()
-                          : DataShower(
-                              type: 'Email ID',
-                              data: widget.userRecord.viceCaptain.email),
-                      (widget.currForm == formType.Single)
-                          ? Container()
-                          : DataShower(
-                              type: 'Age',
-                              data:
-                                  widget.userRecord.viceCaptain.age.toString()),
-                      SizedBox(
-                        height: 1,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: h * (175 / kScreenH),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        blurRadius: 15,
-                        spreadRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'Amount Payable',
-                        style: themeFont(s: 16, w: 'b'),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Charges',
-                            style: themeFont(s: 12, w: 'm'),
-                          ),
-                          Spacer(),
-                          Text(
-                            '₹ ${room.fees}',
-                            style: themeFont(s: 12, w: 'm'),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Taxes',
-                            style: themeFont(s: 12, w: 'm'),
-                          ),
-                          Spacer(),
-                          Text(
-                            '0',
-                            style: themeFont(s: 12, w: 'm'),
-                          )
-                        ],
-                      ),
-                      Divider(
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Total Amount',
-                            style: themeFont(s: 15, w: 'm'),
-                          ),
-                          Spacer(),
-                          Text(
-                            '₹ ${room.fees}',
-                            style: themeFont(s: 15, w: 'sb'),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
+      ),
     );
   }
 }

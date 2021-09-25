@@ -32,7 +32,8 @@ String emailValidator(String val) {
 }
 
 String mobileNumValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter a valid 10-digit contact number';
+  if (val == null || val.isEmpty)
+    return 'Please enter a valid 10-digit contact number';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
   if (val.length != 10) return 'Please enter a valid 10-digit contact number';
@@ -96,10 +97,8 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   }
 
   void preComputer() {
-    //  print("Inside compu");
     sport = widget.currentTour.info.type;
     currForm = getFormType(sport.toLowerCase());
-    print("$sport ---> $currForm");
     if (currForm == formType.Team) {
       tourType[0] = "Team";
       allCategory = {
@@ -164,7 +163,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
         chosedType = tourType[0];
         chosedCat = allCategory['Single'][0];
         selectedSub = allCategory['Single'];
-        print(chosedCat.length);
       }
       currForm = formType.noForm;
     }
@@ -179,7 +177,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   @override
   Widget build(BuildContext context) {
     // typeOfForm = 1;
-    // print(currForm);
     Widget onBackDialog = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Dialog(
@@ -261,8 +258,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
     );
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-
-    // print(chosedType);
     return CommonScaffold(
       bottomBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -303,15 +298,12 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                 * 2 - Means 1 Player Form. (PLayer 1)
                 * */
               onTap: () {
-                print("jassy starts");
-
                 if (currForm == formType.noForm) {
                   print("Select a Form");
                   return;
                 }
                 if (currForm == formType.Team) {
                   if (_key.currentState.validate()) {
-                    print("Inside validator");
                     RegDetails temp = RegDetails(
                       teamName: teamName.text.trim(),
                       captain: Captain(
@@ -362,7 +354,6 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                         contact: int.parse(mob2.text.trim()),
                       ),
                     );
-                    print("Inside navigator");
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -388,7 +379,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                       viceCaptain: Captain(),
                       teamName: "ok",
                     );
-                    print("Navigator in the game");
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -610,7 +601,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 'All communication regarding the tournament will be done with the captain or vice-captain of the team.',
                                 style: themeFont(
                                   s: 12,
-                                  w : 'r',
+                                  w: 'r',
                                 ),
                               ),
                               SizedBox(
@@ -953,7 +944,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     'Further communication will be carried out via the contact details you provide below.',
                                     style: themeFont(
                                       s: 12,
-                                      w : 'r',
+                                      w: 'r',
                                     ),
                                   ),
                                   SizedBox(
@@ -1265,7 +1256,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     'Further communication will be carried out via the contact details you provide below.',
                                     style: themeFont(
                                       s: 12,
-                                      w : 'r',
+                                      w: 'r',
                                     ),
                                   ),
                                   SizedBox(

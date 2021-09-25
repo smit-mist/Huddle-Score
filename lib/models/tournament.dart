@@ -39,16 +39,15 @@ class Tournament {
     String id = value.uid;
     for (int i = 0; i < this.totalReg.length; i++) {
       if (this.totalReg[i] == id) {
-   //     print("Found");
+        //     print("Found");
         return true;
       }
     }
-  //  print("Not Registered");
+    //  print("Not Registered");
     return false;
   }
 
   factory Tournament.fromMap(Map<String, dynamic> data, String id) {
-
     var ok = Tournament(
       tourId: id,
       contact: contactToList(data['contact']),
@@ -136,8 +135,6 @@ class Main {
   }
 }
 
-
-
 class Room {
   final List<dynamic> registered;
   final int fees;
@@ -156,13 +153,15 @@ class Room {
   factory Room.fromMap(
       Map<String, dynamic> map, String category, String subCate) {
     if (map == null) return Room();
+    print(category);
+    print(subCate);
     return Room(
       registered: map['registered'] == null
           ? ['is null']
           : map['registered'].cast<String>(),
       category: category,
       subCategory: subCate,
-      fees: map['fee'],
+      fees: map['fee'] ?? '37',
       orderId: map['orderID'],
       maxSeats: map['max'],
     );
