@@ -1,6 +1,4 @@
 4) in summary page, if player type tournament is there then change title to player details
 6) receipt page button (tried).
 9) turf/tournament hyperlink in help and support
-11) change button text to Thank You! when user clicks on subscribe button
 ..) Password with special characters not working (change regex).
-..) Team booking not working fees was called on null (problem is in review page) where we are selecting the category..

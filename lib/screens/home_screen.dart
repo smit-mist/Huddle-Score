@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return await Permission.camera.request();
   }
 
+  bool isSubscribed = false;
   String _chosenValue = "Ahmedabad";
   var _ctrl = CarouselControllerImpl();
   int currPage = 0;
@@ -63,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
     "http://grownited.com/idea",
     "http://royaltechnosoft.com/",
     "http://grownited.com/services",
-    
   ];
   TextEditingController _emailCtrl = TextEditingController();
   bool emailTapped = false;
@@ -90,20 +90,26 @@ class _HomeScreenState extends State<HomeScreen> {
               width: w * (370 / kScreenW),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-              //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text(
                     'Select your City',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
 
                   Text(
                     'Look for best turfs and tournaments in your city!',
                     style: themeFont(s: 12, w: 'm'),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
 
                   Container(
                     width: w * (350 / kScreenW),
@@ -113,8 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: (90) / (30),
-                          crossAxisSpacing:5,
-                              mainAxisSpacing: 5,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                         ),
                         itemBuilder: (_, int ind) {
                           return GestureDetector(
@@ -129,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    '   '+cities[ind],
+                                    '   ' + cities[ind],
                                     style: themeFont(
                                       s: 12,
                                       w: (ind == 0) ? 'm' : 'r',
@@ -140,8 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 decoration: BoxDecoration(
-                                  color: (ind ==0)?Colors.white:Colors.grey.withOpacity(0.2),
-
+                                  color: (ind == 0)
+                                      ? Colors.white
+                                      : Colors.grey.withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(7),
                                   border: Border.all(
                                       color: (current == ind)
@@ -175,8 +182,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
@@ -590,24 +598,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      if (!RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(_emailCtrl.text)) {
-                        setState(() {
-                          isValid = true;
-                        });
-                      } else {
-                        setState(() {
-                          isValid = false;
-                        });
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => LoadingScreen()));
-                        await HomeRepository()
-                            .subscribeTurf(_emailCtrl.text.trim());
-                        _emailCtrl.clear();
-                        //TODO: Add try catch block in the function..
-                        Navigator.pop(context);
-                        Fluttertoast.showToast(msg: 'Subscribed Successfully');
+                      if (!isSubscribed) {
+                        if (!RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(_emailCtrl.text)) {
+                          setState(() {
+                            isValid = true;
+                          });
+                        } else {
+                          setState(() {
+                            isValid = false;
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => LoadingScreen()));
+                          await HomeRepository()
+                              .subscribeTurf(_emailCtrl.text.trim())
+                              .then((value) => {
+                                    setState(() {
+                                      isSubscribed = true;
+                                    })
+                                  });
+                          _emailCtrl.clear();
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(
+                              msg: 'Subscribed Successfully');
+                        }
                       }
                     },
                     child: Container(
@@ -617,7 +634,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ActionButton(
                         bgColor: kThemeColor,
                         child: Text(
-                          'Subscribe',
+                          isSubscribed ? 'Thank You' : 'Subscribe',
                           style: themeFont(
                             color: Colors.white,
                           ),

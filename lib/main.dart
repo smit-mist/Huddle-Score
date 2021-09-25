@@ -15,6 +15,7 @@ import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/routes.dart';
 import 'package:huddle_and_score/screens/auth_and_user/welcome_screen.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
+
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/home/home_event.dart';
@@ -100,7 +101,9 @@ class App extends StatelessWidget {
         if (state is AuthInitial) {
           return WelcomeScreen();
         } else if (state is Authenticated) {
-          return HomeNavBar(curr: screen.Home,);
+          return HomeNavBar(
+            curr: screen.Home,
+          );
         } else if (state is UnAuthenticated) {
           return WelcomeScreen();
         }
