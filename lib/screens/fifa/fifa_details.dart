@@ -534,7 +534,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
                                                       decoration: TextDecoration
-                                                          .underline),
+                                                          .none),
                                             ),
                                           ),
                                           Icon(
@@ -701,7 +701,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                                         .copyWith(
                                                             decoration:
                                                                 TextDecoration
-                                                                    .underline),
+                                                                    .none),
                                                   ),
                                                 ),
                                                 Icon(
@@ -957,7 +957,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Terms & Conditions',
+                              'Terms & Conditions of This Tournament',
                               style: themeFont(
                                 w: 'sb',
                               ).copyWith(decoration: TextDecoration.none),

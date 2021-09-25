@@ -179,7 +179,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     height: h * 0.05,
                   ),
                   Text(
-                    'Contact Details',
+                    'Fill Your Details',
                     style: themeFont(
                       color: kThemeColor,
                       s: 23,
@@ -247,7 +247,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                             Text(
                               '+91',
                               style: themeFont(
-                                color: Colors.grey.withOpacity(
+                                color: Colors.black.withOpacity(
                                   0.7,
                                 ),
                               ),

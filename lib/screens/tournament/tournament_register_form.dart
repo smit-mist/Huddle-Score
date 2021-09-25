@@ -10,21 +10,21 @@ import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import '../../constants.dart';
 
 String nameValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please Enter a Name';
+  if (val == null || val.isEmpty) return 'Please enter your full name';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
     return 'Enter Valid Name';
   return null;
 }
 
 String ageValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please Enter Age';
+  if (val == null || val.isEmpty) return 'Please enter your age';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
-    return 'Please Enter valid Age';
+    return 'Please enter your age';
   return null;
 }
 
 String emailValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please Enter Email ID';
+  if (val == null || val.isEmpty) return 'Please enter a valid Email ID';
   if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(val)) return 'Please Enter a valid Email ID';
@@ -32,10 +32,10 @@ String emailValidator(String val) {
 }
 
 String mobileNumValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please Enter Contact Number';
+  if (val == null || val.isEmpty) return 'Please enter a valid 10-digit contact number';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
-  if (val.length != 10) return 'Please Enter Valid Contact Number';
+  if (val.length != 10) return 'Please enter a valid 10-digit contact number';
   return null;
 }
 
@@ -452,7 +452,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           'Kindly fill in the following details to register your team in ',
                     ),
                     TextSpan(
-                      text: widget.currentTour.details.title,
+                      text: '${widget.currentTour.details.title}.',
                       style: themeFont(
                         w: 'b',
                       ),
@@ -607,9 +607,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 height: 5,
                               ),
                               Text(
-                                'All communication regarding the tournament will be done with the Captain or Vice-Captain of the team.',
+                                'All communication regarding the tournament will be done with the captain or vice-captain of the team.',
                                 style: themeFont(
                                   s: 12,
+                                  w : 'r',
                                 ),
                               ),
                               SizedBox(
@@ -949,9 +950,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     height: 5,
                                   ),
                                   Text(
-                                    'For further communication regarding the tournament will be done with Player 1 or Player 2',
+                                    'Further communication will be carried out via the contact details you provide below.',
                                     style: themeFont(
                                       s: 12,
+                                      w : 'r',
                                     ),
                                   ),
                                   SizedBox(
@@ -1260,9 +1262,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                     height: 5,
                                   ),
                                   Text(
-                                    'For further communication regarding the tournament will be done with Player 1',
+                                    'Further communication will be carried out via the contact details you provide below.',
                                     style: themeFont(
                                       s: 12,
+                                      w : 'r',
                                     ),
                                   ),
                                   SizedBox(

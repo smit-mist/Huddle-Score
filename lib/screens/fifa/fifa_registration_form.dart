@@ -9,22 +9,22 @@ import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import '../../constants.dart';
 
 String nameValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter Name';
+  if (val == null || val.isEmpty) return 'Please enter your full name';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
     return 'Enter Valid Name';
   return null;
 }
 
 String emailValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter Email ID';
+  if (val == null || val.isEmpty) return 'Please enter a valid Email ID';
   if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(val)) return 'Please enter a valid email';
+      .hasMatch(val)) return 'Please enter a valid Email ID';
   return null;
 }
 
 String mobileNumValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter Contact Number';
+  if (val == null || val.isEmpty) return 'Please enter a 10-digit contact number';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
   if (val.length != 10) return 'Enter Valid Mobile Number';
@@ -230,7 +230,7 @@ class _FifaRegistrationFormState extends State<FifaRegistrationForm> {
                         style: themeFont(s: 14, w: 'm'),
                       ),
                       TextSpan(
-                        text: widget.fifa.details.title ?? 'Fifa',
+                        text: '${widget.fifa.details.title}.' ?? 'Fifa',
                         style: themeFont(
                           w: 'b',
                           s: 14,

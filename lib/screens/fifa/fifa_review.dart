@@ -189,7 +189,7 @@ class _FifaReviewState extends State<FifaReview> {
                     SizedBox(
                       height: 1,
                     ),
-                    DataShower(type: 'Name', data: widget.record.name),
+                    DataShower(type: 'Full Name', data: widget.record.name),
                     DataShower(
                         type: 'Contact Number',
                         data: widget.record.number.toString()),

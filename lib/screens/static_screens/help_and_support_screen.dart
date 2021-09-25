@@ -271,7 +271,7 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                             ),
                             TextSpan(
                               text:
-                                  ' section on the app and the website will reflect all your bookings. Huddle & Score also sends confirmation through Email.',
+                                  ' section on the app and the website will reflect all your bookings. Huddle & Score also sends confirmation through emails.',
                               style: themeFont(),
                             ),
                           ],

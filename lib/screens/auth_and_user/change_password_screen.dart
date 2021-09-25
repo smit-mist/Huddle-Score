@@ -304,7 +304,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 SizedBox(
                   width: w * (356 / kScreenW),
                   child: Text(
-                    'Password should be at least 6 characters long and must include a minimum of 1 number',
+                    'Password should be at least 6 characters long and must include a minimum of 1 number.',
                     style: themeFont(
                       color: Colors.black,
                       s: 10,

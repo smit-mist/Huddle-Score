@@ -234,7 +234,7 @@ class _PartnerTnCState extends State<PartnerTnC> {
                     ),
                   ),
                   SizedBox(width: 10,),
-                  Text('I agree to the Terms and Conditions',style: smallText,),
+                  Text('I agree to the Terms & Conditions',style: boldText,),
                 ],
               ),
               SizedBox(height: 10,),

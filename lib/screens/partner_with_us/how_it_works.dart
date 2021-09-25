@@ -49,7 +49,7 @@ class HowItWorks extends StatelessWidget {
               height: h * 0.05,
             ),
             Text(
-              'How it works',
+              'How it Works',
               style: themeFont(
                 s: 23,
                 color: kThemeColor,

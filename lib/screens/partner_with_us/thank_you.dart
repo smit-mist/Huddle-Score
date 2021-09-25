@@ -32,7 +32,7 @@ class ThankYou extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (_)=>HomeNavBar()));
               },
               child: Text(
-                'Back to home',
+                'Back to Home',
                 style: themeFont(),
               ),
             ),

@@ -73,7 +73,7 @@ class BookingNotSignIn extends StatelessWidget {
           SizedBox(
             width: w * 0.5,
             child: Text(
-              'All your turf and tournament bookings will appear here',
+              'All your turf and tournament bookings will appear here.',
               style: themeFont(),
               textAlign: TextAlign.center,
             ),

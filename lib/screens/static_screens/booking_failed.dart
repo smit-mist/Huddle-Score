@@ -19,7 +19,7 @@ class _BookingFailedState extends State<BookingFailed> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Booking Failed!!. Something Went Wrong.',
+                'Your booking attempt was unsuccessful! Please try again.',
                 style: themeFont(),
               ),
               SizedBox(height:11,),
@@ -31,7 +31,7 @@ class _BookingFailedState extends State<BookingFailed> {
                       (route) => false);
                 },
                 child: Text(
-                  'Go to Home',
+                  'Back to Home',
                   style: themeFont(color: kThemeColor),
                 ),
               )

@@ -153,7 +153,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             (selected != 'Tournaments')
                 ? (upFifa == null || upFifa.length == 0)
-                    ? Center(child: Text('No bookings', style: themeFont(s: 13, w: 'sb')))
+                    ? Center(child: Text('No Bookings', style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         width: w,
                         child: ListView.separated(
@@ -176,7 +176,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                         ),
                       )
                 : (upTour == null || upTour.length == 0)
-                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
+                    ? Center(child: Text('No Bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         child: ListView.separated(
                           shrinkWrap: true,
@@ -224,7 +224,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
             ),
             (selected != 'Tournaments')
                 ? (downFifa == null || downFifa.length == 0)
-                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
+                    ? Center(child: Text('No Bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         width: w,
                         child: ListView.separated(
@@ -247,7 +247,7 @@ class _BookingHistoryScreenState extends State<BookingHistoryScreen> {
                         ),
                       )
                 : (downTour == null || downTour.length == 0)
-                    ? Center(child: Text('No bookings',style: themeFont(s: 13, w: 'sb')))
+                    ? Center(child: Text('No Bookings',style: themeFont(s: 13, w: 'sb')))
                     : Container(
                         child: ListView.separated(
                           shrinkWrap: true,

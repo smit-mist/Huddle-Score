@@ -830,7 +830,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                         color: Colors.grey.withOpacity(0.5),
                         blurRadius: 10,
                         spreadRadius: 0,
-                        offset: Offset(5, 5),
+                        offset: Offset(3, 3),
                       )
                     ],
                   ),

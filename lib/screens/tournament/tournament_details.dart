@@ -624,7 +624,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
                                                       decoration: TextDecoration
-                                                          .underline),
+                                                          .none),
                                             ),
                                           ),
                                           Icon(
@@ -791,7 +791,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                                         .copyWith(
                                                             decoration:
                                                                 TextDecoration
-                                                                    .underline),
+                                                                    .none),
                                                   ),
                                                 ),
                                                 Icon(
@@ -845,7 +845,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               height: 10,
                             ),
                             DataShower(
-                              type: 'Players per team',
+                              type: 'Players per Team',
                               data: widget.tournament.info.playersPerTeam
                                   .toString(),
                             ),
@@ -868,7 +868,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               height: 10,
                             ),
                             DataShower(
-                              type: 'Duration per match',
+                              type: 'Duration per Match',
                               data:
                                   '${widget.tournament.info.durationPerMatch.toString()} minutes',
                             ),
@@ -876,7 +876,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                               height: 10,
                             ),
                             DataShower(
-                              type: 'Date of Semi-Finals',
+                              type: 'Date of Semi-finals',
                               data: semi.printNormal(),
                             ),
                             SizedBox(

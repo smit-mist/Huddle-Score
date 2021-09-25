@@ -254,8 +254,8 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                               Text(
                                 '+91',
                                 style: themeFont(
-                                  color: Colors.grey.withOpacity(
-                                    0.7,
+                                  color: Colors.black.withOpacity(
+                                    0.7
                                   ),
                                 ),
                               ),

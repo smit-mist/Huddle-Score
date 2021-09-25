@@ -219,19 +219,11 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                 Row(
                   children: [
                     Spacer(),
-                    Text('Select a card to proceed',
+                    Text('Select a card to proceed.',
                         style: themeFont(s: 12, w: 'r'))
                   ],
                 ),
-                SizedBox(
-                  height : 15
-                ),
-                Text(
-                  'Why Huddle & Score?',
-                  style: themeFont(
-                    s: 20,
-                  ),
-                ),
+
                 SizedBox(
                   height: h * 0.033,
                 ),
