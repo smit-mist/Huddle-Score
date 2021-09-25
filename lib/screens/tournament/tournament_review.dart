@@ -242,7 +242,9 @@ class _TournamentReviewState extends State<TournamentReview> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Team Details',
+                      widget.currForm == formType.Single
+                          ? 'Player Details'
+                          : 'Team Details',
                       style: themeFont(w: 'm', s: 16),
                     ),
                     SizedBox(

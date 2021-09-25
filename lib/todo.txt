@@ -1,4 +1,3 @@
-4) in summary page, if player type tournament is there then change title to player details
 6) receipt page button (tried).
 9) turf/tournament hyperlink in help and support
 ..) Password with special characters not working (change regex).
