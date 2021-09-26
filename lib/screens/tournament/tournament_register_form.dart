@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huddle_and_score/models/captain.dart';
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
@@ -298,100 +299,104 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                 * */
               onTap: () {
                 if (currForm == formType.noForm) {
-                  print("Select a Form");
+                  Fluttertoast.showToast(msg: 'Please Select a Type of Form');
                   return;
                 }
-                if (currForm == formType.Team) {
-                  if (_key.currentState.validate()) {
-                    RegDetails temp = RegDetails(
-                      teamName: teamName.text.trim(),
-                      captain: Captain(
-                        fullName: name1.text.trim(),
-                        email: email1.text.trim(),
-                        contact: int.parse(mob1.text.trim()),
-                        age: int.parse(
-                          age1.text.trim(),
+                if (chosedCat != 'Select' && chosedType != 'Select') {
+                  if (currForm == formType.Team) {
+                    if (_key.currentState.validate()) {
+                      RegDetails temp = RegDetails(
+                        teamName: teamName.text.trim(),
+                        captain: Captain(
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          contact: int.parse(mob1.text.trim()),
+                          age: int.parse(
+                            age1.text.trim(),
+                          ),
                         ),
-                      ),
-                      viceCaptain: Captain(
-                        fullName: name2.text.trim(),
-                        email: email2.text.trim(),
-                        contact: int.parse(mob2.text.trim()),
-                        age: int.parse(
-                          age2.text.trim(),
+                        viceCaptain: Captain(
+                          fullName: name2.text.trim(),
+                          email: email2.text.trim(),
+                          contact: int.parse(mob2.text.trim()),
+                          age: int.parse(
+                            age2.text.trim(),
+                          ),
                         ),
-                      ),
-                    );
+                      );
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => TournamentReview(
-                          currentTour: widget.currentTour,
-                          userRecord: temp,
-                          currForm: currForm,
-                          cat: chosedType,
-                          subCat: chosedCat,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                            currForm: currForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                } else if (currForm == formType.Double) {
-                  if (_key.currentState.validate()) {
-                    RegDetails temp = RegDetails(
-                      teamName: teamName.text.trim(),
-                      captain: Captain(
-                        fullName: name1.text.trim(),
-                        email: email1.text.trim(),
-                        age: int.parse(age1.text.trim()),
-                        contact: int.parse(mob1.text.trim()),
-                      ),
-                      viceCaptain: Captain(
-                        fullName: name2.text.trim(),
-                        email: email2.text.trim(),
-                        age: int.parse(age2.text.trim()),
-                        contact: int.parse(mob2.text.trim()),
-                      ),
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => TournamentReview(
-                          currentTour: widget.currentTour,
-                          userRecord: temp,
-                          currForm: currForm,
-                          cat: chosedType,
-                          subCat: chosedCat,
+                      );
+                    }
+                  } else if (currForm == formType.Double) {
+                    if (_key.currentState.validate()) {
+                      RegDetails temp = RegDetails(
+                        teamName: teamName.text.trim(),
+                        captain: Captain(
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          age: int.parse(age1.text.trim()),
+                          contact: int.parse(mob1.text.trim()),
                         ),
-                      ),
-                    );
+                        viceCaptain: Captain(
+                          fullName: name2.text.trim(),
+                          email: email2.text.trim(),
+                          age: int.parse(age2.text.trim()),
+                          contact: int.parse(mob2.text.trim()),
+                        ),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                            currForm: currForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
+                          ),
+                        ),
+                      );
+                    }
+                  } else {
+                    if (_key.currentState.validate()) {
+                      RegDetails temp = RegDetails(
+                        captain: Captain(
+                          fullName: name1.text.trim(),
+                          email: email1.text.trim(),
+                          age: int.parse(age1.text.trim()),
+                          contact: int.parse(mob1.text.trim()),
+                        ),
+                        viceCaptain: Captain(),
+                        teamName: "ok",
+                      );
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TournamentReview(
+                            currentTour: widget.currentTour,
+                            userRecord: temp,
+                            currForm: currForm,
+                            cat: chosedType,
+                            subCat: chosedCat,
+                          ),
+                        ),
+                      );
+                    }
                   }
                 } else {
-                  if (_key.currentState.validate()) {
-                    RegDetails temp = RegDetails(
-                      captain: Captain(
-                        fullName: name1.text.trim(),
-                        email: email1.text.trim(),
-                        age: int.parse(age1.text.trim()),
-                        contact: int.parse(mob1.text.trim()),
-                      ),
-                      viceCaptain: Captain(),
-                      teamName: "ok",
-                    );
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => TournamentReview(
-                          currentTour: widget.currentTour,
-                          userRecord: temp,
-                          currForm: currForm,
-                          cat: chosedType,
-                          subCat: chosedCat,
-                        ),
-                      ),
-                    );
-                  }
+                  Fluttertoast.showToast(msg: 'Please Select a Category');
                 }
               },
               child: Container(
@@ -499,7 +504,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                           );
                         }).toList(),
                         hint: Text(
-                          "Type",
+                          "Select",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
