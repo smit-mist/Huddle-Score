@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,11 @@ import 'package:huddle_and_score/repositories/feedback_repository.dart';
 import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../constants.dart';
 import '../home_navbar_screen.dart';
@@ -79,12 +85,13 @@ class TournamentReceiptScreen extends StatefulWidget {
     @required this.currForm,
     this.freshBooking,
   });
+
   @override
   _TournamentReceiptScreenState createState() =>
       _TournamentReceiptScreenState();
 }
 
-// TODO: UPdate receipt as per form type.
+// TODO: Update receipt as per form type.
 class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
   List<String> first = ['Definitely', 'Maybe', 'Not at all'];
   List<String> second = [
@@ -94,6 +101,189 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
     'Word of mouth',
     'Other'
   ];
+  List<pw.TableRow> getList() {
+    if (widget.currForm != formType.Single) {
+      return [
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('Team Name'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.teamName}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 1 Name'
+                  : 'Captain Name'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.captain.fullName}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 1 Contact'
+                  : 'Captain Contact'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.captain.contact}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 1 Email ID'
+                  : 'Captain Email ID'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.captain.email}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 1 Age'
+                  : 'Captain Age'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.captain.age}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 2 Name'
+                  : 'Vice Captain Name'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child:
+                  pw.Text('${widget.details.regDetails.viceCaptain.fullName}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 2 Contact'
+                  : 'Vice Captain Contact'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child:
+                  pw.Text('${widget.details.regDetails.viceCaptain.contact}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 2 Email ID'
+                  : 'Vice Captain Email ID'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.viceCaptain.email}'),
+            ),
+          ],
+        ),
+        pw.TableRow(
+          children: [
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text(widget.currForm == formType.Double
+                  ? 'Player 2 Age'
+                  : 'Vice Captain Age'),
+            ),
+            pw.Container(
+              padding: pw.EdgeInsets.all(8.0),
+              child: pw.Text('${widget.details.regDetails.viceCaptain.age}'),
+            ),
+          ],
+        ),
+      ];
+    }
+    return [
+      pw.TableRow(
+        children: [
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('Player Name'),
+          ),
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('${widget.details.regDetails.captain.fullName}'),
+          ),
+        ],
+      ),
+      pw.TableRow(
+        children: [
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('Contact Number'),
+          ),
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('${widget.details.regDetails.captain.contact}'),
+          ),
+        ],
+      ),
+      pw.TableRow(
+        children: [
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('Email ID'),
+          ),
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('${widget.details.regDetails.captain.email}'),
+          ),
+        ],
+      ),
+      pw.TableRow(
+        children: [
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('Age'),
+          ),
+          pw.Container(
+            padding: pw.EdgeInsets.all(8.0),
+            child: pw.Text('${widget.details.regDetails.captain.age}'),
+          ),
+        ],
+      ),
+    ];
+  }
+
   TextEditingController suggestion = TextEditingController(),
       otherText = TextEditingController();
   double liked = 0.0;
@@ -179,7 +369,6 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                   },
                                 ),
                                 SvgPicture.asset('assets/icons/happy.svg'),
-
                               ],
                             ),
                             SizedBox(
@@ -566,18 +755,19 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
             ),
             TextButton(
               onPressed: () {
-                if(widget.freshBooking == null || widget.freshBooking == false){
+                if (widget.freshBooking == null ||
+                    widget.freshBooking == false) {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (_) => HomeNavBar(
                           curr: (widget.freshBooking == null ||
-                              widget.freshBooking == false)
+                                  widget.freshBooking == false)
                               ? screen.Book
                               : screen.Home,
                         ),
                       ),
-                          (route) => false);
+                      (route) => false);
                   return;
                 }
                 showDialog(
@@ -592,38 +782,148 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
               ),
             ),
             Spacer(),
-            // GestureDetector(
-            //   onTap: () {
-            //     showDialog(
-            //         context: context,
-            //         builder: (BuildContext _) => feedBackFrom);
-            //   },
-            //   child: Container(
-            //     height: 40,
-            //     width: w * 0.45,
-            //     child: Center(
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //         children: [
-            //           Icon(
-            //             Icons.download_rounded,
-            //             color: Colors.white,
-            //           ),
-            //           Text(
-            //             'Download Receipt',
-            //             style: themeFont(
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(8),
-            //       color: kThemeColor,
-            //     ),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () async {
+                final status = await Permission.storage.request();
+                if (status.isGranted) {
+                  final doc = pw.Document();
+                  doc.addPage(pw.Page(
+                      pageFormat: PdfPageFormat.a4,
+                      build: (pw.Context context) {
+                        return pw.Center(
+                          child: pw.Column(
+                            children: [
+                              pw.Text(
+                                'Receipt',
+                                style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold,
+                                  fontSize: 24.0,
+                                ),
+                              ),
+                              pw.SizedBox(height: 20.0),
+                              pw.Text('Online Tournament Details'),
+                              pw.SizedBox(height: 10.0),
+                              pw.Table(
+                                columnWidths: {
+                                  0: pw.FractionColumnWidth(.3),
+                                  1: pw.FractionColumnWidth(.7),
+                                },
+                                border: pw.TableBorder.all(
+                                  width: 2.0,
+                                  color: PdfColor.fromHex('#248232'),
+                                ),
+                                children: [
+                                  pw.TableRow(
+                                    children: [
+                                      pw.Container(
+                                        padding: pw.EdgeInsets.all(8.0),
+                                        child: pw.Text('Name of Tournament'),
+                                      ),
+                                      pw.Container(
+                                        padding: pw.EdgeInsets.all(8.0),
+                                        child: pw.Text(
+                                            '${widget.details.data.title}'),
+                                      ),
+                                    ],
+                                  ),
+                                  pw.TableRow(children: [
+                                    pw.Container(
+                                        padding: pw.EdgeInsets.all(8.0),
+                                        child: pw.Text('Timeline')),
+                                    pw.Container(
+                                      padding: pw.EdgeInsets.all(8.0),
+                                      child: pw.Text(
+                                          '${widget.details.data.timeLine.join(' - ')}'),
+                                    ),
+                                  ]),
+                                  pw.TableRow(children: [
+                                    pw.Container(
+                                      padding: pw.EdgeInsets.all(8.0),
+                                      child: pw.Text('Address'),
+                                    ),
+                                    pw.Container(
+                                      padding: pw.EdgeInsets.all(8.0),
+                                      child: pw.Text(
+                                          '${widget.details.data.venue.address.join(', ')}'),
+                                    ),
+                                  ]),
+                                  pw.TableRow(
+                                    children: [
+                                      pw.Container(
+                                        padding: pw.EdgeInsets.all(8.0),
+                                        child: pw.Text('Age Restriction'),
+                                      ),
+                                      pw.Container(
+                                        padding: pw.EdgeInsets.all(8.0),
+                                        child: pw.Text(
+                                            '${widget.details.data.ageRec}'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              pw.SizedBox(height: 10.0),
+                              pw.Text(widget.currForm != formType.Single
+                                  ? 'Team Details'
+                                  : 'Player Details'),
+                              pw.SizedBox(height: 10.0),
+                              pw.Table(
+                                columnWidths: {
+                                  0: pw.FractionColumnWidth(.3),
+                                  1: pw.FractionColumnWidth(.7),
+                                },
+                                border: pw.TableBorder.all(
+                                  width: 2.0,
+                                  color: PdfColor.fromHex('#248232'),
+                                ),
+                                children: getList(),
+                              ),
+                            ],
+                          ),
+                        );
+                      }));
+                  if (Platform.isAndroid) {
+                    final path = '/storage/emulated/0/Download';
+                    final file = File("$path/${widget.details.data.title}.pdf");
+                    await file.writeAsBytes(await doc.save());
+                    OpenFile.open('$path/${widget.details.data.title}.pdf');
+                  } else if (Platform.isIOS) {
+                    final path = (await getApplicationDocumentsDirectory())
+                        .absolute
+                        .path;
+                    final file = File("$path/${widget.details.data.title}.pdf");
+                    await file.writeAsBytes(await doc.save());
+                    OpenFile.open('$path/${widget.details.data.title}.pdf');
+                  }
+                  print("Saved");
+                }
+              },
+              child: Container(
+                height: 40,
+                width: w * 0.45,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.download_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Download Receipt',
+                        style: themeFont(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),

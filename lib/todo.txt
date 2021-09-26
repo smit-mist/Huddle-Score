@@ -1,2 +1,1 @@
-6) receipt page button (tried).
 9) turf/tournament hyperlink in help and support
