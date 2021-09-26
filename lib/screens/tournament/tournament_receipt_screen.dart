@@ -801,7 +801,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                 ),
                               ),
                               pw.SizedBox(height: 20.0),
-                              pw.Text('Online Tournament Details'),
+                              pw.Text('Tournament Details'),
                               pw.SizedBox(height: 10.0),
                               pw.Table(
                                 columnWidths: {

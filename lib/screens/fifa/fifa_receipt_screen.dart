@@ -729,7 +729,8 @@ class _DetailShowerState extends State<DetailShower> {
                       }));
                   if (Platform.isAndroid) {
                     final path = '/storage/emulated/0/Download';
-                    final file = File("$path/${widget.details.data.title}.pdf");
+                    final file =
+                        File("$path/${widget.details.data.title}_receipt.pdf");
                     await file.writeAsBytes(await doc.save());
                     OpenFile.open('$path/${widget.details.data.title}.pdf');
                   } else if (Platform.isIOS) {
@@ -738,7 +739,8 @@ class _DetailShowerState extends State<DetailShower> {
                         .path;
                     final file = File("$path/${widget.details.data.title}.pdf");
                     await file.writeAsBytes(await doc.save());
-                    OpenFile.open('$path/${widget.details.data.title}.pdf');
+                    OpenFile.open(
+                        '$path/${widget.details.data.title}_receipt.pdf');
                   }
                   print("Saved");
                 }
