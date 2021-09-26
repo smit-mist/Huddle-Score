@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/blocs/signup/signup_bloc.dart';
 import 'package:huddle_and_score/screens/home_navbar_screen.dart';
 import 'package:huddle_and_score/screens/static_screens/user_privacy_policy.dart';
@@ -29,6 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showP2 = false;
   bool termsAgreed = false;
   SignupBloc _signupBloc;
+  HomeNavBarBloc _homeBloc;
 
   final _key = GlobalKey<FormState>();
 
@@ -48,6 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _homeBloc = BlocProvider.of<HomeNavBarBloc>(context);
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -59,10 +61,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: BlocConsumer<SignupBloc, SignupState>(
             listener: (context, state) {
               if (state is SignUpSuccess) {
+                _homeBloc.add(HomeIconPressed());
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => HomeNavBar(),
+                    builder: (_) => HomeNavBar(
+                      curr: screen.Home,
+                    ),
                   ),
                   (route) => false,
                 );

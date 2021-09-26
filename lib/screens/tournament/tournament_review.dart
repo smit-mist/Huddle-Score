@@ -245,7 +245,7 @@ class _TournamentReviewState extends State<TournamentReview> {
                       widget.currForm == formType.Single
                           ? 'Player Details'
                           : 'Team Details',
-                      style: themeFont(w: 'm', s: 16),
+                      style: themeFont(w: 'sb', s: 16),
                     ),
                     SizedBox(
                       height: 1,
