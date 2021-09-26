@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home_nav_bar/home_nav_bar_bloc.dart';
 import 'package:huddle_and_score/screens/booking/booking_history_screen.dart';
+import 'package:huddle_and_score/screens/partner_with_us/partner_with_us_intro.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 
 import '../../constants.dart';
@@ -191,13 +192,42 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                     'Registration Information',
                     style: themeFont(s: 15),
                   ),
-                  Field(
-                    ans:
-                        'Currently, Huddle & Score offers services in Ahmedabad. We will soon be coming to other cities of India.'
-                        '\nIf you are a turf owner or a tournament organizer, we welcome you to list your turf/tournament with us.',
-                    ques: 'In what cities are your services available?',
-                    val: ok[9],
-                    onPressed: (bool nw) {
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.all(0),
+                    title: Text(
+                      'In what cities are your services available?',
+                      style: themeFont(),
+                    ),
+                    trailing: (ok[13] == true)
+                        ? Icon(Icons.keyboard_arrow_up_outlined)
+                        : Icon(Icons.keyboard_arrow_down_outlined),
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text:
+                              '''Currently, Huddle & Score offers services in Ahmedabad. We will soon be coming to other cities of India.'
+                        '\nIf you are a turf owner or a tournament organizer, we welcome you to ''',
+                          style: themeFont(),
+                          children: [
+                            TextSpan(
+                              text: 'list your turf/tournament with us.',
+                              style: themeFont().copyWith(color: kThemeColor),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  print('recognized');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => PartnerWithUsIntro(),
+                                    ),
+                                  );
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    onExpansionChanged: (bool nw) {
                       setState(() {
                         ok[9] = nw;
                       });
