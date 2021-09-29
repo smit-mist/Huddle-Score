@@ -56,7 +56,7 @@ class FifaBookingTile extends StatelessWidget {
             children: [
               Text(
                 booking.data.title,
-                style: themeFont(),
+                style: themeFont(s: 13.5, w: 'b'),
               ),
               SizedBox(
                 width: w*0.4,
@@ -70,11 +70,11 @@ class FifaBookingTile extends StatelessWidget {
               ),
               Text(
                 booking.data.gameDate,
-                style: themeFont(),
+                style: themeFont(s: 12, w: 'r'),
               ),
               Text(
                 '₹ ${booking.amount / 100}',
-                style: themeFont(),
+                style: themeFont(s: 12, w: 'sb'),
               ),
               Container(
                 height: 20,

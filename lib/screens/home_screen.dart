@@ -591,7 +591,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration:
                           normalTextDecoration('Enter your Email ID').copyWith(
                         errorText: isValid
-                            ? 'Please enter a valid email address'
+                            ? 'Please enter a valid Email ID'
                             : null,
                       ),
                     ),
