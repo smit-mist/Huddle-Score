@@ -185,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ) ==
                                       false)
-                                return 'Please Enter the password in the given manner';
+                                return 'Please enter a valid password';
                               return null;
                             },
                             onChanged: (ok) {
@@ -677,7 +677,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ) ==
                                     false)
-                              return 'Please Enter the password in the given manner';
+                              return 'Please enter a valid password';
                             return null;
                           },
                           onChanged: (ok) {

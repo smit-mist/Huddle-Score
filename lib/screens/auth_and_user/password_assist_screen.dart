@@ -143,7 +143,7 @@ class _PasswordAssistInitialScreenState
                             child: Row(
                               children: [
                                 Text(
-                                  'Invalid Email ID',
+                                  'Please make sure you enter an Email ID',
                                   style: themeFont(
                                       color: Colors.red, s: 12, w: 'r'),
                                 ),
@@ -159,7 +159,7 @@ class _PasswordAssistInitialScreenState
                         width: double.infinity,
                         height: 60,
                         child: Text(
-                          'Please make sure you enter an email id that is associated with your Huddle & Score account.',
+                          'Please make sure you enter an Email ID that is associated with your Huddle & Score account.',
                           style: themeFont(
                             w: 'r',
                             s: 13,

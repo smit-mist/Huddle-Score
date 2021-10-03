@@ -55,7 +55,7 @@ class BookedEventTile extends StatelessWidget {
             children: [
               Text(
                 booking.data.title,
-                style: themeFont(s: 13.5, w: 'sb'),
+                style: themeFont(s: 13.5, w: 'b'),
               ),
               SizedBox(
                 width: w*0.4,
@@ -64,16 +64,16 @@ class BookedEventTile extends StatelessWidget {
                   venue.length > 45
                       ? venue.substring(0, 45) + '...'
                       : venue,
-                  style: themeFont(s: 12, w: 'm'),
+                  style: themeFont(s: 12, w: 'r'),
                 ),
               ),
               Text(
                 booking.data.timeLine.join(' - '),
-                style: themeFont(s: 12, w: 'm'),
+                style: themeFont(s: 12, w: 'r'),
               ),
               Text(
                 '₹ ${booking.amount / 100}',
-                style: themeFont(s: 12, w: 'm'),
+                style: themeFont(s: 12, w: 'sb'),
               ),
               Container(
                 height: 20,
