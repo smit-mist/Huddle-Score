@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               padding: EdgeInsets.symmetric(horizontal: 20),
-              height: h * (320 / kScreenH),
+              height: h * (330 / kScreenH),
               width: w * (370 / kScreenW),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Spacer(),
                       Container(
-                        height: 50,
+                        height: 45,
                         width: 115,
                         child: ActionButton(
                           onTap: () {

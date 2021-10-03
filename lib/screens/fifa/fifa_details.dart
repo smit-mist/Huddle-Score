@@ -497,7 +497,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                         ),
                                         Container(
                                           child: Image.asset(
-                                            'assets/images/player_1.png',
+                                            'assets/images/player_1_prizepool.png',
                                             fit: BoxFit.cover,
                                           ),
                                           height: h * (130 / kScreenW),
@@ -533,8 +533,8 @@ class _FifaDetailsState extends State<FifaDetails> {
                                               style: themeFont(
                                                       color: kThemeColor, s: 10)
                                                   .copyWith(
-                                                      decoration: TextDecoration
-                                                          .none),
+                                                      decoration:
+                                                          TextDecoration.none),
                                             ),
                                           ),
                                           Icon(
