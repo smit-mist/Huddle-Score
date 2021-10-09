@@ -587,7 +587,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                         Container(
                                           child: Image.asset(
                                             'assets/images/player_1_prizepool.png',
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.contain,
                                           ),
                                           height: h * (130 / kScreenW),
                                           width: w * (130 / kScreenW),
@@ -712,7 +712,7 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                       ),
                                       Container(
                                         child: Image.asset(
-                                          'assets/images/player_1.png',
+                                          'assets/images/player_1_prizepool.png',
                                           fit: BoxFit.cover,
                                         ),
                                         height: h * (130 / kScreenW),

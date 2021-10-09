@@ -449,18 +449,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else if (state is InitialState) {
                     return Container();
                   }
-                  return ListView.separated(
-                      separatorBuilder: (_, index) {
-                        return SizedBox(
-                          width: 20,
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.allTournaments[_chosenValue].length,
-                      itemBuilder: (_, int index) {
-                        return TournamentTile(
-                            here: state.allTournaments[_chosenValue][index]);
-                      });
+                  return (state == null ||
+                          state.allTournaments == null ||
+                          state.allTournaments[_chosenValue] == null)
+                      ? Center(
+                          child: Text(
+                            'No Tournaments',
+                            style:
+                                themeFont(color: kThemeColor, w: 'sb', s: 20),
+                          ),
+                        )
+                      : ListView.separated(
+                          separatorBuilder: (_, index) {
+                            return SizedBox(
+                              width: 20,
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.allTournaments[_chosenValue].length,
+                          itemBuilder: (_, int index) {
+                            return TournamentTile(
+                                here: state.allTournaments[_chosenValue]
+                                    [index]);
+                          });
                 },
               ),
             ),
