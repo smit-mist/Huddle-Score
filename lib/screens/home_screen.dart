@@ -512,20 +512,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else if (state is InitialState) {
                     return Container();
                   }
-                  return ListView.separated(
-                    separatorBuilder: (_, index) {
-                      return SizedBox(
-                        width: 20,
-                      );
-                    },
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.allFifa[_chosenValue].length,
-                    itemBuilder: (_, int index) {
-                      return FifaTile(
-                        fifa: state.allFifa[_chosenValue][index],
-                      );
-                    },
-                  );
+                  return (state == null ||
+                          state.allFifa == null ||
+                          state.allFifa[_chosenValue] == null)
+                      ? Center(
+                          child: Text(
+                            'No Online Tournaments',
+                            style:
+                                themeFont(color: kThemeColor, w: 'sb', s: 20),
+                          ),
+                        )
+                      : ListView.separated(
+                          separatorBuilder: (_, index) {
+                            return SizedBox(
+                              width: 20,
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.allFifa[_chosenValue].length,
+                          itemBuilder: (_, int index) {
+                            return FifaTile(
+                              fifa: state.allFifa[_chosenValue][index],
+                            );
+                          },
+                        );
                 },
               ),
             ),
@@ -590,9 +600,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: _emailCtrl,
                       decoration:
                           normalTextDecoration('Enter your Email ID').copyWith(
-                        errorText: isValid
-                            ? 'Please enter a valid Email ID'
-                            : null,
+                        errorText:
+                            isValid ? 'Please enter a valid Email ID' : null,
                       ),
                     ),
                   ),

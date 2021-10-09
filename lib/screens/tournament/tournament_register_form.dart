@@ -59,7 +59,9 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
   * Player 1-2 Like Badminton Doubles
   * Player 1 Single Player Game.
   * */
-  Map<String, List<String>> allCategory = {};
+  Map<String, List<String>> allCategory = {
+    'Select': ['Select'],
+  };
   List<String> selectedSub = ["Select"];
   String chosedType, chosedCat;
   final _key = GlobalKey<FormState>();
@@ -138,14 +140,16 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
           'Select': ["Select"],
         };
         for (var x in widget.currentTour.rooms) {
-          String here = "";
-          here += x.subCategory;
-          here += ' - ₹ ';
-          here += x.fees.toString();
-          if (x.category == "1")
-            allCategory["Single"].add(here);
-          else
-            allCategory['Double'].add(here);
+          if (x.maxSeats > x.registered.length) {
+            String here = "";
+            here += x.subCategory;
+            here += ' - ₹ ';
+            here += x.fees.toString();
+            if (x.category == "1")
+              allCategory["Single"].add(here);
+            else
+              allCategory['Double'].add(here);
+          }
         }
         chosedCat = allCategory['Single'][0];
       } else {
