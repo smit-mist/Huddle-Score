@@ -371,16 +371,12 @@ class _FifaDetailsState extends State<FifaDetails> {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View in ',
-                                              style: themeFont(s: 12),
-                                            ),
                                             GestureDetector(
                                               onTap: () async {
                                                 await launch(mapUrl);
                                               },
                                               child: Text(
-                                                'Maps',
+                                                'View in Maps',
                                                 style: themeFont(
                                                         s: 12,
                                                         color: kThemeColor)

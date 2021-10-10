@@ -607,10 +607,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      readOnly: isSubscribed,
                       // TODO: Fill color is white only in design.
                       controller: _emailCtrl,
                       decoration:
-                          normalTextDecoration('Enter your Email ID').copyWith(
+                          normalTextDecoration((isSubscribed?'An Email has been sent':'Enter your Email ID')).copyWith(
                         errorText:
                             isValid ? 'Please enter a valid Email ID.' : null,
                       ),

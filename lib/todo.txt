@@ -1,0 +1,7 @@
+//coming soon box message change
+//change pwu card of tournament
+//view in maps should entirely be a hyperlink
+//tournament register page name of your team validation
+//remove placeholder from name of your team
+//when 0 seats are left - change text in tournament description page
+//about and help and support icon change

@@ -16,7 +16,12 @@ String nameValidator(String val) {
     return 'Enter Valid Name';
   return null;
 }
-
+String teamNameValidator(String val) {
+  if (val == null || val.isEmpty) return 'Please enter team name';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
+    return 'Enter Valid Team Name';
+  return null;
+}
 String ageValidator(String val) {
   if (val == null || val.isEmpty) return 'Please enter your age.';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
@@ -590,10 +595,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 },
                                 controller: teamName,
                                 validator: (val) {
-                                  return nameValidator(val);
+                                  return teamNameValidator(val);
                                 },
                                 decoration: textFieldDecoration(
-                                    'Team Name', typedTeamName),
+                                    ' ', typedTeamName),
                               ),
                               SizedBox(
                                 height: h * 0.035,

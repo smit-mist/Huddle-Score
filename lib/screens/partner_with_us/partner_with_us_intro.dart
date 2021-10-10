@@ -199,12 +199,12 @@ class _PartnerWithUsIntroState extends State<PartnerWithUsIntro> {
                               width: double.infinity,
                               height: h * (140 / kScreenH),
                               child: Image.asset(
-                                'assets/images/player_1.png',
+                                'assets/images/player_1_prizepool.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
                             Text(
-                              'Tournament',
+                              'Tournaments',
                               style: themeFont(),
                             ),
                           ],

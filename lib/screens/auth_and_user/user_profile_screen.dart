@@ -137,7 +137,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     style: themeFont(),
                   ),
                   leading: SvgPicture.asset(
-                    'assets/icons/Help&Support_Account.svg',
+                    'assets/icons/New_Help.svg',
                     height: 17,
                     width: 17,
                   ),
@@ -161,7 +161,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     style: themeFont(),
                   ),
                   leading: SvgPicture.asset(
-                    'assets/icons/About_Profile.svg',
+                    'assets/icons/New_About.svg',
                     height: 17,
                     width: 17,
                   ),

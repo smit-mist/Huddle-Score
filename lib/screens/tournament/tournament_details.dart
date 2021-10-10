@@ -422,13 +422,9 @@ class _TournamentDetailsState extends State<TournamentDetails> {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View in ',
-                                              style: themeFont(s: 12),
-                                            ),
                                             GestureDetector(
                                               child: Text(
-                                                'Maps',
+                                                'View in Maps',
                                                 style: themeFont(
                                                         s: 12,
                                                         color: kThemeColor)
