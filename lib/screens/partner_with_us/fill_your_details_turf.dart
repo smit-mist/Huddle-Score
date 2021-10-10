@@ -199,7 +199,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                   TextFormField(
                     validator: (value) {
                       if (value.isEmpty || value == null)
-                        return 'Please enter your name';
+                        return 'Please enter your full name.';
                       return null;
                     },
                     controller: _name,
@@ -226,7 +226,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                   TextFormField(
                     validator: (value) {
                       if (value.length != 10 || value.isEmpty || value == null)
-                        return 'Please enter a valid 10-digit contact number';
+                        return 'Please enter a 10-digit contact number.';
                       return null;
                     },
                     controller: _contact,
@@ -279,7 +279,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                     validator: (value) {
                       if (!RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) return 'Please enter a valid Email ID';
+                          .hasMatch(value)) return 'Please enter a valid Email ID.';
                       return null;
                     },
                     onChanged: (val) {
@@ -322,7 +322,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                   decoration: InputDecoration.collapsed(hintText: ''),
                                   validator: (value) =>
                                       value == 'Select a State'
-                                          ? 'Please select a state'
+                                          ? 'Please select a state.'
                                           : null,
                                   isExpanded: true,
                                   focusColor: Colors.grey.withOpacity(0.14),
@@ -389,7 +389,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                                   decoration: InputDecoration.collapsed(hintText: ''),
                                   isExpanded: true,
                                   validator: (value) => value == 'Select a City'
-                                      ? 'Please select a city'
+                                      ? 'Please select a city.'
                                       : null,
                                   focusColor: Colors.grey.withOpacity(0.14),
                                   value: city,
@@ -445,7 +445,7 @@ class _FillYourDetailsTurfState extends State<FillYourDetailsTurf> {
                   TextFormField(
                     validator: (value) {
                       if (value.isEmpty || value == null)
-                        return 'Please enter the name of your turf';
+                        return 'Please enter a turf name.';
                       return null;
                     },
                     controller: _nameTurf,

@@ -60,7 +60,7 @@ class BookingNotSignIn extends StatelessWidget {
                       text: 'Sign In ',
                       style: themeFont(color: kThemeColor, s: 16)),
                   TextSpan(
-                    text: 'to view your booking history',
+                    text: 'to view your booking history.',
                     style: themeFont(s: 16),
                   ),
                 ],

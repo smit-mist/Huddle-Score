@@ -212,7 +212,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       },
                       validator: (value) {
                         if (value.isEmpty || value == null)
-                          return 'Please enter your full name';
+                          return 'Please enter your full name.';
                         return null;
                       },
                       controller: _name,
@@ -241,7 +241,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         if (value.length != 10 ||
                             value.isEmpty ||
                             value == null)
-                          return 'Please enter a valid 10-digit contact number';
+                          return 'Please enter a 10-digit contact number.';
                         return null;
                       },
                       controller: _contact,
@@ -295,7 +295,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                         if (!RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(value))
-                          return 'Please enter a valid Email ID';
+                          return 'Please enter a valid Email ID.';
                         return null;
                       },
                       controller: _emailId,
@@ -333,7 +333,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                     decoration: InputDecoration.collapsed(hintText: ''),
                                     validator: (value) =>
                                         value == 'Select a State'
-                                            ? 'Please select a state'
+                                            ? 'Please select a state.'
                                             : null,
                                     isExpanded: true,
                                     focusColor: Colors.grey.withOpacity(0.14),
@@ -401,7 +401,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                                     isExpanded: true,
                                     validator: (value) =>
                                         value == 'Select a City'
-                                            ? 'Please select a city'
+                                            ? 'Please select a city.'
                                             : null,
                                     focusColor: Colors.grey.withOpacity(0.14),
                                     value: city,
@@ -464,7 +464,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       child: DropdownButtonFormField<String>(
                         decoration: InputDecoration.collapsed(hintText: ''),
                         validator: (value) => value == 'Select a Tournament'
-                            ? 'Please select a tournament type'
+                            ? 'Please select a tournament type.'
                             : null,
                         isExpanded: true,
                         focusColor: Colors.grey.withOpacity(0.14),
@@ -523,7 +523,7 @@ class _FillYourDetailsTournamentState extends State<FillYourDetailsTournament> {
                       },
                       validator: (value) {
                         if (value.isEmpty || value == null)
-                          return 'Please enter the name of your tournament';
+                          return 'Please enter a tournament name.';
                         return null;
                       },
                       controller: _nameTour,

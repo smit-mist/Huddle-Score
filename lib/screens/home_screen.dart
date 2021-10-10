@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   Text(
-                    'Select your City',
+                    'Select Your City',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
                   SizedBox(
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   Text(
-                    'Look for best turfs and tournaments in your city!',
+                    'Look for the best turfs and tournaments in your city!',
                     style: themeFont(s: 12, w: 'm'),
                   ),
                   SizedBox(
@@ -612,7 +612,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration:
                           normalTextDecoration('Enter your Email ID').copyWith(
                         errorText:
-                            isValid ? 'Please enter a valid Email ID' : null,
+                            isValid ? 'Please enter a valid Email ID.' : null,
                       ),
                     ),
                   ),

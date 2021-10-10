@@ -106,7 +106,7 @@ class SearchResult extends StatelessWidget {
                           (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
                       mainAxisSpacing: 0),
                 ):Container(
-                  child: Text('We couldn\'t find any Tournaments as per your search.',style: themeFont(),),
+                  child: Text('We couldn\'t find any tournaments as per your search.',style: themeFont(),),
                 ),
               ),
               SizedBox(
@@ -138,7 +138,7 @@ class SearchResult extends StatelessWidget {
                           (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
                       mainAxisSpacing: 0),
                 ):Container(
-                  child: Text('We couldn\'t find any Online Tournaments as per your search. ',style: themeFont(),),
+                  child: Text('We couldn\'t find any tournaments as per your search. ',style: themeFont(),),
                 ),
               ),
             ],

@@ -113,9 +113,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           width: double.infinity,
                           child: TextFormField(
                             validator: (value) {
-                              //     print("THIS IS EMASIL");
+    
                               if (value.isEmpty || value == null)
-                                return 'Please Enter your name';
+                                return 'Please enter your full name.';
                               return null;
                             },
                             controller: nameCtrl,
@@ -148,7 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               if (!RegExp(
                                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value))
-                                return 'Please enter a valid email';
+                                return 'Please enter a valid Email ID.';
                               return null;
                             },
                             onChanged: (ok) {
@@ -185,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ) ==
                                       false)
-                                return 'Please enter a valid password';
+                                return 'Please enter a valid password.';
                               return null;
                             },
                             onChanged: (ok) {
@@ -377,7 +377,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            'Password should be at least 6 characters long and must include at least 1 number.',
+                            'Password should be at least 6 characters long and must include a minimum of 1 number.',
                             style: themeFont(
                               color: Colors.black,
                               s: 10,
@@ -471,7 +471,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               ),
                                             );
                                           },
-                                        text: 'Privacy Policy',
+                                        text: 'Privacy Policy.',
                                         style: themeFont(
                                           s: 12.0,
                                           w: 'r',
@@ -606,7 +606,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: TextFormField(
                           validator: (value) {
                             if (value.isEmpty || value == null)
-                              return 'Please Enter your name';
+                              return 'Incorrect password format!';
                             return null;
                           },
                           controller: nameCtrl,
@@ -639,7 +639,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (!RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value))
-                              return 'Please enter a valid email';
+                              return 'Please enter a valid Email ID.';
                             return null;
                           },
                           onChanged: (ok) {
@@ -677,7 +677,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ) ==
                                     false)
-                              return 'Please enter a valid password';
+                              return 'Please enter a valid password.';
                             return null;
                           },
                           onChanged: (ok) {
@@ -775,7 +775,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (value) {
                             if (value.isEmpty ||
                                 value != passwordCtrl.text ||
-                                value == null) return 'Passwords don\'t match';
+                                value == null) return 'Passwords do not match!';
                             return null;
                           },
                           onChanged: (ok) {
@@ -868,7 +868,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          'Password should be at least 6 characters long and must include at least 1 number.',
+                          'Password should be at least 6 characters long and must include a minimum of 1 number.',
                           style: themeFont(
                             color: Colors.black,
                             s: 10,
@@ -960,7 +960,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             ),
                                           );
                                         },
-                                      text: 'Privacy Policy',
+                                      text: 'Privacy Policy.',
                                       style: themeFont(
                                         s: 12.0,
                                         w: 'r',

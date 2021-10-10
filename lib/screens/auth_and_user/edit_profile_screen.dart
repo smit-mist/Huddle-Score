@@ -262,7 +262,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   );
                 },
                 child: Text(
-                  'Change password',
+                  'Change Password',
                   style: themeFont()
                       .copyWith(decoration: TextDecoration.underline),
                 ),

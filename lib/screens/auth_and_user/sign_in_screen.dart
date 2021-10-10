@@ -92,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           if (!RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value))
-                            return 'Please enter a valid Email ID';
+                            return 'Please enter a valid Email ID.';
                           return null;
                         },
                         onChanged: (ok) {
@@ -119,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         validator: (value) {
                           // if (isFailed) return null;
                           if (value.isEmpty || value == null)
-                            return 'Please enter your password';
+                            return 'Please enter a correct password.';
                           return null;
                         },
                         onChanged: (ok) {
@@ -139,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         decoration: InputDecoration(
                           fillColor: Color(0xFFF1F1F1),
                           errorText:
-                              (isFailed) ? 'Password is incorrect.' : null,
+                              (isFailed) ? 'Please enter a correct password.' : null,
                           hintText: 'Password',
                           hintStyle: themeFont(
                               color: Color(0xff626262), w: 'r', s: 14),
