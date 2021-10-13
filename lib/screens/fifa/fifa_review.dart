@@ -73,7 +73,7 @@ class _FifaReviewState extends State<FifaReview> {
   void checkoutOptions(FifaRecord regDetails) {
     print(widget.currFifa.info.registrationFee);
     var options = {
-      'key': 'rzp_test_Q9uimXdoWQRLSv',
+      'key': 'rzp_live_7YTJ04qmrWkRhu',
       'prefill': {
         'name': user.displayName,
         'email': user.email,

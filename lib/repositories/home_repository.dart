@@ -7,7 +7,7 @@ import 'package:huddle_and_score/models/home_event.dart';
 // Ma
 class HomeRepository {
   final String baseUrl =
-      "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/home";
+      "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/home";
   Future<Map<String, List<HomeTour>>> fetchTours() async {
     print("Tournament Fetching started");
     Map<String, List<HomeTour>> toReturn = {};
@@ -70,7 +70,7 @@ class HomeRepository {
   Future<void> subscribeTurf(String email) async {
     try {
       final String url =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/sub";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/sub";
       final String jwt = await FirebaseAuth.instance.currentUser.getIdToken();
       var response = await http.post(
         Uri.parse(url),

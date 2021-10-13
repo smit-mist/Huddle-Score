@@ -31,7 +31,7 @@ class TournamentRepository {
     print("reg started");
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/purchaseApi/tour";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/purchaseApi/tour";
       final String jwt = await AuthRepository().getJwtToken();
       var response = await http.post(
         Uri.parse(baseUrl),

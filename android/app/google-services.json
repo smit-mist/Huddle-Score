@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "160049309902",
-    "firebase_url": "https://football-demo-3a80e-default-rtdb.firebaseio.com",
-    "project_id": "football-demo-3a80e",
-    "storage_bucket": "football-demo-3a80e.appspot.com"
+    "project_number": "473127805176",
+    "firebase_url": "https://huddleandscore-prod-default-rtdb.firebaseio.com",
+    "project_id": "huddleandscore-prod",
+    "storage_bucket": "huddleandscore-prod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:160049309902:android:f338b7db88e15d48b5889f",
+        "mobilesdk_app_id": "1:473127805176:android:6ee2b454b983d3361e5b0d",
         "android_client_info": {
           "package_name": "com.example.huddle_and_score"
         }
       },
       "oauth_client": [
         {
-          "client_id": "160049309902-tl0ro31r3oolqt240hsu8r0vd93medps.apps.googleusercontent.com",
+          "client_id": "473127805176-vquif4271rs9ilp9jr8b3hoe6llso6vr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBucbMyjfSg2EwDJxd3x_YlJlx-KQaxxCQ"
+          "current_key": "AIzaSyC9faxHYYKOH7wIErlmsZLzvs3bn3gLxQk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "101682730419561660327",
+              "client_id": "473127805176-vquif4271rs9ilp9jr8b3hoe6llso6vr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

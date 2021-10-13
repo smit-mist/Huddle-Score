@@ -7,7 +7,7 @@ class PartnerRepository {
   Future<void> submitPartnerDetailsForTour(PartnerDetailsTour details) async {
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/pwu";
       var response = await http.post(
         Uri.parse(baseUrl),
         headers: {'Content-Type': 'Application/json'},
@@ -33,7 +33,7 @@ class PartnerRepository {
   Future<void> submitPartnerDetailsForTurf(PartnerDetailsTurf details) async {
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/pwu";
       var response = await http.post(
         Uri.parse(baseUrl),
         headers: {'Content-Type': 'Application/json'},

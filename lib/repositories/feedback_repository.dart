@@ -7,7 +7,7 @@ class FeedBackRepository {
   Future<void> sendFeedbackData(FeedBack feedBack) async {
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/feedback";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/feedback";
       var response = await http.post(Uri.parse(baseUrl),
           headers: {'Content-Type': 'Application/json'},
           body: jsonEncode(<String, dynamic>{
