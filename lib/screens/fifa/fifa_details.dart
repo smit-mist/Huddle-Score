@@ -371,16 +371,12 @@ class _FifaDetailsState extends State<FifaDetails> {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
-                                              'View in ',
-                                              style: themeFont(s: 12),
-                                            ),
                                             GestureDetector(
                                               onTap: () async {
                                                 await launch(mapUrl);
                                               },
                                               child: Text(
-                                                'Maps',
+                                                'View in Maps',
                                                 style: themeFont(
                                                         s: 12,
                                                         color: kThemeColor)
@@ -622,7 +618,7 @@ class _FifaDetailsState extends State<FifaDetails> {
                                       ),
                                       Container(
                                         child: Image.asset(
-                                          'assets/images/player_1.png',
+                                          'assets/images/player_1_prizepool.png',
                                           fit: BoxFit.cover,
                                         ),
                                         height: h * (130 / kScreenW),

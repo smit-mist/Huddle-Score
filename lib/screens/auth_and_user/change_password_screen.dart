@@ -77,7 +77,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   obscureText: !visible1,
                   decoration: InputDecoration(
                     fillColor: Color(0xFFF1F1F1),
-                    hintText: 'Password',
+                    hintText: 'Enter Your Current Password',
                     hintStyle:
                         themeFont(color: Color(0xff626262), w: 'r', s: 14),
                     suffixIcon: GestureDetector(
@@ -170,7 +170,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Spacer(),
                     GestureDetector(
                         child: Text(
-                          'Forgot Password?',
+                          'Forgot password?',
                           style: themeFont(s: 12),
                         ),
                         onTap: () {
@@ -204,7 +204,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               ),
                             ) ==
                             false)
-                      return 'Please Enter the password in the given manner';
+                      return 'Invalild password format!';
                     return null;
                   },
                   style: themeFont(
@@ -323,7 +323,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 TextFormField(
                   validator: (value) {
-                    if (value != pass2.text) return 'Passwords don\'t match';
+                    if (value != pass2.text) return 'Passwords do not match!';
                     return null;
                   },
                   controller: pass3,

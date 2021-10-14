@@ -1095,7 +1095,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                                       color: kThemeColor, s: 13, w: 'r'),
                                 ),
                                 Text(
-                                  'Pan Card',
+                                  'PAN Card',
                                   style: themeFont(
                                       color: Colors.black, s: 13, w: 'r'),
                                 ),
@@ -1179,7 +1179,7 @@ class _TournamentReceiptScreenState extends State<TournamentReceiptScreen> {
                       (widget.currForm != formType.Single)
                           ? DataShower(
                               type: (widget.currForm == formType.Team)
-                                  ? 'Vice Captain\'s Name'
+                                  ? 'Vice-captain\'s Name'
                                   : 'Player 2',
                               data: widget
                                   .details.regDetails.viceCaptain.fullName)

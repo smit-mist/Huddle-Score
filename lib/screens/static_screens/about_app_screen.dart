@@ -69,7 +69,7 @@ class AboutAppScreen extends StatelessWidget {
                 );
               },
               title: Text(
-                'Terms and Conditions',
+                'Terms & Conditions',
                 style: themeFont(),
               ),
               trailing: Icon(Icons.arrow_forward_ios),

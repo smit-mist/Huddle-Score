@@ -11,33 +11,38 @@ import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import '../../constants.dart';
 
 String nameValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter your full name';
+  if (val == null || val.isEmpty) return 'Please enter your full name.';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
     return 'Enter Valid Name';
   return null;
 }
-
+String teamNameValidator(String val) {
+  if (val == null || val.isEmpty) return 'Please enter team name';
+  if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(val))
+    return 'Enter Valid Team Name';
+  return null;
+}
 String ageValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter your age';
+  if (val == null || val.isEmpty) return 'Please enter your age.';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
-    return 'Please enter your age';
+    return 'Please enter your age.';
   return null;
 }
 
 String emailValidator(String val) {
-  if (val == null || val.isEmpty) return 'Please enter a valid Email ID';
+  if (val == null || val.isEmpty) return 'Please enter a valid Email ID.';
   if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(val)) return 'Please Enter a valid Email ID';
+      .hasMatch(val)) return 'Please enter a valid Email ID.';
   return null;
 }
 
 String mobileNumValidator(String val) {
   if (val == null || val.isEmpty)
-    return 'Please enter a valid 10-digit contact number';
+    return 'Please enter a 10-digit number.';
   if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(val))
     return 'Enter Valid Mobile Number';
-  if (val.length != 10) return 'Please enter a valid 10-digit contact number';
+  if (val.length != 10) return 'Please enter a 10-digit number.';
   return null;
 }
 
@@ -590,10 +595,10 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 },
                                 controller: teamName,
                                 validator: (val) {
-                                  return nameValidator(val);
+                                  return teamNameValidator(val);
                                 },
                                 decoration: textFieldDecoration(
-                                    'Team Name', typedTeamName),
+                                    ' ', typedTeamName),
                               ),
                               SizedBox(
                                 height: h * 0.035,
@@ -755,7 +760,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 height: h * (0.045),
                               ),
                               Text(
-                                'Vice Captain details',
+                                'Vice-captain Details',
                                 style: themeFont(s: 15),
                               ),
                               SizedBox(
@@ -785,7 +790,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 },
                                 controller: name2,
                                 decoration: textFieldDecoration(
-                                    'Vice Captain\'s Name', typedName2),
+                                    'Vice-captain\'s Name', typedName2),
                               ),
                               SizedBox(
                                 height: 15,
@@ -815,7 +820,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 keyboardType: TextInputType.phone,
                                 controller: mob2,
                                 decoration: textFieldDecoration(
-                                        'Vice Captain\'s Contact Number',
+                                        'Vice-captain\'s Contact Number',
                                         typedMob2)
                                     .copyWith(
                                   prefixIcon: Container(
@@ -867,7 +872,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 },
                                 controller: email2,
                                 decoration: textFieldDecoration(
-                                    'Vice Captain\'s Email', typedEmail2),
+                                    'Vice-captain\'s Email ID', typedEmail2),
                               ),
                               SizedBox(
                                 height: 15,
@@ -896,7 +901,7 @@ class _TournamentRegisterFormState extends State<TournamentRegisterForm> {
                                 },
                                 controller: age2,
                                 decoration: textFieldDecoration(
-                                    'Vice Captain\'s Age', typedAge2),
+                                    'Vice-captain\'s Age', typedAge2),
                               ),
                               SizedBox(
                                 height: 15,

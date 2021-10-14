@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   Text(
-                    'Select your City',
+                    'Select Your City',
                     style: themeFont(s: 17, w: 'sb'),
                   ),
                   SizedBox(
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   Text(
-                    'Look for best turfs and tournaments in your city!',
+                    'Look for the best turfs and tournaments in your city!',
                     style: themeFont(s: 12, w: 'm'),
                   ),
                   SizedBox(
@@ -449,18 +449,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else if (state is InitialState) {
                     return Container();
                   }
-                  return ListView.separated(
-                      separatorBuilder: (_, index) {
-                        return SizedBox(
-                          width: 20,
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.allTournaments[_chosenValue].length,
-                      itemBuilder: (_, int index) {
-                        return TournamentTile(
-                            here: state.allTournaments[_chosenValue][index]);
-                      });
+                  return (state == null ||
+                          state.allTournaments == null ||
+                          state.allTournaments[_chosenValue] == null)
+                      ? Center(
+                          child: Text(
+                            'No Tournaments',
+                            style:
+                                themeFont(color: kThemeColor, w: 'sb', s: 20),
+                          ),
+                        )
+                      : ListView.separated(
+                          separatorBuilder: (_, index) {
+                            return SizedBox(
+                              width: 20,
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.allTournaments[_chosenValue].length,
+                          itemBuilder: (_, int index) {
+                            return TournamentTile(
+                                here: state.allTournaments[_chosenValue]
+                                    [index]);
+                          });
                 },
               ),
             ),
@@ -596,12 +607,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      readOnly: isSubscribed,
                       // TODO: Fill color is white only in design.
                       controller: _emailCtrl,
                       decoration:
-                          normalTextDecoration('Enter your Email ID').copyWith(
+                          normalTextDecoration((isSubscribed?'An Email has been sent':'Enter your Email ID')).copyWith(
                         errorText:
-                            isValid ? 'Please enter a valid Email ID' : null,
+                            isValid ? 'Please enter a valid Email ID.' : null,
                       ),
                     ),
                   ),
