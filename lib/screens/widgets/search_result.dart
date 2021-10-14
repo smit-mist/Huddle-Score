@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_bloc.dart';
@@ -14,7 +12,7 @@ import 'fifa_tile.dart';
 class SearchResult extends StatelessWidget {
   String currentSearch;
   String city;
-  SearchResult({this.city = "Ahmedabad",this.currentSearch});
+  SearchResult({this.city = "Ahmedabad", this.currentSearch});
   HomeBloc _bloc;
   @override
   Widget build(BuildContext context) {
@@ -24,15 +22,20 @@ class SearchResult extends StatelessWidget {
 
     List<HomeTour> tours = [];
     List<HomeFifa> toShow = [];
-    if (_bloc.state != null && _bloc.state.allTournaments != null &&_bloc.state.allTournaments[city] != null) {
+    if (_bloc.state != null &&
+        _bloc.state.allTournaments != null &&
+        _bloc.state.allTournaments[city] != null) {
       for (int i = 0; i < _bloc.state.allTournaments[city].length; i++) {
         bool flag = false;
 
-        if (startsWith(_bloc.state.allTournaments[city][i].name, currentSearch)) {
+        if (startsWith(
+            _bloc.state.allTournaments[city][i].name, currentSearch)) {
           // toShow.add(_bloc.state.allTournaments[i]);
           flag = true;
         }
-        for (int j = 0; j < _bloc.state.allTournaments[city][i].venue.length; j++) {
+        for (int j = 0;
+            j < _bloc.state.allTournaments[city][i].venue.length;
+            j++) {
           if (startsWith(
               currentSearch, _bloc.state.allTournaments[city][i].venue[j])) {
             flag = true;
@@ -75,7 +78,6 @@ class SearchResult extends StatelessWidget {
         } else if (state is InitialState) {
           return LoadingWidget();
         }
-        print(tours.length);
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,25 +91,30 @@ class SearchResult extends StatelessWidget {
               ),
               Container(
                 width: w,
-                child:(tours.length>0)? GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: tours.length,
-                  itemBuilder: (_, ind) {
-                    return TournamentTile(
-                      here: tours[ind],
-                    );
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      // width: w * (145 / kScreenW),
+                child: (tours.length > 0)
+                    ? GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: tours.length,
+                        itemBuilder: (_, ind) {
+                          return TournamentTile(
+                            here: tours[ind],
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            // width: w * (145 / kScreenW),
 //height: h * (212 / kScreenH)
-                      childAspectRatio:
-                          (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
-                      mainAxisSpacing: 0),
-                ):Container(
-                  child: Text('We couldn\'t find any Tournaments as per your search.',style: themeFont(),),
-                ),
+                            childAspectRatio:
+                                (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
+                            mainAxisSpacing: 0),
+                      )
+                    : Container(
+                        child: Text(
+                          'We couldn\'t find any Tournaments as per your search.',
+                          style: themeFont(),
+                        ),
+                      ),
               ),
               SizedBox(
                 height: 20,
@@ -120,26 +127,29 @@ class SearchResult extends StatelessWidget {
                 height: 10,
               ),
               Container(
-
                 width: w,
-                child:(toShow.length>0)? GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: toShow.length,
-                  itemBuilder: (_, ind) {
-
-                    return FifaTile(
-                      fifa: toShow[ind],
-                    );
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio:
-                          (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
-                      mainAxisSpacing: 0),
-                ):Container(
-                  child: Text('We couldn\'t find any Online Tournaments as per your search. ',style: themeFont(),),
-                ),
+                child: (toShow.length > 0)
+                    ? GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: toShow.length,
+                        itemBuilder: (_, ind) {
+                          return FifaTile(
+                            fifa: toShow[ind],
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio:
+                                (w * (155 / kScreenW)) / (h * (230 / kScreenH)),
+                            mainAxisSpacing: 0),
+                      )
+                    : Container(
+                        child: Text(
+                          'We couldn\'t find any Online Tournaments as per your search. ',
+                          style: themeFont(),
+                        ),
+                      ),
               ),
             ],
           ),
