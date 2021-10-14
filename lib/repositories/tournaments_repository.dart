@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 import 'package:huddle_and_score/models/record.dart';
 import 'package:huddle_and_score/models/tournament.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
@@ -31,7 +31,7 @@ class TournamentRepository {
     print("reg started");
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/purchaseApi/tour";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/purchaseApi/tour";
       final String jwt = await AuthRepository().getJwtToken();
       var response = await http.post(
         Uri.parse(baseUrl),

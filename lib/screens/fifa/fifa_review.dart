@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:huddle_and_score/models/booking.dart';
 import 'package:huddle_and_score/models/fifa.dart';
-import 'package:huddle_and_score/models/fifa_booking.dart';
 import 'package:huddle_and_score/models/fifa_record.dart';
-import 'package:huddle_and_score/models/user.dart';
 import 'package:huddle_and_score/repositories/auth_repository.dart';
-import 'package:huddle_and_score/repositories/user_repository.dart';
 import 'package:huddle_and_score/screens/fifa/fifa_receipt_screen.dart';
 import 'package:huddle_and_score/screens/static_screens/booking_failed.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
@@ -51,7 +47,9 @@ class _FifaReviewState extends State<FifaReview> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => FifaReceiptScreen(bookingID: response.paymentId,freshBook: true,
+        builder: (_) => FifaReceiptScreen(
+          bookingID: response.paymentId,
+          freshBook: true,
         ),
       ),
     );
@@ -62,7 +60,7 @@ class _FifaReviewState extends State<FifaReview> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print("${response.message} hereherehere");
     Fluttertoast.showToast(msg: "Error");
-    Navigator.push(context, MaterialPageRoute(builder: (_)=>BookingFailed()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => BookingFailed()));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -73,7 +71,7 @@ class _FifaReviewState extends State<FifaReview> {
   void checkoutOptions(FifaRecord regDetails) {
     print(widget.currFifa.info.registrationFee);
     var options = {
-      'key': 'rzp_test_Q9uimXdoWQRLSv',
+      'key': 'rzp_live_7YTJ04qmrWkRhu',
       'prefill': {
         'name': user.displayName,
         'email': user.email,
@@ -98,204 +96,203 @@ class _FifaReviewState extends State<FifaReview> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return CommonScaffold(
-        bottomBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: w,
-          height: h * 0.08,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-                spreadRadius: 1)
-          ]),
-          child: Row(
-            children: [
-              Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 18,
+      bottomBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        width: w,
+        height: h * 0.08,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 7,
+              spreadRadius: 1)
+        ]),
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 18,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Back',
+                style: themeFont(),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Back',
-                  style: themeFont(),
-                ),
-              ),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  checkoutOptions(widget.record);
-                },
-                child: Container(
-                  height: 40,
-                  width: w * 0.4,
-                  child: Center(
-                    child: Text(
-                      'Proceed to Pay',
-                      style: themeFont(color: Colors.white),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: kThemeColor,
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                checkoutOptions(widget.record);
+              },
+              child: Container(
+                height: 40,
+                width: w * 0.4,
+                child: Center(
+                  child: Text(
+                    'Proceed to Pay',
+                    style: themeFont(color: Colors.white),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          width: double.infinity,
-          height: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: h * (0.04),
-              ),
-              Text(
-                'Registration Summary',
-                style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
-              ),
-              SizedBox(
-                height: h * (0.04),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (190 / kScreenH),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Player Details',
-                      style: themeFont(w: 'm', s: 16),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    DataShower(type: 'Full Name', data: widget.record.name),
-                    DataShower(
-                        type: 'Contact Number',
-                        data: widget.record.number.toString()),
-                    DataShower(type: 'Email ID', data: widget.record.email),
-                    SizedBox(
-                      height: 1,
-                    ),
-                  ],
+                  borderRadius: BorderRadius.circular(8),
+                  color: kThemeColor,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: h * (165 / kScreenH),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 1,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-
-                    Text(
-                      'Amount Payable',
-                      style: themeFont(s: 16, w: 'm'),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Charges',
-                          style: themeFont(w: 'm', s: 12),
-                        ),
-                        Spacer(),
-                        Text(
-                          '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'm', s: 12),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Taxes',
-                          style: themeFont(w: 'm', s: 12),
-                        ),
-                        Spacer(),
-                        Text(
-                          '0',
-                          style: themeFont(w: 'm', s: 12),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    //  SizedBox(height: 1,),
-                    Row(
-                      children: [
-                        Text(
-                          'Total Amount',
-                          style: themeFont(w: 'm', s: 15),
-                        ),
-                        Spacer(),
-                        Text(
-                          '₹ ${widget.currFifa.info.registrationFee}',
-                          style: themeFont(w: 'sb', s: 16),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-
-                    SizedBox(
-                      height: 1,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: h * (0.04),
+            ),
+            Text(
+              'Registration Summary',
+              style: themeFont(color: kThemeColor, s: 23, w: 'sb'),
+            ),
+            SizedBox(
+              height: h * (0.04),
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: h * (190 / kScreenH),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    spreadRadius: 2,
+                  )
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Player Details',
+                    style: themeFont(w: 'm', s: 16),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  DataShower(type: 'Full Name', data: widget.record.name),
+                  DataShower(
+                      type: 'Contact Number',
+                      data: widget.record.number.toString()),
+                  DataShower(type: 'Email ID', data: widget.record.email),
+                  SizedBox(
+                    height: 1,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: h * (165 / kScreenH),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    spreadRadius: 2,
+                  )
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
 
+                  Text(
+                    'Amount Payable',
+                    style: themeFont(s: 16, w: 'm'),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Charges',
+                        style: themeFont(w: 'm', s: 12),
+                      ),
+                      Spacer(),
+                      Text(
+                        '₹ ${widget.currFifa.info.registrationFee}',
+                        style: themeFont(w: 'm', s: 12),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Taxes',
+                        style: themeFont(w: 'm', s: 12),
+                      ),
+                      Spacer(),
+                      Text(
+                        '0',
+                        style: themeFont(w: 'm', s: 12),
+                      )
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                  //  SizedBox(height: 1,),
+                  Row(
+                    children: [
+                      Text(
+                        'Total Amount',
+                        style: themeFont(w: 'm', s: 15),
+                      ),
+                      Spacer(),
+                      Text(
+                        '₹ ${widget.currFifa.info.registrationFee}',
+                        style: themeFont(w: 'sb', s: 16),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+
+                  SizedBox(
+                    height: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

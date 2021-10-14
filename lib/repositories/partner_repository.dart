@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:huddle_and_score/models/partner_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:huddle_and_score/models/partner_details.dart';
 
 class PartnerRepository {
   Future<void> submitPartnerDetailsForTour(PartnerDetailsTour details) async {
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/pwu";
       var response = await http.post(
         Uri.parse(baseUrl),
         headers: {'Content-Type': 'Application/json'},
@@ -22,9 +22,6 @@ class PartnerRepository {
           'state': details.state,
         }),
       );
- //     print(response.statusCode);
-  //    print(response.body);
-    //  if (response.statusCode == 200) print('Success=====>>>>');
     } catch (e) {
       print(e.toString());
     }
@@ -33,7 +30,7 @@ class PartnerRepository {
   Future<void> submitPartnerDetailsForTurf(PartnerDetailsTurf details) async {
     try {
       final String baseUrl =
-          "https://us-central1-football-demo-3a80e.cloudfunctions.net/openApis/pwu";
+          "https://asia-south1-huddleandscore-prod.cloudfunctions.net/openApis/pwu";
       var response = await http.post(
         Uri.parse(baseUrl),
         headers: {'Content-Type': 'Application/json'},

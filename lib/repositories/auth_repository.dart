@@ -10,8 +10,8 @@ class AuthRepository {
     return _auth.currentUser;
   }
 
-  bool isEmailVerified(){
-   return _auth.currentUser.emailVerified;
+  bool isEmailVerified() {
+    return _auth.currentUser.emailVerified;
   }
 
   Future<void> sendEmailVerificationLink() async {
@@ -41,6 +41,7 @@ class AuthRepository {
       result.user.updateDisplayName(name);
       return result.user;
     } catch (e) {
+      print(e.toString());
       throw Exception(e.toString());
     }
   }

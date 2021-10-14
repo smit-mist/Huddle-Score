@@ -30,7 +30,6 @@ class UserRepository {
     String uid = AuthRepository().getCurrentUser().uid;
     try {
       var response = FirebaseFirestore.instance.doc('users/$uid/records/tour');
-      // ignore: missing_return
       print('in booking fetch');
       var bookingsData = await response.get();
       print(bookingsData.data());

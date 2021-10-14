@@ -5,19 +5,15 @@ class FifaRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<Fifa> getFifaById(String iD) async {
     try {
-   //   print('fifa fetch started');
       var response = _firestore.doc('fifas/$iD');
       Fifa fifa = await response.get().then(
         (value) {
-   //       print(value.id);
           return Fifa.fromMap(
             value.data(),
             value.id,
           );
         },
       );
-   //   print('fetch started for ${fifa.fifaId}');
-     // print('complete');
       return fifa;
     } catch (e) {
       print('====>Failed=====');
