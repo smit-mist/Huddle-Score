@@ -16,6 +16,7 @@ import 'package:huddle_and_score/screens/widgets/action_button.dart';
 import 'package:huddle_and_score/screens/widgets/camera_widget.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
 import 'package:huddle_and_score/screens/widgets/loading_screen.dart';
+import 'package:huddle_and_score/screens/widgets/no_tournament_widget.dart';
 import 'package:huddle_and_score/screens/widgets/tournament_tile.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -526,13 +527,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return (state == null ||
                           state.allFifa == null ||
                           state.allFifa[_chosenValue] == null)
-                      ? Center(
-                          child: Text(
-                            'No Online Tournaments',
-                            style:
-                                themeFont(color: kThemeColor, w: 'sb', s: 20),
-                          ),
-                        )
+                      ? NoTourWidget()
                       : ListView.separated(
                           separatorBuilder: (_, index) {
                             return SizedBox(

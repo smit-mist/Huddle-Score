@@ -4,6 +4,7 @@ import 'package:huddle_and_score/blocs/home/home_bloc.dart';
 import 'package:huddle_and_score/blocs/home/home_state.dart';
 import 'package:huddle_and_score/screens/widgets/common_scaffold.dart';
 import 'package:huddle_and_score/screens/widgets/fifa_tile.dart';
+import 'package:huddle_and_score/screens/widgets/no_tournament_widget.dart';
 
 import '../../constants.dart';
 
@@ -74,16 +75,7 @@ class ViewAllFifaScreen extends StatelessWidget {
                     } else if (state == null ||
                         state.allFifa == null ||
                         state.allFifa[city] == null) {
-                      return Center(
-                        child: Text(
-                          'No Online Tournaments',
-                          style: themeFont(
-                            color: kThemeColor,
-                            s: 20,
-                            w: 'sb',
-                          ),
-                        ),
-                      );
+                      return NoTourWidget();
                     }
                     return GridView.builder(
                       itemCount: state.allFifa[city].length,
