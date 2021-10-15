@@ -47,7 +47,7 @@ class SearchResult extends StatelessWidget {
         }
       }
     }
-    if (_bloc.state.allFifa != null) {
+    if (_bloc.state.allFifa != null && _bloc.state.allFifa[city] != null) {
       for (int i = 0; i < _bloc.state.allFifa[city].length; i++) {
         bool flag = false;
         if (startsWith(_bloc.state.allFifa[city][i].name, currentSearch)) {
