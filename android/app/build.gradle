@@ -35,7 +35,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.example.huddle_and_score"
+        applicationId "com.huddleandscore.huddle_and_score"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
