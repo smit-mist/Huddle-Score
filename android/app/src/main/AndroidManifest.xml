@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.huddle_and_score">
+    package="com.huddleandscore.huddle_and_score">
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="HuddleandScore"
+        android:label="HuddleandScore">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
