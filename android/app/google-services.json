@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:473127805176:android:6ee2b454b983d3361e5b0d",
+        "mobilesdk_app_id": "1:473127805176:android:954dde502bebee841e5b0d",
         "android_client_info": {
-          "package_name": "com.example.huddle_and_score"
+          "package_name": "com.huddleandscore.huddle_and_score"
         }
       },
       "oauth_client": [
