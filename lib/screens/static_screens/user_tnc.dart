@@ -38,7 +38,9 @@ class UserTermsAndConditions extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 15.0,),
+              SizedBox(
+                height: 15.0,
+              ),
               Text(
                 'As updated on (Launching Date)',
                 style: smallText,
@@ -401,7 +403,7 @@ c) Posting and/or uploading any content on the Website and/or App.''',
                 style: bigText,
               ),
               Text(
-                '''\nAs per these Terms of Use, Users are solely responsible for every material or content submitted for uploading on to the Website and/or App. Huddle And Score has the right to review the contents before they appear on the Website and/or App. However, Huddle And Score does not verify, endorse or otherwise vouch for the contents of any User or any content generally submitted for uploading on to the Website and/or App. Users can be held legally liable for their contents and may be held legally accountable if their contents or material include, for example, defamatory comments or material protected by copyright, trademark, etc. If You come across any abuse or violation of these Terms of Use, please report to support@huddleandscore.com. We shall process all infringement claims, which may result in removing the reported content from our Website and/or App. If the User that posted the content believes that the content shouldn't have been removed, the Users will be encouraged to reach out to us.''',
+                '''\nAs per these Terms of Use, Users are solely responsible for every material or content submitted for uploading on to the Website and/or App. Huddle And Score has the right to review the contents before they appear on the Website and/or App. However, Huddle And Score does not verify, endorse or otherwise vouch for the contents of any User or any content generally submitted for uploading on to the Website and/or App. Users can be held legally liable for their contents and may be held legally accountable if their contents or material include, for huddleandscore, defamatory comments or material protected by copyright, trademark, etc. If You come across any abuse or violation of these Terms of Use, please report to support@huddleandscore.com. We shall process all infringement claims, which may result in removing the reported content from our Website and/or App. If the User that posted the content believes that the content shouldn't have been removed, the Users will be encouraged to reach out to us.''',
                 style: smallText,
               ),
               Text(
